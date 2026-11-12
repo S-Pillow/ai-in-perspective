@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 4
+- **Record revision:** 5
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -33,3 +33,13 @@
 - **Current action:** Read-only source review and planning document commit on draft PR #1; no third-party tool or hook installed, no downloaded executable run, and no change to visual source/runtime/deployment.
 - **Visual status:** Current prototype remains **not visually accepted**. The candidate art direction (Living Atrium recommended for exploration) is a proposal, not accepted design and not implementation authority for unreviewed visual additions.
 - **Next gate:** Render and compare materially different compositions within the same accepted animated museum vision, inspect mobile/desktop/reduced-motion and teaching states; owner selects direction before full rollout. No PR merge or public release.
+
+## AIIP-UI-INTRO-01 | Missing Earth horizon corrective unit (2026-11-12)
+
+- **Input / visual observation:** Owner-supplied desktop screenshot of `/intro` at approximately 2048px wide showed the script and controls but no visible Earth; most of the lower viewport was unused dark space. The cyan inline “right now” emphasis and readable message were retained.
+- **Root cause (source-supported):** The former `.intro-planet` used a fixed `max-height:1550px` and `max-width:1900px` but a viewport-width-scaled negative `bottom:-92vw` (mobile `bottom:-125vw`). On wide displays this could place the entire planet below the visible stage. The gradient-only orb also did not depict recognizable geography.
+- **Scope / evidence:** Targeted source-only correction in existing draft PR #1. `src/pages/intro.astro` now contains an original, marked-decorative globe SVG; `src/styles/global.css` anchors the Earth scene by viewport **height** at desktop/mobile with a subtle atmospheric layer, and keeps reduced-motion behavior. `tests/content.test.mjs` adds a regression contract for the scene and placement.
+- **Protected:** Exact public copy and the user-controlled Continue/Skip destination were not changed. The current introduction remains a working visual prototype and is **not** accepted as final art direction. No third-party image or JavaScript was imported; previously exported first-party globe art was inspected as an internal reference but was **not** copied into this correction.
+- **Version and validation:** Correction commit `9f15c4dc47e9641db117667993278b6713cffa84`, GitHub Actions run `43205866336` completed SUCCESS, content tests and Astro build passed. Vercel project `prj_ogxXY2zsXmNWfbQzJo3L5MipbJxC` protected preview deployment `dpl_CnRsS4NuDShMJraVEASWLinv2Udm` reached READY, `target=null`, no aliases. URL `https://ai-in-perspective-prototype-preview-cn17is4xu-spillow82-4062.vercel.app/intro` returned HTML 200 with globe markup; linked CSS returned 200 with new desktop/mobile anchor rules and no obsolete `bottom:-92vw`.
+- **Unverified:** New globe composition has NOT been screenshot-inspected in a real desktop/mobile browser, nor have full runtime animation, accessibility or reduced-motion interactions been observed. Keep status **visual correction implemented / rendered acceptance pending**.
+- **Boundary / recovery:** No merge, no custom domain, no public production deployment, no changes to the Environment exhibit or museum hall. Previous preview remains a separate immutable comparison; cancel the new preview if rollback of preview availability is required. The standalone Vercel project does not auto-update from GitHub.
