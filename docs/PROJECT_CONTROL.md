@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 5
+- **Record revision:** 6
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -43,3 +43,11 @@
 - **Version and validation:** Correction commit `9f15c4dc47e9641db117667993278b6713cffa84`, GitHub Actions run `43205866336` completed SUCCESS, content tests and Astro build passed. Vercel project `prj_ogxXY2zsXmNWfbQzJo3L5MipbJxC` protected preview deployment `dpl_CnRsS4NuDShMJraVEASWLinv2Udm` reached READY, `target=null`, no aliases. URL `https://ai-in-perspective-prototype-preview-cn17is4xu-spillow82-4062.vercel.app/intro` returned HTML 200 with globe markup; linked CSS returned 200 with new desktop/mobile anchor rules and no obsolete `bottom:-92vw`.
 - **Unverified:** New globe composition has NOT been screenshot-inspected in a real desktop/mobile browser, nor have full runtime animation, accessibility or reduced-motion interactions been observed. Keep status **visual correction implemented / rendered acceptance pending**.
 - **Boundary / recovery:** No merge, no custom domain, no public production deployment, no changes to the Environment exhibit or museum hall. Previous preview remains a separate immutable comparison; cancel the new preview if rollback of preview availability is required. The standalone Vercel project does not auto-update from GitHub.
+
+## AIIP-COPY-INTRO-02 | Owner-directed opening headline (2026-11-12)
+
+- **Source/decision:** Owner screenshot and request to replace opening "The wave isn't coming. It's already here." with exactly "AI HAS ARRIVED".
+- **Approved scope:** Intro heading copy only, plus a focused regression assertion. Other intro paragraphs, timing, globe graphics, interaction, navigation and the remaining site unchanged.
+- **Commits:** `f059b47a4c2f1c76976435279e6a21f6595b6ecd` heading; `2eb59bfc0a21102b2abbabec7b9428565f605bfe` test.
+- **Verification:** GitHub Actions `43265883342` completed SUCCESS; content contracts and Astro static build PASS. Vercel authenticated standalone unaliased preview deployment `dpl_GfRZrfKBKT3eetA5mo7ji5AtTjhS` READY with `target=null`, URL `https://ai-in-perspective-prototype-preview-a13w8mbu2-spillow82-4062.vercel.app/intro`; HTML GET 200 shows exact replacement heading, no previous heading, and globe/Continue/Skip retained.
+- **Limitations:** No new rendered browser screenshot or mobile accessibility audit recorded for this copy-only change. Visual acceptance of the whole intro remains pending. No merge, production release, or custom-domain change.
