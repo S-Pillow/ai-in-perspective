@@ -39,9 +39,9 @@ test("pre-release site opts out of indexing", () => {
   assert.match(read("src/layouts/BaseLayout.astro"), /noindex, nofollow/);
 });
 
-test("privacy and authorization statements exist", () => {
+test("accepted governance and development-branch protections are documented", () => {
   const control = read("docs/PROJECT_CONTROL.md");
+  assert.match(control, /AIPF v8\.10\.1/);
   assert.match(control, /owner-accepted 2026-11-12/);
   assert.match(control, /No auto-merge/);
-  assert.match(control, /Vercel not yet connected/);
 });
