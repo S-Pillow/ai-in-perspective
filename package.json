@@ -1,0 +1,19 @@
+{
+  "name": "ai-in-perspective",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:content": "node --test tests/content.test.mjs",
+    "check": "npm run check:content && npm run build"
+  },
+  "dependencies": {
+    "astro": "^5.16.0"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}
