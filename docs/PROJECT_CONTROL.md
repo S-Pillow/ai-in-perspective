@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 7
+- **Record revision:** 8
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -58,3 +58,12 @@
 - **Implementation:** `src/pages/intro.astro` updated only for one-word connective change; `tests/content.test.mjs` now asserts the exact approved transition. Changes pushed to `feature/aiip-foundation-museum-slice` as commits `aa414da607ae1ffe62269683622c9393e06c393b` and `78655664bf2d182a78ab6fab92216136bc52eed4`.
 - **Verification:** GitHub Actions run `43267707196` concluded SUCCESS, content contract checks PASS, Astro static build PASS. Standalone protected Vercel preview `dpl_EQcBTNeotRaZNCXkZSfEkj83ZZov`, READY, `target=null`, URL `https://ai-in-perspective-prototype-preview-n2kwtlgni-spillow82-4062.vercel.app/intro`. HTTP 200 and rendered HTML contains the new wording and headline while omitting old "Because" and retaining Earth markup.
 - **Boundary:** No merge or production promotion; same draft PR #1. Browser-level visual checks and wider museum art-direction acceptance remain separate.
+
+## AIIP-INTRO-04 | Emphasized headline and brief standalone hold (2026-11-12)
+
+- **Owner direction:** Keep the existing Earth animation and accepted copy. Let “AI HAS ARRIVED” remain on its own slightly longer before the next paragraph, and make its type feel distinctive. This is scoped to the intro heading and reveal timings, not the museum hall or exhibit design.
+- **External research, read-only:** Consulted `pbakaus/impeccable` bolder/craft guidance and `nextlevelbuilder/ui-ux-pro-max-skill` typography/motion catalogs for selective techniques. Additionally inspected `elayadesign/ai-design-skills` public repository `main` tree `456d9e0d3e2d84c748bb143c6ca3d90c45e16213`, specifically `landing-page-design/SKILL.md` and `figma-designer/SKILL.md`. Useful ideas: a distinct headline typographic voice, a deliberate held first message, and motion that feels intentional. Rejected generic conversion-page prescriptions and blanket one-typeface/Tailwind policies as non-governing for the accepted museum PRD. No third-party tool installed, skill copied, or external code imported.
+- **Changes:** `src/pages/intro.astro` splits the single semantic first-line paragraph into inline `AI HAS` and `ARRIVED` spans without changing the words. `src/styles/global.css` adds a page-specific Syne display face (via Google Fonts, with fallback), differentiated weights, subtle underline/lighting, and ~0.55 seconds added to the reveal delays after the headline. First headline delay remains 0.35 s, next paragraph begins at 1.75 s; remaining paragraphs/Continue are shifted equally. `tests/content.test.mjs` validates wording, presence, delay, and reduced-motion declaration.
+- **GitHub commits:** `7b6206d75e2b15cf7197062ebe6521ca99bef422` (markup), `5e19f0dd8fe77a4795c4a27686034c7bdf415e4a` (CSS), `329222480d913153e490d805146f4663c311a0b3` (tests). All on `feature/aiip-foundation-museum-slice`; draft PR #1 remains open and unmerged.
+- **Validation:** GitHub Actions run `43270698252` finished SUCCESS; content contracts and Astro build both PASS. Protected standalone Vercel preview `dpl_2yzkMeGmS3pNtuPhCF65BXi4BpF7` reached READY with `target=null`, `alias=[]`, URL `https://ai-in-perspective-prototype-preview-1xnak1qxq-spillow82-4062.vercel.app/intro`. Authenticated HTML and stylesheet requests both returned 200. Markup retains headline wording, approved “But the truth is, right now” copy and original globe. Compiled CSS contains display face and updated 1.75 s delay.
+- **Unverified:** No independent browser screenshot inspection of new typography, desktop/mobile widths, fonts loading, or animation smoothness. The owner's visual acceptance remains pending. No main merge, live custom-domain release, or public launch.
