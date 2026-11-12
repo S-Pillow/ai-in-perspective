@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 6
+- **Record revision:** 7
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -51,3 +51,10 @@
 - **Commits:** `f059b47a4c2f1c76976435279e6a21f6595b6ecd` heading; `2eb59bfc0a21102b2abbabec7b9428565f605bfe` test.
 - **Verification:** GitHub Actions `43265883342` completed SUCCESS; content contracts and Astro static build PASS. Vercel authenticated standalone unaliased preview deployment `dpl_GfRZrfKBKT3eetA5mo7ji5AtTjhS` READY with `target=null`, URL `https://ai-in-perspective-prototype-preview-a13w8mbu2-spillow82-4062.vercel.app/intro`; HTML GET 200 shows exact replacement heading, no previous heading, and globe/Continue/Skip retained.
 - **Limitations:** No new rendered browser screenshot or mobile accessibility audit recorded for this copy-only change. Visual acceptance of the whole intro remains pending. No merge, production release, or custom-domain change.
+
+## AIIP-COPY-INTRO-03 | Risk/optimism transition wording (2026-11-12)
+
+- **Owner decision:** Replace "Because the truth is" with "But the truth is" in the paragraph following "AI HAS ARRIVED". Preserve the rest of the prose, inline cyan emphasis on "right now", scene, and Continue/Skip behavior.
+- **Implementation:** `src/pages/intro.astro` updated only for one-word connective change; `tests/content.test.mjs` now asserts the exact approved transition. Changes pushed to `feature/aiip-foundation-museum-slice` as commits `aa414da607ae1ffe62269683622c9393e06c393b` and `78655664bf2d182a78ab6fab92216136bc52eed4`.
+- **Verification:** GitHub Actions run `43267707196` concluded SUCCESS, content contract checks PASS, Astro static build PASS. Standalone protected Vercel preview `dpl_EQcBTNeotRaZNCXkZSfEkj83ZZov`, READY, `target=null`, URL `https://ai-in-perspective-prototype-preview-n2kwtlgni-spillow82-4062.vercel.app/intro`. HTTP 200 and rendered HTML contains the new wording and headline while omitting old "Because" and retaining Earth markup.
+- **Boundary:** No merge or production promotion; same draft PR #1. Browser-level visual checks and wider museum art-direction acceptance remain separate.
