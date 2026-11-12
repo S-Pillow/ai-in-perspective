@@ -122,6 +122,8 @@ export function mountCoreScene(stage, { onStatus } = {}) {
   const spine = new THREE.Mesh(track(new THREE.CylinderGeometry(.62, .62, 4.6, 24)), baseMat);
   spine.position.y = 2.72;
   column.add(spine);
+  // Instanced server units use world-space matrices; update the parent transform first.
+  column.updateMatrixWorld(true);
 
   // Eight distinct racks, actual 3D cabinets and module fronts.
   // Repeated drive bays and LED indicators are instanced for low draw-call count.
