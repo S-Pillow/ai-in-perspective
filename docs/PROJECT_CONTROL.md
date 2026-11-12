@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 10
+- **Record revision:** 11
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -81,5 +81,5 @@
 - **Owner direction:** Continue the approved cinematic intro via the existing GitHub feature branch and manual protected Vercel source-snapshot previews. GitHub-to-Vercel auto-connection is deferred. Owner screenshot shows the present illustrated globe, sunrise, headline proportions and mobile framing short of the accepted reference.
 - **Classification and scope:** Chapter 12 existing-app correction and Chapter 14 Visual direction / substantial redesign. Preserve opening text, narrative delays, Continue/Skip behavior, reduced-motion, museum hall and exhibit pages, and separate public-release authority.
 - **Implementation candidate:** Atmospheric horizon, warmer title illumination, viewport-anchored Earth and sunrise across desktop/mobile, restrained geographic grid, original cloud/city-light texture. Continue is visible before its delayed glow. Retains original procedural SVG rather than using the approved image as baked-in art.
-- **Current gate:** Source candidate submitted for GitHub build/content-contract checks and subsequent manual preview; runtime animation and rendered visual acceptance remain pending. Keep PR #1 draft and unmerged.
+- **Current gate/evidence:** Commit `d86546e181b1a09ce086942696b98cf13df8cb47` pushed to `feature/aiip-foundation-museum-slice`; GitHub Actions run `43286523700` completed SUCCESS (content contracts and Astro build). Manual Vercel source-snapshot preview `dpl_E3Zjetn6AzJH2s8GsN9CMUvzPT4X` reached READY with `target=null` and no aliases at `https://ai-in-perspective-prototype-preview-a1do4x7yl-spillow82-4062.vercel.app/intro`. Source was fetched from the pinned commit: 13 application/build files were inlined; non-runtime docs, tests, CI, and README were not included in the deployment payload (GitHub CI tested the complete committed tree). Authenticated preview smoke: `/intro`, `/`, `/explore/environment`, `/methodology` and compiled CSS returned HTTP 200; markup confirms approved copy and viewport-anchored Earth scene; stylesheet confirms rise/bloom and reduced-motion declarations. This is build/source/HTTP evidence only: actual animated motion, device composition, keyboard behavior, and visual-fidelity acceptance remain pending owner/capable-browser review. Keep PR #1 draft and unmerged.
 - **Accepted limitation not implied:** This SVG is still illustrative, not a photorealistic Earth. Further original/licensed artwork and human visual approval may be required before final fidelity acceptance.
