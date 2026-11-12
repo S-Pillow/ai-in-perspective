@@ -17,6 +17,7 @@ export function mountCoreScene(stage, { onStatus } = {}) {
     });
   } catch {
     stage.dataset.coreState = "unavailable";
+    if (motionButton) motionButton.disabled = true;
     onStatus?.("3D graphics are unavailable. All six exhibit links remain accessible.");
     return () => {};
   }
@@ -132,10 +133,14 @@ export function mountCoreScene(stage, { onStatus } = {}) {
   const bladeMaterial = mat(0x1a2c39, .46, .54);
   const bladeMesh = new THREE.InstancedMesh(bladeGeometry, bladeMaterial, units * 8);
   const ledGeometry = track(new THREE.BoxGeometry(.065, .055, .035));
-  const ledMesh = new THREE.InstancedMesh(ledGeometry, ice, units * 8);
+  const ledMesh = new THREE.InstancedMesh(ledGeometry, light(0xf3ffff), units * 8);
   const dummy = new THREE.Object3D();
   const indicators = [];
   let count = 0;
+  const ledBright = new THREE.Color(0xa4edf0);
+  const ledWarm = new THREE.Color(0xe6a772);
+  const ledDim = new THREE.Color(0x19383f);
+  let lastLedStep = -1;
   for (let side = 0; side < 8; side++) {
     const angle = side * Math.PI / 4;
     const rack = new THREE.Group();
@@ -326,6 +331,16 @@ export function mountCoreScene(stage, { onStatus } = {}) {
     elapsed += delta;
     globe.rotation.y = elapsed * .18;
     globe.rotation.z = .11;
+    const ledStep = Math.floor(elapsed * 4);
+    if (ledStep !== lastLedStep) {
+      lastLedStep = ledStep;
+      for (const { index, seed } of indicators) {
+        // Low-frequency deterministic light activity: no hard flashing or strobe.
+        const value = Math.sin(seed * 9.41 + ledStep * .57);
+        ledMesh.setColorAt(index, value > .48 ? ledWarm : value > -.45 ? ledBright : ledDim);
+      }
+      ledMesh.instanceColor.needsUpdate = true;
+    }
     for (const { path, pulse, offset } of streams) {
       pulse.position.copy(path.getPoint((elapsed * .065 + offset) % 1));
     }
