@@ -17,7 +17,7 @@ test("cinematic opening never waits to reveal the skip and continue actions", ()
   const html = read("src/pages/intro.astro");
   assert.match(html, /class="intro-skip"/);
   assert.match(html, /class="intro-continue"/);
-  assert.match(html, /<p class="intro-line intro-line--first"><span class="intro-headline-lead">AI HAS<\/span> <span class="intro-headline-arrived">ARRIVED<\/span><\/p>/);
+  assert.match(html, /<h1 class="intro-line intro-line--first"><span class="intro-headline-lead">AI HAS<\/span><span class="intro-headline-arrived">ARRIVED<\/span><\/h1>/);
   assert.match(html, /But the truth is, <em>right now<\/em>/);
   assert.doesNotMatch(html, /Because the truth is/);
   assert.doesNotMatch(html, /The wave isn.t coming/);
@@ -27,11 +27,11 @@ test("cinematic opening never waits to reveal the skip and continue actions", ()
 test("intro headline has a distinct display face and a brief standalone hold before body copy", () => {
   const css = read("src/styles/global.css");
   assert.match(css, /family=Syne:wght@500;700;800/);
-  assert.match(css, /\.intro-line--first \{ font-family:"Syne"/);
+  assert.match(css, /\.intro-line--first \{[\s\S]*?flex-direction:column/);
   assert.match(css, /\.intro-headline-arrived \{/);
   assert.match(css, /\.intro-line:nth-child\(1\) \{ animation-delay:\.35s; \}/);
   assert.match(css, /\.intro-line:nth-child\(2\) \{ animation-delay:1\.75s; \}/);
-  assert.match(css, /animation:reveal-line 1s ease-out 5\.25s both/);
+  assert.match(css, /animation:reveal-line 1s cubic-bezier\(\.22,1,\.36,1\) 5\.25s both/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
@@ -56,10 +56,15 @@ test("intro uses a visible Earth scene and viewport-relative positioning on desk
   const styles = read("src/styles/global.css");
   assert.match(page, /intro-earth-art/);
   assert.match(page, /intro-earth-land/);
-  assert.match(styles, /top:max\(54svh, 490px\)/);
-  assert.match(styles, /top:max\(76svh, 640px\)/);
+  assert.match(styles, /\.intro-planet \{[\s\S]*?top:77%/);
+  assert.match(styles, /\.intro-planet \{ top:81%;width:max\(165vw,730px\); \}/);
   assert.doesNotMatch(styles, /bottom:-92vw|bottom:-125vw/);
   assert.match(styles, /prefers-reduced-motion/);
+  assert.match(styles, /@keyframes earth-emerge/);
+  assert.match(styles, /translate:0 28svh/);
+  assert.match(styles, /to \{ opacity:\.94;translate:0 0;scale:1; \}/);
+  assert.match(styles, /\.intro-planet \{ opacity:\.94 !important;translate:0 0 !important;scale:1 !important; \}/);
+  assert.match(styles, /@keyframes sunrise-bloom/);
 });
 
 test("pre-release site opts out of indexing", () => {
