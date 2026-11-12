@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 9
+- **Record revision:** 10
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -75,3 +75,11 @@
 - **Commits:** `3df1f2c14f2c706033712717a428c7de327b1e34` title markup, `ed3c128322732884e296e1e8cb641b0121648639` cinematic CSS, `12d42ec9e34f1778026c979562b48f2d993e803f` test updates, `42236d1c67d12cb51b6fcb32c3b6b6da0865fcc4` accessible separator, and `52138394534d108441d31f67c8cbff62c9bbe5f7` matching test. All isolated on `feature/aiip-foundation-museum-slice`.
 - **Verification:** GitHub Actions `43276013829` completed SUCCESS for revision `52138394534d108441d31f67c8cbff62c9bbe5f7`; content contract tests and Astro static build passed. Earlier intermediate runs failed solely because old tests still expected the previous heading/CSS positions. Protected, unaliased standalone Vercel review deployment `dpl_DMxzv4wVt8hdLmbYvchCYgGz9ukF` READY, `target=null`, URL `https://ai-in-perspective-prototype-preview-lcye92f1a-spillow82-4062.vercel.app/intro`; authenticated HTML and CSS GET both returned 200 and source probes confirmed exact accepted copy, semantic title, Earth markup, rise keyframes, reduced-motion override, noindex, Skip and Continue.
 - **Validation gap:** Exact appearance, font load, timing smoothness, contrast and overflow in real desktop/mobile browsers remain unverified. The user-approved concept image is a visual reference, and matching it has **not** yet received owner acceptance. Keep PR #1 in draft; no merge/public custom-domain release, and no change to the museum or flagship exhibits.
+
+## AIIP-INTRO-06 | Cinematic composition correction (2026-11-12)
+
+- **Owner direction:** Continue the approved cinematic intro via the existing GitHub feature branch and manual protected Vercel source-snapshot previews. GitHub-to-Vercel auto-connection is deferred. Owner screenshot shows the present illustrated globe, sunrise, headline proportions and mobile framing short of the accepted reference.
+- **Classification and scope:** Chapter 12 existing-app correction and Chapter 14 Visual direction / substantial redesign. Preserve opening text, narrative delays, Continue/Skip behavior, reduced-motion, museum hall and exhibit pages, and separate public-release authority.
+- **Implementation candidate:** Atmospheric horizon, warmer title illumination, viewport-anchored Earth and sunrise across desktop/mobile, restrained geographic grid, original cloud/city-light texture. Continue is visible before its delayed glow. Retains original procedural SVG rather than using the approved image as baked-in art.
+- **Current gate:** Source candidate submitted for GitHub build/content-contract checks and subsequent manual preview; runtime animation and rendered visual acceptance remain pending. Keep PR #1 draft and unmerged.
+- **Accepted limitation not implied:** This SVG is still illustrative, not a photorealistic Earth. Further original/licensed artwork and human visual approval may be required before final fidelity acceptance.

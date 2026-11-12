@@ -31,7 +31,8 @@ test("intro headline has a distinct display face and a brief standalone hold bef
   assert.match(css, /\.intro-headline-arrived \{/);
   assert.match(css, /\.intro-line:nth-child\(1\) \{ animation-delay:\.35s; \}/);
   assert.match(css, /\.intro-line:nth-child\(2\) \{ animation-delay:1\.75s; \}/);
-  assert.match(css, /animation:reveal-line 1s cubic-bezier\(\.22,1,\.36,1\) 5\.25s both/);
+  assert.match(css, /animation:cta-illuminate 1s ease-out 5\.25s both/);
+  assert.match(css, /\.intro-continue \{[\s\S]*?opacity:1;/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
@@ -51,20 +52,21 @@ test("water diagram is declared as conceptual and has two reachable states", () 
 });
 
 
-test("intro uses a visible Earth scene and viewport-relative positioning on desktop and mobile", () => {
+test("Earth is viewport-anchored, rises from below the screen, and blooms with the sunrise", () => {
   const page = read("src/pages/intro.astro");
   const styles = read("src/styles/global.css");
   assert.match(page, /intro-earth-art/);
   assert.match(page, /intro-earth-land/);
-  assert.match(styles, /\.intro-planet \{[\s\S]*?top:77%/);
-  assert.match(styles, /\.intro-planet \{ top:81%;width:max\(165vw,730px\); \}/);
-  assert.doesNotMatch(styles, /bottom:-92vw|bottom:-125vw/);
-  assert.match(styles, /prefers-reduced-motion/);
-  assert.match(styles, /@keyframes earth-emerge/);
-  assert.match(styles, /translate:0 28svh/);
-  assert.match(styles, /to \{ opacity:\.94;translate:0 0;scale:1; \}/);
-  assert.match(styles, /\.intro-planet \{ opacity:\.94 !important;translate:0 0 !important;scale:1 !important; \}/);
+  assert.match(page, /intro-earth-cloud-texture/);
+  assert.match(page, /intro-title-horizon/);
+  assert.match(styles, /\.intro-planet \{[\s\S]*?top:72svh/);
+  assert.match(styles, /\.intro-planet \{ top:67svh;width:max\(165vw,730px\); \}/);
+  assert.doesNotMatch(styles, /\.intro-planet \{[^}]*top:\d+%/);
+  assert.match(styles, /@keyframes earth-emerge \{[\s\S]*?translate:0 76svh/);
+  assert.match(styles, /@keyframes earth-aura-rise \{[\s\S]*?translate:0 54svh/);
   assert.match(styles, /@keyframes sunrise-bloom/);
+  assert.match(styles, /prefers-reduced-motion/);
+  assert.match(styles, /\.intro-planet \{ opacity:\.98 !important;translate:0 0 !important;scale:1 !important; \}/);
 });
 
 test("pre-release site opts out of indexing", () => {
