@@ -17,6 +17,8 @@ test("cinematic opening never waits to reveal the skip and continue actions", ()
   const html = read("src/pages/intro.astro");
   assert.match(html, /class="intro-skip"/);
   assert.match(html, /class="intro-continue"/);
+  assert.match(html, /<p class="intro-line intro-line--first">AI HAS ARRIVED<\/p>/);
+  assert.doesNotMatch(html, /The wave isn.t coming/);
   assert.doesNotMatch(html, /setTimeout\(|window\.location\s*=/);
 });
 
