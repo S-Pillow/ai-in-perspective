@@ -17,11 +17,22 @@ test("cinematic opening never waits to reveal the skip and continue actions", ()
   const html = read("src/pages/intro.astro");
   assert.match(html, /class="intro-skip"/);
   assert.match(html, /class="intro-continue"/);
-  assert.match(html, /<p class="intro-line intro-line--first">AI HAS ARRIVED<\/p>/);
+  assert.match(html, /<p class="intro-line intro-line--first"><span class="intro-headline-lead">AI HAS<\/span> <span class="intro-headline-arrived">ARRIVED<\/span><\/p>/);
   assert.match(html, /But the truth is, <em>right now<\/em>/);
   assert.doesNotMatch(html, /Because the truth is/);
   assert.doesNotMatch(html, /The wave isn.t coming/);
   assert.doesNotMatch(html, /setTimeout\(|window\.location\s*=/);
+});
+
+test("intro headline has a distinct display face and a brief standalone hold before body copy", () => {
+  const css = read("src/styles/global.css");
+  assert.match(css, /family=Syne:wght@500;700;800/);
+  assert.match(css, /\.intro-line--first \{ font-family:"Syne"/);
+  assert.match(css, /\.intro-headline-arrived \{/);
+  assert.match(css, /\.intro-line:nth-child\(1\) \{ animation-delay:\.35s; \}/);
+  assert.match(css, /\.intro-line:nth-child\(2\) \{ animation-delay:1\.75s; \}/);
+  assert.match(css, /animation:reveal-line 1s ease-out 5\.25s both/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
 test("intro, hall, environment, and methodology have public routes", () => {
