@@ -11,7 +11,8 @@
     "check": "npm run check:content && npm run build"
   },
   "dependencies": {
-    "astro": "^5.16.0"
+    "astro": "^5.16.0",
+    "three": "0.187.0"
   },
   "engines": {
     "node": ">=20.11.0"

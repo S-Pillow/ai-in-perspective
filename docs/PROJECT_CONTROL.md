@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 14
+- **Record revision:** 15
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -98,3 +98,10 @@
 - **Authority reconciliation:** Scoped direction change to the hall's experience metaphor under the owner's instruction. Owner-accepted PRD v2.1 continues for unaffected requirements; formal future PRD amendment/decision capture needed before merging the replacement home surface. See `docs/design/AIIP-CORE-01-data-center-direction.md` for detailed comparison, asset and performance architecture, and acceptance gates.
 - **Managed action boundary:** Current `feature/aiip-foundation-museum-slice` branch / draft PR #1; allowed docs update and isolated `/lab/core` Three.js proof of concept with only exact necessary dependency, test and CSS changes. Preserve intro/home/exhibit routes. No production deploy, PR merge, paid APIs, external artwork, runtime data or unrelated project mutation.
 - **Evidence separation:** Research supports Three.js / Astro / glTF technical feasibility; it does **not** validate scene fidelity. Source tests, CI build, preview GET, actual WebGL rendering, mobile behavior, reduced-motion and owner aesthetic decision remain independent gates. Preview may be deployed only after successful CI using source-pinned snapshot to protected Vercel project, `target=null`, no aliases.
+
+## AIIP-CORE-01A | Initial real-3D study implementation (2026-11-12)
+
+- **Candidate source:** First code commit `b92c299239b527741c96bd04fe69c1e5ff2a1ebd` adds `src/scripts/core-scene.js`, `src/pages/lab/core.astro`, `src/styles/core-lab.css` on the same draft branch. This follow-up pins `three@0.187.0` and adds targeted content contracts. User-approved reference is visual direction **only**; no ForgeForward imagery, brand, wording or third-party 3D assets were imported.
+- **Actual technique:** Live WebGL via Three.js scene, perspective camera, physically present room walls/columns/floors, 8 radial modeled server racks, instanced server blades and indicators, three 3D conductor paths with traveling pulse meshes, real rotating globe sphere in a modeled high wall display, six physically recessed subject-specific 3D bay studies and a floor conductor. Separate semantic six-topic HTML links remain independent of canvas. Isolated route only, `/` and `/intro` unchanged.
+- **Progressive/accessibility boundary:** Scene loads on approaching viewport; pause-motion control, reduced-motion static frame, pointer focus, native direct links, mobile arrangement, WebGL failure status, no audio, cleanup of WebGL resources. Scene values/nodes are decorative simulation, not measured metrics or scientific claims. Initial geometry is an engineering/art-direction prototype, not a photorealistic 3D asset pipeline or final subject previews.
+- **Validation gate:** GitHub content contracts and Astro build not yet assessed at this record entry. Npm registry unavailable in assistant container; GitHub Actions runner is required to establish build evidence. Independent actual browser render/visual mobile, contextual WebGL availability, motion smoothness, fallback and performance not yet observed. Owner visual acceptance and formal PRD reissue remain pending. No PR merge, public release or external services authorized.

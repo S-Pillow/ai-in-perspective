@@ -97,3 +97,46 @@ test("accepted governance and development-branch protections are documented", ()
   assert.match(control, /owner-accepted 2026-11-12/);
   assert.match(control, /No auto-merge/);
 });
+
+test("isolated Core lab is a genuine 3D scene and preserves six accessible exhibit destinations", () => {
+  const page = read("src/pages/lab/core.astro");
+  const script = read("src/scripts/core-scene.js");
+  const css = read("src/styles/core-lab.css");
+  const pkg = JSON.parse(read("package.json"));
+  assert.equal(pkg.dependencies.three, "0.187.0");
+  assert.match(page, /<BaseLayout/);
+  assert.match(page, /<canvas class="core-canvas"/);
+  assert.match(page, /aria-hidden="true"/);
+  assert.match(page, /<nav aria-label="All six exhibit topics">/);
+  assert.match(page, /href=\{exhibitPath\(exhibit\.slug\)\}/);
+  assert.match(page, /exhibits\.map\(\(exhibit\) =>/);
+  assert.match(page, /Working prototype/);
+  assert.match(page, /Planned/);
+  assert.match(page, /data-core-motion aria-pressed="true"/);
+  assert.match(script, /new THREE\.WebGLRenderer/);
+  assert.match(script, /new THREE\.PerspectiveCamera/);
+  assert.match(script, /new THREE\.InstancedMesh/);
+  assert.match(script, /new THREE\.TubeGeometry/);
+  assert.match(script, /new THREE\.SphereGeometry/);
+  assert.match(script, /globe\.rotation\.y = elapsed/);
+  assert.match(script, /pulse\.position\.copy\(path\.getPoint/);
+  assert.match(script, /prefers-reduced-motion: reduce/);
+  assert.match(script, /webglcontextlost/);
+  assert.match(script, /renderer\.dispose\(\)/);
+  assert.match(script, /new ResizeObserver/);
+  assert.doesNotMatch(page, /ForgeForward|Cloud Solutions|Core Infrastructure|Sustainability/);
+  assert.doesNotMatch(css, /background-image:\s*url\(/);
+  assert.match(css, /@media\(max-width:620px\)/);
+});
+
+test("data-center visual direction and bounded review gate are documented", () => {
+  const direction = read("docs/design/AIIP-CORE-01-data-center-direction.md");
+  const control = read("docs/PROJECT_CONTROL.md");
+  assert.match(direction, /Owner-directed visual-direction change/);
+  assert.match(direction, /Three\.js WebGL scene/);
+  assert.match(direction, /not.*flat|flat.*rejected/i);
+  assert.match(direction, /Globe|globe/);
+  assert.match(direction, //lab/core/);
+  assert.match(direction, /not.*visual approval/i);
+  assert.match(control, /Record revision:\*\* 15/);
+});
