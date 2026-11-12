@@ -10,7 +10,7 @@ test("six museum exhibit slugs and a single working prototype are declared", () 
   const data = read("src/data/exhibits.ts");
   const slugs = [...data.matchAll(/slug: "([a-z-]+)"/g)].map((m) => m[1]);
   assert.deepEqual(slugs, ["risks", "consciousness", "environment", "benefits", "misconceptions", "agents-security"]);
-  assert.equal([...data.matchAll(/status: "prototype",/g)].length, 1);
+  assert.equal([...data.matchAll(/status: "prototype"\s*\}/g)].length, 1);
 });
 
 test("cinematic opening never waits to reveal the skip and continue actions", () => {
