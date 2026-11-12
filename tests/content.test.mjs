@@ -136,7 +136,7 @@ test("data-center visual direction and bounded review gate are documented", () =
   assert.match(direction, /Three\.js WebGL scene/);
   assert.match(direction, /not.*flat|flat.*rejected/i);
   assert.match(direction, /Globe|globe/);
-  assert.match(direction, //lab/core/);
+  assert.ok(direction.includes("`/lab/core`"));
   assert.match(direction, /not.*visual approval/i);
   assert.match(control, /Record revision:\*\* 15/);
 });
