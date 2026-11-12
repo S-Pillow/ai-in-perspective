@@ -115,8 +115,11 @@ em { color: var(--accent); font-style: normal; }
 .intro-body { overflow-x:hidden; }
 .intro-stage { position:relative;isolation:isolate;min-height:100svh;display:flex;justify-content:center;text-align:center;padding:48px 20px 140px;overflow:hidden;background:radial-gradient(ellipse at 50% 90%,#183958,#070a15 64%); }
 .intro-stars { position:absolute;inset:0;z-index:-2;background:radial-gradient(#cbeeffbd .8px,transparent 1.2px);background-size:91px 93px;opacity:.3; }
-.intro-planet { position:absolute;z-index:-1;bottom:-92vw;left:50%;width:160vw;height:130vw;max-width:1900px;max-height:1550px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at 55% 9%,#ffbc8670,transparent 10%),radial-gradient(ellipse at 48% 0%,#78ddf2a3 0%,#24678ba8 10%,#112843 24%,#06101f 52%,#030810 72%);box-shadow:0 -16px 34px -17px #c1f8ff,0 -24px 85px #4caed480,0 -40px 120px #1389b559;animation:planet-rise 3s ease-out both; }
-.intro-horizon { position:absolute;left:30%;top:1%;width:35%;height:8%;border-radius:50%;background:#ffdab18a;filter:blur(65px); }
+.intro-earth-aura { position:absolute;z-index:-2;top:54svh;left:50%;width:min(94vw,1200px);height:30svh;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 40%,#47b5e557,transparent 68%);filter:blur(55px);pointer-events:none; }
+.intro-planet { position:absolute;z-index:-1;top:max(54svh, 490px);left:50%;width:min(142vw,1540px);aspect-ratio:1;height:auto;transform:translateX(-50%);opacity:.88;pointer-events:none;animation:planet-rise 3s ease-out both; }
+.intro-earth-art { width:100%;height:auto;display:block;filter:drop-shadow(0 -14px 35px #46bce970); }
+.intro-earth-bloom { filter:blur(21px); }
+.intro-earth-land { filter:drop-shadow(0 0 5px #7fd9e857); }
 .intro-center { width:min(790px,100%);position:relative;z-index:2;display:flex;flex-direction:column;align-items:center; }
 .intro-brand { font:650 clamp(18px,2vw,26px)/1.3 var(--display);letter-spacing:-.05em;text-decoration:none;margin-bottom:clamp(32px,5vh,65px); }
 .intro-brand span { font-weight:400; }
@@ -135,7 +138,7 @@ em { color: var(--accent); font-style: normal; }
 .intro-skip { position:absolute;z-index:4;top:30px;right:clamp(17px,3vw,54px);color:#bde8ef;font-size:12px;text-decoration:underline;text-underline-offset:5px; }
 .intro-caption { position:absolute;bottom:24px;color:#b3d6e9;font:700 10px/1 var(--display);letter-spacing:.25em; }
 @keyframes reveal-line { to { opacity:1;transform:translateY(0); } }
-@keyframes planet-rise { from { opacity:0;translate:0 45px; } to { opacity:1;translate:0 0; } }
+@keyframes planet-rise { from { opacity:.18;translate:0 52px;scale:.975; } to { opacity:.88;translate:0 0;scale:1; } }
 
 /* Representative evidence-first exhibit. */
 .exhibit-body { background:#070e17; }
@@ -251,7 +254,9 @@ em { color: var(--accent); font-style: normal; }
   .intro-line { font-size:15px;margin-bottom:19px;line-height:1.65; }
   .intro-line--first { font-size:27px; }
   .intro-line--final { font-size:23px;margin-top:20px; }
-  .intro-planet { width:260vw;height:210vw;bottom:-125vw; }
+  .intro-earth-aura { top:76svh;width:125vw;height:24svh;opacity:.65; }
+  .intro-planet { top:max(76svh, 640px);width:max(175vw,680px);opacity:.70; }
+  .intro-earth-art { filter:drop-shadow(0 -7px 22px #46bce955); }
   .intro-skip { right:16px;top:14px; }
   .env-hero { min-height:750px;padding:85px 22px 100px;align-items:start; }
   .env-hero .back-link { margin:18px 0 42px; }
