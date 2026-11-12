@@ -36,6 +36,24 @@ test("intro headline has a distinct display face and a brief standalone hold bef
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
+test("Living Atrium has six subject-specific interactive installations and direct routes", () => {
+  const hall = read("src/pages/index.astro");
+  const styles = read("src/styles/global.css");
+  assert.match(hall, /class="hall hall--living-atrium"/);
+  assert.match(hall, /<nav class="installation-grid" aria-label="Choose one of six AI exhibits">/);
+  assert.match(hall, /href=\{exhibitPath\(exhibit\.slug\)\}/);
+  for (const kind of ["signal","mind","water","benefits","prism","network"]) {
+    assert.ok(hall.includes('exhibit.visual === "' + kind + '"'));
+    assert.ok(styles.includes(".installation--" + kind));
+  }
+  assert.match(styles, /\.hall--living-atrium \.installation-grid \{[^}]*grid-template-columns:repeat\(12,minmax\(0,1fr\)\)/);
+  assert.match(styles, /\.hall--living-atrium \.installation-grid \{ display:flex;flex-direction:column/);
+  assert.match(styles, /\.installation:focus-visible \.installation-sculpture/);
+  assert.match(styles, /\.installation:active \.installation-sculpture/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(hall, /clearly labeled planned exhibits/);
+});
+
 test("intro, hall, environment, and methodology have public routes", () => {
   for (const path of ["src/pages/intro.astro", "src/pages/index.astro", "src/pages/explore/environment.astro", "src/pages/methodology.astro", "src/pages/explore/[slug].astro"]) {
     assert.ok(read(path).includes("BaseLayout"));

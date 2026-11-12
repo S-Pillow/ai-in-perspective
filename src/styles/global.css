@@ -405,6 +405,94 @@ em { color: var(--accent); font-style: normal; }
   .method-lede { margin-bottom:50px; }
   .method-grid { grid-template-columns:1fr; }
 }
+
+/* AIIP-UI-01A — Living Atrium candidate. Scope: hall and installation navigation only. */
+.hall--living-atrium {
+  isolation:isolate;overflow:hidden;padding:110px clamp(16px,5vw,80px) 135px;
+  background:radial-gradient(ellipse 68% 38% at 50% 17%,#1e4157,transparent 80%),
+    linear-gradient(180deg,#07111e,#0b1828 46%,#040810);
+}
+.hall--living-atrium .hall-architecture { position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden; }
+.hall-roof { position:absolute;top:-620px;left:50%;width:min(1750px,170vw);height:970px;transform:translateX(-50%);border:2px solid #90d1ed4a;border-radius:50%;box-shadow:0 0 0 40px #06101e,0 0 0 42px #9ad0f124,0 0 0 128px #060d1a,0 0 0 130px #95d0ef18,inset 0 -140px 120px #91dbeb16; }
+.hall-axis { position:absolute;top:0;bottom:0;left:50%;width:1px;background:linear-gradient(#c0f7ff53,#77c5f210 50%,transparent); }
+.hall-floor { position:absolute;top:23%;bottom:-15%;left:-35%;width:170%;opacity:.43;background:repeating-linear-gradient(90deg,transparent 0 11.7%,#85bcdb29 12%,transparent 12.2%),repeating-linear-gradient(0deg,transparent 0 84px,#88afcd22 87px,transparent 89px);transform:perspective(950px) rotateX(67deg) scale(1.2);transform-origin:50% 0;mask-image:linear-gradient(transparent 1%,black 26%,black 75%,transparent); }
+.hall-pillar { position:absolute;top:6%;bottom:2%;width:clamp(58px,9vw,135px);background:linear-gradient(90deg,#030713,#1d354c 45%,#091626 60%,#02050f);box-shadow:inset 1px 0 #c7e7fe28,inset -1px 0 #c7e7fe17;opacity:.62; }
+.hall-pillar--left { left:-5%;transform:skewY(-4deg); }
+.hall-pillar--right { right:-5%;transform:skewY(4deg); }
+.hall--living-atrium .hall-inner { max-width:1440px;position:relative; }
+.hall--living-atrium .section-intro { margin-bottom:28px; }
+.hall--living-atrium .section-intro h2 { font-size:clamp(34px,4.3vw,67px);line-height:1.08; }
+.hall--living-atrium .section-intro>p { color:#c0d0da;line-height:1.75; }
+.hall-orientation { display:flex;align-items:center;gap:15px;margin:42px 0 7px;color:#b8d8e6;letter-spacing:.2em;font:700 10px var(--display); }
+.hall-orientation>span:first-child { font-size:19px;color:#b9faf7; }
+.hall-orientation-line { flex:1;height:1px;background:linear-gradient(90deg,#8bc9df80,transparent); }
+.hall--living-atrium .installation-grid { position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(7,115px);gap:14px clamp(16px,2.2vw,34px);padding:25px 0 48px; }
+.hall--living-atrium .installation { display:flex;flex-direction:column;min-width:0;min-height:0;overflow:visible;--light:#b8e6ff;--light-dim:#2c5c78; }
+.hall--living-atrium .installation--signal { grid-column:1/5;grid-row:1/4;--light:#ffb9ac;--light-dim:#77424a; }
+.hall--living-atrium .installation--mind { grid-column:5/9;grid-row:1/5;--light:#dfc5ff;--light-dim:#614c91; }
+.hall--living-atrium .installation--water { grid-column:9/13;grid-row:1/4;--light:#b7faff;--light-dim:#237187; }
+.hall--living-atrium .installation--benefits { grid-column:1/5;grid-row:4/7;--light:#ffe0ac;--light-dim:#8b5c36; }
+.hall--living-atrium .installation--prism { grid-column:5/9;grid-row:5/8;--light:#d4d0ff;--light-dim:#69588c; }
+.hall--living-atrium .installation--network { grid-column:9/13;grid-row:4/8;--light:#b9ffe2;--light-dim:#347766; }
+.hall--living-atrium .installation:hover { transform:none; }
+.hall--living-atrium .installation-visual {
+  flex:1 1 auto;min-height:0;height:auto;overflow:hidden;border:0;border-bottom:1px solid var(--light);
+  border-radius:0;box-shadow:none;background:radial-gradient(ellipse at 50% 85%,var(--light-dim),transparent 69%);
+}
+.hall--living-atrium .installation-visual::before { inset:12% 8%;border:0;border-radius:0;background:radial-gradient(ellipse at 50% 35%,var(--light-dim),transparent 65%);filter:blur(26px); }
+.hall--living-atrium .installation-visual::after { background:linear-gradient(180deg,#e5ffff18,transparent 38%); }
+.hall--living-atrium .installation--signal .installation-visual { clip-path:polygon(0 12%,49% 0,100% 12%,100% 100%,0 100%); }
+.hall--living-atrium .installation--mind .installation-visual { border-radius:48% 48% 9% 9% / 30% 30% 7% 7%; }
+.hall--living-atrium .installation--water .installation-visual { border-radius:11% 11% 28% 28%; }
+.hall--living-atrium .installation--benefits .installation-visual { clip-path:polygon(0 12%,35% 0,66% 8%,100% 0,100% 100%,0 100%); }
+.hall--living-atrium .installation--prism .installation-visual { clip-path:polygon(12% 0,100% 0,100% 85%,88% 100%,0 100%,0 18%); }
+.hall--living-atrium .installation--network .installation-visual { border-radius:44% 44% 16% 16% / 22% 22% 10% 10%; }
+.hall--living-atrium .installation-vault { opacity:.12; }
+.hall--living-atrium .installation-halo { z-index:0;width:84%;background:radial-gradient(circle,var(--light-dim),transparent 65%);opacity:.8; }
+.hall--living-atrium .installation-plinth { position:absolute;bottom:5%;left:16%;width:68%;height:22%;border:1px solid var(--light);border-radius:50%;transform:perspective(280px) rotateX(68deg);opacity:.44;box-shadow:inset 0 0 30px var(--light-dim),0 0 25px var(--light-dim); }
+.hall--living-atrium .installation-beam { position:absolute;top:0;left:27%;width:46%;height:75%;background:linear-gradient(180deg,var(--light),transparent);opacity:.12;clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);transition:opacity .3s; }
+.hall--living-atrium .installation-sculpture { position:relative;z-index:3;display:block;width:min(93%,350px);height:100%;max-height:295px;filter:drop-shadow(0 0 21px var(--light-dim));animation:gallery-float 9s ease-in-out infinite alternate;transition:transform .34s,filter .34s; }
+.hall--living-atrium .installation:hover .installation-sculpture,.hall--living-atrium .installation:focus-visible .installation-sculpture { transform:translateY(-8px) scale(1.07);filter:drop-shadow(0 0 35px var(--light)); }
+.hall--living-atrium .installation:active .installation-sculpture { transform:scale(.98);transition-duration:.1s; }
+.hall--living-atrium .installation:hover .installation-beam,.hall--living-atrium .installation:focus-visible .installation-beam { opacity:.3; }
+.hall--living-atrium .installation-copy { min-height:0;flex:0 0 auto;gap:7px;padding:13px 8px 8px;border:0;border-top:1px solid var(--light);background:linear-gradient(180deg,#080f1d25,#08101fdd 32%,#07101fe6);box-shadow:none; }
+.hall--living-atrium .installation-meta { color:var(--light);font-size:10px;letter-spacing:.16em; }
+.hall--living-atrium .installation-title { font-size:clamp(18px,1.7vw,25px);line-height:1.2; }
+.hall--living-atrium .installation-desc { color:#c8d4dc;font-size:13px;line-height:1.5; }
+.hall--living-atrium .installation-foot { padding-top:9px;font-size:10px; }
+.hall--living-atrium .installation-foot span:last-child { color:var(--light);white-space:nowrap; }
+.hall--living-atrium .hall-footnote { color:#b6c4ce;line-height:1.6;max-width:770px;margin-top:38px; }
+.hall--living-atrium .signal-waves,.hall--living-atrium .benefit-beacon,.hall--living-atrium .prism-rays { animation:gallery-light-pulse 6s ease-in-out infinite alternate; }
+.hall--living-atrium .water-current,.hall--living-atrium .trust-route { animation:gallery-current 8s linear infinite; }
+.hall--living-atrium .thought-ring { transform-origin:150px 122px;animation:gallery-thought 14s ease-in-out infinite alternate; }
+@keyframes gallery-float { to { translate:0 -9px; } }
+@keyframes gallery-current { to { stroke-dashoffset:-192; } }
+@keyframes gallery-light-pulse { from { opacity:.38; } to { opacity:1; } }
+@keyframes gallery-thought { to { rotate:12deg; } }
+@media (max-width:1050px) {
+  .hall--living-atrium .installation-grid { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:430px;gap:30px; }
+  .hall--living-atrium .installation { grid-column:auto;grid-row:auto; }
+  .hall--living-atrium .installation-title { font-size:22px; }
+  .hall--living-atrium .installation-desc { font-size:14px; }
+}
+@media (max-width:620px) {
+  .hall--living-atrium { padding:76px 16px 90px; }
+  .hall--living-atrium .section-intro { display:block;margin-bottom:23px; }
+  .hall--living-atrium .section-intro h2 { font-size:clamp(33px,9vw,47px); }
+  .hall--living-atrium .section-intro>p { margin:24px 0 0;max-width:450px; }
+  .hall-orientation { font-size:9px;letter-spacing:.1em;gap:8px;margin:18px 0 10px; }
+  .hall--living-atrium .installation-grid { display:flex;flex-direction:column;gap:42px;padding:22px 0 8px; }
+  .hall--living-atrium .installation { min-height:420px; }
+  .hall--living-atrium .installation-visual { min-height:240px;max-height:290px; }
+  .hall--living-atrium .installation--mind .installation-visual,.hall--living-atrium .installation--water .installation-visual,.hall--living-atrium .installation--network .installation-visual { min-height:275px; }
+  .hall--living-atrium .installation-sculpture { height:240px;width:min(91%,320px); }
+  .hall--living-atrium .installation-copy { padding:13px 7px 7px; }
+  .hall--living-atrium .installation-title { font-size:clamp(22px,6vw,29px); }
+  .hall--living-atrium .installation-desc { font-size:14px; }
+  .hall--living-atrium .installation-foot { font-size:11px; }
+  .hall--living-atrium .hall-footnote { margin-top:20px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { animation:none !important;scroll-behavior:auto !important;transition-duration:.01ms !important; }
   .intro-line,.intro-continue { opacity:1 !important;transform:none !important; }

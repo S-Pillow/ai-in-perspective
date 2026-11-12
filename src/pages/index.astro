@@ -28,27 +28,70 @@ import { exhibits, exhibitPath } from "../data/exhibits";
       <p class="atrium-caption">SIX QUESTIONS. MANY PERSPECTIVES. YOUR CONCLUSIONS.</p>
     </section>
 
-    <section class="hall" id="exhibits" aria-labelledby="hall-title">
+    <section class="hall hall--living-atrium" id="exhibits" aria-labelledby="hall-title">
+      <div class="hall-architecture" aria-hidden="true">
+        <span class="hall-roof"></span><span class="hall-axis"></span>
+        <span class="hall-floor"></span><span class="hall-pillar hall-pillar--left"></span><span class="hall-pillar hall-pillar--right"></span>
+      </div>
       <div class="hall-inner">
         <div class="section-intro">
           <div>
-            <p class="eyebrow">THE EXHIBITION HALL / 01—06</p>
-            <h2 id="hall-title">Choose a question.<br /><span>Enter another world.</span></h2>
+            <p class="eyebrow">THE LIVING ATRIUM / SIX EXHIBITIONS</p>
+            <h2 id="hall-title">Six questions.<br /><span>Countless perspectives.</span></h2>
           </div>
-          <p>Every doorway opens a different way of looking at AI. The experience is immersive. The explanations are grounded in evidence.</p>
+          <p>Choose an installation. Each opens a different question about AI, with evidence beyond the spectacle. No prescribed path. No required tour.</p>
         </div>
-        <div class="installation-grid">
+        <p class="hall-orientation"><span aria-hidden="true">✦</span> THE EXHIBITION FLOOR <span class="hall-orientation-line" aria-hidden="true"></span> SELECT ANY INSTALLATION</p>
+        <nav class="installation-grid" aria-label="Choose one of six AI exhibits">
           {exhibits.map((exhibit) => (
             <a href={exhibitPath(exhibit.slug)} class:list={["installation", `installation--${exhibit.visual}`]} aria-label={`Explore ${exhibit.title}`}>
               <span class="installation-visual" aria-hidden="true">
-                <span class="installation-vault"></span>
-                <svg class="installation-symbol" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {exhibit.visual === "signal" && <g stroke="currentColor" stroke-width="1.2"><path d="M100 22L172 155H28L100 22Z" opacity=".6"/><path d="M100 48L148 139H52L100 48Z"/><circle cx="100" cy="106" r="24"/><path d="M100 78V114M100 125V129" stroke-width="4" stroke-linecap="round"/><path d="M30 45L61 65M167 50L144 73M39 155L70 145M158 162L134 144" opacity=".5"/></g>}
-                  {exhibit.visual === "mind" && <g stroke="currentColor" stroke-width="1.1"><circle cx="100" cy="100" r="72" opacity=".3"/><circle cx="100" cy="100" r="48" stroke-dasharray="3 6"/><path d="M63 95Q38 58 77 47Q89 23 109 53Q151 43 149 77Q175 114 143 128Q132 161 98 146Q66 163 58 133Q31 124 63 95Z"/><path d="M75 65L115 78L137 111L102 135L72 115L75 65L102 89L137 111M115 78L102 135" opacity=".65"/><circle cx="102" cy="89" r="5" fill="currentColor"/></g>}
-                  {exhibit.visual === "water" && <g stroke="currentColor" stroke-width="1.3"><path d="M100 22C86 51 48 87 48 118C48 147 70 170 100 170C130 170 152 147 152 118C152 87 114 51 100 22Z"/><path d="M73 116C74 95 85 84 95 70" stroke-width="5" stroke-linecap="round" opacity=".6"/><ellipse cx="100" cy="133" rx="36" ry="12" opacity=".4"/><path d="M62 144C88 128 117 165 145 141" opacity=".55"/><circle cx="100" cy="117" r="9" fill="currentColor" fill-opacity=".26"/></g>}
-                  {exhibit.visual === "benefits" && <g stroke="currentColor" stroke-width="1.2"><circle cx="100" cy="100" r="67" opacity=".35"/><path d="M100 35V165M35 100H165M54 54L146 146M146 54L54 146" opacity=".25"/><path d="M100 62L109 91L139 100L109 109L100 139L91 109L61 100L91 91Z" fill="currentColor" fill-opacity=".25"/><circle cx="100" cy="100" r="8" fill="currentColor"/></g>}
-                  {exhibit.visual === "prism" && <g stroke="currentColor" stroke-width="1.2"><path d="M100 30L170 149H30L100 30Z"/><path d="M100 30V149M30 149L136 89M170 149L64 89" opacity=".6"/><path d="M23 104L80 104M120 104H178" stroke-width="3"/><path d="M168 100L185 80M168 106L188 107M167 112L185 135" stroke-width="2" opacity=".65"/><circle cx="100" cy="103" r="14" fill="currentColor" fill-opacity=".15"/></g>}
-                  {exhibit.visual === "network" && <g stroke="currentColor" stroke-width="1.2"><path d="M100 37L152 71V129L100 163L48 129V71L100 37Z" opacity=".5"/><path d="M100 37V100L48 129M100 100L152 129M48 71L100 100L152 71"/><circle cx="100" cy="37" r="8" fill="#091525"/><circle cx="152" cy="71" r="7" fill="#091525"/><circle cx="48" cy="71" r="7" fill="#091525"/><circle cx="100" cy="100" r="12" fill="currentColor" fill-opacity=".23"/><circle cx="100" cy="163" r="6" fill="#091525"/></g>}
+                <span class="installation-vault"></span><span class="installation-plinth"></span><span class="installation-beam"></span>
+                <svg class="installation-sculpture" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" fill="none">
+                  {exhibit.visual === "signal" && <g>
+                    <path d="M62 198L107 58L125 90L102 198Z" fill="#b47a79" fill-opacity=".45" stroke="#ffd1c6" stroke-opacity=".72"/>
+                    <path d="M123 209L153 25L179 75L173 205Z" fill="#763c52" fill-opacity=".55" stroke="#ffccbf" stroke-opacity=".73"/>
+                    <path d="M187 196L215 83L243 132L224 205Z" fill="#894c59" fill-opacity=".55" stroke="#ffc7b4" stroke-opacity=".55"/>
+                    <path class="signal-waves" d="M58 117L94 96L112 114L147 90L169 113L208 93L244 112" stroke="#ffdbce" stroke-width="3"/>
+                    <path d="M53 217H254" stroke="#ffc7ba" stroke-opacity=".37" stroke-width="2"/>
+                  </g>}
+                  {exhibit.visual === "mind" && <g>
+                    <ellipse class="thought-ring" cx="150" cy="122" rx="111" ry="75" stroke="#cbbdff" stroke-opacity=".44" stroke-width="2" transform="rotate(-21 150 122)"/>
+                    <ellipse cx="150" cy="122" rx="80" ry="106" stroke="#f2eaff" stroke-opacity=".25" stroke-width="2" transform="rotate(41 150 122)"/>
+                    <path d="M89 133C66 108 76 76 105 76C117 52 142 55 152 67C180 48 212 75 207 97C240 110 222 152 201 155C206 190 167 202 147 184C119 202 89 181 94 159C78 151 79 137 89 133Z" fill="#8a74c7" fill-opacity=".18" stroke="#ece2ff" stroke-width="2"/>
+                    <g stroke="#e3d6ff" stroke-opacity=".75" stroke-width="2"><path d="M109 88L148 109L188 86L204 123L167 152L122 151L95 124L148 109L167 152L148 184"/><path d="M109 88L122 151M188 86L167 152"/></g>
+                    <g fill="#f7eaff"><circle cx="109" cy="88" r="4"/><circle cx="148" cy="109" r="6"/><circle cx="188" cy="86" r="5"/><circle cx="167" cy="152" r="5"/><circle cx="122" cy="151" r="4"/></g>
+                  </g>}
+                  {exhibit.visual === "water" && <g>
+                    <path d="M63 213V78L107 49H197L239 78V213Z" fill="#225d73" fill-opacity=".3" stroke="#b6f5ff" stroke-opacity=".56" stroke-width="2"/>
+                    <path d="M107 49V213M197 49V213M63 78H239" stroke="#b7faff" stroke-opacity=".44" stroke-width="2"/>
+                    <g stroke="#b1e8f1" stroke-opacity=".7" stroke-width="2"><path d="M119 89H185M119 109H185M119 129H185M119 149H185M119 169H185M119 189H185"/></g>
+                    <path class="water-current" d="M85 209V178C85 156 113 162 113 138S135 112 150 112S184 91 184 66" stroke="#83fff2" stroke-width="5" stroke-dasharray="10 13" stroke-linecap="round"/>
+                    <path class="water-current" d="M217 209V173C217 153 187 141 187 121S174 94 170 84" stroke="#d1ffff" stroke-width="3" stroke-dasharray="6 11"/>
+                    <ellipse cx="151" cy="215" rx="108" ry="17" stroke="#91f9f1" stroke-opacity=".78" stroke-width="3"/>
+                    <path d="M152 20C144 37 133 50 133 65A19 19 0 00171 65C171 50 160 37 152 20Z" stroke="#e2ffff" stroke-width="2" fill="#b5fffc" fill-opacity=".3"/>
+                  </g>}
+                  {exhibit.visual === "benefits" && <g>
+                    <path d="M50 203L75 92L120 126L151 48L194 109L237 72L255 202" stroke="#ffddaa" stroke-opacity=".35" stroke-width="2"/>
+                    <g stroke="#ffedcf" stroke-width="2"><path d="M60 125L116 89L128 177L72 203Z" fill="#edb36e" fill-opacity=".21"/><path d="M121 72L174 46L195 182L133 185Z" fill="#ffd49c" fill-opacity=".21"/><path d="M190 104L245 78L254 187L197 197Z" fill="#ffc383" fill-opacity=".18"/></g>
+                    <g fill="#fff1cc"><circle class="benefit-beacon" cx="94" cy="141" r="9"/><circle cx="156" cy="108" r="10"/><circle cx="224" cy="137" r="9"/></g>
+                    <path d="M94 141L156 108L224 137M94 141L114 201M156 108V202M224 137L236 205" stroke="#ffdc9f" stroke-opacity=".48" stroke-width="2"/>
+                  </g>}
+                  {exhibit.visual === "prism" && <g>
+                    <path d="M29 139H117" stroke="#d6e3ff" stroke-opacity=".8" stroke-width="8"/>
+                    <path d="M119 45L217 201H52Z" stroke="#e4e7ff" stroke-opacity=".82" stroke-width="3" fill="#837bc4" fill-opacity=".17"/>
+                    <path d="M119 45L135 159L217 201M52 201L135 159" stroke="#e4eaff" stroke-opacity=".47" stroke-width="2"/>
+                    <g class="prism-rays" stroke-width="5" stroke-linecap="round"><path d="M135 159L260 93" stroke="#9cf2ff"/><path d="M135 159L266 139" stroke="#dac2ff"/><path d="M135 159L261 188" stroke="#ffe2b7"/></g>
+                    <path d="M45 220H257" stroke="#c6bdff" stroke-opacity=".38" stroke-width="2"/>
+                  </g>}
+                  {exhibit.visual === "network" && <g>
+                    <path d="M151 20L245 75V187L151 241L56 187V75Z" fill="#3e8d78" fill-opacity=".12" stroke="#a5ffd5" stroke-opacity=".76" stroke-width="3"/>
+                    <path d="M151 52L216 93V173L151 209L86 173V93Z" stroke="#bcffe3" stroke-opacity=".51" stroke-dasharray="6 7" stroke-width="2"/>
+                    <path d="M151 87L195 109V155L151 181L108 155V109Z" fill="#91daba" fill-opacity=".14" stroke="#d7ffe7" stroke-opacity=".78" stroke-width="2"/>
+                    <path class="trust-route" d="M56 133H110L151 129L196 133H245" stroke="#c3ffe4" stroke-width="4" stroke-dasharray="9 12"/>
+                    <g fill="#d8ffed" stroke="#27644f" stroke-width="2"><circle cx="56" cy="133" r="10"/><circle cx="110" cy="133" r="9"/><circle cx="151" cy="129" r="12"/><circle cx="196" cy="133" r="9"/><circle cx="245" cy="133" r="10"/></g>
+                    <path d="M143 112V103C143 90 161 90 161 103V112M139 112H165V134H139Z" fill="#224d42" stroke="#d7ffe7" stroke-width="2"/>
+                  </g>}
                 </svg>
                 <span class="installation-halo"></span>
               </span>
@@ -56,12 +99,12 @@ import { exhibits, exhibitPath } from "../data/exhibits";
                 <span class="installation-meta"><span>{exhibit.number} / {exhibit.kicker}</span><span class="installation-arrow" aria-hidden="true">↗</span></span>
                 <span class="installation-title">{exhibit.title}</span>
                 <span class="installation-desc">{exhibit.short}</span>
-                <span class="installation-foot"><span>{exhibit.kind}</span><span>{exhibit.status === "prototype" ? "Explore prototype" : "Preview exhibit"}</span></span>
+                <span class="installation-foot"><span>{exhibit.kind}</span><span>{exhibit.status === "prototype" ? "Explore prototype" : "Planned exhibit"}</span></span>
               </span>
             </a>
           ))}
-        </div>
-        <p class="hall-footnote">This is a development preview. The Environment experience is the first working exhibit prototype; the other five are identified as planned.</p>
+        </nav>
+        <p class="hall-footnote">Development preview: AI & the Environment is the first interactive prototype. The other five installations open clearly labeled planned exhibits.</p>
       </div>
     </section>
     <section class="closing-band" aria-label="Our purpose"><p>The first impression is not always the whole picture.</p><h2>The choice begins with <em>understanding.</em></h2><a href="/methodology" class="text-action">How we approach the evidence <span aria-hidden="true">↗</span></a></section>
