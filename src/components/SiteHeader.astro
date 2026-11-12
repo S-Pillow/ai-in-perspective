@@ -1,0 +1,15 @@
+---
+const { subtle = false } = Astro.props;
+---
+<header class:list={["site-header", { "site-header--subtle": subtle }]}>
+  <a class="brand" href="/" aria-label="AI in Perspective, museum hall">
+    <span class="brand-mark" aria-hidden="true"><span></span></span>
+    <span>AI <span class="brand-light">in Perspective</span></span>
+  </a>
+  <nav class="header-links" aria-label="Primary navigation">
+    <a href="/">The museum</a>
+    <a href="/#exhibits">Exhibits</a>
+    <a href="/methodology">Our approach</a>
+    <a href="/intro" class="header-quiet">Replay opening <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
