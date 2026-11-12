@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 3
+- **Record revision:** 4
 - **Last reconciled:** 2026-11-12
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -24,3 +24,12 @@
 - Source snapshot: feature-branch commit `ac5ee432395e8375bd89732fd8e43df78ede17ba` (earlier than this documentation-only revision).
 - NOT VERIFIED: rendered desktop/mobile layout or design quality, interactive button state transition in a browser, reduced-motion behavior in a browser, cross-browser layout/keyboard interaction, final research/editorial sourcing.
 - Source-of-truth note: GitHub PR #1 remains the code authority. This temporary standalone Vercel project is not Git-linked and does not auto-update on pushes. Do not treat its READY state as visual approval or public launch.
+
+## AIIP-UI-01 design correction intake (2026-11-12)
+
+- **Trigger/evidence:** Owner-provided desktop screenshots of the authenticated museum hall, six similarly structured arch installations, Environment hero and reading sections show that the current iteration does not yet visually meet the accepted immersive museum direction. This is screenshot evidence for the pictured states only; animation and multi-viewport performance remain unverified.
+- **Chapter 14 classification:** Visual direction / substantial redesign. Planning and source study only in this unit; accepted PRD, application behavior and editorial evidence are protected.
+- **External research reviewed:** `pbakaus/impeccable` at `b4bff1626c344067788c2679f048a20057c7cc5a` (Apache-2.0); `nextlevelbuilder/ui-ux-pro-max-skill` at `6ae86f61f520d6ca229d2f40e070410638c908c5` (MIT). Detailed adoption/non-adoption and three candidate museum compositions: `docs/design/AIIP-UI-01-creative-correction-brief.md`.
+- **Current action:** Read-only source review and planning document commit on draft PR #1; no third-party tool or hook installed, no downloaded executable run, and no change to visual source/runtime/deployment.
+- **Visual status:** Current prototype remains **not visually accepted**. The candidate art direction (Living Atrium recommended for exploration) is a proposal, not accepted design and not implementation authority for unreviewed visual additions.
+- **Next gate:** Render and compare materially different compositions within the same accepted animated museum vision, inspect mobile/desktop/reduced-motion and teaching states; owner selects direction before full rollout. No PR merge or public release.
