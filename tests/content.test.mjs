@@ -35,6 +35,18 @@ test("water diagram is declared as conceptual and has two reachable states", () 
   assert.match(html, /No live data feed or measured site figures/);
 });
 
+
+test("intro uses a visible Earth scene and viewport-relative positioning on desktop and mobile", () => {
+  const page = read("src/pages/intro.astro");
+  const styles = read("src/styles/global.css");
+  assert.match(page, /intro-earth-art/);
+  assert.match(page, /intro-earth-land/);
+  assert.match(styles, /top:max\(54svh, 490px\)/);
+  assert.match(styles, /top:max\(76svh, 640px\)/);
+  assert.doesNotMatch(styles, /bottom:-92vw|bottom:-125vw/);
+  assert.match(styles, /prefers-reduced-motion/);
+});
+
 test("pre-release site opts out of indexing", () => {
   assert.match(read("src/layouts/BaseLayout.astro"), /noindex, nofollow/);
 });
