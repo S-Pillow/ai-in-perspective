@@ -138,7 +138,7 @@ test("data-center visual direction and bounded review gate are documented", () =
   assert.match(direction, /Globe|globe/);
   assert.ok(direction.includes("`/lab/core`"));
   assert.match(direction, /not.*visual approval/i);
-  assert.match(control, /Record revision:\*\* 15/);
+  assert.match(control, /Record revision:\*\* 17/);
 });
 
 
@@ -156,6 +156,6 @@ test("CORE-02 architectural comparison preserves three meaningful alternatives a
   assert.match(html,/Observation gallery/i);
   assert.match(html,/not finished 3D environments/i);
   assert.match(brief,/Recommended provisional main hub composition/);
-  assert.match(brief,/not.*accepted/i);
+  assert.match(brief,/Owner has not visually accepted any option/i);
   assert.match(read("docs/PROJECT_CONTROL.md"),/Record revision:\*\* 17/);
 });
