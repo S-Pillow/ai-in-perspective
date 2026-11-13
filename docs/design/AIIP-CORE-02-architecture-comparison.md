@@ -1,4 +1,7 @@
-# AIIP-CORE-02 — Architecture-first correction and visual comparison
+# AIIP-CORE-02 — Architecture-first correction and visual comparison (historical / visually rejected)
+
+> **OWNER CORRECTION — SUPERSEDED FOR MAIN HUB (2026-11-12):** After reviewing the actual screenshots, the owner **rejected all three** visual compositions in this study as candidates for the main landing page. The proposed **Observation Gallery winner is withdrawn**; none of these is accepted, selected, or the mandatory starting point for new implementation. This file is a historical account of an unsuccessful visual comparison, **not current design authority**. The controlling direction and next design workflow are in [AIIP-CORE-01 — Living Data Center](AIIP-CORE-01-data-center-direction.md) and `docs/PROJECT_CONTROL.md`. The owner wants a grand, cohesive, multi-level *living destination* with a central animated core, elevated rotating globe, and six subject-relevant animated entrances—not flat technical diagrams. Do not interpret the failures as a requirement to build a literal facility or convert the homepage into the Environment exhibit.
+
 
 **Date:** 2026-11-12  
 **Classification:** AIPF v8.10.1 / Chapter 12 existing application + Chapter 14 substantial visual redirection + Chapter 18 protected preview. Managed, design-validation work.  
@@ -25,9 +28,9 @@ Its rack-like forms, rings, symbols and place-marker labels were generic primiti
 |---|---|---|---|---|
 | **01 Contained Aisle** | Human-height view along opposed equipment rack fronts with containment ceiling and overhead utility paths | Strongest sense of being inside genuine infrastructure | Six directly discoverable topical entrances would be difficult without an added gallery/navigation system | Preserve as a possible close-up transition / supporting scene |
 | **02 Power-to-Cooling Cross-section** | Readable architectural section from incoming electrical equipment through compute to cooling equipment | Strongest explanation of environmental infrastructure, concrete flow | Too diagrammatic for a premium atmospheric hub | Prefer as a future **Environment** exhibit teaching sequence, separate scope |
-| **03 Observation Gallery** | Visitor-scale gallery looking into real data hall behind glazed wall; separate thematic destinations on the gallery perimeter | Balances believable infrastructure with useful navigation and calm ambient activity | Must not become a flat “wall of server racks”; needs depth/material/light and evidence-aware previews | **Recommended provisional main hub composition for next asset study** |
+| **03 Observation Gallery** | Visitor-scale gallery looking into real data hall behind glazed wall; separate thematic destinations on the gallery perimeter | Balances believable infrastructure with useful navigation and calm ambient activity | Must not become a flat “wall of server racks”; needs depth/material/light and evidence-aware previews | **REJECTED by owner for the main hub; earlier recommendation withdrawn** |
 
-**Evidence and uncertainty:** Local browser-rendered comparative vector composition studies were inspected at desktop 1440×900 and mobile 390×844. They are linework *planning studies*, not finished 3D scenes, not final visual acceptance, and not proof of production performance. The study route reproduces the architectural comparison rather than claiming realism. Reject any candidate that looks like generic neon hardware or sacrifices direct six-topic navigation. Provisional recommendation needs real 3D visual acceptance before the homepage changes.
+**Evidence and uncertainty:** Local browser-rendered comparative vector composition studies were inspected at desktop 1440×900 and mobile 390×844. They are linework *planning studies*, not finished 3D scenes, not final visual acceptance, and not proof of production performance. The study route reproduces the architectural comparison rather than claiming realism. Reject any candidate that looks like generic neon hardware or sacrifices direct six-topic navigation. **Owner's later screenshots reject all three compositions as primary homepage directions. No option remains preferred or selected.**
 
 ## Next scoped implementation package
 
@@ -40,11 +43,11 @@ Its rack-like forms, rings, symbols and place-marker labels were generic primiti
 
 ### CORE-02B — Planned separate asset/material milestone
 
-Use **Observation Gallery** as the default provisional candidate (subject to review). Model one *convincing* architectural slice: true depth, correctly oriented equipment rows, enclosure/glazing, overhead power/network routing, cooling physical logic, PBR materials, contact shadows, purposeful lighting. First produce 2–3 **material/camera** variants of that one layout with real 3D still captures, not three random stylistic presets. No artificial server sculpture. Include at least one motion behavior attached to real infrastructure. The stage must be visually compelling when paused.
+**CANCELLED as conceived following owner rejection. Do not use Observation Gallery as a default or model it as the next hub.** The historical plan below is retained only to explain the failed direction; it must not be executed without a new owner decision. Historical proposal: model one *convincing* architectural slice: true depth, correctly oriented equipment rows, enclosure/glazing, overhead power/network routing, cooling physical logic, PBR materials, contact shadows, purposeful lighting. First produce 2–3 **material/camera** variants of that one layout with real 3D still captures, not three random stylistic presets. No artificial server sculpture. Include at least one motion behavior attached to real infrastructure. The stage must be visually compelling when paused.
 
 ### CORE-02C — Planned separate living-exhibits milestone
 
-Make six real doorway previews connected to the visitor gallery: Risks incident evidence, Consciousness cognition/experience distinction, Environment power/cooling/water, Benefits measurable outcomes, Misconceptions claims versus evidence, Agents & Security permissions boundaries. Separate idle, selected and reduced-motion states. All links are HTML. Do not force a literal hardware explanation for philosophical subjects.
+**Superseded in its specific gallery layout, but the functional requirement for six living entrances remains.** Historical proposal: make six real doorway previews connected to the visitor gallery: Risks incident evidence, Consciousness cognition/experience distinction, Environment power/cooling/water, Benefits measurable outcomes, Misconceptions claims versus evidence, Agents & Security permissions boundaries. Separate idle, selected and reduced-motion states. All links are HTML. Do not force a literal hardware explanation for philosophical subjects.
 
 ### Quality, testing and stops
 
@@ -52,3 +55,7 @@ Make six real doorway previews connected to the visitor gallery: Risks incident 
 - Source contracts + Astro static build on exact commit, then Git-linked **protected preview** on feature branch, inspect deploy branch, protection/aliases, served route and assets. Git-connected preview builds may trigger automatically on pushes; verify them instead of claiming success in advance.
 - Stop: no merge, no root-route replacement, no release or custom domain, no new external asset/license/paid pipeline, no rewriting PRD. The owner-directed visual delta requires formal PRD reconciliation before release.
 - Risks: using line studies as a substitute for asset production; over-darkening and tiny labels; mismatched subject portals; mobile crop; GPU performance. All remain open and need real-device verification.
+
+## Final disposition after owner screenshots
+
+The side-by-side studies, live-page screenshots and equipment diagrams were specifically called out as **not the requested homepage**. The owner asked whether the agent had shifted to an exhibit; the agent acknowledged that the power/cooling section functioned more like an Environment explainer, and that the observation gallery reduced the destination to staring at servers. **All three main-page directions are rejected.** The technical learning from generating accessible comparisons and keeping source/preview states separate is retained, but the designs are not advanced. No CORE-02B or CORE-02C implementation was authorized by these studies. See the revised CORE-01 note for the main-hub brief and the next design process.
