@@ -137,12 +137,12 @@ test("data-center visual direction and bounded review gate are documented", () =
   assert.match(direction, /Flat, ugly technical diagrams as homepage candidates/);
   assert.match(direction, /Globe|globe/);
   assert.ok(direction.includes("`/lab/core`"));
-  assert.match(direction, /central animated core/i);
+  assert.match(direction, /Signature central core/);
   assert.match(direction, /Six meaningful, discoverable exhibit entrances/);
   assert.match(direction, /The observation gallery is \*\*NOT selected/);
   assert.match(direction, /Dioramas/);
   assert.match(direction, /InstaLanding/);
-  assert.match(direction, /not.*selected.*automatically/i);
+  assert.match(direction, /No default winner now/);
 
   assert.match(direction, /NO owner-accepted page composition/);
   assert.ok(Number(control.match(/Record revision:\*\* (\d+)/)?.[1]) >= 18);
