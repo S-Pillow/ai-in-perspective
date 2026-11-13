@@ -156,6 +156,6 @@ test("CORE-02 architectural comparison preserves three meaningful alternatives a
   assert.match(html,/Observation gallery/i);
   assert.match(html,/not finished 3D environments/i);
   assert.match(brief,/Recommended provisional main hub composition/);
-  assert.match(brief,/Owner has not visually accepted any option/i);
+  assert.match(brief,/not final visual acceptance/i);
   assert.match(read("docs/PROJECT_CONTROL.md"),/Record revision:\*\* 17/);
 });
