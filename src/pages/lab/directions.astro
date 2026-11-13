@@ -12,6 +12,8 @@ const rackSet = Array.from({length:6},(_,i)=>({
 }));
 const serverSlots=Array.from({length:12},(_,i)=>i);
 const windowRacks=Array.from({length:10},(_,i)=>i);
+const ceilingLines=Array.from({length:9},(_,i)=>i/8);
+const floorDepths=Array.from({length:5},(_,i)=>(i+1)/5);
 ---
 <BaseLayout title="Architecture comparison — The Core" description="Three original architecture-first composition studies for the AI in Perspective data center" bodyClass="architecture-study">
   <main id="content" class="directions">
@@ -39,7 +41,7 @@ const windowRacks=Array.from({length:10},(_,i)=>i);
           <path d="M0 650L390 300H810L1200 650Z" fill="url(#aisle-floor)"/>
           <path d="M0 75L390 295V650H0Z" fill="#152731"/><path d="M1200 75L810 295V650H1200Z" fill="#111e28"/>
           <path d="M210 58H990L815 295H385Z" fill="#29424a" opacity=".62"/>
-          {Array.from({length:9},(_,i)=>{const k=i/8;return <path d={`M${260+k*140} ${50+k*26}H${940-k*140}`} stroke="#81a8ae" stroke-width={2-k} opacity=".5"/>})}
+          {ceilingLines.map(k=><path d={`M${260+k*140} ${50+k*26}H${940-k*140}`} stroke="#81a8ae" stroke-width={2-k} opacity=".5"/>)}
           <path d="M140 95L480 300M1060 95L720 300" stroke="#b38355" stroke-width="10"/>
           <path d="M175 118L491 298M1025 118L709 298" stroke="#355567" stroke-width="7"/>
           {rackSet.map(r=>(<g>
@@ -52,7 +54,7 @@ const windowRacks=Array.from({length:10},(_,i)=>i);
             </g>))}
           </g>))}
           {Array.from({length:10},(_,i)=><path d={`M${385+i*43} 305L${-30+i*140} 650`} stroke="#7d9ba1" opacity=".25"/>)}
-          {Array.from({length:5},(_,i)=>{const k=(i+1)/5;return <path d={`M${400-400*k} ${306+k*k*344}H${800+400*k}`} stroke="#79959a" opacity=".28"/>})}
+          {floorDepths.map(k=><path d={`M${400-400*k} ${306+k*k*344}H${800+400*k}`} stroke="#79959a" opacity=".28"/>)}
           <path class="activity" d="M400 296L570 296L600 320L630 296H800" fill="none" stroke="#9ed5d9" stroke-width="3" stroke-dasharray="3 45"/>
           <text x="690" y="352" font-size="12" fill="#a5c8ca" letter-spacing="2">COLD AISLE / ACCESS ZONE</text>
           <text x="937" y="335" font-size="11" fill="#e3b98c">OVERHEAD POWER / CABLE ROUTE</text>
