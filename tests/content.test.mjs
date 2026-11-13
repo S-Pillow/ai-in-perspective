@@ -140,3 +140,22 @@ test("data-center visual direction and bounded review gate are documented", () =
   assert.match(direction, /not.*visual approval/i);
   assert.match(control, /Record revision:\*\* 15/);
 });
+
+
+test("CORE-02 architectural comparison preserves three meaningful alternatives and six direct exhibit links", () => {
+  const html=read("src/pages/lab/directions.astro");
+  const brief=read("docs/design/AIIP-CORE-02-architecture-comparison.md");
+  assert.match(html,/data-composition="aisle"/);
+  assert.match(html,/data-composition="section"/);
+  assert.match(html,/data-composition="overlook"/);
+  assert.match(html,/aria-label="Choose an AI in Perspective exhibit"/);
+  assert.match(html,/href=\{exhibitPath\(e.slug\)\}/);
+  assert.match(html,/prefers-reduced-motion:reduce/);
+  assert.match(html,/Cold aisle|COLD AISLE/);
+  assert.match(html,/COOLING \/ CDU/);
+  assert.match(html,/Observation gallery/i);
+  assert.match(html,/not finished 3D environments/i);
+  assert.match(brief,/Recommended provisional main hub composition/);
+  assert.match(brief,/not.*accepted/i);
+  assert.match(read("docs/PROJECT_CONTROL.md"),/Record revision:\*\* 17/);
+});
