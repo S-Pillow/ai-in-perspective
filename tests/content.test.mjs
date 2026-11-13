@@ -132,12 +132,19 @@ test("isolated Core lab is a genuine 3D scene and preserves six accessible exhib
 test("data-center visual direction and bounded review gate are documented", () => {
   const direction = read("docs/design/AIIP-CORE-01-data-center-direction.md");
   const control = read("docs/PROJECT_CONTROL.md");
-  assert.match(direction, /Owner-directed visual-direction change/);
-  assert.match(direction, /Three\.js WebGL scene/);
-  assert.match(direction, /not.*flat|flat.*rejected/i);
+  assert.match(direction, /Owner-directed experience metaphor/);
+  assert.match(direction, /Three\.js\/WebGL/);
+  assert.match(direction, /Flat, ugly technical diagrams as homepage candidates/);
   assert.match(direction, /Globe|globe/);
   assert.ok(direction.includes("`/lab/core`"));
-  assert.match(direction, /not.*visual approval/i);
+  assert.match(direction, /central animated core/i);
+  assert.match(direction, /Six meaningful, discoverable exhibit entrances/);
+  assert.match(direction, /The observation gallery is \*\*NOT selected/);
+  assert.match(direction, /Dioramas/);
+  assert.match(direction, /InstaLanding/);
+  assert.match(direction, /not.*selected.*automatically/i);
+
+  assert.match(direction, /NO owner-accepted page composition/);
   assert.ok(Number(control.match(/Record revision:\*\* (\d+)/)?.[1]) >= 18);
 });
 
@@ -155,7 +162,8 @@ test("CORE-02 architectural comparison preserves three meaningful alternatives a
   assert.match(html,/COOLING \/ CDU/);
   assert.match(html,/Observation gallery/i);
   assert.match(html,/not finished 3D environments/i);
-  assert.match(brief,/Recommended provisional main hub composition/);
+  assert.match(brief,/rejected all three/i);
+  assert.match(brief,/Observation Gallery winner is withdrawn/);
   assert.match(brief,/not final visual acceptance/i);
   assert.ok(Number(read("docs/PROJECT_CONTROL.md").match(/Record revision:\*\* (\d+)/)?.[1]) >= 18);
 });
