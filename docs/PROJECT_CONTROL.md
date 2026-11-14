@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 35
+- **Record revision:** 36
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -264,3 +264,11 @@
 - **Editorial contract:** Three cards cover alternative water supplies, cooling tradeoffs and reported water replenishment, with direct EPA/DOE/company source paths. No unsupported figures or invented success claims. The company account is explicitly labeled self-reported/pledged, not independently verified, and heat rejection remains relevant even with liquid cooling. ELI5 follows the four owner-selected mini-card concepts and keeps body copy ordinary, accessible and concise.
 - **Implementation:** Add semantic sections/cards to `src/pages/explore/environment.astro`, scoped responsive styles to `src/styles/environment-rebuild.css` (including static decorative, aria-hidden crayon underline), source/order and accessibility-oriented contract checks to `tests/content.test.mjs`. No new package, network runtime, JS handler, imagery asset, external font or interactive dependency.
 - **Acceptance order:** Energy → Energy explanation → Water → The bigger picture → Practical response cards → ELI5 recap → Footnotes. Verify exact-commit GitHub content tests and Astro build, protected Git-linked Vercel preview, and operator visual/mobile/reduced-motion check. Prior licensed source, editorial, performance and release gates remain separate. Draft PR #1 stays unmerged; no production/public release, domain/DNS, unrelated route, or external API change.
+
+## AIIP-EXPERIENCE-12A | Exact-code build and protected preview evidence (2026-11-14)
+
+- **Source implementation:** `aad6e4131d48daca7fc917c150a37deedc91e3e2` on `feature/aiip-foundation-museum-slice`. Four-file bounded implementation: Environment Astro, Environment scoped CSS, source-contract tests, control record. No modifications to existing energy/water JS or other routes.
+- **GitHub CI:** Actions workflow `43654292204` completed **SUCCESS** for exact source `aad6e4131d48daca7fc917c150a37deedc91e3e2`: dependency installation, content contract tests and Astro static build. New test checks section sequence, three practical cards, four ELI5 cards, title decoration/aria and responsive CSS, plus source links.
+- **Protected preview:** Git-linked Vercel deployment `dpl_8GaiUS25JWDZiKqeQrYdLsaDiRUe` returned **READY**, target `null`, source SHA `aad6e4131d48daca7fc917c150a37deedc91e3e2`. Preview: `https://ai-in-perspective-prototype-preview-mloaeq132-spillow82-4062.vercel.app/explore/environment`.
+- **Read-only hosted check:** Authenticated GET returned HTTP 200. Rendered HTML contains the seven ordered sections: Energy → Energy explanation → Water → Bigger picture → Practical cards → ELI5 recap → footnotes, with three practical cards and four ELI5 cards, semantic title, SVG scribble, source links and stylesheet reference. This is hosted response/DOM source evidence, **not** a browser screenshot or real-device visual proof.
+- **Remaining gates:** Owner visual review of desktop/mobile composition and wrapping, keyboard/accessibility and reduced-motion checks on the hosted surface, final editorial/source review and public-release permissions. Neither this status update nor the earlier READY preview authorizes merge/production. This commit is documentation-only; automatic checks/previews may retrigger but do not represent a new art iteration.
