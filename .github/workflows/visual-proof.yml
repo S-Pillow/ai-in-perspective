@@ -47,11 +47,3 @@ jobs:
         run: node scripts/visual-proof.mjs
         env:
           BASE_URL: http://127.0.0.1:4173
-      - name: Upload browser visual evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: aiip-wayfinder-visual-proof
-          path: visual-proof/
-          retention-days: 14
-          if-no-files-found: warn

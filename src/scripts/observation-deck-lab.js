@@ -116,8 +116,18 @@ export function bootObservationDeck(){
   function updateActive(){const idx=centerIndex();if(idx===active)return;active=idx;panels.forEach((p,i)=>{p.classList.toggle('deck-module--active',i===active);p.setAttribute('aria-current',i===active?'true':'false');});counter.textContent=String(active+1).padStart(2,'0')+' / 05';prev.disabled=active===0;next.disabled=active===panels.length-1;changeWorld(active);}
   function go(index,behavior='smooth'){
     const i=Math.max(0,Math.min(panels.length-1,index));const p=panels[i];
-    track.scrollTo({left:p.offsetLeft-(track.clientWidth-p.clientWidth)/2,behavior:reduce.matches?'instant':behavior});
-    if(behavior==='instant'||reduce.matches){setTimeout(updateActive,60);}
+    // Compute the position from viewport rects, not offsetLeft (different offsetParent).
+    const box=track.getBoundingClientRect(),rect=p.getBoundingClientRect();
+    const left=track.scrollLeft+(rect.left+rect.width/2)-(box.left+box.width/2);
+    if(behavior==='instant'||reduce.matches){
+      const oldSnap=track.style.scrollSnapType,oldScroll=track.style.scrollBehavior;
+      track.style.scrollSnapType='none';track.style.scrollBehavior='auto';
+      track.scrollLeft=left;
+      requestAnimationFrame(()=>{track.style.scrollSnapType=oldSnap;track.style.scrollBehavior=oldScroll;});
+      setTimeout(updateActive,160);
+    } else {
+      track.scrollTo({left,behavior:'smooth'});
+    }
   }
   prev.addEventListener('click',()=>go(active-1));next.addEventListener('click',()=>go(active+1));
   track.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();go(active-1);}else if(e.key==='ArrowRight'){e.preventDefault();go(active+1);}});

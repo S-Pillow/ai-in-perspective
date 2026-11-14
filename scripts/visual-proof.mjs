@@ -37,6 +37,10 @@ try{
   checks('skip enters deck',page.url().includes('/lab/observation-deck'));
   await page.waitForTimeout(1200);
   await page.screenshot({path:join(DIR,'desktop-deck-risks.png'),fullPage:true,animations:'disabled'});
+  const deckThumb=await page.screenshot({type:'jpeg',quality:23,fullPage:false});
+  process.stdout.write('AIIP_DECK_JPEG='+deckThumb.toString('base64')+'\n');
+  const viewportMetrics=await page.evaluate(()=>{const t=document.querySelector('[data-deck-track]');return {left:t.scrollLeft,width:t.clientWidth,panels:[...document.querySelectorAll('[data-deck-window]')].map((p,i)=>({i,center:p.getBoundingClientRect().left+p.getBoundingClientRect().width/2}))};});
+  process.stdout.write('AIIP_DECK_METRICS='+JSON.stringify(viewportMetrics)+'\n');
   const activeInitial=await page.locator('[data-deck-counter]').innerText();
   checks('deck starts on Risks 02 / 05',activeInitial.includes('02'),{activeInitial});
   const deckGL=await page.locator('[data-deck]').getAttribute('data-webgl');
