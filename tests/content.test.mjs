@@ -167,3 +167,34 @@ test("CORE-02 architectural comparison preserves three meaningful alternatives a
   assert.match(brief,/not final visual acceptance/i);
   assert.ok(Number(read("docs/PROJECT_CONTROL.md").match(/Record revision:\*\* (\d+)/)?.[1]) >= 18);
 });
+// Paste the following isolated test into tests/content.test.mjs; it exercises
+// source-level contract only. It does not establish actual WebGL rendering.
+test("EXPERIENCE-06 isolated connected spaceship visual slice", () => {
+  const voyage = read("src/pages/lab/voyage.astro");
+  const scene = read("src/scripts/voyage-lab.js");
+  const deck = read("src/pages/lab/observation-deck.astro");
+  const deckCode = read("src/scripts/observation-deck-lab.js");
+  const pkg = JSON.parse(read("package.json"));
+  const direction = read("docs/design/AIIP-EXPERIENCE-06-visual-slice.md");
+  assert.match(voyage, /Skip journey/);
+  assert.match(voyage, /data-voyage-play/);
+  assert.match(voyage, /Explore the observation deck/);
+  assert.match(scene, /GLTFLoader/);
+  assert.match(scene, /wayfinder\.glb/);
+  assert.match(scene, /new THREE\.WebGLRenderer/);
+  assert.match(scene, /gsap\.timeline/);
+  assert.match(scene, /prefers-reduced-motion: reduce/);
+  assert.match(scene, /visibilitychange/);
+  assert.match(deck, /Spaceship observation windows/);
+  assert.match(deck, /Education & News/);
+  assert.match(deck, /href: null/);
+  assert.match(deckCode, /pointerdown/);
+  assert.match(deckCode, /ArrowLeft/);
+  assert.match(deckCode, /scrollTo/);
+  assert.match(deckCode, /new THREE\.WebGLRenderer/);
+  assert.equal(pkg.dependencies.gsap, "3.15.1");
+  assert.match(pkg.scripts.build, /unpack-wayfinder/);
+  assert.match(read("scripts/unpack-wayfinder.mjs"), /brotliDecompressSync/);
+  assert.match(direction, /existing homepage remains intact/i);
+  assert.ok(Number(read("docs/PROJECT_CONTROL.md").match(/Record revision:\*\* (\d+)/)?.[1]) >= 24);
+});

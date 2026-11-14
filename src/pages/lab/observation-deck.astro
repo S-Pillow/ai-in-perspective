@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/observation-deck-lab.css";
+const windows = [
+  { number: "01", slug: "history", eyebrow: "ARCHIVE / THE BEGINNING", title: "History of AI", short: "The ideas, breakthroughs, and questions that brought us here.", state: "planned", href: null },
+  { number: "02", slug: "risks", eyebrow: "FRONTIER / THE UNKNOWN", title: "AI Risks & Safety", short: "What can go wrong? What safeguards exist? And where are we falling short?", state: "planned", href: "/explore/risks" },
+  { number: "03", slug: "benefits", eyebrow: "HORIZON / THE POSSIBLE", title: "Where AI Is Helping", short: "Follow the evidence behind AI's promises and real-world benefits.", state: "planned", href: "/explore/benefits" },
+  { number: "04", slug: "environment", eyebrow: "SYSTEMS / OUR PLANET", title: "AI & the Environment", short: "Energy, water, infrastructure and the real tradeoffs of AI.", state: "prototype", href: "/explore/environment" },
+  { number: "05", slug: "education", eyebrow: "DISCOVERY / KEEP LEARNING", title: "Education & News", short: "Learn more, ask better questions, and follow what is changing.", state: "planned", href: null },
+];
+---
+<BaseLayout title="Observation Deck — design proof" description="Explore AI questions through the windows of an original exploratory spacecraft." bodyClass="deck-lab-body">
+  <main id="content" class="deck" data-deck>
+    <div class="deck-cabin-backing" aria-hidden="true"><div class="deck-cabin-top"></div><div class="deck-cabin-belt"></div><div class="deck-cabin-bottom"></div></div>
+    <header class="deck-header">
+      <a href="/" class="deck-brand" aria-label="AI in Perspective homepage"><span class="deck-brand-icon" aria-hidden="true">✳</span> AI <em>in Perspective</em></a>
+      <span class="deck-name">THE WAYFINDER <span aria-hidden="true">/</span> OBSERVATION DECK</span>
+      <a href="/lab/voyage" class="deck-back">Replay journey <span aria-hidden="true">↗</span></a>
+    </header>
+    <div class="deck-orientation">
+      <p class="deck-kicker">THE FIVE PERSPECTIVES <span aria-hidden="true">—</span> SELECT YOUR DESTINATION</p>
+      <h1>Look out. <em>Look closer.</em></h1>
+    </div>
+
+    <div class="deck-carousel-region" aria-label="Explore the AI topic windows">
+      <div class="deck-windows" data-deck-track tabindex="0" role="region" aria-roledescription="carousel" aria-label="Spaceship observation windows, horizontally scrollable">
+        {windows.map((item,index)=>(
+          <section class:list={["deck-module",`deck-module--${item.slug}`]} data-deck-window data-deck-index={index} aria-label={`${item.number} of 05, ${item.title}`}>
+            <div class="deck-window-rim">
+              <div class="deck-window-glass">
+                <div class:list={["deck-window-paint",`deck-window-paint--${item.slug}`]} aria-hidden="true"><span class="deck-far-mountain"></span><span class="deck-near-mountain"></span><span class="deck-paint-stars"></span></div>
+                <div class="deck-render-slot" data-deck-render-slot aria-hidden="true"></div>
+                <div class="deck-glass-reflection" aria-hidden="true"></div>
+                <div class="deck-window-copy">
+                  <p class="deck-world-kicker">{item.eyebrow}</p>
+                  <h2>{item.title}</h2>
+                  <p class="deck-world-lede">{item.short}</p>
+                  {item.href ? <a class="deck-explore" href={item.href}>Explore this perspective <span aria-hidden="true">↗</span></a> : <span class="deck-planned">Destination in development</span>}
+                </div>
+                <div class="deck-window-index" aria-hidden="true">{item.number} / 05</div>
+              </div>
+            </div>
+            <div class="deck-module-plinth" aria-hidden="true"><div class="deck-module-light"></div><div class="deck-plinth-line"></div></div>
+          </section>
+        ))}
+      </div>
+    </div>
+    <div class="deck-bottom">
+      <div class="deck-control-label">DRAG TO LOOK AROUND <span aria-hidden="true">/</span> SWIPE ON MOBILE</div>
+      <nav class="deck-nav" aria-label="Observation window controls">
+        <button type="button" data-deck-prev aria-label="Previous window"><span aria-hidden="true">←</span></button>
+        <span data-deck-counter aria-live="polite">02 <span aria-hidden="true">/</span> 05</span>
+        <button type="button" data-deck-next aria-label="Next window"><span aria-hidden="true">→</span></button>
+      </nav>
+      <a class="deck-home" href="/">Return home <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="deck-qa-hint">Visual exploration prototype — original 3D worlds are in development; planned topic pages are identified honestly.</p>
+  </main>
+  <script>
+    import { bootObservationDeck } from "../../scripts/observation-deck-lab.js";
+    bootObservationDeck();
+  </script>
+</BaseLayout>
