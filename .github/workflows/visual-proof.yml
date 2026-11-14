@@ -1,0 +1,57 @@
+name: AIIP Wayfinder browser visual proof
+
+on:
+  push:
+    branches: [feature/aiip-foundation-museum-slice]
+    paths:
+      - .github/workflows/visual-proof.yml
+      - scripts/visual-proof.mjs
+      - src/pages/lab/voyage.astro
+      - src/pages/lab/observation-deck.astro
+      - src/scripts/voyage-lab.js
+      - src/scripts/observation-deck-lab.js
+      - src/styles/voyage-lab.css
+      - src/styles/observation-deck-lab.css
+      - public/models/wayfinder.br.part*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-and-interact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install the existing app and browser testing tools
+        run: |
+          npm install --no-audit --no-fund
+          npm install --no-save --no-audit --no-fund playwright@1.65.0
+          npx playwright install chromium --with-deps
+      - name: Build verified source
+        run: npm run build
+      - name: Start local static preview
+        run: |
+          nohup npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/aiip-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/lab/voyage > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/aiip-preview.log
+          exit 1
+      - name: Browser screenshots and interaction checks
+        run: node scripts/visual-proof.mjs
+        env:
+          BASE_URL: http://127.0.0.1:4173
+      - name: Upload browser visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aiip-wayfinder-visual-proof
+          path: visual-proof/
+          retention-days: 14
+          if-no-files-found: warn
