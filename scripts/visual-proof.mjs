@@ -28,6 +28,8 @@ try{
   checks('voyage graphics ready',graphics==='ready',{graphics});
   checks('ship glTF loaded',model==='ready',{model});
   await page.screenshot({path:join(DIR,'desktop-voyage.png'),fullPage:true,animations:'disabled'});
+  const voyageThumb=await page.screenshot({type:'jpeg',quality:23,fullPage:false});
+  process.stdout.write('AIIP_VOYAGE_JPEG='+voyageThumb.toString('base64')+'\n');
   await page.getByRole('button',{name:/Pause journey/}).click();
   const counterBefore=await page.locator('[data-voyage-counter]').innerText();
   await page.waitForTimeout(750);
@@ -41,6 +43,9 @@ try{
   process.stdout.write('AIIP_DECK_JPEG='+deckThumb.toString('base64')+'\n');
   const viewportMetrics=await page.evaluate(()=>{const t=document.querySelector('[data-deck-track]');return {left:t.scrollLeft,width:t.clientWidth,panels:[...document.querySelectorAll('[data-deck-window]')].map((p,i)=>({i,center:p.getBoundingClientRect().left+p.getBoundingClientRect().width/2}))};});
   process.stdout.write('AIIP_DECK_METRICS='+JSON.stringify(viewportMetrics)+'\n');
+  checks('deck viewport constrained to browser width',viewportMetrics.width<=1440,{width:viewportMetrics.width});
+  const closest=viewportMetrics.panels.reduce((a,b)=>Math.abs(a.center-720)<Math.abs(b.center-720)?a:b);
+  checks('Risks physical window centered',closest.i===1,{centeredWindow:closest.i+1});
   const activeInitial=await page.locator('[data-deck-counter]').innerText();
   checks('deck starts on Risks 02 / 05',activeInitial.includes('02'),{activeInitial});
   const deckGL=await page.locator('[data-deck]').getAttribute('data-webgl');
@@ -61,6 +66,8 @@ try{
   await mobilePage.goto(ROOT+'/lab/observation-deck',{waitUntil:'networkidle'});
   await mobilePage.waitForTimeout(950);
   await mobilePage.screenshot({path:join(DIR,'mobile-deck.png'),fullPage:true,animations:'disabled'});
+  const mobileThumb=await mobilePage.screenshot({type:'jpeg',quality:22,fullPage:false});
+  process.stdout.write('AIIP_MOBILE_DECK_JPEG='+mobileThumb.toString('base64')+'\n');
   checks('mobile deck no document horizontal overflow',await mobilePage.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
   const activeMobile=await mobilePage.locator('[data-deck-counter]').innerText();
   checks('mobile deck selection initialized',activeMobile.includes('02'),{activeMobile});

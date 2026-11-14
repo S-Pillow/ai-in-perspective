@@ -16,8 +16,8 @@
 .deck-orientation{text-align:center;padding:23px 18px 17px;position:relative;z-index:3}
 .deck-kicker{margin:0 0 7px;font-size:10px;letter-spacing:.29em;color:#315864;font-weight:690}.deck-kicker span{margin:0 8px;color:#bc9277}
 .deck-orientation h1{font-weight:550;letter-spacing:-.065em;font-size:clamp(28px,3.5vw,48px);margin:0;line-height:1.08;color:#153f4b}.deck-orientation h1 em{font-style:normal;color:#557c7a;font-weight:370}
-.deck-carousel-region{position:relative;min-height:0;width:100%;height:100%;display:flex;align-items:center}
-.deck-windows{display:flex;align-items:center;gap:clamp(16px,2.2vw,40px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:calc((100vw - min(72vw,1060px)) / 2);padding:12px max(14vw,calc((100vw - 1060px) / 2)) 24px;scrollbar-width:none;width:100%;height:100%;touch-action:pan-x pan-y;cursor:grab;scroll-behavior:smooth;align-content:center}
+.deck-carousel-region{position:relative;min-height:0;min-width:0;overflow:hidden;width:100%;height:100%;display:flex;align-items:center}
+.deck-windows{min-width:0;max-width:100vw;flex:1 1 auto;display:flex;align-items:center;gap:clamp(16px,2.2vw,40px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:calc((100vw - min(72vw,1060px)) / 2);padding:12px max(14vw,calc((100vw - 1060px) / 2)) 24px;scrollbar-width:none;width:100%;height:100%;touch-action:pan-x pan-y;cursor:grab;scroll-behavior:smooth;align-content:center}
 .deck-windows::-webkit-scrollbar{display:none}.deck-windows.deck-dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
 .deck-module{flex:0 0 min(72vw,1060px);width:min(72vw,1060px);height:100%;min-height:400px;max-height:690px;position:relative;scroll-snap-align:center;display:flex;flex-direction:column;justify-content:center;transition:filter .25s,transform .25s;filter:brightness(.78) saturate(.78)}
 .deck-module--active{filter:none}
