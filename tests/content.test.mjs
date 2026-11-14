@@ -77,13 +77,37 @@ test("intro, hall, environment, and methodology have public routes", () => {
   }
 });
 
-test("water diagram is declared as conceptual and has two reachable states", () => {
-  const html = read("src/pages/explore/environment.astro");
-  assert.match(html, /simplified teaching model/);
-  assert.match(html, /data-mode-btn="withdrawal"/);
-  assert.match(html, /data-mode-btn="consumption"/);
-  assert.match(html, /aria-pressed/);
-  assert.match(html, /No live data feed or measured site figures/);
+test("Environment restart uses accessible ISO-GLOW-inspired connected infrastructure", () => {
+  const page = read("src/pages/explore/environment.astro");
+  const script = read("src/scripts/environment-system.js");
+  const css = read("src/styles/environment-rebuild.css");
+  const license = read("public/licenses/iso-glow-LICENSE.txt");
+  assert.match(page, /<h1 id="environment-title">AI has a/);
+  assert.match(page, /data-environment-stage/);
+  for (const focus of ["all", "power", "compute", "cooling", "context"]) {
+    assert.ok(page.includes('data-env-focus="' + focus + '"'));
+  }
+  assert.match(page, /data-env-motion/);
+  assert.match(page, /role="status" aria-live="polite"/);
+  assert.match(page, /IEA · Energy and AI/);
+  assert.match(page, /Berkeley National Laboratory/);
+  assert.match(page, /not a measured data center/i);
+  assert.match(page, /water-assisted cooling arrangement/i);
+  assert.match(page, /licenses\/iso-glow-LICENSE\.txt/);
+  assert.doesNotMatch(page, /data-mode-btn|data-water-mode|water-lab/);
+  assert.match(script, /const P = \(x,y,z=0\)/);
+  assert.match(script, /const isoBox =/);
+  assert.match(script, /const rack=\(x,y,index\)=>/);
+  assert.match(script, /for\(let i=0;i<7;i\+\+\)/);
+  assert.match(script, /data-zone="compute"/);
+  assert.match(script, /const focusData=/);
+  assert.match(script, /visibilitychange/);
+  assert.match(script, /prefers-reduced-motion: reduce/);
+  assert.match(css, /@media\(max-width:660px\)/);
+  assert.match(css, /\.env-scene-wrap\{overflow-x:auto/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
+  assert.match(license, /MIT License/);
+  assert.match(license, /Copyright \(c\) 2026 April Zhu/);
 });
 
 

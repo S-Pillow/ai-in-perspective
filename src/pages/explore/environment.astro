@@ -1,91 +1,113 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import "../../styles/environment-rebuild.css";
 ---
-<BaseLayout title="AI & the Environment" description="Follow the difference between water withdrawal and water consumption in this early interactive learning prototype." bodyClass="exhibit-body">
+<BaseLayout title="AI & the Environment" description="Explore how electricity, grid infrastructure, servers, cooling and environmental resources connect to AI computing." bodyClass="exhibit-body">
   <SiteHeader subtle />
-  <main id="content">
-    <section class="env-hero">
-      <div class="env-field" aria-hidden="true"><div class="env-ripple env-ripple--one"></div><div class="env-ripple env-ripple--two"></div><div class="env-droplet"><div class="env-drop-reflection"></div></div></div>
-      <div class="env-hero-copy">
-        <a class="back-link" href="/#exhibits">← Back to the museum</a>
-        <p class="eyebrow">EXHIBIT 03 / THE CURRENT</p>
-        <h1>What does AI<br /><em>actually use?</em></h1>
-        <p class="env-deck">Every AI request depends on physical infrastructure. To understand its impact, we have to ask not only how much is used, but what we mean by <em>used</em>.</p>
-        <a class="primary-link" href="#water-lab">Explore the water system <span aria-hidden="true">↓</span></a>
+  <main id="content" class="environment-rebuild">
+    <section class="environment-opening" aria-labelledby="environment-title">
+      <div class="environment-opening__copy">
+        <a class="environment-back" href="/discover/">← All perspectives</a>
+        <p class="environment-eyebrow"><span class="environment-eyebrow__mark"></span> AI & THE ENVIRONMENT <span class="environment-eyebrow__divider">/</span> EXPLORATION 04</p>
+        <h1 id="environment-title">AI has a<br /><em>physical footprint.</em></h1>
+        <p class="environment-opening__lead">The cloud runs on real equipment. Trace the electricity, computing hardware, heat and cooling systems that make AI possible—and the resource questions they raise.</p>
       </div>
-      <p class="env-scroll-note" aria-hidden="true">FROM DIGITAL TO PHYSICAL ↓</p>
+      <aside class="environment-opening__side" aria-label="How to use this exhibit">
+        <span>INTERACTIVE STUDY / 01</span>
+        <p>One connected miniature system. Five parts. No invented measurements.</p>
+        <a href="#environment-model">Explore the system <span aria-hidden="true">↓</span></a>
+      </aside>
     </section>
-    <section class="chapter intro-chapter" aria-labelledby="first-question">
-      <div class="chapter-number">01 / THE QUESTION</div>
-      <div class="chapter-content">
-        <h2 id="first-question">One word.<br />Two different measurements.</h2>
-        <p class="large-copy">When someone says a data center “uses water,” do they mean water taken from a source, or water that does not return to that source in the same accounting period?</p>
-        <p>Those are related but different questions. Water withdrawal measures water taken from a source. Water consumption generally describes water that is evaporated, incorporated into products, or otherwise not returned to the immediate water environment within the relevant accounting boundary. The distinction matters when interpreting an environmental claim.</p>
-        <p>It also matters where and when the water is used. A figure without a location, accounting scope, and time period can create the wrong impression even when the arithmetic is correct.</p>
+
+    <section id="environment-model" class="env-interactive" aria-labelledby="model-title">
+      <div class="env-interactive__heading">
+        <div>
+          <p class="environment-eyebrow">THE PHYSICAL CHAIN <span class="environment-eyebrow__divider">/</span> INTERACTIVE PLATE</p>
+          <h2 id="model-title">How AI uses energy</h2>
+        </div>
+        <p>Choose a part of the system to trace its role. The scene is illustrative, not a measured data center or a model of one universal cooling design.</p>
       </div>
-    </section>
-    <section class="water-lab" id="water-lab" aria-labelledby="lab-title">
-      <div class="lab-head">
-        <div><p class="eyebrow">02 / THE MECHANISM</p><h2 id="lab-title">Follow the water.</h2></div>
-        <p>This is a simplified teaching model, not a measured facility or an estimate of AI's water footprint. Switch the lens to see what each accounting term counts.</p>
-      </div>
-      <div class="water-switch" role="group" aria-label="Water accounting perspective">
-        <button type="button" data-mode-btn="withdrawal" aria-pressed="true">Withdrawal</button>
-        <button type="button" data-mode-btn="consumption" aria-pressed="false">Consumption</button>
-      </div>
-      <div class="lab-stage" data-water-mode="withdrawal">
-        <svg class="lab-diagram" viewBox="0 0 860 360" role="img" aria-labelledby="diagram-title diagram-desc">
-          <title id="diagram-title">Simplified cooling water flow</title>
-          <desc id="diagram-desc">Water moves from a source toward a cooling facility. Some may return, while some may evaporate. Select withdrawal or consumption for a different emphasis.</desc>
-          <defs><linearGradient id="flow" x1="0" x2="1"><stop offset="0" stop-color="#3a8caa"/><stop offset=".55" stop-color="#7fe4e5"/><stop offset="1" stop-color="#4289c9"/></linearGradient></defs>
-          <g class="diagram-grid" stroke="#6bdbe8" opacity=".14"><path d="M0 90H860M0 180H860M0 270H860M143 0V360M286 0V360M429 0V360M572 0V360M715 0V360" /></g>
-          <g class="water-source"><rect x="45" y="142" width="145" height="110" rx="26" fill="#0b2638" stroke="#56bbdc" stroke-width="2"/><path d="M59 199Q79 181 100 199T145 199T178 199" stroke="#8be8e5" stroke-width="3" fill="none"/><text x="117" y="275" text-anchor="middle">WATER SOURCE</text></g>
-          <g class="water-intake"><path d="M192 179H342" stroke="url(#flow)" stroke-width="9" stroke-linecap="round"/><path d="M328 166L343 179L328 192" stroke="#9aeaf0" stroke-width="4" fill="none" stroke-linejoin="round"/><text x="266" y="156" text-anchor="middle">WITHDRAWAL</text></g>
-          <g class="facility"><rect x="347" y="110" width="174" height="166" rx="15" fill="#0e2532" stroke="#649eab" stroke-width="2"/><path d="M375 112V83H493V112" fill="none" stroke="#649eab" stroke-width="2"/><path d="M372 154H498M372 182H498M372 210H498M372 238H498" stroke="#4b91a8" stroke-width="8" stroke-linecap="round" stroke-dasharray="22 10"/><text x="435" y="304" text-anchor="middle">COOLING SYSTEM</text></g>
-          <g class="water-return"><path d="M519 228H654V289H191V244" fill="none" stroke="#4a8fa5" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><path d="M201 257L191 243L180 258" fill="none" stroke="#72c8d0" stroke-width="4"/><text x="603" y="268" text-anchor="middle">RETURNED</text></g>
-          <g class="water-evap"><path d="M519 152H694" stroke="#7bdcc8" stroke-width="5" stroke-dasharray="8 9"/><path d="M680 139L695 152L680 165" stroke="#7bdcc8" stroke-width="4" fill="none"/><circle cx="730" cy="153" r="37" stroke="#86d4cc" stroke-width="2" stroke-dasharray="3 7"/><path d="M716 159C721 142 727 132 734 115C742 135 747 144 747 155Q747 177 730 177Q714 177 716 159Z" fill="#81d6c5" fill-opacity=".3"/><text x="730" y="209" text-anchor="middle">EVAPORATION</text></g>
-        </svg>
-        <div class="lab-reading" aria-live="polite">
-          <p class="reading-kicker" id="reading-kicker">WHAT WITHDRAWAL COUNTS</p>
-          <h3 id="reading-title">Water taken from a source</h3>
-          <p id="reading-description">Withdrawal measures water removed from a source for use. Some withdrawn water may return. A withdrawal figure alone does not tell you how much water was consumed.</p>
+
+      <div class="env-model-panel">
+        <div class="env-model-toolbar" role="group" aria-label="Highlight a part of the AI infrastructure system">
+          <div class="env-focus-controls">
+            <button type="button" data-env-focus="all" aria-pressed="true">Whole system</button>
+            <button type="button" data-env-focus="power" aria-pressed="false">Electricity</button>
+            <button type="button" data-env-focus="compute" aria-pressed="false">Compute</button>
+            <button type="button" data-env-focus="cooling" aria-pressed="false">Cooling</button>
+            <button type="button" data-env-focus="context" aria-pressed="false">Environment</button>
+          </div>
+          <button class="env-motion-toggle" type="button" data-env-motion aria-pressed="false">Pause movement</button>
+        </div>
+        <p class="env-mobile-cue">Swipe the illustration sideways to explore the whole system <span aria-hidden="true">→</span></p>
+        <div class="env-scene-wrap" role="region" aria-label="Isometric infrastructure model; on small screens scroll horizontally to inspect the scene" tabindex="0">
+          <div class="env-glow-ambient" aria-hidden="true"></div>
+          <div class="env-scene" data-environment-stage data-focus="all" data-motion="on">
+            <noscript><p class="env-no-script">Illustration requires JavaScript. Electricity generation and delivery power the servers, which generate heat that must be managed by cooling systems. The environmental impact depends on the energy source, cooling methods and location.</p></noscript>
+          </div>
+        </div>
+        <div class="env-plate-footer">
+          <div class="env-reading" role="status" aria-live="polite" aria-atomic="true">
+            <span class="env-reading__step" data-env-step>SYSTEM VIEW</span>
+            <h3 data-env-title>The whole system</h3>
+            <p data-env-description>Follow electricity from generation and grid delivery into computing hardware, then the heat and cooling that keep those systems operating.</p>
+          </div>
+          <div class="env-plate-key" aria-label="Flow legend">
+            <span><i class="env-key-energy"></i>Electricity</span>
+            <span><i class="env-key-water"></i>Example cooling / water circuit</span>
+            <span><i class="env-key-outline"></i>Infrastructure</span>
+          </div>
         </div>
       </div>
-      <p class="figure-note">Conceptual diagram. Actual systems differ by cooling technology, location, operating conditions, and reporting boundary.</p>
+      <p class="env-caveat"><strong>How to read the scene.</strong> Energy and water routes are illustrative. The drawing is not to scale, doesn't quantify an AI request, and depicts one possible water-assisted cooling arrangement—not a claim that all data centers use rivers, cooling towers or the same fuel.</p>
     </section>
-    <section class="chapter closing-chapter" aria-labelledby="context-title">
-      <div class="chapter-number">03 / THE CONTEXT</div><div class="chapter-content"><h2 id="context-title">A meaningful number needs context.</h2><p>When we eventually compare AI with other activities, every figure needs its unit, date, geography, methodology and scope. Direct facility cooling, water consumed in producing electricity, and supply-chain water embedded in manufactured goods are not interchangeable measurements.</p><p>This prototype deliberately omits numerical charts until the underlying datasets and boundaries have been independently verified. The approved full exhibit will add accessible, source-backed comparisons and substantially deeper reading.</p><div class="evidence-status"><span>RESEARCH STATUS</span><strong>Explanatory prototype</strong><p>Definitions and teaching sequence need editorial source review before public publication. No live data feed or measured site figures are represented here.</p></div><div class="chapter-actions"><a href="/methodology" class="text-action">How we verify the evidence ↗</a><a href="/#exhibits" class="text-action">Return to the museum ↗</a></div></div>
+
+    <section class="env-explain" aria-labelledby="explain-title">
+      <div class="env-explain__title">
+        <p class="environment-eyebrow">BEHIND THE VISUAL</p>
+        <h2 id="explain-title">What the scene is really showing.</h2>
+      </div>
+      <div class="env-explain__grid">
+        <article class="env-explain__card">
+          <span class="env-explain__num">01 / POWER</span>
+          <h3>Electricity comes from somewhere.</h3>
+          <p>AI workloads rely on data centers connected to electrical infrastructure. The generating sources and regional grid mix influence the emissions and other upstream impacts of that electricity.</p>
+        </article>
+        <article class="env-explain__card">
+          <span class="env-explain__num">02 / COMPUTE</span>
+          <h3>Computing becomes heat.</h3>
+          <p>Servers, networking hardware and supporting systems use electricity. They also release heat, which facilities must remove to keep equipment operating reliably.</p>
+        </article>
+        <article class="env-explain__card">
+          <span class="env-explain__num">03 / COOLING</span>
+          <h3>Water use is not one number.</h3>
+          <p>Cooling choices differ. Some systems use evaporative water cooling; others rely more heavily on air or dry cooling. Water withdrawn and water consumed are not interchangeable measurements.</p>
+        </article>
+      </div>
     </section>
+
+    <section class="env-context" aria-labelledby="context-title">
+      <div>
+        <p class="environment-eyebrow">THE BIGGER PICTURE</p>
+        <h2 id="context-title">The impact depends on <em>where, when and how.</em></h2>
+      </div>
+      <div>
+        <p>A meaningful environmental comparison needs a boundary: which infrastructure is included, how electricity is supplied, what cooling technology is used, and which place and time period are being studied.</p>
+        <p>This exhibit deliberately avoids unsourced per-prompt numbers. The interactive scene teaches the connections first; quantitative comparisons belong in a separately researched, sourced update.</p>
+        <div class="env-sources">
+          <p>START WITH THE EVIDENCE</p>
+          <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" rel="noopener noreferrer">IEA · Energy and AI (2025) <span aria-hidden="true">↗</span></a>
+          <a href="https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report" target="_blank" rel="noopener noreferrer">Lawrence Berkeley National Laboratory · US Data Center Energy Usage Report (2024) <span aria-hidden="true">↗</span></a>
+          <a href="/methodology">Our evidence methodology <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+    <div class="env-footnotes">
+      <span>EXPLANATORY PROTOTYPE · NO LIVE DATA OR MEASURED SITE FIGURES</span>
+      <span>Illustration adapted from the <a href="https://isoglow.dev" target="_blank" rel="noopener noreferrer">ISO-GLOW</a> isometric technique (MIT). <a href="/licenses/iso-glow-LICENSE.txt">License and copyright</a>.</span>
+      <a href="/discover/">← Choose another perspective</a>
+    </div>
   </main>
-  <script>
-    const explanations = {
-      withdrawal: {
-        kicker: "WHAT WITHDRAWAL COUNTS",
-        title: "Water taken from a source",
-        body: "Withdrawal measures water removed from a source for use. Some withdrawn water may return. A withdrawal figure alone does not tell you how much water was consumed."
-      },
-      consumption: {
-        kicker: "WHAT CONSUMPTION COUNTS",
-        title: "Water not returned within the boundary",
-        body: "Consumption typically counts water evaporated, incorporated into products, or otherwise unavailable for return within a defined accounting boundary. It is not synonymous with total withdrawal."
-      }
-    };
-    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-mode-btn]"));
-    const stage = document.querySelector<HTMLElement>(".lab-stage");
-    const kicker = document.getElementById("reading-kicker");
-    const title = document.getElementById("reading-title");
-    const description = document.getElementById("reading-description");
-    for (const button of buttons) {
-      button.addEventListener("click", () => {
-        const mode = button.dataset.modeBtn as keyof typeof explanations;
-        if (!explanations[mode] || !stage || !kicker || !title || !description) return;
-        stage.dataset.waterMode = mode;
-        kicker.textContent = explanations[mode].kicker;
-        title.textContent = explanations[mode].title;
-        description.textContent = explanations[mode].body;
-        for (const item of buttons) item.setAttribute("aria-pressed", String(item === button));
-      });
-    }
-  </script>
+  <script>import "../../scripts/environment-system.js";</script>
 </BaseLayout>
