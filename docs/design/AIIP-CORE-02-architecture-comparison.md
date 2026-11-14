@@ -1,5 +1,7 @@
 # AIIP-CORE-02 — Architecture-first correction and visual comparison (historical / visually rejected)
 
+> **LATER OWNER REFERENCE RESET (2026-11-14):** All three designs remain rejected. New visual/interaction inspiration is [AIIP-EXPERIENCE-04](AIIP-EXPERIENCE-04-cyera-interactive-world-direction.md). This document's plans/recommendations have no active main-page authority.
+
 > **OWNER CORRECTION — SUPERSEDED FOR MAIN HUB (2026-11-12):** After reviewing the actual screenshots, the owner **rejected all three** visual compositions in this study as candidates for the main landing page. The proposed **Observation Gallery winner is withdrawn**; none of these is accepted, selected, or the mandatory starting point for new implementation. This file is a historical account of an unsuccessful visual comparison, **not current design authority**. The controlling direction and next design workflow are in [AIIP-CORE-01 — Living Data Center](AIIP-CORE-01-data-center-direction.md) and `docs/PROJECT_CONTROL.md`. The owner wants a grand, cohesive, multi-level *living destination* with a central animated core, elevated rotating globe, and six subject-relevant animated entrances—not flat technical diagrams. Do not interpret the failures as a requirement to build a literal facility or convert the homepage into the Environment exhibit.
 
 

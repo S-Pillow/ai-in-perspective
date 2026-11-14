@@ -1,4 +1,7 @@
-# AIIP-CORE-01 — Living Data Center: controlling visual-direction note
+# AIIP-CORE-01 — Living Data Center (historical / superseded)
+
+> **SUPERSEDED BY LATER OWNER DIRECTION (2026-11-14):** The owner has discarded the data-center/museum concepts and selected the *interactive illustrated 3D experience* of https://secure-the-unknown.cyera.com/ as the new primary **visual and behavior reference**. See [AIIP-EXPERIENCE-04](AIIP-EXPERIENCE-04-cyera-interactive-world-direction.md) and the newest Project Control Record entry. This file remains historical only: central core, elevated globe, physical data-center six bays, observation gallery and related implementation steps are **no longer requirements**. Do not assume approval to copy the reference's artwork or mechanics.
+
 
 **First recorded:** 2026-11-12  
 **Reconciled:** 2026-11-12, after owner review of `/lab/core` and all three `/lab/directions` studies  
