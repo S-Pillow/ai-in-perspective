@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import "../../styles/environment-rebuild.css";
+import "../../styles/environment-water.css";
 ---
 <BaseLayout title="AI & the Environment" description="Explore how electricity, grid infrastructure, servers, cooling and environmental resources connect to AI computing." bodyClass="exhibit-body">
   <SiteHeader subtle />
@@ -63,6 +64,68 @@ import "../../styles/environment-rebuild.css";
       <p class="env-caveat"><strong>How to read the scene.</strong> Energy and water routes are illustrative. The drawing is not to scale, doesn't quantify an AI request, and depicts one possible water-assisted cooling arrangement—not a claim that all data centers use rivers, cooling towers or the same fuel.</p>
     </section>
 
+
+    <!-- EXPERIENCE-10: A separate water-accounting scene. The energy model above is retained intact. -->
+    <section id="water-system" class="env-water" data-water-experience aria-labelledby="water-system-title">
+      <div class="env-water-intro">
+        <div>
+          <p class="environment-eyebrow">A SECOND PERSPECTIVE <span class="environment-eyebrow__divider">/</span> INTERACTIVE WATER STUDY</p>
+          <h2 id="water-system-title">How AI uses <em>water.</em></h2>
+        </div>
+        <p>What comes in is not necessarily what gets consumed. Follow the water through two different cooling arrangements—and see which paths actually lead back to a source.</p>
+      </div>
+      <div class="env-water-panel">
+        <div class="env-water-top">
+          <div class="env-water-scenarios" role="group" aria-label="Choose a cooling-system example">
+            <button type="button" data-water-mode-btn="evaporative" aria-pressed="true">Data center · evaporative</button>
+            <button type="button" data-water-mode-btn="onceThrough" aria-pressed="false">Power plant · once-through</button>
+          </div>
+          <p class="env-water-scenario-caption" data-water-mode-description>Data center · recirculating evaporative cooling</p>
+        </div>
+        <div class="env-water-subbar">
+          <div class="env-water-focus" role="group" aria-label="Trace a water-flow type">
+            <button type="button" data-water-focus-btn="all" aria-pressed="true">Whole flow</button>
+            <button type="button" data-water-focus-btn="withdrawal" aria-pressed="false">Withdrawal</button>
+            <button type="button" data-water-focus-btn="reuse" aria-pressed="false">Reuse loop</button>
+            <button type="button" data-water-focus-btn="evaporation" aria-pressed="false">Evaporation</button>
+            <button type="button" data-water-focus-btn="discharge" aria-pressed="false">Return / discharge</button>
+          </div>
+          <button class="env-water-motion" type="button" data-water-motion aria-pressed="false">Pause movement</button>
+        </div>
+        <p class="env-water-hint">Swipe the illustration sideways to see each part of the system →</p>
+        <div class="env-water-scroll" data-water-scroll role="region" aria-label="Isometric water-cooling illustration, horizontally scrollable on small screens" tabindex="0">
+          <div class="env-water-stage" data-water-stage data-mode="evaporative" data-focus="all" data-motion="on">
+            <noscript><p style="padding:30px;color:#e5f1f0">The animated illustration requires JavaScript. Evaporative cooling withdraws makeup water, reuses water in a cooling loop, releases some through evaporation, and sends blowdown for treatment or discharge. Once-through power-plant cooling returns much of the withdrawn water to its source, often warmer.</p></noscript>
+          </div>
+        </div>
+        <div class="env-water-bottom">
+          <div class="env-water-reading" role="status" aria-live="polite" aria-atomic="true">
+            <span data-water-reading-step>THE WATER PATH</span>
+            <h3 data-water-reading-title>Water moves through several different paths</h3>
+            <p data-water-reading-body>Water can be withdrawn, recirculated, evaporated, or discharged. What those terms mean depends on the cooling system.</p>
+          </div>
+          <div class="env-water-legend" aria-label="Visual flow legend">
+            <span><i></i>Intake / return water</span>
+            <span><i class="iw-leg-reuse"></i>Reused in a loop</span>
+            <span><i class="iw-leg-loss"></i>Heat / blowdown</span>
+          </div>
+        </div>
+      </div>
+      <p class="env-water-note"><strong>Read the labels carefully.</strong> These are two distinct illustrative facilities, not interchangeable settings on one site. In the evaporative example, treated blowdown is shown returning to the river <em>where permitted</em>; other facilities use different discharge or reuse routes. The once-through example concerns cooling at electricity generation, not a data-center cooling tower. Neither drawing presents measured volumes or a typical percentage split.</p>
+      <div class="env-water-lessons" aria-label="Key lessons about water and AI infrastructure">
+        <article><span>01 / WHAT COUNTS</span><h3>Withdrawal isn't consumption.</h3><p>Water taken from a source is a withdrawal. Consumption is water not returned to the relevant source during the accounting period, often because it evaporates. Recirculation within equipment is different from return to the environment.</p></article>
+        <article><span>02 / THE SOURCE</span><h3>Where it comes from matters.</h3><p>Cooling water may come from municipal supplies, rivers, groundwater or reclaimed wastewater; some specialized facilities use seawater. Availability, quality and competing local demand shape the impact.</p></article>
+        <article><span>03 / THE TRADEOFF</span><h3>Water and energy interact.</h3><p>Evaporative heat rejection can lower electricity demand while consuming water. Air-cooled and hybrid arrangements can reduce on-site water use with different energy tradeoffs. Direct-to-chip cooling still needs a way to reject heat.</p></article>
+        <article><span>04 / THE PLACE</span><h3>The watershed matters.</h3><p>Evaporated water is not destroyed: it rejoins the water cycle, but may not return to the same watershed when needed. Returned water can also be warmer or require treatment, so location and method matter.</p></article>
+      </div>
+      <div class="env-water-source">
+        <span>READ THE SOURCE MATERIAL</span>
+        <a href="https://www.energy.gov/cmei/femp/cooling-water-efficiency-opportunities-federal-data-centers" target="_blank" rel="noopener noreferrer">US DOE · Data center cooling-water efficiency ↗</a>
+        <a href="https://www.usgs.gov/mission-areas/water-resources/science/thermoelectric-power-water-use" target="_blank" rel="noopener noreferrer">USGS · Thermoelectric power water use ↗</a>
+        <a href="https://www.energy.gov/cmei/femp/best-management-practice-10-cooling-tower-management" target="_blank" rel="noopener noreferrer">US DOE · Cooling tower management ↗</a>
+      </div>
+    </section>
+
     <section class="env-explain" aria-labelledby="explain-title">
       <div class="env-explain__title">
         <p class="environment-eyebrow">BEHIND THE VISUAL</p>
@@ -110,4 +173,5 @@ import "../../styles/environment-rebuild.css";
     </div>
   </main>
   <script>import "../../scripts/environment-system.js";</script>
+  <script>import "../../scripts/environment-water.js";</script>
 </BaseLayout>
