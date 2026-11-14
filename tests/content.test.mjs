@@ -247,6 +247,14 @@ test("EXPERIENCE-10 keeps the energy plate and teaches separate water flows", ()
   assert.match(page, /id="environment-model"/);
   assert.match(page, /id="water-system"/);
   assert.ok(page.indexOf('id="environment-model"') < page.indexOf('id="water-system"'));
+  const energy = page.indexOf('id="environment-model"');
+  const explanation = page.indexOf('class="env-explain"');
+  const water = page.indexOf('id="water-system"');
+  const context = page.indexOf('class="env-context"');
+  assert.ok(energy >= 0 && explanation >= 0 && water >= 0 && context >= 0);
+  assert.ok(energy < explanation && explanation < water && water < context,
+    "Energy explanation must sit directly after the Energy scene, before Water and shared context");
+  assert.equal(page.match(/class="env-explain"/g)?.length, 1);
   assert.match(page, /How AI uses energy/);
   assert.match(page, /How AI uses <em>water/);
   assert.match(page, /data-water-mode-btn="evaporative"/);

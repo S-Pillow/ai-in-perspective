@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 33
+- **Record revision:** 34
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -250,3 +250,10 @@
 - **Read-only hosted smoke:** Authenticated GETs returned HTTP 200 for `/explore/environment`, `/intro`, `/discover/`, `/explore/benefits` and `/licenses/iso-glow-LICENSE.txt`. Environment HTML includes both section IDs (`environment-model`, `water-system`) and two mode controls. The generated JS bundle `/_astro/environment.astro_astro_type_script_index_0_lang.DIOA-wbF.js` returned HTTP 200 with both the treated-return and once-through scene markers; previous Energy scene JS bundle also linked. Read-only GET proof does not establish headless host render or end-to-end real-device interaction.
 - **Local browser verification:** New standalone water scene was actually rendered via Chromium at 1440px, 390px and 320px with no page errors or document overflow; both examples switched, disabled controls and Pause behavior observed; mobile default starting pan visually revised. Screenshots are local derived HTML artifacts and should not be misrepresented as protected Vercel captures.
 - **Remaining release gates:** Owner aesthetic and educational review; actual hosted mobile/keyboard and reduced-motion demonstration on representative devices; further licensed-source/evidence review and PRD reconciliation. No PR merge, production promotion or public launch. This latest status flip is documentation-only and does not alter the implemented art, scripts or tests.
+
+## AIIP-EXPERIENCE-11 | Restore Energy explanation placement (2026-11-14)
+
+- **Owner decision:** Place the existing “Behind the visual / What the scene is really showing” three-card block immediately after the Energy interactive plate and before the new Water interactive scene. Keep the Water illustration, its four water-specific cards and the final shared “The bigger picture” section in place. This is a scoped layout/order correction, not a redesign or editorial rewrite.
+- **Source mutation:** Move the complete existing `env-explain` section unchanged within `src/pages/explore/environment.astro`; no CSS, JS, copy, source links or other routes changed. Add an exact-order source-contract assertion to `tests/content.test.mjs`; preserve the existing Energy and Water contracts.
+- **Expected reading order:** Energy model → Behind the visual (Power / Compute / Cooling) → Water model, water-specific lessons/sources → The bigger picture. The section's heading ID remains `explain-title`, and the Water anchor stays `water-system`.
+- **Scope and approval boundary:** Authorized feature-branch source/test/docs change only. GitHub CI and automatic protected Vercel preview may run after branch push; verify exact SHA and terminal status before claiming success. No PR merge, production/public release, domain changes, new data or external product calls. Visual/mobile/owner acceptance remains pending independently.
