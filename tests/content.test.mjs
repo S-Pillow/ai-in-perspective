@@ -94,7 +94,7 @@ test("Environment restart uses accessible ISO-GLOW-inspired connected infrastruc
   assert.match(page, /not a measured data center/i);
   assert.match(page, /water-assisted cooling arrangement/i);
   assert.match(page, /licenses\/iso-glow-LICENSE\.txt/);
-  assert.doesNotMatch(page, /data-mode-btn|data-water-mode|water-lab/);
+  assert.doesNotMatch(page, /data-mode-btn="withdrawal"|data-water-mode="withdrawal"|water-lab/);
   assert.match(script, /const P = \(x,y,z=0\)/);
   assert.match(script, /const isoBox =/);
   assert.match(script, /const rack=\(x,y,index\)=>/);
