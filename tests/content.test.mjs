@@ -57,6 +57,12 @@ test("ring selector uses five real AI perspectives and no fake destination links
     assert.ok(worlds.includes("url:'"+path+"'"));
   }
   assert.equal((worlds.match(/url:null/g)||[]).length,2);
+  // Owner disliked Benefits cherry blossoms; trial uses existing original Horizon painter.
+  const benefits=worlds.split("{name:'Benefits'")[1]?.split('},')[0] || '';
+  assert.match(benefits, /paint:pGrid/);
+  assert.match(benefits, /anim:aGrid/);
+  assert.match(benefits, /icon:ICON\.horizon/);
+  assert.doesNotMatch(benefits, /pBlossom|aBlossom|ICON\.blossom/);
   assert.match(page, /In development/);
   assert.match(page, /id="topic-cta"/);
   assert.match(page, /prefers-reduced-motion:reduce/);
