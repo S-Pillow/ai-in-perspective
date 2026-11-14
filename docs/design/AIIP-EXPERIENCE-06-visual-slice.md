@@ -1,7 +1,10 @@
 # AIIP-EXPERIENCE-06 — Wayfinder voyage and observation-deck visual slice
 
+> **OWNER SCREENSHOT CORRECTION — 2026-11-14:** The owner's approved existing **landing experience** is the **“AI HAS ARRIVED”** introduction with Earth horizon, introduction text, “Skip introduction” and “Continue to the museum”, **implemented at `src/pages/intro.astro` and served at `/intro`** (verified source blob `040b3aa318f45dca141522cb3134c0f5550dbe37`). The **separate `src/pages/index.astro` at `/` is the museum/atrium**, which the agent wrongly called the protected liked homepage. The intended sequence is the preserved **/intro design** → a proposed new spaceship information journey → a proposed observation-window selector, with routing/public path decisions still unapproved. This correction supersedes every assertion below identifying the museum at `/` as the owner's chosen landing page. Neither of the newly rendered Wayfinder prototype screens is visually accepted; owner said “No.” Do not rewrite the approved /intro design or merge/publicly release anything. See [EXPERIENCE-05](AIIP-EXPERIENCE-05-voyage-and-window-hub.md).
+
+
 **Date:** 2026-11-14  
-**Status:** Prototype implementation on `feature/aiip-foundation-museum-slice`, pending or limited visual evaluation. Not visually accepted, not a replacement homepage, not a release.  
+**Status:** Prototype implementation on `feature/aiip-foundation-museum-slice`, **owner visually rejected as shown** on 2026-11-14, not the accepted landing page, not approved for integration or release. Functional/browser checks are not visual acceptance.  
 **Authority:** Owner approved proceeding with the previously discussed Astro + Three.js + Blender + GSAP approach, scoped to an original spacecraft composition, cinematic transition and representative observation-deck window. AIPF v8.10.1; `docs/PROJECT_CONTROL.md` remains authoritative.
 
 ## Scope
@@ -33,3 +36,8 @@ The model is an authored parametric original GLB, not a professionally sculpted 
 - This is a **single representative connected slice**, not completed five scenic worlds, finished exhibit pages, audio, actual RSS/news, data analytics or approved public narration.
 - If the GLB feels too simple, do **not** add random neon shapes to compensate; improve geometry/art direction via a proper Blender/sculpting pipeline or rethink the composition before scaling.
 - The eventual use of Blender is accepted as a *planned production tool*, not verified as installed/used in this asset. A future step can import, retopologize and art-direct the model in Blender after this browser proof.
+## Owner rejection and landing-page identity correction (2026-11-14)
+
+The owner inspected the rendered Wayfinder voyage and observation-deck screenshots and responded **“No and you saved the wrong home/landing page.”** The owner then supplied a screenshot of the visually preferred original introduction: **AI HAS ARRIVED**, introduction prose, **Skip introduction**, **Continue to the museum**, and Earth horizon. This exact content is source-confirmed at `src/pages/intro.astro` (`/intro`, blob `040b3aa318f45dca141522cb3134c0f5550dbe37`); it is NOT `src/pages/index.astro` (`/`), which contains the museum atrium. The prior claim to preserve `/` as the *owner-liked* landing page was mistaken.
+
+**Disposition:** WAYFINDER visual slice NOT owner accepted. The browser-backed implementation still exists on protected isolated `/lab` routes, but neither art direction nor navigational placement may be advanced from it by implication. The next design pass must preserve the actual /intro composition, compare any further spaceship artistic concepts to the provided Cyera screenshots, and not advance the inadequate preliminary output merely because it is WebGL/GLB. No homepage or /intro code was edited in this correction; no merge, production release or public URL reassignment was authorized.
