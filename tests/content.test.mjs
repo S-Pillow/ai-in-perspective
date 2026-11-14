@@ -36,22 +36,33 @@ test("intro headline has a distinct display face and a brief standalone hold bef
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
-test("Living Atrium has six subject-specific interactive installations and direct routes", () => {
-  const hall = read("src/pages/index.astro");
-  const styles = read("src/styles/global.css");
-  assert.match(hall, /class="hall hall--living-atrium"/);
-  assert.match(hall, /<nav class="installation-grid" aria-label="Choose one of six AI exhibits">/);
-  assert.match(hall, /href=\{exhibitPath\(exhibit\.slug\)\}/);
-  for (const kind of ["signal","mind","water","benefits","prism","network"]) {
-    assert.ok(hall.includes('exhibit.visual === "' + kind + '"'));
-    assert.ok(styles.includes(".installation--" + kind));
+test("approved AI HAS ARRIVED introduction is the public entrypoint", () => {
+  const rootPage = read("src/pages/index.astro");
+  const intro = read("src/pages/intro.astro");
+  assert.match(rootPage, /window\.location\.replace\("\/intro"\)/);
+  assert.match(intro, /AI HAS/);
+  assert.match(intro, /href="\/discover\/" class="intro-continue"/);
+  assert.match(intro, /href="\/discover\/" class="intro-skip"/);
+  assert.doesNotMatch(rootPage, /hall--living-atrium/);
+});
+
+test("ring selector uses five real AI perspectives and no fake destination links", () => {
+  const page = read("public/discover/index.html");
+  const worlds = page.split("const WORLDS=[")[1]?.split("];")[0] || "";
+  assert.equal((worlds.match(/\{name:'/g)||[]).length,5);
+  for (const name of ["History","Risks & Safety","Benefits","Environment","Education & News"]) {
+    assert.ok(worlds.includes("name:'"+name+"'"));
   }
-  assert.match(styles, /\.hall--living-atrium \.installation-grid \{[^}]*grid-template-columns:repeat\(12,minmax\(0,1fr\)\)/);
-  assert.match(styles, /\.hall--living-atrium \.installation-grid \{ display:flex;flex-direction:column/);
-  assert.match(styles, /\.installation:focus-visible \.installation-sculpture/);
-  assert.match(styles, /\.installation:active \.installation-sculpture/);
-  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(hall, /clearly labeled planned exhibits/);
+  for (const path of ["/explore/risks","/explore/benefits","/explore/environment"]) {
+    assert.ok(worlds.includes("url:'"+path+"'"));
+  }
+  assert.equal((worlds.match(/url:null/g)||[]).length,2);
+  assert.match(page, /In development/);
+  assert.match(page, /id="topic-cta"/);
+  assert.match(page, /prefers-reduced-motion:reduce/);
+  assert.match(page, /role="tablist"/);
+  assert.match(page, /noindex, nofollow/);
+  assert.doesNotMatch(page, /Start a pilot|Send a demo request/);
 });
 
 test("intro, hall, environment, and methodology have public routes", () => {
