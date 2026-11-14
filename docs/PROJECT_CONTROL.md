@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 34
+- **Record revision:** 35
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -257,3 +257,10 @@
 - **Source mutation:** Move the complete existing `env-explain` section unchanged within `src/pages/explore/environment.astro`; no CSS, JS, copy, source links or other routes changed. Add an exact-order source-contract assertion to `tests/content.test.mjs`; preserve the existing Energy and Water contracts.
 - **Expected reading order:** Energy model → Behind the visual (Power / Compute / Cooling) → Water model, water-specific lessons/sources → The bigger picture. The section's heading ID remains `explain-title`, and the Water anchor stays `water-system`.
 - **Scope and approval boundary:** Authorized feature-branch source/test/docs change only. GitHub CI and automatic protected Vercel preview may run after branch push; verify exact SHA and terminal status before claiming success. No PR merge, production/public release, domain changes, new data or external product calls. Visual/mobile/owner acceptance remains pending independently.
+  
+## AIIP-EXPERIENCE-12 | Practical response cards and ELI5 finish (2026-11-14)
+
+- **Owner authority:** Add an Environment-only three-card “What's actually being done” section, then four short ELI5 recap cards after the existing “The bigger picture” conclusion and before footnotes. Only “Explain Like I’m Five:” gets playful pastel-colored word styling and a static hand-drawn SVG underline. Preserve both existing interactive scenes, their explanations and the site's overall visual grammar; no other page or route is in scope.
+- **Editorial contract:** Three cards cover alternative water supplies, cooling tradeoffs and reported water replenishment, with direct EPA/DOE/company source paths. No unsupported figures or invented success claims. The company account is explicitly labeled self-reported/pledged, not independently verified, and heat rejection remains relevant even with liquid cooling. ELI5 follows the four owner-selected mini-card concepts and keeps body copy ordinary, accessible and concise.
+- **Implementation:** Add semantic sections/cards to `src/pages/explore/environment.astro`, scoped responsive styles to `src/styles/environment-rebuild.css` (including static decorative, aria-hidden crayon underline), source/order and accessibility-oriented contract checks to `tests/content.test.mjs`. No new package, network runtime, JS handler, imagery asset, external font or interactive dependency.
+- **Acceptance order:** Energy → Energy explanation → Water → The bigger picture → Practical response cards → ELI5 recap → Footnotes. Verify exact-commit GitHub content tests and Astro build, protected Git-linked Vercel preview, and operator visual/mobile/reduced-motion check. Prior licensed source, editorial, performance and release gates remain separate. Draft PR #1 stays unmerged; no production/public release, domain/DNS, unrelated route, or external API change.

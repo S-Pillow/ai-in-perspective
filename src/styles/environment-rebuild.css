@@ -183,3 +183,40 @@
 @media(prefers-reduced-motion:reduce){
   .env-scene *, .env-scene [data-zone]{animation:none!important;transition:none!important;}
 }
+
+/* AIIP-EXPERIENCE-12: Practical water context and ELI5 recap, scoped to Environment. */
+.env-actions{max-width:1520px;margin:0 auto;padding:86px clamp(22px,6vw,94px) 76px;}
+.env-actions__intro{max-width:810px;margin-bottom:32px;}
+.env-actions__intro h2{font-family:'Syne',Inter,sans-serif;letter-spacing:-.043em;font-weight:650;font-size:clamp(34px,4.2vw,60px);line-height:1.1;margin:0 0 15px;}
+.env-actions__intro>p:last-child{font-size:clamp(14px,1.5vw,17px);line-height:1.7;color:#b4c7cc;margin:0;}
+.env-actions__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.env-actions__card{min-width:0;display:flex;flex-direction:column;gap:0;padding:29px clamp(21px,2.3vw,34px) 27px;border:1px solid #334b53;border-radius:15px;background:linear-gradient(154deg,#142833 0%,#0b1b25 61%,#0a161e 100%);box-shadow:inset 0 1px 0 #ffffff0a;}
+.env-actions__meta{display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-bottom:27px;}
+.env-actions__index{font:650 10px/1.5 ui-monospace,SFMono-Regular,monospace;letter-spacing:.14em;color:#f0bc8c;}
+.env-actions__tag{font:650 10px/1.5 ui-monospace,SFMono-Regular,monospace;letter-spacing:.08em;color:#a6e1df;border:1px solid #286675;background:#113540;border-radius:6px;padding:5px 8px;}
+.env-actions__card h3{font:650 clamp(21px,2vw,27px)/1.2 'Syne',Inter,sans-serif;letter-spacing:-.025em;margin:0 0 15px;color:#f0f6f3;}
+.env-actions__card p{color:#b1c6ca;font-size:14px;line-height:1.8;margin:0 0 25px;flex:1;}
+.env-actions__source{align-self:start;display:inline-block;color:#b4e6df!important;font-size:12px;line-height:1.5;text-underline-offset:5px;text-decoration-color:#507f83;}
+.env-actions__source:hover{color:#edf9f4!important;}
+.env-actions__note{margin:25px 0 0;padding:19px 0 0;border-top:1px solid #2c414a;font-size:12px;line-height:1.75;color:#a6bbc2;}
+.env-actions__note strong{color:#d5e4e3;}
+.env-eli5{max-width:1520px;margin:0 auto;padding:0 clamp(22px,6vw,94px) 92px;}
+.env-eli5__inner{position:relative;overflow:hidden;border:1px solid #334951;border-radius:20px;background:radial-gradient(ellipse at 90% 0%,#172d35 0%,transparent 47%),linear-gradient(160deg,#0e1e28,#0a141d 75%);padding:clamp(27px,4vw,55px);}
+.env-eli5__inner::before{content:'';position:absolute;top:0;left:26px;right:26px;height:2px;background:linear-gradient(90deg,#91d4f0,#f5c77c,#e8a1c4,#9ad9be);opacity:.7;}
+.env-eli5__title{font-family:'Syne',Inter,sans-serif;font-size:clamp(38px,5.35vw,72px);line-height:1.24;letter-spacing:-.053em;font-weight:750;margin:0 0 17px;max-width:1040px;text-wrap:balance;}
+.env-eli5__word{display:inline-block;white-space:nowrap;position:relative;margin-right:.07em;}
+.env-eli5__word--blue{color:#a0d9ff;transform:rotate(-.65deg);}
+.env-eli5__word--gold{color:#f5cc86;transform:rotate(.75deg);}
+.env-eli5__word--pink{color:#f6aed0;transform:rotate(-.5deg);}
+.env-eli5__word--mint{color:#a8e7c8;transform:rotate(.45deg);}
+.env-eli5__scribble{position:absolute;top:calc(100% - 3px);left:-3%;width:107%;height:16px;overflow:visible;fill:none;stroke:#f1c77d;stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;}
+.env-eli5__scribble path:nth-child(2){stroke:#8fcde8;stroke-width:2.4;opacity:.9;}
+.env-eli5__lead{margin:11px 0 31px;color:#b3c9d0;font-size:15px;line-height:1.7;}
+.env-eli5__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.env-eli5__card{min-width:0;border:1px solid #2e4851;border-radius:12px;background:#112530;padding:26px 27px 28px;min-height:168px;}
+.env-eli5__number{font:650 11px/1 ui-monospace,SFMono-Regular,monospace;color:#86c6c6;letter-spacing:.13em;display:block;margin-bottom:15px;}
+.env-eli5__card h3{font:650 clamp(20px,2vw,26px)/1.22 'Syne',Inter,sans-serif;letter-spacing:-.02em;color:#f1f6f4;margin:0 0 10px;}
+.env-eli5__card p{font-size:14px;line-height:1.7;color:#b2c8ce;margin:0;}
+@media(max-width:920px){.env-actions__grid{grid-template-columns:1fr;}.env-actions__card{min-height:0;}.env-actions__meta{margin-bottom:16px;}.env-actions__card p{margin-bottom:18px;}}
+@media(max-width:660px){.env-actions{padding:60px 22px 58px;}.env-eli5{padding:0 14px 70px;}.env-eli5__inner{padding:30px 20px 26px;border-radius:15px;}.env-eli5__grid{grid-template-columns:1fr;}.env-eli5__title{font-size:clamp(37px,9.5vw,51px);line-height:1.29;}.env-eli5__card{min-height:0;padding:22px;}.env-eli5__lead{margin-bottom:25px;}}
+@media(prefers-reduced-motion:reduce){.env-eli5__word{transform:none;}}

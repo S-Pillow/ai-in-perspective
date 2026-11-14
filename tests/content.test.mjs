@@ -289,3 +289,27 @@ test("EXPERIENCE-10 keeps the energy plate and teaches separate water flows", ()
   assert.match(design, /not a measured or statistically representative/i);
   assert.match(design, /owner visual review/i);
 });
+
+test("EXPERIENCE-12 practical cards and ELI5 recap follow shared Environment conclusion", () => {
+  const page = read("src/pages/explore/environment.astro");
+  const css = read("src/styles/environment-rebuild.css");
+  const anchors = ['id="environment-model"', 'class="env-explain"', 'id="water-system"', 'class="env-context"', 'class="env-actions"', 'class="env-eli5"', 'class="env-footnotes"'];
+  const positions = anchors.map(anchor => page.indexOf(anchor));
+  assert.ok(positions.every(position => position !== -1), "all seven section anchors must remain present");
+  assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]), "teaching sections must follow the approved reading order");
+  assert.equal(page.match(/class="env-actions__card"/g)?.length, 3);
+  assert.equal(page.match(/class="env-eli5__card"/g)?.length, 4);
+  for (const title of ["Using different water", "Changing the cooling", "Replenishing and restoring",
+    "AI runs in buildings", "Computers get hot", "Cooling removes that heat", "Water can be borrowed, reused, or partly lost"]) {
+    assert.ok(page.includes(title), title);
+  }
+  assert.match(page, /id="environment-eli5-title"/);
+  assert.match(page, /<span class="env-eli5__word env-eli5__word--mint">Five:<svg class="env-eli5__scribble"/);
+  assert.match(page, /aria-hidden="true" focusable="false"/);
+  assert.match(css, /\.env-eli5__scribble/);
+  assert.match(css, /\.env-eli5__grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css, /@media\(max-width:660px\)\{[\s\S]*?\.env-eli5__grid\{grid-template-columns:1fr;/);
+  assert.match(page, /epa.gov\/waterreuse\/water-reuse-industrial-applications-resources/);
+  assert.match(page, /energy.gov\/cmei\/femp\/cooling-water-efficiency-opportunities-federal-data-centers/);
+  assert.match(page, /microsoft.com\/en-us\/corporate-responsibility\/sustainability\/water/);
+});
