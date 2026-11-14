@@ -1,4 +1,7 @@
-# AIIP-EXPERIENCE-04 — Illustrated Interactive Worlds: controlling experience reference
+# AIIP-EXPERIENCE-04 — Illustrated Interactive Worlds: visual reference (later page placement corrected)
+
+> **CORRECTION OF PAGE PLACEMENT (2026-11-14):** The owner explicitly likes the current homepage and wants it **preserved unchanged**. The Cyera visual inspiration now applies to two **NEW pages AFTER the homepage**: (B) a skippable, automatically progressing cinematic journey in an original exploratory spacecraft and (C) a swipeable/window-based topic-selection deck. See [AIIP-EXPERIENCE-05](AIIP-EXPERIENCE-05-voyage-and-window-hub.md). The previous suggestion to replace the homepage with an illustrated world is superseded. Education & News is the last window in a proposed five-window lineup; RSS details, including any 90-day period, are deferred.
+
 
 **Owner direction:** November 14, 2026.
 **Status:** Active primary visual and interactive *reference* for the main AI in Perspective experience. No new original concept, artwork, mechanics or homepage implementation has been visually accepted.
