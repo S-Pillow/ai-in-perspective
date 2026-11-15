@@ -92,7 +92,7 @@ test("Environment restart uses accessible ISO-GLOW-inspired connected infrastruc
   assert.match(page, /IEA · Energy and AI/);
   assert.match(page, /Berkeley National Laboratory/);
   assert.match(page, /not a measured data center/i);
-  assert.match(page, /water-assisted cooling arrangement/i);
+  assert.match(page, /Data centers use different power sources and cooling systems/i);
   assert.match(page, /licenses\/iso-glow-LICENSE\.txt/);
   assert.doesNotMatch(page, /data-mode-btn="withdrawal"|data-water-mode="withdrawal"|water-lab/);
   assert.match(script, /const P = \(x,y,z=0\)/);
@@ -300,7 +300,7 @@ test("EXPERIENCE-12 practical cards and ELI5 recap follow shared Environment con
   assert.equal(page.match(/class="env-actions__card"/g)?.length, 3);
   assert.equal(page.match(/class="env-eli5__card"/g)?.length, 4);
   for (const title of ["Using different water", "Changing the cooling", "Replenishing and restoring",
-    "AI runs in buildings", "Computers get hot", "Cooling removes that heat", "Water can be borrowed, reused, or partly lost"]) {
+    "AI runs in buildings", "Computers get hot", "Cooling removes that heat", "Water can be used in different ways"]) {
     assert.ok(page.includes(title), title);
   }
   assert.match(page, /id="environment-eli5-title"/);
