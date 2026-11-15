@@ -53,10 +53,10 @@ test("ring selector uses five real AI perspectives and no fake destination links
   for (const name of ["History","Risks & Safety","Benefits","Environment","Education & News"]) {
     assert.ok(worlds.includes("name:'"+name+"'"));
   }
-  for (const path of ["/explore/history","/explore/risks","/explore/benefits","/explore/environment"]) {
+  for (const path of ["/explore/history","/explore/risks","/explore/benefits","/explore/environment","/explore/education-news"]) {
     assert.ok(worlds.includes("url:'"+path+"'"));
   }
-  assert.equal((worlds.match(/url:null/g)||[]).length,1);
+  assert.equal((worlds.match(/url:null/g)||[]).length,0);
   // Owner disliked Benefits cherry blossoms; trial uses existing original Horizon painter.
   const benefits=worlds.split("{name:'Benefits'")[1]?.split('},')[0] || '';
   assert.match(benefits, /paint:pGrid/);
@@ -588,4 +588,71 @@ test("AIIP-COPY-01 keeps four topic pages conversational without intrusive art l
   assert.match(environment, /Neither drawing presents measured volumes or a typical percentage split/);
   assert.doesNotMatch(benefits, /EXHIBIT 04/);
   assert.doesNotMatch(environment, /How to use this exhibit|This exhibit deliberately/);
+});
+
+
+
+test("AIIP-EDUNEWS-01 coming soon page is real, temporary, and safely embeds the supplied animation", () => {
+  const page=read("src/pages/explore/education-news.astro");
+  const css=read("src/styles/education-news.css");
+  const arcade=read("public/arcade/education-news-fighter.html");
+  const nav=read("public/discover/index.html");
+  const record=read("docs/design/AIIP-EDUNEWS-01-coming-soon.md");
+  const source=read("src/pages/explore/[slug].astro");
+  assert.match(page, /<BaseLayout title="Education & News \| Coming Soon"/);
+  assert.match(page, /<SiteHeader subtle \/>/);
+  assert.match(page, /id="en-title"/);
+  assert.match(page, /COMING <span>SOON<\/span>/);
+  assert.match(page, /id="arcade"/);
+  assert.match(page, /id="what-is-next"/);
+  assert.match(page, /data-en-replay/);
+  assert.match(page, /<iframe[^>]*src="\/arcade\/education-news-fighter\.html"[^>]*sandbox="allow-scripts"/);
+  assert.match(page, /title="Retro pixel-art fighter animation/);
+  assert.match(page, /tabindex="-1" sandbox="allow-scripts"/);
+  assert.doesNotMatch(page, /sandbox="[^"]*allow-same-origin/);
+  assert.match(page, /We're gathering useful ways to learn about AI/);
+  assert.match(page, /We're exploring an RSS-based news feed/);
+  assert.match(page, /RSS IS A PLAN \/ NO LIVE FEED YET/);
+  assert.match(page, /No lessons or live headlines are being presented here yet/);
+  assert.doesNotMatch(page, /<article[^>]*data-(?:news|rss)-item|rss-parser|api\/news/);
+  assert.ok(!page.includes("\u2014"),"Owner prohibits em dashes in site copy");
+  assert.match(css, /en-arcade__frame/);
+  assert.match(css, /aspect-ratio:16\/9/);
+  assert.match(css, /@media\(max-width:530px\)/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(arcade, /User-supplied Pixel Fighter Combo \/ InstaLanding Motion source/);
+  assert.match(arcade, /<meta name="robots" content="noindex,nofollow">/);
+  assert.match(arcade, /<canvas id="fighter"/);
+  assert.match(arcade, /<article id="gamepad"/);
+  assert.match(arcade, /function drawFighter/);
+  assert.match(arcade, /window\.__renderAt/);
+  assert.match(arcade, /prefers-reduced-motion: reduce/);
+  assert.match(arcade, /<h1>AI IN PERSPECTIVE<\/h1>/);
+  assert.doesNotMatch(arcade, /\bfetch\(|\bXMLHttpRequest\b|\beval\(/);
+  assert.match(nav, /name:'Education & News'.*url:'\/explore\/education-news'/);
+  assert.ok(!source.includes('slug !== "education-news"'),"This is a dedicated route, not a placeholder exhibit slug");
+  assert.match(record, /license/);
+  assert.match(record, /protected/);
+});
+
+test("AIIP-EDUNEWS-01 replay button restarts the sandboxed animation", async () => {
+  const { runInNewContext } = await import("node:vm");
+  const page = read("src/pages/explore/education-news.astro");
+  const script = page.split("<script>")[1]?.split("</script>")[0];
+  assert.ok(script && script.includes("replayButton.addEventListener"));
+  const events={};
+  const links=[];
+  const button={addEventListener(name,cb){events[name]=cb;}};
+  const frame={setAttribute(name,value){links.push({name,value});}};
+  const document={
+    querySelector(selector){return selector==="[data-en-replay]"?button:null;},
+    getElementById(id){return id==="en-fighter"?frame:null;}
+  };
+  runInNewContext(script,{document});
+  events.click();
+  events.click();
+  assert.deepEqual(links,[
+    {name:"src",value:"/arcade/education-news-fighter.html?replay=1"},
+    {name:"src",value:"/arcade/education-news-fighter.html?replay=2"}
+  ]);
 });

@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 47
+- **Record revision:** 48
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -368,3 +368,13 @@
 - **Approved correction:** For the first chapter only, change the center glyph from \`✳\` to \`AI\`. Preserve all chapter names, illustrations, circular orbits, center styles, interactions, text, source links, accessibility attributes, no-em-dash copy, and the absence of repetitive image disclaimers. Other eras' symbols remain unchanged.
 - **Files:** \`src/pages/explore/history.astro\`, \`tests/content.test.mjs\`, \`docs/PROJECT_CONTROL.md\`. The test locks both the first-chapter glyph and the main clock's AI center, and verifies the redundant decorative-art disclaimer stays absent.
 - **Verification:** Require exact-SHA content contracts plus Astro build, protected Git-linked preview READY and read-only HTML smoke. Actual browser visual acceptance remains the owner's decision. Draft PR #1 stays unmerged, no public deployment and no work on Education & News.
+
+
+## AIIP-EDUNEWS-01 | Temporary Education & News arcade coming-soon page (2026-11-14)
+
+- **Owner instruction:** Education & News remains the final substantial content section. The owner needs time to collect Education resources and decide how to provide news through RSS, but explicitly approved creating a temporary landing page now. The owner provided a complete 1357-line Pixel Fighter Combo / InstaLanding Motion HTML/CSS/JS sample and asked to add it as the temporary experience. The owner's previous no-em-dash and no-useless-decorative-caption rules apply.
+- **Proposed implementation and scope:** New /explore/education-news page, styled as a cyan/violet retro arcade coming-soon screen with real information about what remains unbuilt, an isolated fighter demo, accessible replay button, and separate planned Education / News cards. Add scoped page CSS and user-supplied demo HTML under public/arcade. Link the existing fifth Education & News Discover entrance to the real new route without changing its scene, animation, or the other four destinations. Add source/content/replay contract tests and a design/provenance record. No changes to other topic pages, main website hero, global CSS, generic future exhibit placeholders or third-party services.
+- **Interaction isolation:** Demo runs in an iframe with sandbox allow-scripts only, without allow-same-origin. Demo markup remains a third-party-style motion sample, not a real fighting game. Keep iframe out of keyboard tab sequence and provide a focusable Replay animation button. Respect reduced motion. No live headlines, RSS feed, sources list, claims of collected educational links, or subscription functionality yet.
+- **Attribution and legal boundary:** Pasted demo appears to be from InstaLanding Motion but contains no clear license/redistribution grant. Owner-provided code is suitable for private protected visual prototyping, not proof of rights for public release. Future publication of this specific source is BLOCKED pending license/provenance review or replacement with an original equivalent. Retain source attribution in the code and docs. No production deployment authorized.
+- **Verification requirement:** Exact-SHA GitHub content tests, Astro build, Git-linked protected Vercel preview READY, authenticated GET of page and embedded HTML and regressions across existing pages; owner rendering, keyboard and mobile review still open. Draft PR #1 stays unmerged. Project record should distinguish preview readiness from future Education/RSS implementation.
+- **Future:** Education resource curation and news RSS source/rights/freshness/sanitization/feed design require a separate approved implementation and editorial contract. Do not silently implement an RSS ingestion pipeline.
