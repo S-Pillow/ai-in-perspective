@@ -1,5 +1,5 @@
 /**
- * AIIP-RISKS-01 — Educational risk overview, reviewed 2026-11-14.
+ * AIIP-RISKS-01: Educational risk overview, reviewed 2026-11-14.
  * Levels are PROVISIONAL editorial descriptions of potential consequence,
  * not measured probability, independent rankings or predictions.
  * No trend indicator is an unsupported numeric forecast.

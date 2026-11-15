@@ -63,9 +63,9 @@
 .bf-story__art{min-width:0;padding:25px clamp(17px,2.8vw,36px) 23px;display:flex;flex-direction:column;justify-content:center;position:relative;isolation:isolate;}
 .bf-story__art::before{content:"";position:absolute;inset:8%;z-index:-1;background:radial-gradient(ellipse,var(--bf-spot),transparent 64%);opacity:.11;filter:blur(35px);}
 .bf-story__art-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font:700 10px/1.5 ui-monospace,monospace;letter-spacing:.07em;color:#b3bfd0;}
-.bf-story__art-meta span:last-child{text-align:right;color:#9daac3;font-size:9px;}
+
 .bf-story__art svg{width:100%;height:auto;max-height:452px;display:block;}
-.bf-story__caption{color:#96a5be;font-size:11px;line-height:1.7;margin:0;}
+
 .bf-story__copy{padding:clamp(29px,3.25vw,49px);border-left:1px solid #343a57;background:linear-gradient(180deg,#141a2ad0,#101529e5);}
 .bf-story__type{font:700 10px/1.6 ui-monospace,monospace;letter-spacing:.12em;color:var(--bf-spot);margin:0;}
 .bf-story__copy h3{font:700 clamp(27px,2.8vw,40px)/1.12 "Syne",Manrope,sans-serif;letter-spacing:-.04em;margin:16px 0 20px;}
@@ -107,7 +107,7 @@
 @keyframes bf-wave{to{opacity:.53;transform:scaleX(.93);}}
 @media(max-width:1140px){.bf-hero__content{grid-template-columns:1fr minmax(260px,.8fr);}.bf-choices{grid-template-columns:repeat(2,minmax(0,1fr));}.bf-story{grid-template-columns:1fr;}.bf-story__art svg{max-height:340px;}.bf-story__copy{border-left:0;border-top:1px solid #363d5a;}.bf-evidence__cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:780px){.bf-hero__content{min-height:0;display:flex;flex-direction:column;align-items:stretch;padding:45px 22px 35px;gap:0;}.bf-back{margin-bottom:43px;}.bf-hero h1{font-size:clamp(52px,11vw,80px);}.bf-hero h1 em{white-space:normal;}.bf-sun{width:min(90%,490px);align-self:center;margin-top:-8px;}.bf-explorer{padding:65px 22px 76px;}.bf-explorer__intro{grid-template-columns:1fr;gap:17px;}.bf-explorer__intro>p{max-width:630px;}.bf-evidence{padding:66px 22px 74px;}.bf-close{grid-template-columns:1fr;gap:18px;padding-top:66px;padding-bottom:66px;}.bf-close>p{margin:0;}}
-@media(max-width:540px){.bf-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}.bf-choice__inside{min-height:211px;padding:15px;}.bf-choice__meta{font-size:9px;letter-spacing:0;}.bf-choice__glyph{font-size:51px;width:62px;height:66px;margin:13px 0 7px;}.bf-choice strong{font-size:19px;}.bf-choice__tagline{font-size:11px;}.bf-stage{border-radius:14px;}.bf-story__art{padding:17px 15px 24px;}.bf-story__art-meta{font-size:9px;}.bf-story__art-meta span:last-child{font-size:8px;}.bf-story__art svg{max-height:270px;}.bf-story__copy{padding:26px 21px 31px;}.bf-evidence__cards{grid-template-columns:1fr;}.bf-evidence__card{padding:25px;}.bf-evidence__card h3{margin-top:16px;}.bf-sun__grid{opacity:.43;}}
+@media(max-width:540px){.bf-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}.bf-choice__inside{min-height:211px;padding:15px;}.bf-choice__meta{font-size:9px;letter-spacing:0;}.bf-choice__glyph{font-size:51px;width:62px;height:66px;margin:13px 0 7px;}.bf-choice strong{font-size:19px;}.bf-choice__tagline{font-size:11px;}.bf-stage{border-radius:14px;}.bf-story__art{padding:17px 15px 24px;}.bf-story__art-meta{font-size:9px;}.bf-story__art svg{max-height:270px;}.bf-story__copy{padding:26px 21px 31px;}.bf-evidence__cards{grid-template-columns:1fr;}.bf-evidence__card{padding:25px;}.bf-evidence__card h3{margin-top:16px;}.bf-sun__grid{opacity:.43;}}
 @media(max-width:355px){.bf-choice__inside{padding:13px;}.bf-choice strong{font-size:17px;}.bf-hero h1{font-size:50px;}.bf-hero__actions{display:grid;}.bf-hero__cta,.bf-motion{width:100%;}}
 @media(prefers-reduced-motion:reduce){.benefits-realm *,.benefits-realm *::before,.benefits-realm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
 .benefits-realm[data-motion="off"] *,.benefits-realm[data-motion="off"] *::before,.benefits-realm[data-motion="off"] *::after{animation-play-state:paused!important;transition:none!important;}

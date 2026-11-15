@@ -335,9 +335,9 @@ test("BENEFITS-01 impact explorer has four grounded stories and an accessible in
   assert.match(page, /aria-live="polite"/);
   assert.match(page, /data-benefits-motion/);
   assert.match(page, /stories\.map\(s=>\(<article class="bf-evidence__card"/);
-  assert.match(page, /Concept illustration — not an actual medical image/);
-  assert.match(page, /not live weather data/);
-  assert.match(page, /not a real app screenshot/);
+  assert.doesNotMatch(page, /Concept illustration|artNote|bf-story__caption/);
+  assert.match(page, /class="bf-story__art-meta"/);
+  assert.match(page, /KEEP IN PERSPECTIVE/);
   for (const link of ["pubmed.ncbi.nlm.nih.gov/41620232/",
       "alphafold.ebi.ac.uk/", "ecmwf.int/en/about/media-centre/news/2025/ecmwfs-ai-forecasts-become-operational",
       "bemyeyes.com/bme-ai/"]) assert.ok(page.includes(link), "missing source " + link);
@@ -548,4 +548,41 @@ test("AIIP-HISTORY-01 selectors display one active chapter and one active everyd
   assert.equal(examplePanels[1].focusCount,1);
   eras[0].click();
   assert.equal(eraPanels.filter(p=>!p.hidden).length,1);
+});
+
+
+
+test("AIIP-COPY-01 keeps four topic pages conversational without intrusive art labels", () => {
+  const pages = ["history", "benefits", "risks", "environment"];
+  const sources = pages.map(name => read("src/pages/explore/" + name + ".astro"));
+  const all = [
+    ...sources, read("src/data/history.ts"), read("src/data/risks.ts")
+  ];
+  for (let i=0;i<all.length;i++) {
+    assert.ok(!all[i].includes("\u2014"), "Em dash remains in page/data " + i);
+  }
+  const [history, benefits, risks, environment] = sources;
+  for (const phrase of [
+    "A conceptual illustration, not historical footage",
+    "Simplified concept, not an actual app screenshot",
+    "hi-era-illustration__caption", "hi-everyday__art-label"
+  ]) assert.ok(!history.includes(phrase), "History still labels art: " + phrase);
+  assert.match(history, /hi-everyday__art" aria-hidden="true"/);
+  assert.match(history, /WHAT WE LEARNED/);
+  for (const phrase of ["artNote", "Concept illustration", "bf-story__caption"]) {
+    assert.ok(!benefits.includes(phrase), "Benefits still labels art: " + phrase);
+  }
+  assert.match(benefits, /THE BIGGER PICTURE/);
+  assert.match(benefits, /trial tested one screening system/i);
+  assert.match(benefits, /predictions, not confirmed lab results/i);
+  assert.match(benefits, /bemyeyes\.com\/bme-ai/);
+  assert.match(risks, /A prediction, not an observed job-loss rate/);
+  assert.match(risks, /not proof AI caused a 19% job loss/);
+  assert.match(risks, /Yale's Budget Lab found no clear evidence/);
+  assert.match(environment, /not a measured data center/);
+  assert.match(environment, /Data centers use different power sources and cooling systems/);
+  assert.match(environment, /Withdrawal isn't consumption/);
+  assert.match(environment, /Neither drawing presents measured volumes or a typical percentage split/);
+  assert.doesNotMatch(benefits, /EXHIBIT 04/);
+  assert.doesNotMatch(environment, /How to use this exhibit|This exhibit deliberately/);
 });

@@ -5,10 +5,10 @@ import { historyEras, historyMoments } from "../../data/history";
 import "../../styles/history.css";
 const everyday = [
   { id:"lenses",label:"Snapchat Lenses",type:"CAMERA + COMPUTER VISION",date:"SINCE 2015",
-    title:"Those playful face effects? There's some serious technology underneath.",
+    title:"How do those puppy ears follow your face?",
     intro:"When a puppy nose follows your face or a cartoon mask moves when you smile, the camera has to work out where your eyes, nose, and mouth are. Face-tracking technology makes the effect stay in place.",
-    how:"Snap's lenses use camera-based feature tracking, and some Lenses use machine learning. The digital puppy ears themselves are augmented reality artwork, not necessarily generative AI.",
-    takeaway:"You were interacting with computer vision years before you thought about AI chatbots.",
+    how:"The camera tracks features like your eyes and nose so the effect stays in the right place. Some Lenses also use machine learning or generative AI, but not every face effect does.",
+    takeaway:"Face tracking was already part of everyday apps before AI chatbots became popular.",
     source:"https://help.snapchat.com/hc/en-us/articles/7012366118676-How-Snap-Uses-Information-from-the-Camera",sourceLabel:"Snap · How camera information is used",mark:"⌁"},
   { id:"mail",label:"Email spam filters",type:"PATTERN RECOGNITION",date:"ML-ASSISTED BY 2014",
     title:"The junk mail you never had to open.",
@@ -23,10 +23,10 @@ const everyday = [
     takeaway:"AI doesn't have to talk to you to influence the choices you see.",
     source:"https://help.netflix.com/en/node/100639",sourceLabel:"Netflix · How recommendations work",mark:"▷"},
   { id:"navigation",label:"Traffic predictions",type:"PREDICTION",date:"IN EVERYDAY ROUTES",
-    title:"Your map was predicting the future, a few minutes at a time.",
+    title:"Your map can predict where traffic is heading.",
     intro:"A navigation app doesn't just show where traffic is slow right now. It can also estimate where congestion may build while you're on the road.",
     how:"Google has explained how Maps combines live traffic with historical road patterns and machine learning to predict travel conditions.",
-    takeaway:"AI often makes small predictions rather than dramatic announcements.",
+    takeaway:"Some of the most useful AI predictions are small ones, like how long a drive might take.",
     source:"https://blog.google/products-and-platforms/products/maps/google-maps-101-how-ai-helps-predict-traffic-and-determine-routes/",sourceLabel:"Google · How Maps predicts traffic",mark:"↝"}
 ];
 ---
@@ -40,7 +40,7 @@ const everyday = [
           <a class="hi-back" href="/discover/">← All perspectives</a>
           <p class="hi-eyebrow"><span class="hi-eyebrow__star">✦</span> HISTORY <span class="hi-eyebrow__line"></span> THE LONG STORY</p>
           <h1 id="hi-title">AI didn't begin<br />with <em>ChatGPT.</em></h1>
-          <p class="hi-hero__lead">People have been trying to make machines learn, reason, and communicate for generations. Some ideas changed the world. Others took decades to work. Come see how we got here.</p>
+          <p class="hi-hero__lead">People were asking whether machines could learn or think long before chatbots existed. Some of those ideas changed technology. Others took decades to work. Here is how the story unfolded.</p>
           <div class="hi-hero__actions"><a class="hi-action hi-action--main" href="#time-machine">Travel through the eras <span aria-hidden="true">↘</span></a><a class="hi-action hi-action--secondary" href="#everyday-ai">Find the AI you already know ↓</a></div>
           <p class="hi-hero__micro">A selected journey from 1943 to today · Based on historical sources</p>
         </div>
@@ -61,11 +61,11 @@ const everyday = [
 
     <section class="hi-thought" aria-labelledby="hi-thought-title">
       <p class="hi-eyebrow hi-eyebrow--muted">BEFORE THE TIMELINE</p>
-      <div class="hi-thought__layout"><h2 id="hi-thought-title">AI is older than most people think.</h2><p>Artificial intelligence didn't appear overnight. The field has moved through hopeful beginnings, frustrating setbacks, specialized breakthroughs, and systems that eventually reached our phones. Here's the story in seven chapters.</p></div>
+      <div class="hi-thought__layout"><h2 id="hi-thought-title">AI is older than most people think.</h2><p>AI has been developing for generations. Researchers made discoveries, ran into limits, changed their approach, and kept going. These seven chapters show how we arrived at the tools we use today.</p></div>
     </section>
 
     <section id="time-machine" class="hi-eras" aria-labelledby="hi-eras-title">
-      <div class="hi-section-top"><div><p class="hi-eyebrow hi-eyebrow--muted">THE TIME MACHINE <span class="hi-eyebrow__line"></span> SEVEN CHAPTERS</p><h2 id="hi-eras-title">Follow the long arc.</h2></div><p>Pick an era to see what people hoped for, what they built, and what we learned along the way.</p></div>
+      <div class="hi-section-top"><div><p class="hi-eyebrow hi-eyebrow--muted">THE TIME MACHINE <span class="hi-eyebrow__line"></span> SEVEN CHAPTERS</p><h2 id="hi-eras-title">How did we get here?</h2></div><p>Choose a time period to see what researchers expected, what they actually made, and why it mattered.</p></div>
       <div class="hi-era-tabs" role="group" aria-label="Choose a period in AI history">
         {historyEras.map((era,i)=><button type="button" class="hi-era-tab" data-hi-era={era.id} aria-pressed={i===0?"true":"false"} aria-controls={"hi-era-"+era.id}><span class="hi-era-tab__num">{era.index}</span><span class="hi-era-tab__date">{era.years}</span><span class="hi-era-tab__label">{era.label}</span></button>)}
       </div>
@@ -79,20 +79,20 @@ const everyday = [
               <span class="hi-era-illustration__orbit hi-era-illustration__orbit--a"></span><span class="hi-era-illustration__orbit hi-era-illustration__orbit--b"></span>
               <span class="hi-era-illustration__center">{era.visual==="neuron"?"✳":era.visual==="punch"?"1956":era.visual==="terminal"?">_":era.visual==="winter"?"◇":era.visual==="chess"?"♞":era.visual==="network"?"✧":"AI"}</span>
               <span class="hi-era-illustration__node hi-era-illustration__node--a"></span><span class="hi-era-illustration__node hi-era-illustration__node--b"></span><span class="hi-era-illustration__node hi-era-illustration__node--c"></span>
-              <span class="hi-era-illustration__caption">A conceptual illustration, not historical footage</span>
+              
             </div>
           </div>
           <div class="hi-era-panel__side">
-            <div class="hi-era-panel__statement"><span>THE BIG IDEA</span><p>{era.imagined}</p></div>
-            <div class="hi-era-panel__statement"><span>WHAT ACTUALLY HAPPENED</span><p>{era.actual}</p></div>
-            <div class="hi-era-panel__lesson"><span>WHAT THIS TEACHES US</span><p>{era.lesson}</p></div>
+            <div class="hi-era-panel__statement"><span>WHAT PEOPLE HOPED FOR</span><p>{era.imagined}</p></div>
+            <div class="hi-era-panel__statement"><span>WHAT THEY BUILT</span><p>{era.actual}</p></div>
+            <div class="hi-era-panel__lesson"><span>WHAT WE LEARNED</span><p>{era.lesson}</p></div>
           </div>
         </article>)}
       </div>
     </section>
 
     <section class="hi-milestones" aria-labelledby="hi-milestones-title">
-      <div class="hi-section-top"><div><p class="hi-eyebrow hi-eyebrow--muted">THE ACTUAL RECORD</p><h2 id="hi-milestones-title">Twelve moments that shaped AI.</h2></div><p>History is bigger than any timeline. These milestones are starting points, with links to original papers and historical archives.</p></div>
+      <div class="hi-section-top"><div><p class="hi-eyebrow hi-eyebrow--muted">THE ACTUAL RECORD</p><h2 id="hi-milestones-title">Twelve moments that shaped AI.</h2></div><p>These are twelve milestones that helped shape AI. Open any one to see what happened, why it mattered, and where to read more.</p></div>
       <div class="hi-milestones__list">
         {historyMoments.map((moment,i)=><details class="hi-milestone" open={i===0}>
           <summary><span class="hi-milestone__year">{moment.year}</span><span class="hi-milestone__title">{moment.title}</span><span class="hi-milestone__expander" aria-hidden="true">+</span></summary>
@@ -105,21 +105,21 @@ const everyday = [
       <div class="hi-everyday__intro">
         <p class="hi-eyebrow">YOU WERE THERE, EVEN IF YOU DIDN'T KNOW IT</p>
         <h2 id="hi-everyday-title">You've probably been using AI for years.</h2>
-        <p>When people hear “AI,” they often picture a chatbot. But pieces of this technology became part of everyday apps long before you could ask a computer to write an email.</p>
+        <p>When you hear “AI,” you might think of a chatbot. But AI has been working quietly in familiar apps for years, often without you noticing.</p>
       </div>
       <div class="hi-everyday__controls" role="group" aria-label="Choose an everyday AI example">
         {everyday.map((item,i)=><button type="button" class="hi-everyday__tab" data-hi-everyday={item.id} aria-controls={"hi-everyday-"+item.id} aria-pressed={i===0?"true":"false"}><span aria-hidden="true" class="hi-everyday__tabmark">{item.mark}</span><span>{item.label}</span></button>)}
       </div>
       <div class="hi-everyday__stage" data-hi-everyday-stage>
         {everyday.map((item,i)=><article class="hi-everyday__panel" id={"hi-everyday-"+item.id} data-hi-everyday-panel={item.id} tabindex="-1" aria-labelledby={"hi-everyday-title-"+item.id} hidden={i>0}>
-          <div class="hi-everyday__art">
+          <div class="hi-everyday__art" aria-hidden="true">
             <div class={"hi-everyday__device hi-everyday__device--"+item.id} aria-hidden="true">
               <div class="hi-everyday__devicebar"><span></span><span></span><span></span></div>
               {item.id==="lenses" ? <div class="hi-face"><div class="hi-face__ears"><i></i><i></i></div><div class="hi-face__head"><b class="hi-face__eye hi-face__eye--left"></b><b class="hi-face__eye hi-face__eye--right"></b><b class="hi-face__nose"></b><b class="hi-face__mouth"></b></div><span class="hi-face__tag">FACE TRACKING</span></div> :
               item.id==="mail" ? <div class="hi-mail"><span>INBOX</span><div>✓ &nbsp; Message from a friend</div><div>✓ &nbsp; Your travel receipt</div><div class="hi-mail__filtered">✦ &nbsp; Suspicious message filtered</div></div> :
               item.id==="recommendations" ? <div class="hi-recs"><span>FOR YOU</span><div class="hi-recs__posters"><i></i><i></i><i></i></div><div class="hi-recs__bars"><b></b><b></b><b></b></div></div> :
               <div class="hi-map"><div class="hi-map__roads"></div><svg viewBox="0 0 220 250" aria-hidden="true"><path d="M15 219Q88 211 66 158T167 85Q196 69 208 26" fill="none" stroke="#d6acff" stroke-width="9" stroke-linecap="round"/><circle cx="15" cy="219" r="10" fill="#86e4e7"/><circle cx="208" cy="26" r="10" fill="#86e4e7"/></svg><span>ETA 18 MIN</span></div>}
-            </div><span class="hi-everyday__art-label">Simplified concept, not an actual app screenshot</span>
+            </div>
           </div>
           <div class="hi-everyday__story">
             <p class="hi-everyday__meta">{item.type} / {item.date}</p>
@@ -134,16 +134,16 @@ const everyday = [
       <p class="hi-everyday__disclaimer">An important distinction: not every algorithm, animation, or camera filter is AI. Some use fixed rules, while others use computer vision or models that learn from data. Even within the same app, features can work in very different ways.</p>
     </section>
 
-    <section class="hi-perspective" aria-labelledby="hi-perspective-title"><div class="hi-perspective__ring" aria-hidden="true"></div><div><p class="hi-eyebrow hi-eyebrow--muted">THE BIGGER PICTURE</p><h2 id="hi-perspective-title">The future has a history.</h2><p>Every breakthrough was built on earlier ideas, experiments, and mistakes. That's why today's AI is easier to understand when we know where it came from. And it's why we should be curious about what comes next without assuming every prediction will come true.</p></div></section>
+    <section class="hi-perspective" aria-labelledby="hi-perspective-title"><div class="hi-perspective__ring" aria-hidden="true"></div><div><p class="hi-eyebrow hi-eyebrow--muted">THE BIGGER PICTURE</p><h2 id="hi-perspective-title">The future has a history.</h2><p>Today's AI builds on decades of research, failed attempts, and discoveries. Knowing that history helps us understand what these tools can do now, and why we should question bold predictions about what comes next.</p></div></section>
 
     <section class="hi-eli5" aria-labelledby="hi-eli5-title"><div class="hi-eli5__inner"><p class="hi-eyebrow hi-eyebrow--muted">THE EASY VERSION</p>
       <h2 class="hi-eli5__title" id="hi-eli5-title"><span class="hi-eli5__word hi-eli5__word--pink">Explain</span> <span class="hi-eli5__word hi-eli5__word--blue">Like</span> <span class="hi-eli5__word hi-eli5__word--gold">I'm</span> <span class="hi-eli5__word hi-eli5__word--mint">Five:<svg viewBox="0 0 153 22" aria-hidden="true" focusable="false" class="hi-eli5__scribble" preserveAspectRatio="none"><path d="M4 10Q37 4 78 8T149 7"/><path d="M11 18Q52 13 87 17T145 15"/></svg></span></h2>
       <p class="hi-eli5__lead">Four ideas, without the complicated words.</p>
       <div class="hi-eli5__cards">
-        <article><span>01 / A BIG QUESTION</span><h3>People wanted machines to learn.</h3><p>Scientists started asking if computers could solve problems in ways that seemed smart.</p></article>
-        <article><span>02 / SMALL STEPS</span><h3>It took a very long time.</h3><p>There were exciting discoveries and a lot of times when things didn't work yet.</p></article>
-        <article><span>03 / EVERYDAY AI</span><h3>AI was already around you.</h3><p>Some camera effects, spam filters, and map predictions used AI before chatbots were popular.</p></article>
-        <article><span>04 / WHAT'S NEXT</span><h3>Today's tools are another chapter.</h3><p>AI can do more than it used to, but we still need to check what it gets right and wrong.</p></article>
+        <article><span>01 / A BIG QUESTION</span><h3>People wanted machines to learn.</h3><p>Scientists wondered whether computers could learn and solve problems like people do.</p></article>
+        <article><span>02 / SMALL STEPS</span><h3>It took a very long time.</h3><p>Some ideas worked. Many didn't, and researchers kept trying.</p></article>
+        <article><span>03 / EVERYDAY AI</span><h3>AI was already around you.</h3><p>Face-tracking effects, spam filters, and traffic predictions were using AI long before chatbots became popular.</p></article>
+        <article><span>04 / WHAT'S NEXT</span><h3>Today's tools are another chapter.</h3><p>AI can do a lot more today, but we still need to check its answers and understand its limits.</p></article>
       </div>
     </div></section>
     <footer class="hi-footer"><span>AI IN PERSPECTIVE · HISTORY IS A SELECTIVE OVERVIEW</span><a href="/methodology">How we use evidence ↗</a><a href="/discover/">← All perspectives</a></footer>
