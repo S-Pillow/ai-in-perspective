@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 39
+- **Record revision:** 40
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -295,3 +295,11 @@
 - **Editorial approach:** Four short everyday-language summaries, one each for Healthcare (AI suggests areas for doctors to check), Discovery (protein-shape predictions aid researchers' next experiments), Environment (AI-assisted forecasts with uncertainty and footprint), and Accessibility (image descriptions may help but can be mistaken). No universal medical performance, automatic discoveries, perfect predictions or exaggerated accessibility claims.
 - **Presentation:** After existing conclusion and before footer, new semantic `bf-eli5` section with four mini-cards; pastel sunset-colored heading words “Explain Like I’m Five:” and a decorative hand-drawn two-stroke SVG underline under “Five:”. Body paragraphs retain normal legible typography. Existing conclusion eyebrow changed from “THE SIMPLE VERSION” to “THE BIGGER PICTURE” to distinguish the two summary sections.
 - **Verification and boundary:** Update `src/pages/explore/benefits.astro`, page-scoped `src/styles/benefits.css`, `tests/content.test.mjs`, and this record only. Source-order, card-count, title/aria, responsive and reduced-motion contract checks. CI and Git-connected protected Vercel preview require exact SHA verification. No other page, script, dependency, production domain, PR merge or public release; mobile/keyboard/visual owner acceptance remains separate.
+
+## AIIP-BENEFITS-02A | ELI5 exact-code CI and hosted preview verification (2026-11-14)
+
+- **Implementation identity:** `e462cbd54aa0d6eed30e3c5c36309f7aa32e579e` on `feature/aiip-foundation-museum-slice`. Files changed: `src/pages/explore/benefits.astro`, `src/styles/benefits.css`, `tests/content.test.mjs`, and PCR only. Existing story JS/illustrations, intro, ring and Environment untouched.
+- **GitHub evidence:** Actions run `43663567038` completed **SUCCESS** for exact `e462cbd54aa0d6eed30e3c5c36309f7aa32e579e` (source contracts including four ELI5 cards and responsive/aria/style contract; Astro production build). URL: `https://github.com/S-Pillow/ai-in-perspective/actions/runs/43663567038`.
+- **Vercel evidence:** Git-linked protected preview `dpl_4x4JDGLbrLv4Up9G5fyUErkLDjmY`, source SHA `e462cbd54aa0d6eed30e3c5c36309f7aa32e579e`, **READY**, `target=null` (not public production), `https://ai-in-perspective-prototype-preview-ky57axwyp-spillow82-4062.vercel.app/explore/benefits`.
+- **Authenticated hosted GET:** HTTP 200. Rendered HTML showed the sequence Impact Explorer → Evidence → Bigger picture → ELI5 → footer, four ELI5 cards, colorful heading and decorative SVG scribble, original four selection controls/four story panels; generated stylesheet `/_astro/benefits.C-oE43fa.css` was referenced. These are HTML/source observations, not actual rendered screenshot, mobile/keyboard interaction or user acceptance.
+- **Release/status boundary:** Implementation and build/preview smoke are verified. Await owner visual approval for the ELI5 design and mobile/keyboard/reduced-motion browser check. This status note is documentation-only. Draft PR remains unmerged; no production/public release, source claim promotion or unrelated page update.
