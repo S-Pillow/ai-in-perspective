@@ -132,11 +132,13 @@ test("pre-release site opts out of indexing", () => {
   assert.match(read("src/layouts/BaseLayout.astro"), /noindex, nofollow/);
 });
 
-test("accepted governance and development-branch protections are documented", () => {
+test("current public release governance and protected preview are documented", () => {
   const control = read("docs/PROJECT_CONTROL.md");
   assert.match(control, /AIPF v8\.10\.1/);
   assert.match(control, /owner-accepted 2026-11-12/);
-  assert.match(control, /No auto-merge/);
+  assert.match(control, /GitHub main is the live source/);
+  assert.match(control, /separate prototype-preview project is protected with Vercel Authentication/);
+  assert.match(control, /No RSS feed or educational resource catalog is active/);
 });
 
 test("isolated Core lab is a genuine 3D scene and preserves six accessible exhibit destinations", () => {
