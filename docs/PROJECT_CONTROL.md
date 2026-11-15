@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 49
+- **Record revision:** 50
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -385,3 +385,13 @@
 - **Additional local runtime check:** Headless Chromium with an inline sandboxed source copy found that the original synchronous external Google Fonts stylesheet could delay script parsing in a restricted or offline environment. The sandbox itself was structurally valid, but no browser-level hosted visual acceptance was established. This check is limited and must not be generalized to the protected Vercel preview.
 - **Correction authorized within the existing preview scope:** Load the demo font stylesheet with media=print and onload swap to prevent stylesheet blocking; start the animation directly rather than waiting for document.fonts.ready. System-font fallback remains, and the animation, gamepad visuals, original choreography, parent iframe isolation, page copy, data, and planned RSS boundary are untouched.
 - **Verification needed:** Exact-source CI and protected deployment at this correction SHA, authenticated HTML checks, then owner visual confirmation. Original third-party demo licensing/provenance remains unresolved and blocks public release.
+
+
+## AIIP-EDUNEWS-01B | Protected arcade preview, accessibility and source verification (2026-11-14)
+
+- **Final implementation SHA:** beb2631b3ee5ff708fc1aef901d6080c252aa1aa. Original temporary-page commit 22c21bea58af202218d757b4e25425ef9b618a23 passed GitHub Actions 43676394785. Follow-up font-loading correction beb2631b3ee5ff708fc1aef901d6080c252aa1aa passed GitHub Actions 43676794373 (content contract tests and Astro static build success). https://github.com/S-Pillow/ai-in-perspective/actions/runs/43676794373 .
+- **Vercel:** Git-linked deployment dpl_4KFdDSJe4W3915maFDjXxxNUdww1 READY, exact implementation SHA beb2631b3ee5ff708fc1aef901d6080c252aa1aa, target null (protected preview only). Page: https://ai-in-perspective-prototype-preview-gl0e6ojd8-spillow82-4062.vercel.app/explore/education-news .
+- **Authenticated read-only hosted smoke:** New /explore/education-news, embedded /arcade/education-news-fighter.html, /discover/, and existing /explore/history, /explore/risks, /explore/benefits, /explore/environment all returned HTTP 200. New page HTML retains sandbox allow-scripts without allow-same-origin, Replay animation control, visibly planned RSS disclaimer, and link to embedded source. Hosted embedded HTML contains the original 3D gamepad, pixel fighter canvas and choreography, branded AI in Perspective, nonblocking remote-font stylesheet, immediate requestAnimationFrame startup and no wait on document.fonts.ready.
+- **Supplemental local runtime evidence:** Loaded user-provided source with the exact font-loading changes in a Chromium sandboxed srcdoc test. The browser showed window.__ready true, a non-transparent painted pixel on the scene canvas, timer decrement from 99 to 98, and no page errors. This is supporting evidence of local script execution only, not a screenshot or proof of protected hosted presentation fidelity.
+- **UX and safety boundaries:** No live RSS, no educational resource publication, no fake news, no login/email form, no changed entrance visuals, no changed other page code. The animation is an isolated decorative motion demo, not advertised as a working game. External Google Fonts can fall back without blocking first animation frames. Owner desktop/mobile visual acceptance and reduced-motion/keyboard manual checks remain open. The supplied third-party style source's redistribution/license is not established; do not publicly release the arcade asset unless rights are cleared or it is replaced with an original equivalent.
+- **Finalization:** This PCR closure is docs-only and can produce a new Git-linked preview with a different SHA but identical app code. Draft PR #1 stays unmerged. No production deploy or news feed was started.
