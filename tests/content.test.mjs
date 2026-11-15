@@ -53,10 +53,10 @@ test("ring selector uses five real AI perspectives and no fake destination links
   for (const name of ["History","Risks & Safety","Benefits","Environment","Education & News"]) {
     assert.ok(worlds.includes("name:'"+name+"'"));
   }
-  for (const path of ["/explore/risks","/explore/benefits","/explore/environment"]) {
+  for (const path of ["/explore/history","/explore/risks","/explore/benefits","/explore/environment"]) {
     assert.ok(worlds.includes("url:'"+path+"'"));
   }
-  assert.equal((worlds.match(/url:null/g)||[]).length,2);
+  assert.equal((worlds.match(/url:null/g)||[]).length,1);
   // Owner disliked Benefits cherry blossoms; trial uses existing original Horizon painter.
   const benefits=worlds.split("{name:'Benefits'")[1]?.split('},')[0] || '';
   assert.match(benefits, /paint:pGrid/);
@@ -474,4 +474,78 @@ test("AIIP-RISKS-01 filters and risk-selection controllers preserve single activ
   filters[0].click();
   assert.equal(cards.filter(x=>!x.hidden).length,3);
   assert.equal(panels.filter(x=>!x.hidden).length,1);
+});
+
+
+test("AIIP-HISTORY-01 connects History and presents a sourced timeline and everyday examples", () => {
+  const page = read("src/pages/explore/history.astro");
+  const eras = read("src/data/history.ts");
+  const style = read("src/styles/history.css");
+  const script = read("src/scripts/history.js");
+  const nav = read("public/discover/index.html");
+  const notes = read("docs/design/AIIP-HISTORY-01-time-machine.md");
+  assert.equal((eras.match(/id:"(?:questions|beginning|conversation|setbacks|chess|learning|everyday)",label:/g) || []).length, 7);
+  assert.equal((eras.match(/year:"/g) || []).length, 12);
+  for (const year of ["1943","1950","1956","1958","1966","1997","2012","2016","2017","2022"]) {
+    assert.ok(eras.includes('year:"' + year + '"'));
+  }
+  const anchors = ['id="hi-title"','id="hi-thought-title"','id="time-machine"','class="hi-milestones"','id="everyday-ai"','class="hi-perspective"','class="hi-eli5"','class="hi-footer"'];
+  const positions = anchors.map(anchor => page.indexOf(anchor));
+  assert.ok(positions.every(position => position >= 0));
+  assert.ok(positions.every((position, i) => i === 0 || position > positions[i-1]));
+  for (const label of ["Snapchat Lenses","Email spam filters","What to watch next","Traffic predictions"]) assert.ok(page.includes(label),label);
+  for (const source of ["help.snapchat.com/","blog.google/","help.netflix.com/","academic.oup.com/","ibm.com/history/deep-blue","research.google/"]) {
+    assert.ok(page.includes(source) || eras.includes(source),source);
+  }
+  for (const token of ["data-hi-era={era.id}","data-hi-era-panel={era.id}","data-hi-everyday={item.id}","data-hi-everyday-panel={item.id}","hidden={i>0}"]) assert.ok(page.includes(token),token);
+  assert.ok(page.includes('<details class="hi-milestone"'));
+  assert.ok(page.includes('class="hi-eli5__scribble"'));
+  assert.ok(page.includes('not every algorithm, animation, or camera filter is AI'));
+  assert.ok(style.includes("prefers-reduced-motion:reduce"));
+  assert.ok(style.includes("grid-template-columns:repeat(7"));
+  assert.ok(style.includes("@media(max-width:580px)"));
+  assert.ok(script.includes('setAttribute("aria-pressed"'));
+  assert.ok(nav.includes("url:'/explore/history'"));
+  assert.ok(nav.includes("name:'Education & News'"));
+  assert.ok(!page.includes("\u2014") && !eras.includes("\u2014"),"History prose contains an em dash");
+  assert.ok(notes.includes("Snapchat"));
+});
+
+
+
+test("AIIP-HISTORY-01 selectors display one active chapter and one active everyday example", async () => {
+  const { runInNewContext } = await import("node:vm");
+  const script = read("src/scripts/history.js");
+  const el = dataset => ({
+    dataset, hidden:false, attrs:{}, actions:{}, focusCount:0,
+    setAttribute(key,value) { this.attrs[key] = value; },
+    addEventListener(key,fn) { this.actions[key] = fn; },
+    focus() { this.focusCount++; },
+    scrollIntoView() {},
+    click() { this.actions.click(); }
+  });
+  const eras=[el({hiEra:"questions"}),el({hiEra:"learning"})];
+  const eraPanels=[el({hiEraPanel:"questions"}),el({hiEraPanel:"learning"})];
+  const examples=[el({hiEveryday:"lenses"}),el({hiEveryday:"navigation"})];
+  const examplePanels=[el({hiEverydayPanel:"lenses"}),el({hiEverydayPanel:"navigation"})];
+  const root={querySelectorAll(selector) {
+    return ({
+      "[data-hi-era]":eras,"[data-hi-era-panel]":eraPanels,
+      "[data-hi-everyday]":examples,"[data-hi-everyday-panel]":examplePanels
+    })[selector] || [];
+  }};
+  runInNewContext(script,{document:{querySelector:()=>root},window:{matchMedia:()=>({matches:true})}});
+  assert.equal(eraPanels.filter(p=>!p.hidden).length,1);
+  assert.equal(examplePanels.filter(p=>!p.hidden).length,1);
+  eras[1].click();
+  assert.equal(eras[1].attrs["aria-pressed"],"true");
+  assert.equal(eraPanels[0].hidden,true);
+  assert.equal(eraPanels[1].hidden,false);
+  assert.equal(eraPanels[1].focusCount,1);
+  examples[1].click();
+  assert.equal(examplePanels[1].hidden,false);
+  assert.equal(examplePanels[0].hidden,true);
+  assert.equal(examplePanels[1].focusCount,1);
+  eras[0].click();
+  assert.equal(eraPanels.filter(p=>!p.hidden).length,1);
 });
