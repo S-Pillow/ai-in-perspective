@@ -313,3 +313,40 @@ test("EXPERIENCE-12 practical cards and ELI5 recap follow shared Environment con
   assert.match(page, /energy.gov\/cmei\/femp\/cooling-water-efficiency-opportunities-federal-data-centers/);
   assert.match(page, /microsoft.com\/en-us\/corporate-responsibility\/sustainability\/water/);
 });
+
+
+test("BENEFITS-01 impact explorer has four grounded stories and an accessible interactive preview", () => {
+  const page = read("src/pages/explore/benefits.astro");
+  const style = read("src/styles/benefits.css");
+  const script = read("src/scripts/benefits.js");
+  const route = read("src/pages/explore/[slug].astro");
+  const record = read("docs/design/AIIP-BENEFITS-01-impact-explorer.md");
+  assert.match(route, /e\.slug !== "environment" && e\.slug !== "benefits"/);
+  assert.equal((page.match(/id:"(healthcare|discovery|environment|accessibility)"/g) || []).length, 4);
+  for (const id of ["healthcare", "discovery", "environment", "accessibility"]) {
+    assert.match(page, new RegExp('id:"' + id + '"'));
+    assert.ok(page.includes('s.id==="' + id + '"'), "missing original subject-specific scene: " + id);
+  }
+  assert.match(page, /id="benefits-explorer"/);
+  assert.match(page, /data-benefits-card=\{s.id\}/);
+  assert.match(page, /data-benefits-panel=\{s.id\}/);
+  assert.match(page, /aria-pressed=\{i===0\?"true":"false"\}/);
+  assert.match(page, /hidden=\{i>0\}/);
+  assert.match(page, /aria-live="polite"/);
+  assert.match(page, /data-benefits-motion/);
+  assert.match(page, /stories\.map\(s=>\(<article class="bf-evidence__card"/);
+  assert.match(page, /Concept illustration — not an actual medical image/);
+  assert.match(page, /not live weather data/);
+  assert.match(page, /not a real app screenshot/);
+  for (const link of ["pubmed.ncbi.nlm.nih.gov/41620232/",
+      "alphafold.ebi.ac.uk/", "ecmwf.int/en/about/media-centre/news/2025/ecmwfs-ai-forecasts-become-operational",
+      "bemyeyes.com/bme-ai/"]) assert.ok(page.includes(link), "missing source " + link);
+  assert.match(script, /card\.setAttribute\("aria-pressed"/);
+  assert.match(script, /panel\.hidden = panel\.dataset\.benefitsPanel !== topic/);
+  assert.match(script, /prefers-reduced-motion: reduce/);
+  assert.match(style, /\.bf-choice\[aria-pressed="true"\]/);
+  assert.match(style, /\.benefits-realm\[data-motion="off"\]/);
+  assert.match(style, /@media\(max-width:540px\)/);
+  assert.match(style, /@media\(prefers-reduced-motion:reduce\)/);
+  assert.match(record, /original visual system/);
+});

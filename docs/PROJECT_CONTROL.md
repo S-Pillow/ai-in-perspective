@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 36
+- **Record revision:** 37
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -272,3 +272,11 @@
 - **Protected preview:** Git-linked Vercel deployment `dpl_8GaiUS25JWDZiKqeQrYdLsaDiRUe` returned **READY**, target `null`, source SHA `aad6e4131d48daca7fc917c150a37deedc91e3e2`. Preview: `https://ai-in-perspective-prototype-preview-mloaeq132-spillow82-4062.vercel.app/explore/environment`.
 - **Read-only hosted check:** Authenticated GET returned HTTP 200. Rendered HTML contains the seven ordered sections: Energy → Energy explanation → Water → Bigger picture → Practical cards → ELI5 recap → footnotes, with three practical cards and four ELI5 cards, semantic title, SVG scribble, source links and stylesheet reference. This is hosted response/DOM source evidence, **not** a browser screenshot or real-device visual proof.
 - **Remaining gates:** Owner visual review of desktop/mobile composition and wrapping, keyboard/accessibility and reduced-motion checks on the hosted surface, final editorial/source review and public-release permissions. Neither this status update nor the earlier READY preview authorizes merge/production. This commit is documentation-only; automatic checks/previews may retrigger but do not represent a new art iteration.
+
+## AIIP-BENEFITS-01 | Impact Explorer first visual prototype (2026-11-14)
+
+- **Owner-directed design intent:** Owner provided Uiverse inspiration for dark background, moving gradient rim, sunset-colored cards and starfield, explicitly noting that the search input wasn't wanted; “Let's check it out” approved a scoped first prototype for the existing Benefits route. Use original CSS and SVG illustrations instead of copying Uiverse code/components. No change to the owner-accepted six-topic information architecture.
+- **Implementation scope:** Add src/pages/explore/benefits.astro with four selectable subject-specific story scenes and evidence/limitations text; add page-scoped src/styles/benefits.css and src/scripts/benefits.js; exclude the Benefits slug from [slug].astro placeholder generation; extend content-contract tests; add docs/design/AIIP-BENEFITS-01-impact-explorer.md. Preserve /intro, /discover/, Environment, global CSS, src/data/exhibits.ts and existing route URLs. Benefits remains in planned metadata until final acceptance.
+- **Editorial/evidence scope:** Healthcare cites the 2026 randomized MASAI breast screening findings; Discovery cites EMBL-EBI AlphaFold DB predictions; Environment cites ECMWF operational AI weather forecasting; Accessibility cites Be My AI as a company-described available tool, not independently proven effect. Avoid unmeasured claims and distinguish trial, research resource, operational model, and available service. All stage visuals are marked conceptual.
+- **Functional intent:** Focus-visible keyboard and pointer selectable subject cards, a distinct original illustration per story, aria-pressed/aria-controls, static source cards to preserve all stories without JavaScript, manual motion pause and reduced-motion support, purpose-designed responsive states. No search bar, copied assets, statistics invented for the illustrations or external runtime calls.
+- **Release boundary:** Feature-branch source push and Git-connected protected Vercel review preview are approved; CI/build/source-and-preview identity verification required. No PR merge, public production promotion, DNS change, or completed flagship acceptance; owner visual and mobile/accessibility review remain separate.
