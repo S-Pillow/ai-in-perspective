@@ -350,3 +350,36 @@ test("BENEFITS-01 impact explorer has four grounded stories and an accessible in
   assert.match(style, /@media\(prefers-reduced-motion:reduce\)/);
   assert.match(record, /original visual system/);
 });
+
+
+test("BENEFITS-02 closes the impact explorer with four plain-language ELI5 cards", () => {
+  const page = read("src/pages/explore/benefits.astro");
+  const style = read("src/styles/benefits.css");
+  const anchors = [
+    'id="benefits-explorer"', 'class="bf-evidence"', 'class="bf-close"',
+    'class="bf-eli5"', 'class="bf-foot"'
+  ];
+  const positions = anchors.map(anchor => page.indexOf(anchor));
+  assert.ok(positions.every(position => position >= 0), "all sections must remain present");
+  assert.ok(positions.every((position,i) => i === 0 || position > positions[i-1]),
+    "ELI5 must follow story, evidence and context, before footer");
+  assert.equal(page.match(/class="bf-eli5"/g)?.length, 1);
+  assert.equal(page.match(/class="bf-eli5__card"/g)?.length, 4);
+  for (const heading of ["A second set of eyes for doctors", "Giving scientists a head start",
+    "A better heads-up about weather", "Turning pictures into words"]) {
+    assert.ok(page.includes(heading), heading);
+  }
+  assert.match(page, /id="benefits-eli5"/);
+  assert.match(page, /id="bf-eli5-title"/);
+  assert.match(page, /class="bf-eli5__scribble"[^>]*aria-hidden="true" focusable="false"/);
+  assert.match(page, /THE BIGGER PICTURE/);
+  assert.match(page, /The doctor still decides/);
+  assert.match(page, /Forecasts can still be wrong/);
+  assert.match(page, /AI sometimes gets details wrong/);
+  assert.match(style, /\.bf-eli5__word--peach/);
+  assert.match(style, /\.bf-eli5__word--lavender/);
+  assert.match(style, /\.bf-eli5__scribble/);
+  assert.match(style, /\.bf-eli5__cards\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(style, /@media\(max-width:660px\)\{\.bf-eli5[\s\S]*?\.bf-eli5__cards\{grid-template-columns:1fr;/);
+  assert.match(style, /@media\(prefers-reduced-motion:reduce\)\{\.bf-eli5__word\{transform:none;/);
+});

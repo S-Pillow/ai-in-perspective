@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 38
+- **Record revision:** 39
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -288,3 +288,10 @@
 - **Preview:** Git-linked Vercel deployment dpl_2gz8Wsa6ky2bWQnByj6gQgCuweuN reached READY with source metadata matching the implementation SHA, target null (protected non-production preview), URL https://ai-in-perspective-prototype-preview-j3ozzt3fw-spillow82-4062.vercel.app/explore/benefits .
 - **Read-only hosted smoke:** authenticated Vercel GET returned HTTP 200 on /explore/benefits, /explore/environment, /intro, and /discover/. The rendered Benefits markup contained four labeled topic-selection buttons, four distinct panels, four linked evidence cards, motion control, primary-source links and generated Benefits stylesheet /_astro/benefits.B7HLYYMH.css. These are hosted HTML/source checks, not screenshots or proof that client-side selection/pause works under real mouse, keyboard and reduced-motion interaction.
 - **Unverified release gates:** owner's visual acceptance, actual mobile/desktop rendered and interaction review, browser accessibility/keyboard/reduced-motion and performance review, editorial fact-check/copy polish, and separately authorized PR merge/public release. Benefits retains planned metadata pending final acceptance. This docs-only PCR update must not be interpreted as a new implementation or approval.
+
+## AIIP-BENEFITS-02 | Add simple four-story ELI5 recap (2026-11-14)
+
+- **Owner approval:** Following visual acceptance of the Benefits Impact Explorer prototype (“I love it!!!”), owner requested an “Explain like Im five” section at the bottom. This is scoped to Benefits; preserve the selected-card UI, existing four illustrative scenes, grounded research text and evidence-source links.
+- **Editorial approach:** Four short everyday-language summaries, one each for Healthcare (AI suggests areas for doctors to check), Discovery (protein-shape predictions aid researchers' next experiments), Environment (AI-assisted forecasts with uncertainty and footprint), and Accessibility (image descriptions may help but can be mistaken). No universal medical performance, automatic discoveries, perfect predictions or exaggerated accessibility claims.
+- **Presentation:** After existing conclusion and before footer, new semantic `bf-eli5` section with four mini-cards; pastel sunset-colored heading words “Explain Like I’m Five:” and a decorative hand-drawn two-stroke SVG underline under “Five:”. Body paragraphs retain normal legible typography. Existing conclusion eyebrow changed from “THE SIMPLE VERSION” to “THE BIGGER PICTURE” to distinguish the two summary sections.
+- **Verification and boundary:** Update `src/pages/explore/benefits.astro`, page-scoped `src/styles/benefits.css`, `tests/content.test.mjs`, and this record only. Source-order, card-count, title/aria, responsive and reduced-motion contract checks. CI and Git-connected protected Vercel preview require exact SHA verification. No other page, script, dependency, production domain, PR merge or public release; mobile/keyboard/visual owner acceptance remains separate.

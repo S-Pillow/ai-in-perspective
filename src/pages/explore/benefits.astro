@@ -99,7 +99,45 @@ const stories = [
         {stories.map(s=>(<article class="bf-evidence__card"><span>{s.num} / {s.evidenceType}</span><h3>{s.name}</h3><p>{s.evidenceShort}</p><a href={s.link} target="_blank" rel="noopener noreferrer">Original source <span aria-hidden="true">↗</span></a></article>))}
       </div>
     </section>
-    <aside class="bf-close" aria-labelledby="bf-close-title"><div><p class="bf-eyebrow bf-eyebrow--muted">THE SIMPLE VERSION</p><h2 id="bf-close-title">What matters is what changes for people.</h2></div><p>AI might help a doctor notice something, give a scientist a useful lead, support a weather forecast, or describe something that's hard to see. The point isn't that AI can do everything. It's that some uses are worth understanding — and checking.</p></aside>
+    <aside class="bf-close" aria-labelledby="bf-close-title"><div><p class="bf-eyebrow bf-eyebrow--muted">THE BIGGER PICTURE</p><h2 id="bf-close-title">What matters is what changes for people.</h2></div><p>AI might help a doctor notice something, give a scientist a useful lead, support a weather forecast, or describe something that's hard to see. The point isn't that AI can do everything. It's that some uses are worth understanding — and checking.</p></aside>
+
+    <!-- AIIP-BENEFITS-02: A friendly, four-part recap of the four benefit stories. -->
+    <section class="bf-eli5" id="benefits-eli5" aria-labelledby="bf-eli5-title">
+      <div class="bf-eli5__inner">
+        <p class="bf-eyebrow bf-eyebrow--muted">THE EVERYDAY EXPLANATION</p>
+        <h2 id="bf-eli5-title" class="bf-eli5__title">
+          <span class="bf-eli5__word bf-eli5__word--peach">Explain</span>
+          <span class="bf-eli5__word bf-eli5__word--lavender">Like</span>
+          <span class="bf-eli5__word bf-eli5__word--pink">I’m</span>
+          <span class="bf-eli5__word bf-eli5__word--gold">Five:<svg class="bf-eli5__scribble" viewBox="0 0 164 25" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M5 12 Q38 2 72 10 T159 8"/><path d="M14 19 Q52 12 88 18 T151 16"/></svg></span>
+        </h2>
+        <p class="bf-eli5__lead">Four big ideas, without the complicated words.</p>
+        <div class="bf-eli5__cards">
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">01 / HEALTHCARE</span>
+            <h3>A second set of eyes for doctors</h3>
+            <p>Doctors look at medical pictures for signs of illness. AI can point out something worth checking. The doctor still decides what it means.</p>
+          </article>
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">02 / SCIENCE</span>
+            <h3>Giving scientists a head start</h3>
+            <p>Proteins are tiny parts of living things. AI can guess what shape they have, helping scientists decide what to test next.</p>
+          </article>
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">03 / ENVIRONMENT</span>
+            <h3>A better heads-up about weather</h3>
+            <p>AI can find patterns in weather information to help people plan ahead. Forecasts can still be wrong, and AI uses resources too.</p>
+          </article>
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">04 / ACCESSIBILITY</span>
+            <h3>Turning pictures into words</h3>
+            <p>AI can describe a photo or sign for someone who can't see it clearly. That can be useful, but AI sometimes gets details wrong.</p>
+          </article>
+        </div>
+        <p class="bf-eli5__takeaway">AI doesn't have to do the whole job to be helpful. Sometimes giving a person a better starting point is enough.</p>
+      </div>
+    </section>
+
     <footer class="bf-foot"><span>EXPLANATORY PROTOTYPE · NO LIVE DATA OR AUTOMATED ASSESSMENTS</span><a href="/methodology">How we review evidence <span aria-hidden="true">↗</span></a><a href="/discover/">← Choose another perspective</a></footer>
   </main>
   <script>import "../../scripts/benefits.js";</script>
