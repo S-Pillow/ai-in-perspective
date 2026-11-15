@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 43
+- **Record revision:** 44
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -329,3 +329,13 @@
 - **Education integrity:** 1943 neuron models, Turing 1950, Dartmouth proposal 1955 and workshop 1956, 1958 perceptron, ELIZA 1966, the AI winters, 1997 Deep Blue, 2012 AlexNet, 2016 AlphaGo, 2017 Transformer and 2022 ChatGPT have individual source links and caveats about narrow-task capability versus general intelligence. Timeline is explicitly selective. Everyday examples are Snapchat face Lenses (not every AR filter is AI), Gmail spam filtering, Netflix recommendation ranking and Google Maps traffic prediction. Sources from Snap, Google, Netflix, IBM, AAAI and original research, detailed in design record.
 - **Interaction/accessibility:** Era and everyday selectors use aria-pressed and focusable panels, selected panels toggle hidden, native milestone details are readable with no JS, reduced motion supported, scoped responsive CSS for desktop/tablet/mobile, ELI5 recap. Unit-style simulated DOM tests cover single-active-panel invariant; source structure checks cover seven eras, twelve milestones, four examples, links, no em dashes and entrance routing.
 - **Verification/gates:** Exact commit content tests and Astro static build, protected Git-connected preview and read-only route smoke are required before calling prototype technically ready. Final rendered desktop/mobile browser review, keyboard checks and owner design approval remain separate. Keep Draft PR #1 unmerged and public production unchanged. Do not start Education & News.
+
+
+## AIIP-HISTORY-01A | Exact-source CI and protected History preview verified (2026-11-14)
+
+- **Validated implementation SHA:** 3db50a9292e91e46ae3ef6c508ed0965846bcd40 on feature/aiip-foundation-museum-slice. Files changed: src/data/history.ts, src/pages/explore/history.astro, src/styles/history.css, src/scripts/history.js, docs/design/AIIP-HISTORY-01-time-machine.md, public/discover/index.html, tests/content.test.mjs and PCR. No changes to any other page's content or styles.
+- **GitHub verification:** Actions run 43671772071 for exact SHA 3db50a9292e91e46ae3ef6c508ed0965846bcd40 completed SUCCESS. Install dependencies, content contracts including History milestones/source checks, History control state test, no em dashes in new History page/data, and Astro static build passed. https://github.com/S-Pillow/ai-in-perspective/actions/runs/43671772071 .
+- **Protected Vercel preview:** Git-linked dpl_J7RFinvqQtbCqoHDbekL5iQ8aUo8 READY for the exact implementation SHA, target null, not public production. URL: https://ai-in-perspective-prototype-preview-hdm6xldug-spillow82-4062.vercel.app/explore/history .
+- **Read-only hosted smoke:** Authenticated /explore/history GET 200, 7 era controls and 7 era panels, 4 familiar-AI controls and 4 panels, 12 native historical milestone details, all six main anchors in correct order, deployed stylesheet /_astro/history.B9x-NXqu.css . /explore/risks, /explore/benefits, /explore/environment and /discover/ all returned 200. Discover served a working /explore/history destination while Education & News remained planned.
+- **Evidence/claim limits:** Implementation validated for source correctness and static hosted structure, not subjective appearance, actual JS interactions in a real browser, mobile viewport rendering, keyboard/focus, performance or owner visual acceptance. User's latest images were considered as additional design inspiration but have not been evaluated as measurable rendering equivalence. This PCR evidence entry is documentation only and may retrigger CI/preview for a docs-only commit.
+- **Control boundary:** Draft PR #1 remains unmerged; no production/public release. Education & News not started. Owner review and possible visual adjustments come next.
