@@ -1,0 +1,144 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import "../../styles/benefits.css";
+const stories = [
+{id:"healthcare",num:"01",kicker:"HUMAN HEALTH",name:"Healthcare",tagline:"Finding warning signs sooner.",symbol:"♥",type:"RANDOMIZED SCREENING TRIAL",title:"Helping doctors spot possible warning signs.",problem:"A mammogram is an image doctors use to look for breast cancer. There can be a lot to review, and some changes are easy to miss.",mechanism:"In one screening approach, AI highlights areas for a doctor to check and helps decide which images need more review.",evidence:"A large Swedish randomized trial reported better cancer detection and less image-reading work with AI support than with the comparison screening approach.",limit:"The trial tested one screening system. It does not mean every medical AI tool works better than a doctor.",link:"https://pubmed.ncbi.nlm.nih.gov/41620232/",source:"Read the 2026 MASAI trial",evidenceType:"TESTED IN A TRIAL",evidenceShort:"Researchers compared AI-supported mammography screening with a standard approach."},
+{id:"discovery",num:"02",kicker:"SCIENCE",name:"Discovery",tagline:"Seeing what was hard to see.",symbol:"✳",type:"OPEN RESEARCH RESOURCE",title:"Making the invisible easier to study.",problem:"Proteins are tiny parts of living things. Their shapes help determine what they do, but figuring those shapes out can be difficult.",mechanism:"AlphaFold predicts protein shapes, giving researchers a useful place to start when deciding what to investigate in the lab.",evidence:"The AlphaFold database gives researchers free access to more than 200 million predicted protein structures.",limit:"These are predictions, not confirmed lab results. Scientists still have to test them.",link:"https://alphafold.ebi.ac.uk/",source:"Explore the AlphaFold database",evidenceType:"RESEARCH RESOURCE",evidenceShort:"Scientists can use these predictions as leads, then check them through further research."},
+{id:"environment",num:"03",kicker:"OUR PLANET",name:"Environment",tagline:"Preparing for what's coming.",symbol:"↝",type:"OPERATIONAL FORECASTING",title:"Helping people prepare for what's coming.",problem:"Weather affects farming, travel, emergencies, and energy use. A more useful forecast can give people time to prepare.",mechanism:"AI weather models can recognize useful patterns in information about past conditions and produce forecasts alongside traditional methods.",evidence:"Europe's ECMWF started using an AI forecasting system in daily operations in 2025, alongside its physics-based forecasts.",limit:"Even better forecasts can be wrong. And running AI still uses electricity and other resources.",link:"https://www.ecmwf.int/en/about/media-centre/news/2025/ecmwfs-ai-forecasts-become-operational",source:"Read ECMWF's announcement",evidenceType:"USED IN OPERATIONS",evidenceShort:"An established weather agency now uses AI alongside traditional forecasting."},
+{id:"accessibility",num:"04",kicker:"EVERYDAY LIFE",name:"Accessibility",tagline:"Making everyday things easier.",symbol:"✦",type:"AVAILABLE ASSISTIVE TOOL",title:"Putting more information within reach.",problem:"A label, photo, or unfamiliar screen can be hard to understand if you can't see it clearly.",mechanism:"Tools such as Be My AI can describe photos in words and answer follow-up questions for people who are blind or have low vision.",evidence:"Be My AI is available in the Be My Eyes app. That tells us people can use it, but not how well it works for everyone.",limit:"Descriptions can be wrong. When something important is at stake, checking with a person still matters.",link:"https://www.bemyeyes.com/bme-ai/",source:"Learn about Be My AI",evidenceType:"AVAILABLE PRODUCT",evidenceShort:"The feature exists, but that alone doesn't prove every claimed benefit."}
+];
+---
+<BaseLayout title="Where AI Is Helping" description="Explore four real-world uses of AI, what changed, and what the evidence does and does not show." bodyClass="exhibit-body">
+  <SiteHeader subtle />
+  <main id="content" class="benefits-realm" data-benefits-root data-motion="on" data-topic="healthcare">
+    <section class="bf-hero" aria-labelledby="bf-title">
+      <div class="bf-hero__stars" aria-hidden="true"></div>
+      <div class="bf-hero__content">
+        <div class="bf-hero__copy">
+          <a class="bf-back" href="/discover/">← All perspectives</a>
+          <p class="bf-eyebrow">PERSPECTIVE 04 <span aria-hidden="true">/</span> THE POSSIBILITY</p>
+          <h1 id="bf-title">Where AI<br /><em>is helping.</em></h1>
+          <p class="bf-hero__lead">AI can't fix everything. But it is already helping people in some important ways. In other areas, it's giving researchers new ideas to investigate.</p>
+          <p class="bf-hero__detail">Let's look at the problems, what changed, and what the evidence actually tells us.</p>
+          <div class="bf-hero__actions">
+            <a href="#benefits-explorer" class="bf-hero__cta">Explore the stories <span aria-hidden="true">↘</span></a>
+            <button type="button" data-benefits-motion class="bf-motion">Pause ambient motion</button>
+          </div>
+        </div>
+        <div class="bf-sun" aria-hidden="true"><div class="bf-sun__halo"></div><div class="bf-sun__orbit bf-sun__orbit--outer"></div><div class="bf-sun__orbit bf-sun__orbit--inner"></div><div class="bf-sun__core"><i></i><i></i><i></i></div><div class="bf-sun__horizon"></div><div class="bf-sun__grid"></div></div>
+      </div>
+    </section>
+
+    <section id="benefits-explorer" class="bf-explorer" aria-labelledby="bf-explorer-title">
+      <div class="bf-explorer__intro"><div><p class="bf-eyebrow bf-eyebrow--muted">THE IMPACT EXPLORER / FOUR STORIES</p><h2 id="bf-explorer-title">Choose a problem worth solving.</h2></div><p>Choose a topic to see what the problem is, how AI helps, and what the evidence actually shows.</p></div>
+      <div class="bf-choices" role="group" aria-label="Choose a benefit story">
+        {stories.map((s,i)=>(
+          <button type="button" class={"bf-choice bf-choice--"+s.id} data-benefits-card={s.id} aria-controls={"bf-panel-"+s.id} aria-pressed={i===0?"true":"false"}>
+            <span class="bf-choice__inside">
+              <span class="bf-choice__meta">{s.num} / {s.kicker}<span aria-hidden="true">↗</span></span>
+              <span class="bf-choice__glyph" aria-hidden="true">{s.symbol}</span>
+              <strong>{s.name}</strong><span class="bf-choice__tagline">{s.tagline}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <div class="bf-stage" aria-live="polite" aria-atomic="false">
+        {stories.map((s,i)=>(
+          <article id={"bf-panel-"+s.id} data-benefits-panel={s.id} aria-labelledby={"bf-story-"+s.id} hidden={i>0} class={"bf-story bf-story--"+s.id}>
+            <div class="bf-story__art">
+              <div class="bf-story__art-meta"><span>STORY {s.num}</span></div>
+              {s.id==="healthcare" && <svg viewBox="0 0 620 390" aria-hidden="true" focusable="false">
+                <rect x="105" y="36" width="411" height="305" rx="23" fill="#182038" stroke="#677b9f" stroke-width="2"/><rect x="125" y="55" width="372" height="265" rx="10" fill="#0e1628" stroke="#42506d"/>
+                <path d="M182 248C171 173 211 102 277 103C349 104 395 170 394 242C353 287 230 291 182 248Z" fill="#7c8ba1" fill-opacity=".18" stroke="#879bad" stroke-width="2"/>
+                <path d="M213 242Q194 172 254 131M280 114Q342 133 356 218M233 261Q293 286 360 242" fill="none" stroke="#98a4bc" stroke-opacity=".65" stroke-width="2"/>
+                <path d="M142 110H476M142 170H476M142 230H476M203 71V305M282 71V305M364 71V305M442 71V305" stroke="#b4bde0" stroke-opacity=".1"/>
+                <circle class="bf-scan-pulse" cx="330" cy="186" r="48" stroke="#f9afcc" stroke-width="2.5" stroke-dasharray="7 7" fill="#ff89b9" fill-opacity=".05"/><circle cx="330" cy="186" r="7" fill="#ffdeed"/><path d="M378 165L442 127H532" fill="none" stroke="#f0aed0" stroke-width="2" stroke-dasharray="4 5"/><rect x="443" y="105" width="123" height="37" rx="7" fill="#282039" stroke="#f4b1ce"/><text x="457" y="128" fill="#fbe2ee" font-size="12" font-family="monospace">CHECK HERE</text>
+                <path class="bf-scan-beam" d="M125 98H495" fill="none" stroke="#faacc9" stroke-opacity=".5" stroke-width="3"/>
+              </svg>}
+              {s.id==="discovery" && <svg viewBox="0 0 620 390" aria-hidden="true" focusable="false">
+                <circle cx="313" cy="188" r="159" fill="#835be0" fill-opacity=".06" stroke="#b6a0f0" stroke-opacity=".25" stroke-dasharray="5 9"/><ellipse cx="314" cy="191" rx="221" ry="96" transform="rotate(-25 314 191)" fill="none" stroke="#b6a0e5" stroke-opacity=".25"/>
+                <path class="bf-protein" d="M127 233C157 142 220 143 246 209S338 291 355 193S453 118 478 202S413 286 358 243S261 95 213 132S203 306 288 301S425 157 465 166" fill="none" stroke="#b49bfb" stroke-width="13" stroke-linecap="round"/>
+                <g fill="#f1d3fa" stroke="#987ade" stroke-width="2"><circle cx="127" cy="233" r="12"/><circle cx="246" cy="209" r="10"/><circle cx="355" cy="193" r="13"/><circle cx="478" cy="202" r="10"/><circle cx="358" cy="243" r="11"/><circle cx="213" cy="132" r="10"/><circle cx="288" cy="301" r="10"/><circle cx="465" cy="166" r="12"/></g>
+                <text x="85" y="83" fill="#c5b9e5" font-size="12" font-family="monospace">SEQUENCE</text><text x="393" y="332" fill="#c5b9e5" font-size="12" font-family="monospace">PREDICTED SHAPE</text>
+              </svg>}
+              {s.id==="environment" && <svg viewBox="0 0 620 390" aria-hidden="true" focusable="false">
+                <rect x="66" y="47" width="485" height="283" rx="23" fill="#14303c" stroke="#78c8b7" stroke-opacity=".55" stroke-width="2"/>
+                <path d="M89 115H528M89 185H528M89 256H528M165 61V312M265 61V312M363 61V312M460 61V312" stroke="#b4f0e5" stroke-opacity=".14" stroke-dasharray="5 8"/>
+                <path class="bf-forecast" d="M110 244C155 166 194 215 254 155S383 170 445 100S513 131 521 89" fill="none" stroke="#75d6c0" stroke-width="8" stroke-linecap="round"/>
+                <path class="bf-forecast bf-forecast--warm" d="M106 293C156 231 224 292 290 209S407 235 492 148" fill="none" stroke="#f1b885" stroke-width="6" stroke-linecap="round"/>
+                <path d="M106 165Q173 99 235 135T363 116T520 80M106 217Q189 151 245 185T380 163T516 130" fill="none" stroke="#c3f3e6" stroke-opacity=".3" stroke-width="2"/>
+                <circle cx="266" cy="167" r="34" fill="#a7f1dc" fill-opacity=".12" stroke="#a8f5df" stroke-opacity=".65"/><circle cx="266" cy="167" r="7" fill="#e1fff5"/><text x="88" y="82" fill="#c1eedd" font-size="12" font-family="monospace">FORECAST PATTERNS</text>
+              </svg>}
+              {s.id==="accessibility" && <svg viewBox="0 0 620 390" aria-hidden="true" focusable="false">
+                <rect x="154" y="27" width="220" height="333" rx="32" fill="#0e1324" stroke="#bca9ed" stroke-width="3"/><rect x="167" y="44" width="194" height="297" rx="20" fill="#2a3148"/>
+                <rect x="225" y="53" width="78" height="12" rx="6" fill="#111525"/><rect x="190" y="92" width="151" height="106" rx="12" fill="#2e4056" stroke="#8ba4b4"/><circle cx="266" cy="142" r="30" fill="#f1c290" fill-opacity=".66"/><path d="M201 187L235 160L267 175L303 139L331 178" fill="none" stroke="#b8ebdb" stroke-width="3"/>
+                <rect x="192" y="218" width="148" height="13" rx="5" fill="#cbbad9" fill-opacity=".7"/><rect x="192" y="245" width="112" height="10" rx="5" fill="#aab5d0" fill-opacity=".46"/><rect x="192" y="263" width="132" height="10" rx="5" fill="#aab5d0" fill-opacity=".46"/><rect x="192" y="286" width="140" height="36" rx="12" fill="#a28be2" fill-opacity=".22" stroke="#c5b0f1"/><text x="205" y="309" fill="#eee1ff" font-size="12" font-family="monospace">DESCRIBE</text>
+                <path class="bf-speech" d="M401 134Q431 167 401 200M422 115Q462 168 422 219M446 92Q500 167 446 241" fill="none" stroke="#ffd3a2" stroke-width="4" stroke-linecap="round"/><text x="398" y="279" fill="#dbc9ea" font-size="12" font-family="monospace">IMAGE TO WORDS</text>
+              </svg>}
+              
+            </div>
+            <div class="bf-story__copy">
+              <p class="bf-story__type">{s.name.toUpperCase()} / {s.type}</p>
+              <h3 id={"bf-story-"+s.id}>{s.title}</h3>
+              <p class="bf-story__problem">{s.problem}</p>
+              <div class="bf-story__step"><strong>Where AI comes in</strong><p>{s.mechanism}</p></div>
+              <div class="bf-story__step"><strong>What we can point to</strong><p>{s.evidence}</p></div>
+              <div class="bf-story__limit"><span>KEEP IN PERSPECTIVE</span><p>{s.limit}</p></div>
+              <a href={s.link} class="bf-story__source" target="_blank" rel="noopener noreferrer">{s.source} <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bf-evidence" aria-labelledby="bf-evidence-title">
+      <div class="bf-evidence__intro"><p class="bf-eyebrow bf-eyebrow--muted">BEHIND THE PROMISE</p><h2 id="bf-evidence-title">A useful tool isn't always a proven outcome.</h2><p>A tool tested in a clinical trial isn't the same as a research resource or an app you can download. Let's look at the evidence behind each story.</p></div>
+      <div class="bf-evidence__cards">
+        {stories.map(s=>(<article class="bf-evidence__card"><span>{s.num} / {s.evidenceType}</span><h3>{s.name}</h3><p>{s.evidenceShort}</p><a href={s.link} target="_blank" rel="noopener noreferrer">Original source <span aria-hidden="true">↗</span></a></article>))}
+      </div>
+    </section>
+    <aside class="bf-close" aria-labelledby="bf-close-title"><div><p class="bf-eyebrow bf-eyebrow--muted">THE BIGGER PICTURE</p><h2 id="bf-close-title">What matters is what changes for people.</h2></div><p>AI might help a doctor notice something, give a scientist a useful lead, support a weather forecast, or describe something that's hard to see. AI doesn't have to do everything to be useful. What matters is knowing where it helps and how we can tell.</p></aside>
+
+    <!-- AIIP-BENEFITS-02: A friendly, four-part recap of the four benefit stories. -->
+    <section class="bf-eli5" id="benefits-eli5" aria-labelledby="bf-eli5-title">
+      <div class="bf-eli5__inner">
+        <p class="bf-eyebrow bf-eyebrow--muted">THE EVERYDAY EXPLANATION</p>
+        <h2 id="bf-eli5-title" class="bf-eli5__title">
+          <span class="bf-eli5__word bf-eli5__word--peach">Explain</span>
+          <span class="bf-eli5__word bf-eli5__word--lavender">Like</span>
+          <span class="bf-eli5__word bf-eli5__word--pink">I’m</span>
+          <span class="bf-eli5__word bf-eli5__word--gold">Five:<svg class="bf-eli5__scribble" viewBox="0 0 164 25" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M5 12 Q38 2 72 10 T159 8"/><path d="M14 19 Q52 12 88 18 T151 16"/></svg></span>
+        </h2>
+        <p class="bf-eli5__lead">Four big ideas, without the complicated words.</p>
+        <div class="bf-eli5__cards">
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">01 / HEALTHCARE</span>
+            <h3>A second set of eyes for doctors</h3>
+            <p>Doctors look at medical pictures for signs of illness. AI can point out something worth checking. The doctor still decides what it means.</p>
+          </article>
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">02 / SCIENCE</span>
+            <h3>Giving scientists a head start</h3>
+            <p>Proteins are tiny parts of living things. AI can guess what shape they have, helping scientists decide what to test next.</p>
+          </article>
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">03 / ENVIRONMENT</span>
+            <h3>A better heads-up about weather</h3>
+            <p>AI can find patterns in weather information to help people plan ahead. Forecasts can still be wrong, and AI uses resources too.</p>
+          </article>
+          <article class="bf-eli5__card">
+            <span class="bf-eli5__number">04 / ACCESSIBILITY</span>
+            <h3>Turning pictures into words</h3>
+            <p>AI can describe a photo or sign for someone who can't see it clearly. That can be useful, but AI sometimes gets details wrong.</p>
+          </article>
+        </div>
+        <p class="bf-eli5__takeaway">AI doesn't have to do the whole job to be helpful. Sometimes giving a person a better starting point is enough.</p>
+      </div>
+    </section>
+
+    <footer class="bf-foot"><span>EXPLANATORY PROTOTYPE · NO LIVE DATA OR AUTOMATED ASSESSMENTS</span><a href="/methodology">How we review evidence <span aria-hidden="true">↗</span></a><a href="/discover/">← Choose another perspective</a></footer>
+  </main>
+  <script>import "../../scripts/benefits.js";</script>
+</BaseLayout>

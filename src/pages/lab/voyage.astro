@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/voyage-lab.css";
+---
+<BaseLayout title="The Voyage — design proof" description="An original cinematic journey toward perspective." bodyClass="voyage-lab-body">
+  <main class="voyage" id="content" data-voyage>
+    <div class="voyage-scene" data-voyage-scene aria-hidden="true">
+      <canvas class="voyage-canvas" data-voyage-canvas></canvas>
+      <div class="voyage-sky-fallback"></div>
+    </div>
+    <div class="voyage-atmosphere" aria-hidden="true"></div>
+    <div class="voyage-noise" aria-hidden="true"></div>
+    <header class="voyage-header">
+      <a href="/" class="voyage-brand" aria-label="Return to AI in Perspective homepage"><span class="voyage-brand-mark" aria-hidden="true">✳</span><span>AI <em>in Perspective</em></span></a>
+      <span class="voyage-header-trace">THE WAYFINDER <span aria-hidden="true">/</span> A JOURNEY OF DISCOVERY</span>
+      <a href="/lab/observation-deck" class="voyage-skip">Skip journey <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <section class="voyage-story" aria-labelledby="voyage-story-heading">
+      <div class="voyage-eyebrow"><span class="voyage-eyebrow-rule" aria-hidden="true"></span><span data-voyage-chapter>01 / DEPARTURE</span></div>
+      <div class="voyage-copy" data-voyage-copy>
+        <h1 id="voyage-story-heading" data-voyage-heading>Beyond the noise.<br />Into perspective.</h1>
+        <p data-voyage-description>We're setting out to understand one of the technologies reshaping our world: artificial intelligence.</p>
+      </div>
+      <a href="/lab/observation-deck" class="voyage-enter" data-voyage-enter>Explore the observation deck <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <footer class="voyage-footer">
+      <div class="voyage-progress" aria-label="Journey progress">
+        <div class="voyage-progress-track" aria-hidden="true"><span data-voyage-progress></span></div>
+        <span data-voyage-counter>01 / 06</span>
+      </div>
+      <div class="voyage-controls">
+        <span class="voyage-sound">SOUND OFF</span>
+        <button type="button" data-voyage-play aria-pressed="false">Pause journey <span aria-hidden="true">Ⅱ</span></button>
+        <button type="button" data-voyage-next hidden>Next chapter <span aria-hidden="true">→</span></button>
+      </div>
+    </footer>
+    <p class="voyage-status" data-voyage-status role="status" aria-live="polite">An original interactive voyage preview. The story is available even without 3D.</p>
+  </main>
+  <script>
+    import { bootVoyage } from "../../scripts/voyage-lab.js";
+    bootVoyage();
+  </script>
+</BaseLayout>

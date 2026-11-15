@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import "../../styles/environment-rebuild.css";
+import "../../styles/environment-water.css";
+---
+<BaseLayout title="AI & the Environment" description="Explore how electricity, grid infrastructure, servers, cooling and environmental resources connect to AI computing." bodyClass="exhibit-body">
+  <SiteHeader subtle />
+  <main id="content" class="environment-rebuild">
+    <section class="environment-opening" aria-labelledby="environment-title">
+      <div class="environment-opening__copy">
+        <a class="environment-back" href="/discover/">← All perspectives</a>
+        <p class="environment-eyebrow"><span class="environment-eyebrow__mark"></span> AI & THE ENVIRONMENT <span class="environment-eyebrow__divider">/</span> EXPLORATION 04</p>
+        <h1 id="environment-title">AI has a<br /><em>physical footprint.</em></h1>
+        <p class="environment-opening__lead">AI needs real computers, electricity, and cooling systems to work. Follow how these pieces connect and what they mean for the environment.</p>
+      </div>
+      <aside class="environment-opening__side" aria-label="How to use this interactive page">
+        <span>INTERACTIVE STUDY / 01</span>
+        <p>One connected system with five parts to explore.</p>
+        <a href="#environment-model">Explore the system <span aria-hidden="true">↓</span></a>
+      </aside>
+    </section>
+
+    <section id="environment-model" class="env-interactive" aria-labelledby="model-title">
+      <div class="env-interactive__heading">
+        <div>
+          <p class="environment-eyebrow">THE PHYSICAL CHAIN <span class="environment-eyebrow__divider">/</span> INTERACTIVE PLATE</p>
+          <h2 id="model-title">How AI uses energy</h2>
+        </div>
+        <p>Select a part to see how it works. This is an example of how the pieces fit together, not a measured data center.</p>
+      </div>
+
+      <div class="env-model-panel">
+        <div class="env-model-toolbar" role="group" aria-label="Highlight a part of the AI infrastructure system">
+          <div class="env-focus-controls">
+            <button type="button" data-env-focus="all" aria-pressed="true">Whole system</button>
+            <button type="button" data-env-focus="power" aria-pressed="false">Electricity</button>
+            <button type="button" data-env-focus="compute" aria-pressed="false">Compute</button>
+            <button type="button" data-env-focus="cooling" aria-pressed="false">Cooling</button>
+            <button type="button" data-env-focus="context" aria-pressed="false">Environment</button>
+          </div>
+          <button class="env-motion-toggle" type="button" data-env-motion aria-pressed="false">Pause movement</button>
+        </div>
+        <p class="env-mobile-cue">Swipe the illustration sideways to explore the whole system <span aria-hidden="true">→</span></p>
+        <div class="env-scene-wrap" role="region" aria-label="Isometric infrastructure model; on small screens scroll horizontally to inspect the scene" tabindex="0">
+          <div class="env-glow-ambient" aria-hidden="true"></div>
+          <div class="env-scene" data-environment-stage data-focus="all" data-motion="on">
+            <noscript><p class="env-no-script">Illustration requires JavaScript. Electricity generation and delivery power the servers, which generate heat that must be managed by cooling systems. The environmental impact depends on the energy source, cooling methods and location.</p></noscript>
+          </div>
+        </div>
+        <div class="env-plate-footer">
+          <div class="env-reading" role="status" aria-live="polite" aria-atomic="true">
+            <span class="env-reading__step" data-env-step>SYSTEM VIEW</span>
+            <h3 data-env-title>The whole system</h3>
+            <p data-env-description>Follow electricity from generation and grid delivery into computing hardware, then the heat and cooling that keep those systems operating.</p>
+          </div>
+          <div class="env-plate-key" aria-label="Flow legend">
+            <span><i class="env-key-energy"></i>Electricity</span>
+            <span><i class="env-key-water"></i>Example cooling / water circuit</span>
+            <span><i class="env-key-outline"></i>Infrastructure</span>
+          </div>
+        </div>
+      </div>
+      <p class="env-caveat"><strong>One possible setup.</strong> Data centers use different power sources and cooling systems. This drawing shows how the parts can connect. It doesn't measure how much electricity or water an AI request uses.</p>
+    </section>
+
+
+    <section class="env-explain" aria-labelledby="explain-title">
+      <div class="env-explain__title">
+        <p class="environment-eyebrow">BEHIND THE VISUAL</p>
+        <h2 id="explain-title">What happens behind the scenes?</h2>
+      </div>
+      <div class="env-explain__grid">
+        <article class="env-explain__card">
+          <span class="env-explain__num">01 / POWER</span>
+          <h3>Electricity comes from somewhere.</h3>
+          <p>AI workloads rely on data centers connected to electrical infrastructure. The generating sources and regional grid mix influence the emissions and other upstream impacts of that electricity.</p>
+        </article>
+        <article class="env-explain__card">
+          <span class="env-explain__num">02 / COMPUTE</span>
+          <h3>Computing becomes heat.</h3>
+          <p>Servers, networking hardware and supporting systems use electricity. They also release heat, which facilities must remove to keep equipment operating reliably.</p>
+        </article>
+        <article class="env-explain__card">
+          <span class="env-explain__num">03 / COOLING</span>
+          <h3>Water use is not one number.</h3>
+          <p>Cooling choices differ. Some systems use evaporative water cooling; others rely more heavily on air or dry cooling. Water withdrawn and water consumed are not interchangeable measurements.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE-10: A separate water-accounting scene. The energy model above is retained intact. -->
+    <section id="water-system" class="env-water" data-water-experience aria-labelledby="water-system-title">
+      <div class="env-water-intro">
+        <div>
+          <p class="environment-eyebrow">A SECOND PERSPECTIVE <span class="environment-eyebrow__divider">/</span> INTERACTIVE WATER STUDY</p>
+          <h2 id="water-system-title">How AI uses <em>water.</em></h2>
+        </div>
+        <p>Some water comes in and goes back out. Some is used up through evaporation. Follow two different cooling setups to see where the water goes.</p>
+      </div>
+      <div class="env-water-panel">
+        <div class="env-water-top">
+          <div class="env-water-scenarios" role="group" aria-label="Choose a cooling-system example">
+            <button type="button" data-water-mode-btn="evaporative" aria-pressed="true">Data center · evaporative</button>
+            <button type="button" data-water-mode-btn="onceThrough" aria-pressed="false">Power plant · once-through</button>
+          </div>
+          <p class="env-water-scenario-caption" data-water-mode-description>Data center · recirculating evaporative cooling</p>
+        </div>
+        <div class="env-water-subbar">
+          <div class="env-water-focus" role="group" aria-label="Trace a water-flow type">
+            <button type="button" data-water-focus-btn="all" aria-pressed="true">Whole flow</button>
+            <button type="button" data-water-focus-btn="withdrawal" aria-pressed="false">Withdrawal</button>
+            <button type="button" data-water-focus-btn="reuse" aria-pressed="false">Reuse loop</button>
+            <button type="button" data-water-focus-btn="evaporation" aria-pressed="false">Evaporation</button>
+            <button type="button" data-water-focus-btn="discharge" aria-pressed="false">Return / discharge</button>
+          </div>
+          <button class="env-water-motion" type="button" data-water-motion aria-pressed="false">Pause movement</button>
+        </div>
+        <p class="env-water-hint">Swipe the illustration sideways to see each part of the system →</p>
+        <div class="env-water-scroll" data-water-scroll role="region" aria-label="Isometric water-cooling illustration, horizontally scrollable on small screens" tabindex="0">
+          <div class="env-water-stage" data-water-stage data-mode="evaporative" data-focus="all" data-motion="on">
+            <noscript><p style="padding:30px;color:#e5f1f0">The animated illustration requires JavaScript. Evaporative cooling withdraws makeup water, reuses water in a cooling loop, releases some through evaporation, and sends blowdown for treatment or discharge. Once-through power-plant cooling returns much of the withdrawn water to its source, often warmer.</p></noscript>
+          </div>
+        </div>
+        <div class="env-water-bottom">
+          <div class="env-water-reading" role="status" aria-live="polite" aria-atomic="true">
+            <span data-water-reading-step>THE WATER PATH</span>
+            <h3 data-water-reading-title>Water moves through several different paths</h3>
+            <p data-water-reading-body>Water can be withdrawn, recirculated, evaporated, or discharged. What those terms mean depends on the cooling system.</p>
+          </div>
+          <div class="env-water-legend" aria-label="Visual flow legend">
+            <span><i></i>Intake / return water</span>
+            <span><i class="iw-leg-reuse"></i>Reused in a loop</span>
+            <span><i class="iw-leg-loss"></i>Heat / blowdown</span>
+          </div>
+        </div>
+      </div>
+      <p class="env-water-note"><strong>Read the labels carefully.</strong> These are two distinct illustrative facilities, not interchangeable settings on one site. In the evaporative example, treated blowdown is shown returning to the river <em>where permitted</em>; other facilities use different discharge or reuse routes. The once-through example concerns cooling at electricity generation, not a data-center cooling tower. Neither drawing presents measured volumes or a typical percentage split.</p>
+      <div class="env-water-lessons" aria-label="Key lessons about water and AI infrastructure">
+        <article><span>01 / WHAT COUNTS</span><h3>Withdrawal isn't consumption.</h3><p>Water taken from a source is a withdrawal. Consumption is water not returned to the relevant source during the accounting period, often because it evaporates. Recirculation within equipment is different from return to the environment.</p></article>
+        <article><span>02 / THE SOURCE</span><h3>Where it comes from matters.</h3><p>Cooling water may come from municipal supplies, rivers, groundwater or reclaimed wastewater; some specialized facilities use seawater. Availability, quality and competing local demand shape the impact.</p></article>
+        <article><span>03 / THE TRADEOFF</span><h3>Water and energy interact.</h3><p>Evaporative heat rejection can lower electricity demand while consuming water. Air-cooled and hybrid arrangements can reduce on-site water use with different energy tradeoffs. Direct-to-chip cooling still needs a way to reject heat.</p></article>
+        <article><span>04 / THE PLACE</span><h3>The watershed matters.</h3><p>Evaporated water is not destroyed: it rejoins the water cycle, but may not return to the same watershed when needed. Returned water can also be warmer or require treatment, so location and method matter.</p></article>
+      </div>
+      <div class="env-water-source">
+        <span>READ THE SOURCE MATERIAL</span>
+        <a href="https://www.energy.gov/cmei/femp/cooling-water-efficiency-opportunities-federal-data-centers" target="_blank" rel="noopener noreferrer">US DOE · Data center cooling-water efficiency ↗</a>
+        <a href="https://www.usgs.gov/mission-areas/water-resources/science/thermoelectric-power-water-use" target="_blank" rel="noopener noreferrer">USGS · Thermoelectric power water use ↗</a>
+        <a href="https://www.energy.gov/cmei/femp/best-management-practice-10-cooling-tower-management" target="_blank" rel="noopener noreferrer">US DOE · Cooling tower management ↗</a>
+      </div>
+    </section>
+
+    <section class="env-context" aria-labelledby="context-title">
+      <div>
+        <p class="environment-eyebrow">THE BIGGER PICTURE</p>
+        <h2 id="context-title">The impact depends on <em>where, when and how.</em></h2>
+      </div>
+      <div>
+        <p>A meaningful environmental comparison needs a boundary: which infrastructure is included, how electricity is supplied, what cooling technology is used, and which place and time period are being studied.</p>
+        <p>We haven't included estimates for water or electricity per AI prompt because they depend on many things and need reliable sources. First, it helps to understand where those resources go.</p>
+        <div class="env-sources">
+          <p>START WITH THE EVIDENCE</p>
+          <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" rel="noopener noreferrer">IEA · Energy and AI (2025) <span aria-hidden="true">↗</span></a>
+          <a href="https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report" target="_blank" rel="noopener noreferrer">Lawrence Berkeley National Laboratory · US Data Center Energy Usage Report (2024) <span aria-hidden="true">↗</span></a>
+          <a href="/methodology">Our evidence methodology <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AIIP-EXPERIENCE-12: Practical responses and a plain-language closing recap. -->
+    <section class="env-actions" aria-labelledby="environment-actions-title">
+      <div class="env-actions__intro">
+        <p class="environment-eyebrow">FROM THE SYSTEM TO THE RESPONSE</p>
+        <h2 id="environment-actions-title">What's actually being done</h2>
+        <p>Ways people are responding to water demand, with the difference between an available approach, a reported effort and a future promise kept clear.</p>
+      </div>
+      <div class="env-actions__grid">
+        <article class="env-actions__card">
+          <div class="env-actions__meta"><span class="env-actions__index">01 / WATER SUPPLY</span><span class="env-actions__tag">AVAILABLE APPROACH</span></div>
+          <h3>Using different water</h3>
+          <p>Some data centers can cool their equipment with treated, recycled or reclaimed water instead of relying only on drinking-water supplies. That doesn't erase the water impact. It changes which source is used, and local availability and treatment still matter.</p>
+          <a class="env-actions__source" href="https://www.epa.gov/waterreuse/water-reuse-industrial-applications-resources" target="_blank" rel="noopener noreferrer">EPA · Water reuse for industry <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="env-actions__card">
+          <div class="env-actions__meta"><span class="env-actions__index">02 / COOLING DESIGN</span><span class="env-actions__tag">DESIGN TRADEOFF</span></div>
+          <h3>Changing the cooling</h3>
+          <p>Air cooling and some hybrid designs can reduce water used on-site. Liquid cooling moves heat away from computer chips, but the heat still has to go somewhere. The best choice depends on weather, electricity needs and local water conditions.</p>
+          <a class="env-actions__source" href="https://www.energy.gov/cmei/femp/cooling-water-efficiency-opportunities-federal-data-centers" target="_blank" rel="noopener noreferrer">US DOE · Cooling choices <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="env-actions__card">
+          <div class="env-actions__meta"><span class="env-actions__index">03 / WATER STEWARDSHIP</span><span class="env-actions__tag">REPORTED / PLEDGED</span></div>
+          <h3>Replenishing and restoring</h3>
+          <p>Some companies report funding work to save or restore water in communities and watersheds. Their reported progress and future goals aren't the same as independently verified results. Where and when a project helps matters, not just the total in a company report.</p>
+          <a class="env-actions__source" href="https://www.microsoft.com/en-us/corporate-responsibility/sustainability/water" target="_blank" rel="noopener noreferrer">Microsoft · Company water commitments <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+      <p class="env-actions__note"><strong>How to read the labels.</strong> Available approach describes an option, not how widely it has been adopted. Design tradeoff means benefits depend on the system and place. Reported is a company's own account; pledged is a future goal, not a completed outcome. Independent verification must be established separately.</p>
+    </section>
+
+    <section class="env-eli5" aria-labelledby="environment-eli5-title">
+      <div class="env-eli5__inner">
+        <p class="environment-eyebrow">THE SIMPLE VERSION</p>
+        <h2 id="environment-eli5-title" class="env-eli5__title">
+          <span class="env-eli5__word env-eli5__word--blue">Explain</span>
+          <span class="env-eli5__word env-eli5__word--gold">Like</span>
+          <span class="env-eli5__word env-eli5__word--pink">I’m</span>
+          <span class="env-eli5__word env-eli5__word--mint">Five:<svg class="env-eli5__scribble" viewBox="0 0 158 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M5 10 C28 3 51 17 77 8 S124 8 153 6"/><path d="M14 17 Q53 11 91 16 T145 14"/></svg></span>
+        </h2>
+        <p class="env-eli5__lead">A very simple version of this page, in plain language.</p>
+        <div class="env-eli5__grid">
+          <article class="env-eli5__card">
+            <span class="env-eli5__number" aria-hidden="true">01</span>
+            <h3>AI runs in buildings</h3>
+            <p>AI works because computers in buildings do the job.</p>
+          </article>
+          <article class="env-eli5__card">
+            <span class="env-eli5__number" aria-hidden="true">02</span>
+            <h3>Computers get hot</h3>
+            <p>When computers work hard, they make heat.</p>
+          </article>
+          <article class="env-eli5__card">
+            <span class="env-eli5__number" aria-hidden="true">03</span>
+            <h3>Cooling removes that heat</h3>
+            <p>Cooling systems help keep the computers from overheating.</p>
+          </article>
+          <article class="env-eli5__card">
+            <span class="env-eli5__number" aria-hidden="true">04</span>
+            <h3>Water can be used in different ways</h3>
+            <p>Some water comes in, some goes back, and some may turn into vapor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="env-footnotes">
+      <span>EXPLANATORY PROTOTYPE · NO LIVE DATA OR MEASURED SITE FIGURES</span>
+      <span>Illustration adapted from the <a href="https://isoglow.dev" target="_blank" rel="noopener noreferrer">ISO-GLOW</a> isometric technique (MIT). <a href="/licenses/iso-glow-LICENSE.txt">License and copyright</a>.</span>
+      <a href="/discover/">← Choose another perspective</a>
+    </div>
+  </main>
+  <script>import "../../scripts/environment-system.js";</script>
+  <script>import "../../scripts/environment-water.js";</script>
+</BaseLayout>

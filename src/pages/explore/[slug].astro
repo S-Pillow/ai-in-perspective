@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { exhibits, exhibitPath } from "../../data/exhibits";
+export function getStaticPaths() {
+  return exhibits.filter((e) => e.slug !== "environment" && e.slug !== "benefits" && e.slug !== "risks").map((e) => ({ params: { slug: e.slug }, props: { exhibit: e } }));
+}
+const { exhibit } = Astro.props;
+---
+<BaseLayout title={exhibit.title} description={exhibit.question} bodyClass="exhibit-body">
+  <SiteHeader subtle />
+  <main id="content" class="planned-page">
+    <div class:list={["planned-orbit", `planned-orbit--${exhibit.visual}`]} aria-hidden="true"><div class="planned-core"></div></div>
+    <div class="planned-content">
+      <a href="/discover/" class="back-link">← All perspectives</a>
+      <p class="eyebrow">TOPIC {exhibit.number} / {exhibit.kicker}</p>
+      <h1>{exhibit.title}</h1>
+      <p class="planned-question">{exhibit.question}</p>
+      <p>{exhibit.short}</p>
+      <div class="planned-disclosure"><span>PAGE STATUS</span><strong>In development</strong><p>This is an early navigation destination, not a completed learning page. Its animated teaching experience, research, sources and supporting visuals are scheduled for separate design and editorial review.</p></div>
+      <a href={exhibitPath("environment")} class="primary-link">Explore AI & the Environment <span aria-hidden="true">↗</span></a>
+    </div>
+  </main>
+</BaseLayout>

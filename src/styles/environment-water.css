@@ -1,0 +1,157 @@
+/* EXPERIENCE-10: companion water plate. Scoped below .environment-rebuild .env-water. */
+.environment-rebuild .env-water{--iw-blue:#65cfff;--iw-teal:#6ce4d1;--iw-amber:#ffd094;--iw-ink:#e5f1f0;--iw-muted:#9eb6bd;max-width:1620px;margin:0 auto;padding:76px clamp(14px,4.5vw,70px) 86px;border-top:1px solid #263b44}
+.environment-rebuild .env-water-intro{max-width:1390px;margin:0 auto 28px;display:flex;align-items:end;justify-content:space-between;gap:30px}
+.environment-rebuild .env-water-intro>div{max-width:750px}
+.environment-rebuild .env-water-intro h2{font:650 clamp(31px,3.8vw,50px)/1.12 'Syne',Inter,Arial,sans-serif;letter-spacing:-.045em;margin:0}
+.environment-rebuild .env-water-intro h2 em{font-style:normal;color:#b3e5de}
+.environment-rebuild .env-water-intro>p{font-size:14px;line-height:1.7;color:#adc2c6;max-width:395px;margin:0}
+.environment-rebuild .env-water-panel{border:1px solid #3b5a66;border-radius:18px;overflow:hidden;max-width:1390px;margin:auto;background:linear-gradient(145deg,#112330,#08141e 68%);box-shadow:0 24px 86px #0007}
+.environment-rebuild .env-water-top{padding:19px 21px 20px;border-bottom:1px solid #3b505b;background:#0d1e28;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.environment-rebuild .env-water-scenarios{display:flex;flex-wrap:wrap;gap:7px}
+.environment-rebuild .env-water-scenarios button{font:650 12px/1.3 ui-monospace,SFMono-Regular,monospace;background:#132530;border:1px solid #344c57;color:#b3c6c9;border-radius:9px;padding:12px 17px;cursor:pointer}
+.environment-rebuild .env-water-scenarios button[aria-pressed=true]{color:#e9faff;border-color:#70b9ce;background:#194055;box-shadow:inset 0 0 0 1px #70b9ce21}
+.environment-rebuild .env-water-scenarios button:hover:not([aria-pressed=true]){color:#e6fcff;background:#203847}
+.environment-rebuild .env-water-scenario-caption{margin:0;color:#97b4bd;font:11px/1.5 ui-monospace,monospace;letter-spacing:.045em}
+.environment-rebuild .env-water-subbar{display:flex;align-items:center;justify-content:space-between;gap:13px;padding:11px 16px 11px 19px;background:#10222d;border-bottom:1px solid #334955}
+.environment-rebuild .env-water-focus{display:flex;flex-wrap:wrap;gap:5px}
+.environment-rebuild .env-water-focus button,.environment-rebuild .env-water-motion{font:600 11px/1.2 ui-monospace,SFMono-Regular,monospace;letter-spacing:.035em;padding:10px 13px;color:#a8c2c9;background:transparent;border:1px solid transparent;border-radius:8px;cursor:pointer}
+.environment-rebuild .env-water-focus button:hover:not(:disabled),.environment-rebuild .env-water-motion:hover{color:#f1ffff;background:#1e3744}
+.environment-rebuild .env-water-focus button[aria-pressed=true]{color:#d9fff8;background:#65d9c317;border-color:#53b9ac}
+.environment-rebuild .env-water-focus button:disabled{opacity:.38;cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1px}
+.environment-rebuild .env-water-motion{flex:none;color:#d9e6e8;border:1px solid #42606b;background:#172d39}
+.environment-rebuild .env-water-hint{display:none}
+.environment-rebuild .env-water-scroll{overflow:hidden;position:relative;isolation:isolate;background:radial-gradient(ellipse at 45% 38%,#172e3c 0,#091923 65%,#09141e 100%)}
+.environment-rebuild .env-water-stage{width:100%;min-height:450px;position:relative;}
+.environment-rebuild .env-water-stage svg{display:block;width:100%;height:auto;min-height:410px;}
+.environment-rebuild .iw-base-top{fill:#142633;stroke:#64808b;stroke-width:1.3}
+.environment-rebuild .iw-base-front{fill:#0b1823;stroke:#3b5c67;stroke-width:1.2}
+.environment-rebuild .iw-base-side{fill:#0b1924;stroke:#436572;stroke-width:1.2}
+.environment-rebuild .iw-base-shadow{fill:#060e16}
+.environment-rebuild .iw-base-outline{fill:none;stroke:#59727c;stroke-width:1.3;stroke-dasharray:8 6;opacity:.6}
+.environment-rebuild .iw-grid{fill:none;stroke:#668c99;opacity:.13;stroke-width:.8}
+.environment-rebuild .iw-waterbank{fill:#172d36;stroke:#739ca6;stroke-width:1.3}
+.environment-rebuild .iw-river-surface{fill:url(#iw-river-fill);stroke:#6ab0bb;stroke-width:1.3}
+.environment-rebuild .iw-river-wave{stroke:#8bdcd7;opacity:.45;stroke-width:1.2;fill:none;stroke-linecap:round;stroke-dasharray:28 14;animation:iw-waves 5s linear infinite}
+.environment-rebuild .iw-pad{fill:#1b303b;stroke:#56717c;stroke-width:1}
+.environment-rebuild .iw-tree-base{fill:#0e3232;stroke:#2e5953;stroke-width:.8}
+.environment-rebuild .iw-tree-trunk{stroke:#7e9790;stroke-width:2}
+.environment-rebuild .iw-tree-crown{fill:#1c4f4a;stroke:#91b8a3;stroke-width:1.2}
+.environment-rebuild .iw-equipment,.environment-rebuild .iw-pump{transition:opacity .25s ease}
+.environment-rebuild .iw-box-front{fill:#19303b;stroke:#92aeb5;stroke-width:1.1;stroke-linejoin:round}
+.environment-rebuild .iw-box-side{fill:#0e2230;stroke:#637f8a;stroke-width:1.1;stroke-linejoin:round}
+.environment-rebuild .iw-box-top{fill:#28414d;stroke:#9db5b9;stroke-width:1.1;stroke-linejoin:round}
+.environment-rebuild .iw-rack-body .iw-box-top{fill:#37505c}
+.environment-rebuild .iw-rack-face{fill:#07131d;stroke:#8faeb8;stroke-width:1.2}
+.environment-rebuild .iw-server-bay{fill:#1a3946;stroke:#91aeb7;stroke-width:.85}
+.environment-rebuild .iw-switch{fill:#1a4a47;stroke:#b5dcd0;stroke-width:.9}
+.environment-rebuild .iw-server-slot{fill:none;stroke:#a0bac4;stroke-width:1.5;opacity:.75}
+.environment-rebuild .iw-roof-fan{fill:#102734;stroke:#91acb6;stroke-width:1.1}
+.environment-rebuild .iw-rack-id{fill:#bbd3d9;font:10px ui-monospace,monospace;letter-spacing:.07em}
+.environment-rebuild .iw-rack-led{fill:#ffd093;filter:url(#iw-halo);animation:iw-led 1.6s steps(1) infinite}
+.environment-rebuild .iw-rack-led-delay{animation-delay:.75s}
+.environment-rebuild .iw-pdu .iw-box-front,.environment-rebuild .iw-treatment-box .iw-box-front{fill:#183a3d}
+.environment-rebuild .iw-exchanger-box .iw-box-top,.environment-rebuild .iw-condenser-shell .iw-box-top{fill:#304f59}
+.environment-rebuild .iw-tower-shell .iw-box-front{fill:#1c3846}
+.environment-rebuild .iw-tower-shell .iw-box-side{fill:#102a36}
+.environment-rebuild .iw-tower-top{fill:#263e4a;stroke:#b0cbd0;stroke-width:1.3}
+.environment-rebuild .iw-tower-slat{stroke:#709eaa;stroke-width:2;opacity:.74}
+.environment-rebuild .iw-tower-fan{fill:#10232f;stroke:#9db9c1;stroke-width:2}
+.environment-rebuild .iw-tower-hub{fill:#8bacb5;stroke:#d9f1ed;stroke-width:1.5}
+.environment-rebuild .iw-basin .iw-box-front{fill:#125166}
+.environment-rebuild .iw-vapor-puff{fill:#bedcda;stroke:#d4ebe7;stroke-opacity:.5;opacity:.35;filter:url(#iw-halo);animation:iw-vapor 4.2s ease-in-out infinite}
+.environment-rebuild .iw-vapor-delay{animation-delay:1s;opacity:.27}
+.environment-rebuild .iw-vapor-delay2{animation-delay:1.8s;opacity:.2}
+.environment-rebuild .iw-generation-shell .iw-box-front,.environment-rebuild .iw-generation-shell .iw-box-top{fill:#29414d}
+.environment-rebuild .iw-generation-roof .iw-box-top{fill:#3a5159}
+.environment-rebuild .iw-turbine-box .iw-box-front{fill:#355362}
+.environment-rebuild .iw-pump-box .iw-box-top{fill:#244b55}
+.environment-rebuild .iw-pipe{--water-route:#6dd5fc;transition:opacity .25s ease}
+.environment-rebuild .iw-pipe--reuse{--water-route:#63e1c5}
+.environment-rebuild .iw-pipe--hot{--water-route:#f1aa75}
+.environment-rebuild .iw-pipe--blowdown{--water-route:#e6bd8e}
+.environment-rebuild .iw-pipe--discharge{--water-route:#8ed9e8}
+.environment-rebuild .iw-pipe--return{--water-route:#95e3de}
+.environment-rebuild .iw-pipe-back{fill:none;stroke:#06121b;stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
+.environment-rebuild .iw-pipe-core{fill:none;stroke:var(--water-route);stroke-width:6.5;stroke-opacity:.55;stroke-linecap:round;stroke-linejoin:round}
+.environment-rebuild .iw-pipe-moving{fill:none;stroke:var(--water-route);stroke-width:3;stroke-dasharray:8 22;stroke-linecap:round;stroke-linejoin:round;animation:iw-flow 1.6s linear infinite;filter:url(#iw-halo)}
+.environment-rebuild .iw-pipe--hot .iw-pipe-moving{animation-direction:reverse}
+.environment-rebuild .iw-pipe--blowdown .iw-pipe-moving{animation-duration:2.5s}
+.environment-rebuild .iw-pipe--return .iw-pipe-moving{animation-duration:1.3s}
+.environment-rebuild .iw-site-label text{font:650 13px ui-monospace,SFMono-Regular,monospace;fill:#e6f5f1;letter-spacing:.11em;paint-order:stroke;stroke:#0b1a24;stroke-width:3}
+.environment-rebuild .iw-site-label .iw-site-label-small{font-size:9px;fill:#9ec0c6;letter-spacing:.1em}
+.environment-rebuild .iw-chip rect{fill:#132e39;stroke:#6daab4;stroke-width:1.1;opacity:.98}
+.environment-rebuild .iw-chip text{fill:#ccecf1;font:650 11px ui-monospace,SFMono-Regular,monospace;letter-spacing:.05em}
+.environment-rebuild .iw-chip-intake rect{stroke:#6dd5fc}
+.environment-rebuild .iw-chip-reuse rect{stroke:#61e1c5}
+.environment-rebuild .iw-chip-return rect{stroke:#94dacc}
+.environment-rebuild .iw-chip-vapor rect{stroke:#cde8dd}
+.environment-rebuild .iw-chip-vapor text{fill:#e5f5e8}
+.environment-rebuild .iw-chip-warm rect{stroke:#f1aa75}
+.environment-rebuild .iw-chip-warm text{fill:#ffd19e}
+.environment-rebuild .iw-svg-overline{fill:#80a2ab;font:700 12px ui-monospace,monospace;letter-spacing:.16em}
+.environment-rebuild .iw-svg-subline{fill:#87a6ac;font:500 10px ui-monospace,monospace;letter-spacing:.11em}
+.environment-rebuild .iw-guide{stroke:#86aab4;fill:none;stroke-width:2}
+.environment-rebuild .env-water-stage[data-focus="withdrawal"] [data-water-zone]:not([data-water-zone~="withdrawal"]),
+.environment-rebuild .env-water-stage[data-focus="reuse"] [data-water-zone]:not([data-water-zone~="reuse"]),
+.environment-rebuild .env-water-stage[data-focus="evaporation"] [data-water-zone]:not([data-water-zone~="evaporation"]),
+.environment-rebuild .env-water-stage[data-focus="discharge"] [data-water-zone]:not([data-water-zone~="discharge"]){opacity:.21}
+.environment-rebuild .env-water-stage[data-motion="off"] *, .environment-rebuild .env-water-stage.iw-hidden * {animation-play-state:paused!important;transition-duration:0s!important}
+.environment-rebuild .env-water-bottom{border-top:1px solid #365460;background:linear-gradient(90deg,#112934,#0a1b26);padding:24px clamp(20px,3.6vw,45px);display:flex;justify-content:space-between;align-items:start;gap:35px}
+.environment-rebuild .env-water-reading{max-width:780px;min-width:0}
+.environment-rebuild .env-water-reading>span{display:block;font:700 10px ui-monospace,monospace;letter-spacing:.17em;color:#85decf}
+.environment-rebuild .env-water-reading h3{font:650 clamp(18px,2vw,27px)/1.22 'Syne',Inter,sans-serif;margin:9px 0 8px;color:#eaf6f3}
+.environment-rebuild .env-water-reading p{font-size:13px;line-height:1.75;color:#a8c2c8;margin:0}
+.environment-rebuild .env-water-legend{flex:none;display:grid;gap:10px;color:#b8cbd1;font:11px ui-monospace,monospace}
+.environment-rebuild .env-water-legend span{display:flex;align-items:center;gap:10px}
+.environment-rebuild .env-water-legend i{display:inline-block;width:25px;height:0;border-top:3px solid #65cfff}
+.environment-rebuild .env-water-legend .iw-leg-reuse{border-color:#63e1c5;border-top-style:dashed}
+.environment-rebuild .env-water-legend .iw-leg-loss{border-color:#ffd094;border-top-style:dashed}
+.environment-rebuild .env-water-note{max-width:1390px;margin:17px auto 0;color:#a5bbc1;font-size:12px;line-height:1.65}
+.environment-rebuild .env-water-note strong{color:#dcefe9}
+.environment-rebuild .env-water-lessons{max-width:1390px;margin:44px auto 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.environment-rebuild .env-water-lessons article{background:#10222bc2;border:1px solid #36505a;border-radius:12px;padding:25px 22px;min-width:0}
+.environment-rebuild .env-water-lessons span{font:650 10px ui-monospace,monospace;letter-spacing:.14em;color:#91d8d1}
+.environment-rebuild .env-water-lessons h3{font:650 21px/1.22 'Syne',Inter,sans-serif;margin:20px 0 11px;letter-spacing:-.022em;color:#e5f2f1}
+.environment-rebuild .env-water-lessons p{font-size:13px;line-height:1.75;color:#a8c0c6;margin:0}
+.environment-rebuild .env-water-source{max-width:1390px;margin:25px auto 0;padding:19px 24px;border-top:1px solid #36525d;display:flex;flex-wrap:wrap;align-items:baseline;gap:15px 35px}
+.environment-rebuild .env-water-source>span{font:700 10px ui-monospace,monospace;letter-spacing:.15em;color:#a5ddd6}
+.environment-rebuild .env-water-source>a{font-size:12px;color:#cde1e0!important;text-decoration:underline;text-underline-offset:4px}
+@keyframes iw-flow {to{stroke-dashoffset:-120}}
+@keyframes iw-led {50%{opacity:.2}}
+@keyframes iw-waves {to{stroke-dashoffset:-84}}
+@keyframes iw-vapor {0%,100%{transform:translateY(3px);opacity:.18}50%{transform:translateY(-9px);opacity:.35}}
+@media(max-width:1100px){
+ .environment-rebuild .env-water-intro{align-items:start;flex-direction:column;gap:14px}
+ .environment-rebuild .env-water-lessons{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .environment-rebuild .env-water-subbar{align-items:start;flex-direction:column}
+ .environment-rebuild .env-water-bottom{gap:20px}
+}
+@media(max-width:700px){
+ .environment-rebuild .env-water{padding:48px 12px 60px}
+ .environment-rebuild .env-water-intro{padding:0 12px;margin-bottom:20px}
+ .environment-rebuild .env-water-intro h2{font-size:34px}
+ .environment-rebuild .env-water-intro>p{font-size:13px}
+ .environment-rebuild .env-water-panel{border-radius:12px}
+ .environment-rebuild .env-water-top{padding:12px 13px}
+ .environment-rebuild .env-water-scenarios{width:100%}
+ .environment-rebuild .env-water-scenarios button{flex:1;min-width:125px;padding:11px 9px;font-size:10px}
+ .environment-rebuild .env-water-subbar{padding:11px 12px;gap:9px}
+ .environment-rebuild .env-water-focus{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .environment-rebuild .env-water-focus button{white-space:normal;padding:10px 6px;font-size:10px;min-height:38px;border:1px solid #2e4a56}
+ .environment-rebuild .env-water-motion{width:100%;text-align:center;min-height:38px}
+ .environment-rebuild .env-water-hint{display:block;margin:0;padding:10px 14px;color:#99b9c1;background:#0c1c26;font:11px/1.5 ui-monospace,monospace}
+ .environment-rebuild .env-water-scroll{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#517a8a #0c202a;touch-action:pan-x pan-y}
+ .environment-rebuild .env-water-stage{width:980px;min-height:unset}
+ .environment-rebuild .env-water-stage svg{width:980px;height:auto;min-height:unset}
+ .environment-rebuild .iw-svg-overline,.environment-rebuild .iw-svg-subline{display:none}
+ .environment-rebuild .env-water-bottom{flex-direction:column;padding:21px 18px;gap:17px}
+ .environment-rebuild .env-water-legend{grid-template-columns:1fr 1fr;font-size:10px}
+ .environment-rebuild .env-water-note{padding:0 12px;font-size:11px}
+ .environment-rebuild .env-water-lessons{margin-top:28px;grid-template-columns:1fr;gap:10px}
+ .environment-rebuild .env-water-lessons article{padding:22px 21px}
+ .environment-rebuild .env-water-lessons h3{margin:11px 0 8px}
+ .environment-rebuild .env-water-source{padding:17px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ .environment-rebuild .env-water-stage *, .environment-rebuild .env-water-stage [data-water-zone]{animation:none!important;transition:none!important}
+}

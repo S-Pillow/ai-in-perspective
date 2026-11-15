@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { exhibits, exhibitPath } from "../../data/exhibits";
+import "../../styles/core-lab.css";
+---
+<BaseLayout title="The Core — Interactive 3D study" description="Explore an original living data-center study for AI in Perspective: real 3D server architecture and six questions about AI." bodyClass="core-lab-body">
+  <header class="core-header">
+    <a class="core-brand" href="/" aria-label="AI in Perspective homepage"><span class="core-brand-mark" aria-hidden="true"></span><span>AI <strong>in Perspective</strong></span></a>
+    <nav aria-label="Core study navigation"><a href="/">Previous prototype</a><a href="/methodology">Our approach</a><a href="/intro">Replay introduction</a></nav>
+  </header>
+  <main id="content" class="core-lab">
+    <section class="core-introduction" aria-labelledby="core-headline">
+      <p class="core-index">AI IN PERSPECTIVE / EXPERIENCE STUDY 01</p>
+      <h1 id="core-headline">Understanding AI, <span>from the inside.</span></h1>
+      <p>Six questions. One connected world. Look inside the systems, decisions and consequences shaping artificial intelligence.</p>
+    </section>
+    <section class="core-experience" aria-label="The Core interactive data-center study">
+      <div class="core-stage" data-core-stage data-core-state="loading">
+        <canvas class="core-canvas" data-core-canvas aria-hidden="true"></canvas>
+        <div class="core-static-recess" aria-hidden="true"></div>
+        <div class="core-corner core-corner--top" aria-hidden="true"></div>
+        <div class="core-corner core-corner--bottom" aria-hidden="true"></div>
+        <div class="core-bays" aria-label="Direct exhibit entries">
+          {exhibits.map((exhibit) => (
+            <a href={exhibitPath(exhibit.slug)} class:list={["core-bay-link", `core-bay-link--${exhibit.visual}`]} data-exhibit-visual={exhibit.slug} aria-label={`Explore ${exhibit.title}; ${exhibit.status === "prototype" ? "working prototype" : "planned exhibition"}`}>
+              <span class="core-bay-index">{exhibit.number}</span>
+              <span class="core-bay-title">{exhibit.title}</span>
+              <span class="core-bay-arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+        <div class="core-scene-caption" aria-hidden="true"><span>THE CORE</span><span>INTERACTIVE SYSTEM STUDY / NOT LIVE DATA</span></div>
+        <p class="core-nosupport" data-core-fallback>3D graphics unavailable. All six topics remain accessible below.</p>
+      </div>
+      <div class="core-actions">
+        <p data-core-status role="status">Preparing the optional 3D environment. Exhibit links work without it.</p>
+        <button type="button" data-core-motion aria-pressed="true">Pause ambient motion</button>
+      </div>
+    </section>
+    <section class="core-directory" aria-labelledby="core-directory-title">
+      <div class="core-directory-heading">
+        <p class="core-index">CHOOSE A QUESTION / NO REQUIRED TOUR</p>
+        <h2 id="core-directory-title">Explore the six perspectives.</h2>
+        <p>The scene is an illustrative experience study, not a live data-center feed. Its graphics are not research evidence. The Environment exhibit is the only interactive learning prototype so far.</p>
+      </div>
+      <nav aria-label="All six exhibit topics">
+        {exhibits.map((exhibit) => (
+          <a class="core-directory-link" href={exhibitPath(exhibit.slug)}>
+            <span class="core-directory-num">{exhibit.number}</span>
+            <span class="core-directory-topic"><strong>{exhibit.title}</strong><span>{exhibit.short}</span></span>
+            <span class="core-directory-status">{exhibit.status === "prototype" ? "Working prototype" : "Planned"}</span>
+            <span class="core-directory-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
+    </section>
+    <footer class="core-foot">Design study / subject to visual acceptance. <a href="/">Return to existing prototype</a></footer>
+  </main>
+</BaseLayout>
+
+<script>
+  const stage = document.querySelector("[data-core-stage]");
+  const status = document.querySelector("[data-core-status]");
+  const motion = document.querySelector("[data-core-motion]");
+  if (stage instanceof HTMLElement) {
+    let teardown;
+    let started = false;
+    const show = (message) => { if (status) status.textContent = message; };
+    const start = async () => {
+      if (started) return;
+      started = true;
+      show("Loading local 3D scene...");
+      try {
+        const { mountCoreScene } = await import("../../scripts/core-scene.js");
+        teardown = mountCoreScene(stage,{onStatus:show});
+      } catch (error) {
+        stage.dataset.coreState = "unavailable";
+        show("The 3D scene could not load. All exhibit links remain available.");
+        if (motion instanceof HTMLButtonElement) motion.disabled = true;
+        console.warn("Optional 3D study unavailable", error);
+      }
+    };
+    if ("IntersectionObserver" in window) {
+      const startObserver = new IntersectionObserver((items)=>{
+        if (items.some(item=>item.isIntersecting)) { startObserver.disconnect(); void start(); }
+      },{rootMargin:"180px"});
+      startObserver.observe(stage);
+    } else void start();
+    document.addEventListener("astro:before-swap",()=>teardown?.(),{once:true});
+  }
+</script>

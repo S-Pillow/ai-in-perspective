@@ -1,0 +1,181 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { risks, riskGroups, riskLevels } from "../../data/risks";
+import "../../styles/risks.css";
+---
+<BaseLayout title="Risks & Safety" description="Understand AI risks, what evidence supports them, how AI might change work, and what safeguards can help." bodyClass="exhibit-body">
+  <SiteHeader subtle />
+  <main id="content" class="risks-realm" data-risks-root>
+    <section class="rs-hero" aria-labelledby="rs-title">
+      <div class="rs-hero__field" aria-hidden="true"></div>
+      <div class="rs-hero__inner">
+        <div class="rs-hero__copy">
+          <a href="/discover/" class="rs-back">← All perspectives</a>
+          <p class="rs-eyebrow"><span class="rs-eyebrow__mark"></span> PERSPECTIVE 01 <span class="rs-divide">/</span> RISKS & SAFETY</p>
+          <h1 id="rs-title">What should we<br/><em>really worry about?</em></h1>
+          <p class="rs-hero__lead">AI headlines can be alarming. Some describe harm that's already happening, while others warn about what might happen in the future. Let's sort out the difference and look at what helps.</p>
+          <div class="rs-hero__actions"><a href="#risk-radar" class="rs-primary">Explore the risks <span aria-hidden="true">↘</span></a><a href="#risk-safeguards" class="rs-secondary">See the safeguards <span aria-hidden="true">↓</span></a></div>
+        </div>
+        <div class="rs-observatory" aria-hidden="true">
+          <div class="rs-observatory__hex"></div>
+          <div class="rs-observatory__ring rs-observatory__ring--outside"></div>
+          <div class="rs-observatory__ring rs-observatory__ring--middle"></div>
+          <div class="rs-observatory__ring rs-observatory__ring--inside"></div>
+          <div class="rs-observatory__sweep"></div>
+          <div class="rs-observatory__hub"><span>◆</span></div>
+          <div class="rs-observatory__ray rs-observatory__ray--left"></div>
+          <div class="rs-observatory__ray rs-observatory__ray--right"></div>
+          <div class="rs-observatory__pulse rs-observatory__pulse--a"></div>
+          <div class="rs-observatory__pulse rs-observatory__pulse--b"></div>
+          <div class="rs-observatory__pulse rs-observatory__pulse--c"></div>
+          <span class="rs-observatory__readout rs-observatory__readout--top">POTENTIAL HARM</span>
+          <span class="rs-observatory__readout rs-observatory__readout--bottom">EVIDENCE / RESPONSE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="rs-global" aria-labelledby="rs-global-title">
+      <div class="rs-section-heading">
+        <p class="rs-eyebrow rs-eyebrow--soft">WHY THE GLOBAL PICTURE MATTERS</p>
+        <h2 id="rs-global-title">The U.S. isn't building AI alone. Why does leadership matter?</h2>
+      </div>
+      <div class="rs-global__layout">
+        <p class="rs-global__lead">Countries around the world are developing more powerful AI. When a country knows how to build and test it, it has a better chance of spotting threats, protecting its systems, and helping shape the rules. That matters for the United States, but it doesn't guarantee safety.</p>
+        <div class="rs-global__split">
+          <article><span class="rs-global__number">01 / CAPABILITY</span><h3>Understanding AI helps us defend against its misuse.</h3><p>Researchers and security teams can use AI expertise to test weaknesses and build tools that protect people and infrastructure.</p></article>
+          <article><span class="rs-global__number">02 / RESPONSIBILITY</span><h3>Racing ahead without checks can create new risks.</h3><p>Competition may encourage faster releases. Testing, accountability, and cooperation with other countries still matter.</p></article>
+        </div>
+        <p class="rs-global__note">The goal shouldn't be to win a race at any cost. It should be to build strong AI capabilities <em>and</em> use them responsibly. <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST's risk framework</a> and the <a href="https://internationalaisafetyreport.org/publication/2026-report-executive-summary" target="_blank" rel="noopener noreferrer">2026 international safety assessment</a> explain why both matter.</p>
+      </div>
+    </section>
+
+    <section class="rs-jobs" aria-labelledby="rs-jobs-title">
+      <div class="rs-jobs__heading">
+        <div>
+          <p class="rs-eyebrow rs-eyebrow--soft">FEATURED RISK <span class="rs-divide">/</span> WORK & ECONOMY</p>
+          <h2 id="rs-jobs-title">Will AI take our jobs?</h2>
+          <p>For some workers, the first sign of change might not be a layoff. It might be a job opening that never gets posted. Both matter.</p>
+        </div>
+        <span class="rs-jobs__tag"><span></span> HIGH · PROVISIONAL</span>
+      </div>
+      <div class="rs-jobs__metrics">
+        <article class="rs-jobs__metric rs-jobs__metric--forecast">
+          <span class="rs-jobs__eyebrow">AN INDUSTRY FORECAST / MAY 2025</span>
+          <strong>Up to 50%</strong>
+          <h3>Entry-level white-collar jobs</h3>
+          <p>Anthropic CEO Dario Amodei warned that AI <em>could</em> eliminate up to half of these jobs within one to five years, with unemployment potentially reaching 10–20%.</p>
+          <span class="rs-jobs__qualifier">A prediction, not an observed job-loss rate.</span>
+          <a href="https://www.axios.com/2025/05/28/ai-jobs-white-collar-unemployment-anthropic" target="_blank" rel="noopener noreferrer">Read the 2025 interview <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="rs-jobs__metric rs-jobs__metric--observed">
+          <span class="rs-jobs__eyebrow">EMPLOYMENT DATA / AUGUST 2026</span>
+          <strong>19% gap</strong>
+          <h3>Young workers in exposed jobs</h3>
+          <p>In Stanford's payroll-data study, employment among 22–25-year-olds in highly AI-exposed occupations was 19% below the level implied by growth in less-exposed occupations.</p>
+          <span class="rs-jobs__qualifier">Mostly weaker hiring; not proof AI caused a 19% job loss.</span>
+          <a href="https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/" target="_blank" rel="noopener noreferrer">Read the Stanford analysis <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="rs-jobs__metric rs-jobs__metric--counter">
+          <span class="rs-jobs__eyebrow">ECONOMY-WIDE CHECK / OCTOBER 2026</span>
+          <strong>No clear shift</strong>
+          <h3>Not yet a broad collapse</h3>
+          <p>Yale's Budget Lab found no clear evidence of large-scale AI-driven labor-market disruption. That doesn't rule out harm in particular jobs or what may happen next.</p>
+          <span class="rs-jobs__qualifier">Different studies track different workers and outcomes.</span>
+          <a href="https://budgetlab.yale.edu/research/tracking-impact-ai-labor-market" target="_blank" rel="noopener noreferrer">Read the Yale analysis <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+      <div class="rs-jobs__context">
+        <div><span class="rs-jobs__context-label">WHAT OTHER LEADERS SAY</span><p>Even AI leaders disagree. In May 2026, OpenAI CEO Sam Altman said an AI-driven “jobs apocalypse” was unlikely in the near term, despite earlier concern about entry-level work.</p><a href="https://www.reuters.com/world/asia-pacific/openais-altman-says-ai-unlikely-lead-jobs-apocalypse-2026-05-26/" target="_blank" rel="noopener noreferrer">Reuters · May 2026 <span aria-hidden="true">↗</span></a></div>
+        <div><span class="rs-jobs__context-label">WHAT EXPOSURE MEANS</span><p>The International Labour Organization found that roughly one in four workers has some exposure to generative AI. It expects most affected jobs to change rather than disappear entirely.</p><a href="https://www.ilo.org/publications/generative-ai-and-jobs-2025-update" target="_blank" rel="noopener noreferrer">ILO · May 2025 <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <p class="rs-jobs__bottomline"><strong>The point:</strong> Fewer job openings, layoffs, new tasks, and new jobs aren't the same thing. We need to measure each one and listen to workers before problems become harder to solve.</p>
+    </section>
+
+    <section id="risk-radar" class="rs-radar" aria-labelledby="rs-radar-title">
+      <div class="rs-radar__heading">
+        <div><p class="rs-eyebrow rs-eyebrow--soft">THE RISK RADAR <span class="rs-divide">/</span> 17 TOPICS</p><h2 id="rs-radar-title">What could go wrong?</h2></div>
+        <p>Choose a category and select a risk to learn more. The levels describe <strong>how serious the harm could be</strong>, not how likely it is.</p>
+      </div>
+      <div class="rs-legend" aria-labelledby="rs-legend-title">
+        <div class="rs-legend__heading"><h3 id="rs-legend-title">What the levels mean</h3><span>Provisional editorial assessments · not a scientific risk score</span></div>
+        <div class="rs-legend__grid">{riskLevels.map(level=>(<div class={"rs-legend__item rs-level--"+level.id}><strong>{level.name}</strong><p>{level.detail}</p></div>))}</div>
+        <p class="rs-legend__foot">Color shows how serious the harm could be. The evidence label tells you whether it has happened, whether the concern is emerging, or whether it's still uncertain. A future risk labeled “Critical” has not necessarily happened.</p>
+      </div>
+      <div class="rs-filters" role="group" aria-label="Filter risks by subject">
+        <button type="button" data-rs-filter="all" aria-pressed="true">All risks <span>{risks.length}</span></button>
+        {riskGroups.map(group=><button type="button" data-rs-filter={group.id} aria-pressed="false">{group.title} <span>{risks.filter(r=>r.group===group.id).length}</span></button>)}
+      </div>
+      <p class="rs-filter-state" role="status" data-rs-count>Showing all {risks.length} risks</p>
+      <div class="rs-grid">
+        {risks.map((risk,i)=>(
+          <button type="button" class={"rs-card rs-level--"+risk.level} data-rs-risk={risk.id} data-rs-group={risk.group}
+            aria-controls={"rs-panel-"+risk.id} aria-pressed={i===0?"true":"false"}>
+            <span class="rs-card__top"><span class="rs-card__category">{riskGroups.find(g=>g.id===risk.group)?.title}</span><span class="rs-card__level"><i></i>{risk.level}</span></span>
+            <strong class="rs-card__title">{risk.name}</strong>
+            <span class="rs-card__description">{risk.short}</span>
+            <span class="rs-card__bottom"><span>EVIDENCE <b>{risk.evidence}</b></span><span class="rs-card__more">Explore <span aria-hidden="true">↗</span></span></span>
+          </button>
+        ))}
+      </div>
+      <div class="rs-stage" data-rs-stage>
+        <div class="rs-stage__header"><span>INSIDE THE SIGNAL</span><span>WHAT IT MEANS / WHAT HELPS</span></div>
+        {risks.map((risk,i)=>(
+          <article id={"rs-panel-"+risk.id} data-rs-panel={risk.id} class={"rs-detail rs-level--"+risk.level}
+            aria-labelledby={"rs-detail-title-"+risk.id} tabindex="-1" hidden={i>0}>
+            <div class="rs-detail__main">
+              <div class="rs-detail__meta"><span>{riskGroups.find(g=>g.id===risk.group)?.title}</span><span class="rs-detail__severity">{risk.level} · potential harm</span></div>
+              <h3 id={"rs-detail-title-"+risk.id}>{risk.name}</h3>
+              <p class="rs-detail__lead">{risk.longer}</p>
+              <div class="rs-detail__facts">
+                <div><span>EVIDENCE</span><strong>{risk.evidence}</strong></div>
+                <div><span>DIRECTION</span><strong>{risk.trend}</strong></div>
+              </div>
+            </div>
+            <div class="rs-detail__side">
+              <div><h4>What the evidence doesn't tell us</h4><p>{risk.perspective}</p></div>
+              <div><h4>What can help</h4><p>{risk.response}</p></div>
+              <a href={risk.source} target="_blank" rel="noopener noreferrer">{risk.sourceName} <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <noscript><p class="rs-nojs">JavaScript is needed to switch the detailed panels. The list above still describes the risks, and the safeguards and source links below remain available.</p></noscript>
+    </section>
+
+    <section id="risk-safeguards" class="rs-safeguards" aria-labelledby="rs-safeguards-title">
+      <div class="rs-safeguards__header">
+        <p class="rs-eyebrow rs-eyebrow--soft">FROM SIGNAL TO SAFEGUARD</p>
+        <h2 id="rs-safeguards-title">So what can we actually do?</h2>
+        <p>No one can make AI safe by themselves. Companies, governments, and everyday users all have a part to play. Different safeguards work better together than on their own.</p>
+      </div>
+      <div class="rs-safeguards__grid">
+        <article><span class="rs-safeguards__icon" aria-hidden="true">◇</span><span class="rs-safeguards__index">01 / COMPANIES & DEVELOPERS</span><h3>Build, test, and take responsibility.</h3><ul><li>Test dangerous capabilities and failure cases before release.</li><li>Limit what AI agents can access or change without approval.</li><li>Investigate incidents, fix problems, and publish meaningful findings.</li><li>Check how workplace automation affects employees and hiring.</li></ul></article>
+        <article><span class="rs-safeguards__icon" aria-hidden="true">⌁</span><span class="rs-safeguards__index">02 / PUBLIC INSTITUTIONS</span><h3>Set rules people can trust.</h3><ul><li>Support independent evaluations and workable accountability.</li><li>Protect privacy, civil rights, and routes to challenge decisions.</li><li>Measure employment effects and help displaced workers transition.</li><li>Cooperate across borders on threats that don't stop at borders.</li></ul></article>
+        <article><span class="rs-safeguards__icon" aria-hidden="true">✳</span><span class="rs-safeguards__index">03 / EVERYDAY PEOPLE</span><h3>Stay informed without living in fear.</h3><ul><li>Double-check surprising claims or urgent requests for money.</li><li>Keep personal and account information secure.</li><li>Don't rely on AI alone for high-stakes advice or decisions.</li><li>Learn how AI may change your work and ask for support early.</li></ul></article>
+      </div>
+      <div class="rs-safeguards__sources"><span>READ MORE ABOUT SAFETY PRACTICES</span><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework <span aria-hidden="true">↗</span></a><a href="https://internationalaisafetyreport.org/publication/2026-report-executive-summary" target="_blank" rel="noopener noreferrer">2026 International AI Safety Report <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="rs-eli5" aria-labelledby="rs-eli5-title">
+      <div class="rs-eli5__inner">
+        <p class="rs-eyebrow rs-eyebrow--soft">THE EVERYDAY EXPLANATION</p>
+        <h2 id="rs-eli5-title" class="rs-eli5__title">
+          <span class="rs-eli5__word rs-eli5__word--gold">Explain</span>
+          <span class="rs-eli5__word rs-eli5__word--cyan">Like</span>
+          <span class="rs-eli5__word rs-eli5__word--pink">I'm</span>
+          <span class="rs-eli5__word rs-eli5__word--mint">Five:<svg class="rs-eli5__scribble" viewBox="0 0 163 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M5 11 Q37 2 77 9 T159 7"/><path d="M14 18 Q56 13 93 17 T153 15"/></svg></span>
+        </h2>
+        <p class="rs-eli5__lead">Four simple ideas to take away.</p>
+        <div class="rs-eli5__grid">
+          <article><span>01 / MISTAKES</span><h3>AI can get things wrong.</h3><p>Even when it sounds confident, AI can make mistakes. It's okay to check its work.</p></article>
+          <article><span>02 / MISUSE</span><h3>People can use AI to trick others.</h3><p>A fake voice, picture, or message can seem real. Before trusting it, make sure it's genuine.</p></article>
+          <article><span>03 / JOBS</span><h3>AI can change work.</h3><p>It may help with some tasks and replace others. People need time and support to adapt.</p></article>
+          <article><span>04 / SAFETY</span><h3>Powerful tools need good rules.</h3><p>Testing, limits, and people paying attention help make AI safer.</p></article>
+        </div>
+      </div>
+    </section>
+    <footer class="rs-foot"><span>AI IN PERSPECTIVE · EDUCATIONAL RISK OVERVIEW · RESEARCH REVIEW PENDING</span><a href="/methodology">Our approach to evidence <span aria-hidden="true">↗</span></a><a href="/discover/">← All perspectives</a></footer>
+  </main>
+  <script>import "../../scripts/risks.js";</script>
+</BaseLayout>

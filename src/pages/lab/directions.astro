@@ -1,0 +1,211 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { exhibits, exhibitPath } from "../../data/exhibits";
+
+const rackSet = Array.from({length:6},(_,i)=>({
+  i,
+  y:250+i*32,
+  h:92+i*44,
+  w:38+i*22,
+  left:425-i*73,
+  right:775+i*51
+}));
+const serverSlots=Array.from({length:12},(_,i)=>i);
+const windowRacks=Array.from({length:10},(_,i)=>i);
+const ceilingLines=Array.from({length:9},(_,i)=>i/8);
+const floorDepths=Array.from({length:5},(_,i)=>(i+1)/5);
+---
+<BaseLayout title="Architecture comparison — The Core" description="Three original architecture-first composition studies for the AI in Perspective data center" bodyClass="architecture-study">
+  <main id="content" class="directions">
+    <header class="topline"><a class="brand" href="/">AI <span>in Perspective</span></a><p>CORE-02 / ARCHITECTURAL COMPOSITION STUDIES</p></header>
+    <section class="brief">
+      <p class="eyebrow">Three environments. One standard.</p>
+      <h1>Make the room <em>mean something.</em></h1>
+      <p>Architecture first. Equipment with recognizable functions. Animations that belong to the system. These are composition studies, not finished 3D environments.</p>
+    </section>
+    <div class="selectors" role="group" aria-label="Choose the architectural composition">
+      <button type="button" data-option="aisle" aria-pressed="true">01 / The Aisle</button>
+      <button type="button" data-option="section" aria-pressed="false">02 / The Section</button>
+      <button type="button" data-option="overlook" aria-pressed="false">03 / The Overlook</button>
+      <button type="button" data-toggle-motion aria-pressed="true" class="motion-control">Pause ambient motion</button>
+    </div>
+    <section class="composition is-active" data-composition="aisle" aria-label="Contained aisle composition">
+      <div class="stage stage-aisle">
+        <svg viewBox="0 0 1200 650" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Perspective architectural drawing of opposed rows of server cabinets with a contained cold aisle, overhead busways and cable trays">
+          <defs>
+            <linearGradient id="aisle-floor" x1=".4" x2=".5" y2="1"><stop stop-color="#1b323b"/><stop offset="1" stop-color="#07131c"/></linearGradient>
+            <linearGradient id="aisle-wall" x2=".8" y2="1"><stop stop-color="#31464e"/><stop offset="1" stop-color="#101f29"/></linearGradient>
+          </defs>
+          <rect width="1200" height="650" fill="#0a1720"/>
+          <path d="M0 0H1200L806 285H394Z" fill="url(#aisle-wall)" opacity=".78"/>
+          <path d="M0 650L390 300H810L1200 650Z" fill="url(#aisle-floor)"/>
+          <path d="M0 75L390 295V650H0Z" fill="#152731"/><path d="M1200 75L810 295V650H1200Z" fill="#111e28"/>
+          <path d="M210 58H990L815 295H385Z" fill="#29424a" opacity=".62"/>
+          {ceilingLines.map(k=><path d={`M${260+k*140} ${50+k*26}H${940-k*140}`} stroke="#81a8ae" stroke-width={2-k} opacity=".5"/>)}
+          <path d="M140 95L480 300M1060 95L720 300" stroke="#b38355" stroke-width="10"/>
+          <path d="M175 118L491 298M1025 118L709 298" stroke="#355567" stroke-width="7"/>
+          {rackSet.map(r=>(<g>
+            <rect x={r.left} y={r.y} width={r.w} height={r.h} fill="#0b161e" stroke="#728d93" stroke-width="2"/>
+            <rect x={r.right} y={r.y} width={r.w} height={r.h} fill="#0b161e" stroke="#728d93" stroke-width="2"/>
+            {serverSlots.map(slot=>(<g>
+              <rect x={r.left+5} y={r.y+9+(slot/12)*(r.h-20)} width={r.w-10} height={Math.max(3,(r.h-22)/12-3)} fill={slot%4===0?"#34515f":"#203541"}/>
+              <rect x={r.right+5} y={r.y+9+(slot/12)*(r.h-20)} width={r.w-10} height={Math.max(3,(r.h-22)/12-3)} fill={slot%4===0?"#34515f":"#203541"}/>
+              {slot%3===1&&<><rect x={r.left+r.w-10} y={r.y+11+(slot/12)*(r.h-20)} width="2" height="2" fill="#e0b67a"/><rect x={r.right+r.w-10} y={r.y+11+(slot/12)*(r.h-20)} width="2" height="2" fill="#a6d3d2"/></>}
+            </g>))}
+          </g>))}
+          {Array.from({length:10},(_,i)=><path d={`M${385+i*43} 305L${-30+i*140} 650`} stroke="#7d9ba1" opacity=".25"/>)}
+          {floorDepths.map(k=><path d={`M${400-400*k} ${306+k*k*344}H${800+400*k}`} stroke="#79959a" opacity=".28"/>)}
+          <path class="activity" d="M400 296L570 296L600 320L630 296H800" fill="none" stroke="#9ed5d9" stroke-width="3" stroke-dasharray="3 45"/>
+          <text x="690" y="352" font-size="12" fill="#a5c8ca" letter-spacing="2">COLD AISLE / ACCESS ZONE</text>
+          <text x="937" y="335" font-size="11" fill="#e3b98c">OVERHEAD POWER / CABLE ROUTE</text>
+        </svg>
+        <div class="scene-copy"><p>01 / COLD AISLE</p><h2>Inside the infrastructure.</h2><span>Recognizable equipment. Enclosed airflow. A human-scale view.</span></div>
+        <p class="scene-caption">SPATIAL STUDY / NOT PHOTOREALISTIC 3D</p>
+      </div>
+      <div class="rationale"><p><strong>Physical logic</strong> Rack fronts face an enclosed supply-air aisle; utilities run overhead.</p><p><strong>What works</strong> Deep perspective and an authentic sense of scale.</p><p><strong>Limit</strong> Six gallery entrances would need another navigation environment.</p></div>
+    </section>
+    <section class="composition" data-composition="section" aria-label="Power-to-cooling section composition" hidden>
+      <div class="stage stage-section">
+        <svg viewBox="0 0 1200 650" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Architectural cross-section showing switchgear and UPS, data hall servers, and liquid cooling heat exchangers with meaningful power and heat paths">
+          <rect width="1200" height="650" fill="#e7e7df"/>
+          <path d="M220 190H1160V570H220Z" fill="#f5f3e9" stroke="#5b797b" stroke-width="3"/>
+          <path d="M240 218H1139V246H240Z" fill="#9eaead"/>
+          <path d="M240 538H1139V556H240Z" fill="#8ca19d"/>
+          <rect x="245" y="250" width="200" height="287" fill="#dedfd6"/>
+          <rect x="467" y="250" width="418" height="287" fill="#d4dedb"/>
+          <rect x="905" y="250" width="230" height="287" fill="#d6dedb"/>
+          <path d="M456 250V541M896 250V541" stroke="#70908e" stroke-width="13"/>
+          <text x="260" y="274" font-size="13" fill="#31545a">ELECTRICAL / UPS</text>
+          <text x="486" y="274" font-size="13" fill="#31545a">COMPUTE / COLD AISLE</text>
+          <text x="918" y="274" font-size="13" fill="#31545a">COOLING / CDU</text>
+          {Array.from({length:3},(_,i)=><g><rect x={260+i*57} y="315" width="48" height="192" fill="#566a71"/><rect x={267+i*57} y="333" width="34" height="46" fill="#acc6c5"/><rect x={272+i*57} y="467" width="18" height="6" fill="#dfb47d"/></g>)}
+          {Array.from({length:6},(_,i)=><g><rect x={489+i*63} y="321" width="51" height="187" fill="#1b313c" stroke="#607f83" stroke-width="3"/>{serverSlots.map(j=><rect x={495+i*63} y={333+j*13.5} width="39" height="10" fill={j%4===0?"#3e5a65":"#233d49"}/>)}</g>)}
+          <rect x="929" y="322" width="91" height="182" fill="#637e83"/>
+          {Array.from({length:5},(_,i)=><rect x={939+i*15} y="334" width="7" height="154" fill="#a0bcb7"/>)}
+          <rect x="1036" y="347" width="84" height="157" fill="#496872"/>
+          {Array.from({length:3},(_,i)=><circle cx={1054+i*26} cy="408" r="11" fill="#a7b7b2" stroke="#344e57" stroke-width="4"/>)}
+          <path class="activity" d="M246 298H443L470 303H870" stroke="#b48152" fill="none" stroke-width="4" stroke-dasharray="12 22"/>
+          <path class="activity" d="M1103 521V532H908L885 520H480" stroke="#318ca4" fill="none" stroke-width="4" stroke-dasharray="12 22"/>
+          <text x="480" y="586" font-size="12" letter-spacing="2" fill="#3b676d">POWER  →  COMPUTE  →  HEAT EXTRACTION</text>
+        </svg>
+        <div class="scene-copy"><p>02 / BUILDING SECTION</p><h2>Follow the physical system.</h2><span>Power reaches compute. Heat leaves through a separate circuit.</span></div>
+        <p class="scene-caption">CONCEPT DIAGRAM / NOT AN ENGINEERING SCHEMATIC</p>
+      </div>
+      <div class="rationale"><p><strong>Physical logic</strong> Electrical distribution, computing racks and cooling connect as recognizable systems.</p><p><strong>What works</strong> Strong educational sequence for Environment.</p><p><strong>Limit</strong> Too diagrammatic to anchor the main living hub.</p></div>
+    </section>
+    <section class="composition" data-composition="overlook" aria-label="Observation gallery composition" hidden>
+      <div class="stage stage-overlook">
+        <svg viewBox="0 0 1200 650" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Visitor observation gallery with large glazed opening to a recessed data hall, physical server racks behind glass and gallery consoles in front">
+          <rect width="1200" height="650" fill="#141c24"/>
+          <path d="M0 0H1200V535H0Z" fill="#172530"/>
+          <rect x="62" y="143" width="1076" height="384" fill="#5b7277"/>
+          <rect x="86" y="166" width="1028" height="341" fill="#0b1923"/>
+          <path d="M100 502L310 290H884L1100 502Z" fill="#1b303a"/>
+          {windowRacks.map(i=><g><rect x={230+i*78} y="264" width="65" height="232" rx="2" fill="#152934" stroke="#73888e" stroke-width="3"/>{serverSlots.map(j=><rect x={237+i*78} y={277+j*16.5} width="51" height="13" fill={j%4===0?"#385565":"#243b48"}/>)}<path d={`M${285+i*78} 277V485`} stroke="#354953" stroke-width="2"/></g>)}
+          {Array.from({length:3},(_,i)=><rect x={352+i*245} y="166" width="12" height="341" fill="#7d9295"/>)}
+          <path d="M86 166H1114V185H86Z" fill="#769299" opacity=".8"/>
+          <path d="M150 189L470 182L320 505H215Z" fill="#badbdc" opacity=".07"/>
+          <rect x="86" y="166" width="1028" height="341" fill="#9ed1dd" opacity=".025"/>
+          <path d="M0 520H1200V650H0Z" fill="#23313a"/>
+          <path d="M0 521H1200" stroke="#7f969b" stroke-width="4"/>
+          <path d="M145 605L325 559H903L1056 609" fill="none" stroke="#8c9ca0" stroke-width="3"/>
+          {Array.from({length:5},(_,i)=><g><path d={`M${355+i*106} 567h35l10 65h-60Z`} fill="#172832" stroke="#637b80"/><rect x={361+i*106} y="578" width="25" height="18" fill="#345e69"/><path class="slow-pulse" d={`M${365+i*106} 584h18`} stroke="#acd4ce" stroke-width="2"/></g>)}
+          <path class="activity" d="M290 440H981" fill="none" stroke="#9bbab8" stroke-width="2" opacity=".4" stroke-dasharray="1 18"/>
+          <text x="858" y="120" font-size="12" fill="#b7d0d0" letter-spacing="2">VISITOR GALLERY / DATA HALL</text>
+        </svg>
+        <div class="scene-copy"><p>03 / OBSERVATION DECK</p><h2>See the systems. Ask better questions.</h2><span>Six distinct learning destinations around a working physical environment.</span></div>
+        <p class="scene-caption">SPATIAL STUDY / NOT PHOTOREALISTIC 3D</p>
+      </div>
+      <div class="rationale"><p><strong>Physical logic</strong> Visitors observe a real equipment room through glazing, with a separate circulation zone.</p><p><strong>What works</strong> Space for six genuinely different topical entrances and controlled ambient life.</p><p><strong>Next candidate</strong> Provisionally selected for first proper modeled/material prototype; still not approved.</p></div>
+    </section>
+    <section class="directory">
+      <div><p class="eyebrow">The six perspectives</p><h2>Every route remains yours to choose.</h2><p class="directory-note">The existing Environment exhibit is a working teaching prototype. Other topics are planned. The architecture is illustrative, not research evidence.</p></div>
+      <nav aria-label="Choose an AI in Perspective exhibit">
+        {exhibits.map(e=><a href={exhibitPath(e.slug)}><span>{e.number}</span><strong>{e.title}</strong><small>{e.status === "prototype" ? "Working prototype" : "Planned"}</small><b aria-hidden="true">↗</b></a>)}
+      </nav>
+    </section>
+    <footer class="foot"><span>Design study only. No final homepage selected.</span><a href="/lab/core">Previous 3D feasibility experiment</a></footer>
+  </main>
+</BaseLayout>
+<style>
+  :global(body.architecture-study){background:#0a1016;color:#e7eeee;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+  :global(.architecture-study .skip-link){z-index:100}
+  :global(.architecture-study *){box-sizing:border-box}
+  .directions{max-width:1580px;margin:0 auto;padding:0 clamp(12px,3vw,46px)}
+  .topline{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #7b9ca144;min-height:69px;gap:16px}
+  .brand{font-size:18px;font-weight:720;letter-spacing:-.05em;text-decoration:none;color:#f6fcfa}
+  .brand span{color:#a8c9cd;font-weight:460}
+  .topline p{font:700 10px ui-monospace,monospace;letter-spacing:.16em;color:#9bb8be}
+  .brief{display:grid;grid-template-columns:1fr minmax(260px,370px);gap:30px;align-items:end;padding:45px 0 29px}
+  .eyebrow{font:750 10px ui-monospace,monospace;letter-spacing:.24em;text-transform:uppercase;color:#a3c4ca;margin:0}
+  h1{font-size:clamp(36px,5vw,70px);line-height:1.04;letter-spacing:-.06em;font-weight:590;margin:13px 0 0}
+  h1 em{font-style:normal;color:#b5d3d2}
+  .brief>p{margin:0;color:#acbfc3;line-height:1.65;font-size:14px}
+  .selectors{display:flex;flex-wrap:wrap;gap:8px;padding:16px 0;border-top:1px solid #7b9ca144}
+  .selectors button{background:#0c1921;color:#c4d4d7;border:1px solid #69818b;padding:11px 15px;font:650 12px system-ui;cursor:pointer}
+  .selectors button[aria-pressed=true]{background:#d1e0e1;color:#14232c;border-color:#d1e0e1}
+  .selectors button:focus-visible,.directory a:focus-visible,.foot a:focus-visible{outline:3px solid #f2be7c;outline-offset:3px}
+  .selectors .motion-control{margin-left:auto}
+  .composition:not(.is-active){display:none}
+  .stage{height:clamp(450px,52vw,710px);position:relative;overflow:hidden;background:#111c26}
+  .stage svg{position:absolute;width:100%;height:100%;inset:0;display:block}
+  .stage-section{background:#e7e7df;color:#172d34}
+  .stage-overlook{background:#141c24}
+  .scene-copy{position:absolute;top:5%;left:3.4%;width:39%;max-width:450px;background:linear-gradient(90deg,#0b161cdd,transparent);padding:13px}
+  .scene-copy p{font:750 11px ui-monospace,monospace;letter-spacing:.15em;color:#9dbdc3;margin:0 0 13px}
+  .scene-copy h2{font-size:clamp(30px,4.3vw,59px);font-weight:570;letter-spacing:-.06em;line-height:1.05;margin:0 0 16px}
+  .scene-copy span{display:block;max-width:330px;color:#cad7db;font-size:clamp(12px,1.1vw,15px);line-height:1.55}
+  .stage-section .scene-copy{background:linear-gradient(90deg,#e7e7dfee,transparent)}
+  .stage-section .scene-copy p,.stage-section .scene-copy h2,.stage-section .scene-copy span{color:#203e46}
+  .scene-caption{position:absolute;bottom:19px;left:3.8%;color:#c1d8d9;font:700 9px ui-monospace,monospace;letter-spacing:.16em}
+  .stage-section .scene-caption{color:#43666c}
+  .rationale{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #8198a348;gap:20px;padding:25px 0 32px}
+  .rationale p{font-size:13px;line-height:1.6;color:#bcc8ce;margin:0;border-left:1px solid #89a4ac55;padding-left:15px}
+  .rationale strong{display:block;margin-bottom:6px;color:#f2f6f6}
+  .directory{display:grid;grid-template-columns:.9fr 1.3fr;gap:10%;padding:65px 0 85px}
+  .directory h2{font-size:clamp(30px,3vw,46px);font-weight:560;line-height:1.15;letter-spacing:-.05em}
+  .directory-note{font-size:14px;line-height:1.65;color:#a8b8be}
+  .directory nav{display:grid;grid-template-columns:1fr 1fr;gap:0 21px;align-self:start}
+  .directory a{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px;padding:20px 4px;color:#e5f0ed;border-top:1px solid #829ba447;text-decoration:none}
+  .directory a:hover{background:#1d3038}
+  .directory a span{font:700 11px ui-monospace,monospace;color:#a6c5c8}
+  .directory a strong{font-size:13px;line-height:1.2}
+  .directory a small{font-size:10px;color:#a6b9be;grid-column:2;grid-row:2}
+  .directory a b{font-size:20px;font-weight:400;color:#a6c5c8;grid-column:3;grid-row:1}
+  .foot{display:flex;justify-content:space-between;gap:25px;padding:23px 0 34px;border-top:1px solid #829ba447;color:#a9b9bc;font-size:12px}
+  .foot a{color:#a5d6d8}
+  .activity{animation:flow 9s linear infinite}.slow-pulse{animation:pulse 5s ease-in-out infinite alternate}
+  @keyframes flow{to{stroke-dashoffset:-550}}@keyframes pulse{to{opacity:.2}}
+  :global(.architecture-study.motion-off) .activity,:global(.architecture-study.motion-off) .slow-pulse{animation:none!important}
+  @media(prefers-reduced-motion:reduce){.activity,.slow-pulse{animation:none!important}}
+  @media(max-width:780px){.brief{grid-template-columns:1fr;gap:14px;padding-top:33px}.stage{height:550px}.stage svg{width:185%;max-width:none;left:-42%}.scene-copy{width:75%;left:4%;max-width:330px}.rationale{grid-template-columns:1fr;gap:12px}.directory{grid-template-columns:1fr;gap:10px}.directory nav{grid-template-columns:1fr 1fr}}
+  @media(max-width:500px){.topline p{display:none}.brief{padding-top:27px}.selectors button{font-size:11px;padding:9px}.selectors .motion-control{margin-left:0}.stage{height:520px}.stage svg{width:220%;left:-60%}.scene-copy{width:82%;max-width:300px}.scene-copy h2{font-size:33px}.directory nav{grid-template-columns:1fr}.foot{display:block}.foot a{display:block;margin-top:12px}}
+</style>
+<script>
+  const body=document.body;
+  const buttons=[...document.querySelectorAll("[data-option]")];
+  const compositions=[...document.querySelectorAll("[data-composition]")];
+  function activate(id){
+    if(!compositions.some(el=>el.getAttribute("data-composition")===id))return;
+    for(const el of compositions){const active=el.getAttribute("data-composition")===id;el.classList.toggle("is-active",active);el.hidden=!active}
+    for(const btn of buttons)btn.setAttribute("aria-pressed",String(btn.dataset.option===id));
+    history.replaceState(null,"","#"+id)
+  }
+  buttons.forEach(btn=>btn.addEventListener("click",()=>activate(btn.dataset.option)));
+  const selected=location.hash.slice(1);
+  if(compositions.some(el=>el.getAttribute("data-composition")===selected))activate(selected);
+  const motion=document.querySelector("[data-toggle-motion]");
+  if(motion instanceof HTMLButtonElement){
+    const reduced=matchMedia("(prefers-reduced-motion: reduce)");
+    let paused=false;
+    const sync=()=>{
+      body.classList.toggle("motion-off",paused||reduced.matches);
+      motion.disabled=reduced.matches;
+      motion.setAttribute("aria-pressed",String(!paused&&!reduced.matches));
+      motion.textContent=reduced.matches?"Motion limited by system settings":paused?"Resume ambient motion":"Pause ambient motion";
+    };
+    motion.addEventListener("click",()=>{paused=!paused;sync()});
+    reduced.addEventListener("change",sync);
+    sync();
+  }
+</script>
