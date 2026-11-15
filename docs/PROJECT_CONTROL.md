@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 37
+- **Record revision:** 38
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -280,3 +280,11 @@
 - **Editorial/evidence scope:** Healthcare cites the 2026 randomized MASAI breast screening findings; Discovery cites EMBL-EBI AlphaFold DB predictions; Environment cites ECMWF operational AI weather forecasting; Accessibility cites Be My AI as a company-described available tool, not independently proven effect. Avoid unmeasured claims and distinguish trial, research resource, operational model, and available service. All stage visuals are marked conceptual.
 - **Functional intent:** Focus-visible keyboard and pointer selectable subject cards, a distinct original illustration per story, aria-pressed/aria-controls, static source cards to preserve all stories without JavaScript, manual motion pause and reduced-motion support, purpose-designed responsive states. No search bar, copied assets, statistics invented for the illustrations or external runtime calls.
 - **Release boundary:** Feature-branch source push and Git-connected protected Vercel review preview are approved; CI/build/source-and-preview identity verification required. No PR merge, public production promotion, DNS change, or completed flagship acceptance; owner visual and mobile/accessibility review remain separate.
+
+## AIIP-BENEFITS-01A | Verified Benefits build and protected preview (2026-11-14)
+
+- **Verified source:** implementation commit 5e367dcd9375b0ca1af127938e856531ca57f16d on feature/aiip-foundation-museum-slice (seven scoped files: one new Benefits page, CSS, JS, design note, dynamic route exclusion, content test, PCR).
+- **CI:** GitHub Actions workflow 43662011919 completed SUCCESS for exact source 5e367dcd9375b0ca1af127938e856531ca57f16d (content contracts and Astro production build). This does not prove real-device or operator visual acceptance.
+- **Preview:** Git-linked Vercel deployment dpl_2gz8Wsa6ky2bWQnByj6gQgCuweuN reached READY with source metadata matching the implementation SHA, target null (protected non-production preview), URL https://ai-in-perspective-prototype-preview-j3ozzt3fw-spillow82-4062.vercel.app/explore/benefits .
+- **Read-only hosted smoke:** authenticated Vercel GET returned HTTP 200 on /explore/benefits, /explore/environment, /intro, and /discover/. The rendered Benefits markup contained four labeled topic-selection buttons, four distinct panels, four linked evidence cards, motion control, primary-source links and generated Benefits stylesheet /_astro/benefits.B7HLYYMH.css. These are hosted HTML/source checks, not screenshots or proof that client-side selection/pause works under real mouse, keyboard and reduced-motion interaction.
+- **Unverified release gates:** owner's visual acceptance, actual mobile/desktop rendered and interaction review, browser accessibility/keyboard/reduced-motion and performance review, editorial fact-check/copy polish, and separately authorized PR merge/public release. Benefits retains planned metadata pending final acceptance. This docs-only PCR update must not be interpreted as a new implementation or approval.
