@@ -620,7 +620,7 @@ test("AIIP-EDUNEWS-01 coming soon page is real, temporary, and safely embeds the
   assert.match(css, /aspect-ratio:16\/9/);
   assert.match(css, /@media\(max-width:530px\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);
-  assert.match(arcade, /User-supplied Pixel Fighter Combo \/ InstaLanding Motion source/);
+  assert.match(arcade, /Pixel Fighter Combo from https:\/\/instalanding\.ai\/m\/pixel-fighter-combo\.txt/);
   assert.match(arcade, /<meta name="robots" content="noindex,nofollow">/);
   assert.match(arcade, /<canvas id="fighter"/);
   assert.match(arcade, /<article id="gamepad"/);
