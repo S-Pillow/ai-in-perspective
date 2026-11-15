@@ -697,3 +697,52 @@ test("AIIP-RELEASE-01 preserves MIT license and creator credit for the arcade an
   assert.match(page, /RSS IS A PLAN \/ NO LIVE FEED YET/);
   assert.ok(!page.includes("\u2014"),"Site copy must not use em dashes");
 });
+
+
+test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Graph metadata", () => {
+  const image = readFileSync(join(root,"public/social/ai-in-perspective-og.jpg"));
+  assert.ok(image.length > 30000 && image.length < 500000, "social JPEG is optimized and nonempty");
+  assert.equal(image[0],0xff);
+  assert.equal(image[1],0xd8);
+  assert.equal(image.at(-2),0xff);
+  assert.equal(image.at(-1),0xd9);
+  let width=0, height=0, i=2;
+  while(i < image.length-8) {
+    if(image[i] !== 0xff) {i++;continue;}
+    while(image[i] === 0xff) i++;
+    const marker=image[i++];
+    if(marker===0xd9||marker===0xda) break;
+    if(marker===0x01 || (marker>=0xd0 && marker<=0xd7))continue;
+    const length=image.readUInt16BE(i);
+    if(length < 2 || i + length > image.length) break;
+    if([0xc0,0xc1,0xc2,0xc3,0xc5,0xc6,0xc7,0xc9,0xca,0xcb,0xcd,0xce,0xcf].includes(marker)){
+      height=image.readUInt16BE(i+3);width=image.readUInt16BE(i+5);break;
+    }
+    i+=length;
+  }
+  assert.deepEqual([width,height],[1200,630]);
+
+  const layout=read("src/layouts/BaseLayout.astro");
+  const discover=read("public/discover/index.html");
+  const home=read("src/pages/index.astro");
+  const imageUrl="https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg";
+  assert.ok(layout.includes('const socialImageUrl = "'+imageUrl+'"'));
+  assert.match(layout,/property="og:image" content=\{socialImageUrl\}/);
+  assert.match(layout,/property="og:image:secure_url" content=\{socialImageUrl\}/);
+  assert.match(layout,/property="og:image:type" content="image\/jpeg"/);
+  assert.match(layout,/property="og:image:width" content="1200"/);
+  assert.match(layout,/property="og:image:height" content="630"/);
+  assert.match(layout,/property="og:image:alt"/);
+  assert.match(layout,/property="og:url" content=\{canonicalUrl\}/);
+  assert.match(layout,/rel="canonical" href=\{canonicalUrl\}/);
+  assert.match(layout,/name="twitter:card" content="summary_large_image"/);
+  assert.match(layout,/name="twitter:image" content=\{socialImageUrl\}/);
+  assert.match(layout,/name="twitter:image:alt"/);
+  assert.ok(discover.includes('property="og:image" content="'+imageUrl+'"'));
+  assert.ok(discover.includes('name="twitter:image" content="'+imageUrl+'"'));
+  assert.match(discover,/property="og:url" content="https:\/\/ai-in-perspective\.vercel\.app\/discover\/"/);
+  assert.match(discover,/name="twitter:card" content="summary_large_image"/);
+  assert.match(home,/A guided look at AI through history, benefits, risks, and the environment\./);
+  assert.match(layout,/name="robots" content="noindex, nofollow"/);
+  assert.match(discover,/name="robots" content="noindex, nofollow"/);
+});

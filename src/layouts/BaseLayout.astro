@@ -8,6 +8,8 @@ interface Props {
 }
 const { title, description, bodyClass = "" } = Astro.props;
 const pageTitle = title === "AI in Perspective" ? title : title + " | AI in Perspective";
+const canonicalUrl = new URL(Astro.url.pathname, "https://ai-in-perspective.vercel.app").href;
+const socialImageUrl = "https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg";
 ---
 <!doctype html>
 <html lang="en">
@@ -16,6 +18,23 @@ const pageTitle = title === "AI in Perspective" ? title : title + " | AI in Pers
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#070a12" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AI in Perspective" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:secure_url" content={socialImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AI in Perspective, a glowing cyan and gold technology corridor with an orbital emblem." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content="AI in Perspective social sharing artwork" />
     <meta name="robots" content="noindex, nofollow" />
     <title>{pageTitle}</title>
   </head>

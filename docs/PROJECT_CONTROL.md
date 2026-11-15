@@ -1,7 +1,7 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 52
-- **Last reconciled:** 2026-11-14
+- **Record revision:** 53
+- **Last reconciled:** 2026-11-15
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
 - **Historical baseline:** v2.0 PRD (superseded for current scope).
@@ -418,3 +418,12 @@
 - Anonymous off-platform verification remains open because the tool runtime could not resolve the new domain through external DNS and browser crawler. Vercel production target READY and alias route HTTP 200 via Vercel site fetch confirm source delivery; owner should confirm in a logged-out browser.
 - No branded custom domain is configured. All pages currently retain pre-launch noindex/nofollow, so the first public release is not search-indexable until later approved domain/SEO work. Full real-browser, narrow/mobile layout, keyboard, reduced-motion and independent source review are future verification tasks.
 - Initial source and deployment rollback references: main d9457b965d75993533e07f6920ff9a9a884a3d19 and Vercel dpl_7eDXU6j4WQxP94Um4WbcU3qxmVrN. Docs-only closure push may trigger a new production deploy and needs exact-SHA check.
+
+
+## AIIP-SHARE-01 | Approved social sharing image and metadata (2026-11-15)
+
+- **Owner design acceptance:** User requested a social sharing image for the now-live AI in Perspective website, reviewed the generated visual, and explicitly said "That works." Implement the approved gold-and-cyan luminous corridor/orbit artwork without changing other accepted page visuals.
+- **Artwork and fidelity:** Resize the accepted source 1731x909 RGB to **1200x630** with Lanczos and optimize as progressive JPEG, 92,717 bytes, SHA-256 \`9ed016f0f3783cd137488d08d73773aa191b77b2a34026a59529b3c9410e38cf\`. Git binary blob SHA \`2922808fc428923dd14010b4b5259e489aefe32e\`, path \`public/social/ai-in-perspective-og.jpg\`. Image remains the exact owner-approved composition apart from resize and compression.
+- **Metadata:** Shared BaseLayout on root, intro and Astro interior routes exposes page-specific Open Graph title, description, canonical URL, stable HTTPS og:image, image type/dimensions/alt, site name, Twitter summary_large_image and matching Twitter image/text. Standalone public/discover/index.html receives the same metadata with its own /discover/ canonical URL. All refer to stable production \`https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg\`, not an ephemeral preview hostname. Root meta description is humanized to match the approved social card. No logo, new UI, tracker, dependency or remote runtime image needed.
+- **Existing policies preserved:** Site remains publicly accessible but retains pre-existing noindex,nofollow until a separate approved SEO/domain change. No changes to custom domains, SEO robots policies, RSS, other projects, editorial content, or interactive flows.
+- **Verification and rollout:** New automated JPEG-magic/SOF/dimension and Open Graph/Twitter source tests plus existing content contracts and Astro build; protected Git-linked preview and GET checks first, then authorized production change and read-only live checks of JPG MIME, dimensions, OG/Twitter tags at root, /intro, /discover/ and interior routes. Preserve Git source/production deployment rollback anchor and record exact SHAs on closure.
