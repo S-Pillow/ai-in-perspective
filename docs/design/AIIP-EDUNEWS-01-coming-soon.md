@@ -17,7 +17,7 @@ After accepting History, Benefits, Environment and Risks & Safety, the owner res
 
 ## Source provenance and third-party rights gate
 
-The attached demo includes "InstaLanding Motion" branding in the original source and comments, but **no explicit copyright/license grant**. It was supplied by the owner for this task. This permits a private protected design prototype, not an assumption of public redistribution rights. Before public merge or production release of this demo, verify provenance and appropriate redistribution permission/license or replace it with a fully original equivalent. Keep this approval gate open regardless of passing tests.
+The owner confirmed that the source website states this animation is free to reuse. Release research independently located Pixel Fighter Combo in InstaLanding.ai's official motion list and the site's public statement that the library is free and MIT-licensed. Its GitHub LICENSE explicitly grants modification, publication and commercial use while requiring the copyright and license notice in copies or substantial portions. We preserved Copyright (c) 2026 Ray Velez and the complete MIT terms in public/licenses/instalanding-MIT-LICENSE.txt, credited the source in the animation HTML and linked the license on the page. Source: https://instalanding.ai/m/pixel-fighter-combo.txt ; license: https://github.com/RayVelez27/instalanding.ai/blob/main/LICENSE . No claim is made that an unrelated third-party asset is covered by this license. The previously recorded licensing gate is resolved for this adapted animation.
 
 The demo references Google Fonts for display, but the stylesheet now loads without blocking the animation and the frame starts without waiting for font loading. If fonts are unavailable, the interface falls back to system fonts. The script has no application network fetch. No new npm dependencies, credentials, RSS services, image generation or external API integrations were introduced. Preview with iframe sandboxing and evaluate performance and accessible fallback in browser review.
 
@@ -26,7 +26,7 @@ The demo references Google Fonts for display, but the stylesheet now loads witho
 New: src/pages/explore/education-news.astro, src/styles/education-news.css, public/arcade/education-news-fighter.html and this design record.
 Updated: public/discover/index.html Education & News URL only; tests/content.test.mjs for five real entrance destinations, temporary copy, iframe isolation and replay behavior; docs/PROJECT_CONTROL.md.
 
-Unchanged: other four topic pages, intro, global styles, generic exhibit placeholder metadata, external APIs, and Draft PR #1 merge state. No public deployment.
+Unchanged: other four topic pages, intro, global styles, generic exhibit placeholder metadata, external APIs, and Draft PR #1 merge state. The previous preview-only restriction was superseded by the owner's explicit 2026-11-14 request to merge main and launch after release checks; use an independent public production Vercel project so the protected preview remains separate.
 
 Validation requires exact-SHA GitHub content contracts and Astro build, Git-linked protected Vercel preview READY, and read-only GET for /explore/education-news, /arcade/education-news-fighter.html and existing four routes. Static GET only verifies HTML/assets, not Canvas animation rendering, mobile usability or actual screen-reader behavior. Owner desktop/mobile/keyboard/reduced-motion review remains open.
 

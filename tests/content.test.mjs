@@ -659,3 +659,41 @@ test("AIIP-EDUNEWS-01 replay button restarts the sandboxed animation", async () 
     {name:"src",value:"/arcade/education-news-fighter.html?replay=2"}
   ]);
 });
+
+
+
+test("AIIP-RELEASE-01 museum wording is absent from shared live navigation and links reach real pages", () => {
+  const header=read("src/components/SiteHeader.astro");
+  const methodology=read("src/pages/methodology.astro");
+  const fallback=read("src/pages/explore/[slug].astro");
+  assert.match(header, /href="\/discover\/" aria-label="AI in Perspective, explore the perspectives"/);
+  assert.match(header, /href="\/discover\/">Explore<\/a>/);
+  assert.match(header, /href="\/explore\/history">The story<\/a>/);
+  assert.match(header, /href="\/methodology">Our approach<\/a>/);
+  assert.match(header, /href="\/intro" class="header-quiet">Replay opening/);
+  assert.doesNotMatch(header, /museum|Exhibits|href="\/#exhibits"/i);
+  assert.match(methodology, /href="\/discover\/" class="back-link">← All perspectives/);
+  assert.match(methodology, /BEHIND THE RESEARCH/);
+  assert.doesNotMatch(methodology, /museum|BEHIND THE EXHIBITS/i);
+  assert.match(fallback, /href="\/discover\/" class="back-link">← All perspectives/);
+  assert.match(fallback, /PAGE STATUS/);
+  assert.doesNotMatch(fallback, /Back to the museum|EXHIBIT STATUS/);
+  for(const text of [header,methodology,fallback])assert.ok(!text.includes("\u2014"));
+});
+
+test("AIIP-RELEASE-01 preserves MIT license and creator credit for the arcade animation", () => {
+  const license=read("public/licenses/instalanding-MIT-LICENSE.txt");
+  const animation=read("public/arcade/education-news-fighter.html");
+  const page=read("src/pages/explore/education-news.astro");
+  assert.match(license, /^MIT License/);
+  assert.match(license, /Copyright \(c\) 2026 Ray Velez/);
+  assert.match(license, /Permission is hereby granted, free of charge/);
+  assert.match(license, /copies or substantial portions of the Software/);
+  assert.match(animation, /instalanding\.ai\/m\/pixel-fighter-combo\.txt/);
+  assert.match(animation, /licenses\/instalanding-MIT-LICENSE\.txt/);
+  assert.match(page, /href="\/licenses\/instalanding-MIT-LICENSE\.txt"/);
+  assert.match(page, /Animation license and credit/);
+  assert.match(page, /sandbox="allow-scripts"/);
+  assert.match(page, /RSS IS A PLAN \/ NO LIVE FEED YET/);
+  assert.ok(!page.includes("\u2014"),"Site copy must not use em dashes");
+});

@@ -12,13 +12,13 @@ const { exhibit } = Astro.props;
   <main id="content" class="planned-page">
     <div class:list={["planned-orbit", `planned-orbit--${exhibit.visual}`]} aria-hidden="true"><div class="planned-core"></div></div>
     <div class="planned-content">
-      <a href="/#exhibits" class="back-link">← Back to the museum</a>
-      <p class="eyebrow">EXHIBIT {exhibit.number} / {exhibit.kicker}</p>
+      <a href="/discover/" class="back-link">← All perspectives</a>
+      <p class="eyebrow">TOPIC {exhibit.number} / {exhibit.kicker}</p>
       <h1>{exhibit.title}</h1>
       <p class="planned-question">{exhibit.question}</p>
       <p>{exhibit.short}</p>
-      <div class="planned-disclosure"><span>EXHIBIT STATUS</span><strong>In development</strong><p>This is an early navigation destination, not a completed educational exhibit. Its animated teaching experience, research, sources and supporting visuals are scheduled for separate design and editorial review.</p></div>
-      <a href={exhibitPath("environment")} class="primary-link">Explore the first working prototype <span aria-hidden="true">↗</span></a>
+      <div class="planned-disclosure"><span>PAGE STATUS</span><strong>In development</strong><p>This is an early navigation destination, not a completed learning page. Its animated teaching experience, research, sources and supporting visuals are scheduled for separate design and editorial review.</p></div>
+      <a href={exhibitPath("environment")} class="primary-link">Explore AI & the Environment <span aria-hidden="true">↗</span></a>
     </div>
   </main>
 </BaseLayout>
