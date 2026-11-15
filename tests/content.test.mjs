@@ -383,3 +383,95 @@ test("BENEFITS-02 closes the impact explorer with four plain-language ELI5 cards
   assert.match(style, /@media\(max-width:660px\)\{\.bf-eli5[\s\S]*?\.bf-eli5__cards\{grid-template-columns:1fr;/);
   assert.match(style, /@media\(prefers-reduced-motion:reduce\)\{\.bf-eli5__word\{transform:none;/);
 });
+
+
+
+test("AIIP-RISKS-01 structures 17 source-based risks, employee impact, and accessible controls", () => {
+  const page = read("src/pages/explore/risks.astro");
+  const data = read("src/data/risks.ts");
+  const css = read("src/styles/risks.css");
+  const script = read("src/scripts/risks.js");
+  const route = read("src/pages/explore/[slug].astro");
+  const notes = read("docs/design/AIIP-RISKS-01-signal-observatory.md");
+  assert.match(route, /e\.slug !== "environment" && e\.slug !== "benefits" && e\.slug !== "risks"/);
+  assert.equal((data.match(/id:"[^"]+",group:"/g) || []).length, 17);
+  for (const g of ["work","misuse","trust","people","power","frontier"]) {
+    assert.ok(data.includes('id: "' + g + '"'), "missing category " + g);
+  }
+  for (const risk of ["job-security","cyber","scams","bio","loss-control","sexual-abuse","agents","wellbeing"]) {
+    assert.ok(data.includes('id:"' + risk + '"'), "missing risk " + risk);
+  }
+  for (const l of ["critical","high","moderate","low"]) assert.ok(data.includes('id: "' + l + '"'));
+  for (const field of ["evidence:","trend:","response:","source:"]) assert.ok(data.includes(field));
+  const anchors = ['id="rs-title"', 'id="rs-global-title"', 'id="rs-jobs-title"',
+     'id="risk-radar"', 'id="risk-safeguards"', 'class="rs-eli5"', 'class="rs-foot"'];
+  const positions = anchors.map(anchor => page.indexOf(anchor));
+  assert.ok(positions.every(position => position >= 0 && position < page.length));
+  assert.ok(positions.every((position,i) => i === 0 || position > positions[i-1]), "correct section order");
+  assert.match(page, /data-rs-filter="all"/);
+  assert.match(page, /data-rs-risk=\{risk\.id\}/);
+  assert.match(page, /data-rs-panel=\{risk\.id\}/);
+  assert.match(page, /aria-controls=\{"rs-panel-"\+risk\.id\}/);
+  assert.match(page, /role="status" data-rs-count/);
+  assert.match(page, /hidden=\{i>0\}/);
+  assert.match(script, /panel\.hidden = panel\.dataset\.rsPanel !== id/);
+  assert.match(script, /card\.setAttribute\("aria-pressed"/);
+  assert.match(script, /filter\.setAttribute\("aria-pressed"/);
+  assert.match(script, /prefers-reduced-motion: reduce/);
+  assert.match(css, /\.rs-grid\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(css, /@media\(max-width:1100px\)/);
+  assert.match(css, /@media\(max-width:590px\)/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
+  assert.match(page, /A prediction, not an observed job-loss rate/);
+  assert.match(page, /not proof AI caused a 19% job loss/);
+  assert.match(page, /no clear evidence of large-scale AI-driven labor-market disruption/i);
+  assert.match(page, /AI IN PERSPECTIVE · EDUCATIONAL RISK OVERVIEW/);
+  assert.doesNotMatch(page, /Back to the museum|EXHIBIT STATUS/);
+  for (const link of ["digitaleconomy.stanford.edu/", "budgetlab.yale.edu/", "axios.com/2025/05/28/",
+    "reuters.com/world/asia-pacific/", "ilo.org/publications/", "nist.gov/", "internationalaisafetyreport.org/"]) {
+    assert.ok(page.includes(link) || data.includes(link), "missing attribution " + link);
+  }
+  assert.match(page, /class="rs-eli5__scribble"[^>]*aria-hidden="true" focusable="false"/);
+  assert.equal((page.match(/class="rs-eli5__grid"/g) || []).length, 1);
+  assert.equal((page.match(/<article><span>0[1-4] \//g) || []).length, 4);
+  assert.match(notes, /not measured probability/);
+});
+
+test("AIIP-RISKS-01 filters and risk-selection controllers preserve single active risk", async () => {
+  const { runInNewContext } = await import("node:vm");
+  const script = read("src/scripts/risks.js");
+  const element = (dataset, label = "") => ({
+    dataset, textContent: label, hidden: false, attributes: {}, actions: {}, focused: false, scrolled: false,
+    setAttribute(k,v) { this.attributes[k] = v; },
+    addEventListener(k,fn) { this.actions[k] = fn; },
+    focus() { this.focused = true; },
+    scrollIntoView(opts) { this.scrolled = opts.behavior; },
+    click() { this.actions.click(); }
+  });
+  const filters = [element({rsFilter:"all"},"All risks 3"),element({rsFilter:"work"},"Work & economy 1"),
+    element({rsFilter:"misuse"},"Security & misuse 1"), element({rsFilter:"frontier"},"Advanced systems 1")];
+  const cards = [element({rsRisk:"job-security",rsGroup:"work"}),element({rsRisk:"cyber",rsGroup:"misuse"}),
+    element({rsRisk:"loss-control",rsGroup:"frontier"})];
+  const panels = [element({rsPanel:"job-security"}),element({rsPanel:"cyber"}),element({rsPanel:"loss-control"})];
+  const counter = {textContent:""};
+  const root = {
+    querySelectorAll(sel) { return sel==="[data-rs-filter]"?filters:sel==="[data-rs-risk]"?cards:panels; },
+    querySelector(sel) { return sel==="[data-rs-count]"?counter:null; }
+  };
+  runInNewContext(script, {document:{querySelector:()=>root},window:{matchMedia:()=>({matches:true})}});
+  assert.equal(cards[0].attributes["aria-pressed"],"true");
+  assert.equal(panels.filter(x=>!x.hidden).length,1);
+  assert.equal(counter.textContent,"Showing all 3 risks");
+  filters[2].click();
+  assert.equal(cards[0].hidden,true);
+  assert.equal(cards[1].hidden,false);
+  assert.equal(cards[1].attributes["aria-pressed"],"true");
+  assert.equal(panels[1].hidden,false);
+  assert.equal(panels[0].hidden,true);
+  cards[1].click();
+  assert.equal(panels[1].focused,true);
+  assert.equal(panels[1].scrolled,"auto");
+  filters[0].click();
+  assert.equal(cards.filter(x=>!x.hidden).length,3);
+  assert.equal(panels.filter(x=>!x.hidden).length,1);
+});
