@@ -500,6 +500,9 @@ test("AIIP-HISTORY-01 connects History and presents a sourced timeline and every
   for (const token of ["data-hi-era={era.id}","data-hi-era-panel={era.id}","data-hi-everyday={item.id}","data-hi-everyday-panel={item.id}","hidden={i>0}"]) assert.ok(page.includes(token),token);
   assert.ok(page.includes('<details class="hi-milestone"'));
   assert.ok(page.includes('class="hi-eli5__scribble"'));
+  assert.ok(page.includes('era.visual==="neuron"?"AI"'), "first History chapter must retain its owner-selected AI centerpiece");
+  assert.ok(page.includes('<div class="hi-clock__center"><span>AI</span></div>'), "main History clock must retain its AI centerpiece");
+  assert.ok(!page.includes("A conceptual illustration, not historical footage"), "decorative illustration captions stay removed");
   assert.ok(page.includes('not every algorithm, animation, or camera filter is AI'));
   assert.ok(style.includes("prefers-reduced-motion:reduce"));
   assert.ok(style.includes("grid-template-columns:repeat(7"));

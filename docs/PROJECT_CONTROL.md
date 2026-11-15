@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 46
+- **Record revision:** 47
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -359,3 +359,12 @@
 - **Protected deployment:** Vercel Git-linked dpl_CURwzmeofKmbhzcBAfs2WRhb6qQQ READY at the exact verified SHA, with target=null, not public production. Reviewed protected URL https://ai-in-perspective-prototype-preview-3x0plgc8q-spillow82-4062.vercel.app/explore/history .
 - **Read-only hosted checks:** /explore/history, /explore/benefits, /explore/risks and /explore/environment returned HTTP 200. Hosted markup for each contained zero em dash characters; History retained seven selectable era controls, Benefits four subject controls, Risks 17 risk controls; History and Benefits repetitive illustration captions absent. Environment retained the concise "One possible setup" boundary note. These are authenticated HTML/source observations, not claims of browser screenshot equivalence or device/keyboard acceptance.
 - **Status:** Owner asked for copy and presentation cleanup and already accepted History's original visual direction. Copy changes verified and ready for owner review. Visual/mobile/keyboard regression and final source fact-check remain separate acceptance tasks. No frontend redesign, scripts/new dependencies, public release, PR merge, or Education & News work performed. This record update is docs-only and should not change code verified above.
+
+
+## AIIP-HISTORY-01B | First chapter illustration centerpiece restored to AI (2026-11-14)
+
+- **Owner feedback:** In screenshot of the first History era's circular orbital illustration, owner preferred “AI” at the center rather than the star-like glyph, and reiterated that explanatory visual disclaimers are unnecessary for original decorative graphics.
+- **Verified root cause:** The first chapter rendered \`✳\` from the existing \`era.visual==="neuron"\` branch in \`src/pages/explore/history.astro\`. This was present before AIIP-COPY-01; that copy-only pass did not alter the glyph. The separate main time-machine graphic already displays \`AI\`.
+- **Approved correction:** For the first chapter only, change the center glyph from \`✳\` to \`AI\`. Preserve all chapter names, illustrations, circular orbits, center styles, interactions, text, source links, accessibility attributes, no-em-dash copy, and the absence of repetitive image disclaimers. Other eras' symbols remain unchanged.
+- **Files:** \`src/pages/explore/history.astro\`, \`tests/content.test.mjs\`, \`docs/PROJECT_CONTROL.md\`. The test locks both the first-chapter glyph and the main clock's AI center, and verifies the redundant decorative-art disclaimer stays absent.
+- **Verification:** Require exact-SHA content contracts plus Astro build, protected Git-linked preview READY and read-only HTML smoke. Actual browser visual acceptance remains the owner's decision. Draft PR #1 stays unmerged, no public deployment and no work on Education & News.
