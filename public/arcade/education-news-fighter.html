@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Teko:wght@300;400&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Teko:wght@300;400&display=block" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
   * { box-sizing: border-box; }
   html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #050508; }
@@ -1339,7 +1339,7 @@
   });
 
   applyTime(t, 0);
-  document.fonts.ready.then(() => { last = performance.now(); requestAnimationFrame(frame); window.__ready = true; });
+  last = performance.now(); requestAnimationFrame(frame); window.__ready = true;
 
   if (!framed) return;
   let lastText = '';

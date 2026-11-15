@@ -19,7 +19,7 @@ After accepting History, Benefits, Environment and Risks & Safety, the owner res
 
 The attached demo includes "InstaLanding Motion" branding in the original source and comments, but **no explicit copyright/license grant**. It was supplied by the owner for this task. This permits a private protected design prototype, not an assumption of public redistribution rights. Before public merge or production release of this demo, verify provenance and appropriate redistribution permission/license or replace it with a fully original equivalent. Keep this approval gate open regardless of passing tests.
 
-The original demo references Google Fonts for display, consistent with the existing site, but its script has no application network fetch. No new npm dependencies, credentials, RSS services, image generation or external API integrations were introduced. Preview with iframe sandboxing and evaluate performance and accessible fallback in browser review.
+The demo references Google Fonts for display, but the stylesheet now loads without blocking the animation and the frame starts without waiting for font loading. If fonts are unavailable, the interface falls back to system fonts. The script has no application network fetch. No new npm dependencies, credentials, RSS services, image generation or external API integrations were introduced. Preview with iframe sandboxing and evaluate performance and accessible fallback in browser review.
 
 ## Authority, files and verification
 

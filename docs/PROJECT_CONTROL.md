@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 48
+- **Record revision:** 49
 - **Last reconciled:** 2026-11-14
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -378,3 +378,10 @@
 - **Attribution and legal boundary:** Pasted demo appears to be from InstaLanding Motion but contains no clear license/redistribution grant. Owner-provided code is suitable for private protected visual prototyping, not proof of rights for public release. Future publication of this specific source is BLOCKED pending license/provenance review or replacement with an original equivalent. Retain source attribution in the code and docs. No production deployment authorized.
 - **Verification requirement:** Exact-SHA GitHub content tests, Astro build, Git-linked protected Vercel preview READY, authenticated GET of page and embedded HTML and regressions across existing pages; owner rendering, keyboard and mobile review still open. Draft PR #1 stays unmerged. Project record should distinguish preview readiness from future Education/RSS implementation.
 - **Future:** Education resource curation and news RSS source/rights/freshness/sanitization/feed design require a separate approved implementation and editorial contract. Do not silently implement an RSS ingestion pipeline.
+
+## AIIP-EDUNEWS-01A | Nonblocking arcade font load correction (2026-11-14)
+
+- **Evidence:** Initial implementation 22c21bea58af202218d757b4e25425ef9b618a23 passed GitHub Actions 43676394785, with successful content contracts and Astro static build. Git-linked protected Vercel deployment dpl_7FKcbdEC1iHxCNyau9qDDBosK7m2 READY at the exact SHA. Authenticated GET returned 200 for /explore/education-news, the embedded 65 KB /arcade/education-news-fighter.html, /discover/ and the four previously completed perspectives. Embedding markup and source were present.
+- **Additional local runtime check:** Headless Chromium with an inline sandboxed source copy found that the original synchronous external Google Fonts stylesheet could delay script parsing in a restricted or offline environment. The sandbox itself was structurally valid, but no browser-level hosted visual acceptance was established. This check is limited and must not be generalized to the protected Vercel preview.
+- **Correction authorized within the existing preview scope:** Load the demo font stylesheet with media=print and onload swap to prevent stylesheet blocking; start the animation directly rather than waiting for document.fonts.ready. System-font fallback remains, and the animation, gamepad visuals, original choreography, parent iframe isolation, page copy, data, and planned RSS boundary are untouched.
+- **Verification needed:** Exact-source CI and protected deployment at this correction SHA, authenticated HTML checks, then owner visual confirmation. Original third-party demo licensing/provenance remains unresolved and blocks public release.

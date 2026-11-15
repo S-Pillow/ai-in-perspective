@@ -627,6 +627,9 @@ test("AIIP-EDUNEWS-01 coming soon page is real, temporary, and safely embeds the
   assert.match(arcade, /function drawFighter/);
   assert.match(arcade, /window\.__renderAt/);
   assert.match(arcade, /prefers-reduced-motion: reduce/);
+  assert.match(arcade, /media="print" onload="this.media=/);
+  assert.doesNotMatch(arcade, /document\.fonts\.ready\.then/);
+  assert.match(arcade, /last = performance\.now\(\); requestAnimationFrame\(frame\); window\.__ready = true;/);
   assert.match(arcade, /<h1>AI IN PERSPECTIVE<\/h1>/);
   assert.doesNotMatch(arcade, /\bfetch\(|\bXMLHttpRequest\b|\beval\(/);
   assert.match(nav, /name:'Education & News'.*url:'\/explore\/education-news'/);
