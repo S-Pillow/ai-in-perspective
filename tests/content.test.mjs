@@ -823,3 +823,62 @@ test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Grap
   assert.match(layout,/name="robots" content="noindex, nofollow"/);
   assert.match(discover,/name="robots" content="noindex, nofollow"/);
 });
+
+
+test("AIIP-EDU-02B audits all 24 learning concepts while protecting caveats and source links", () => {
+  const data=read("src/data/education.ts");
+  const concepts=data.split("\n").filter(line=>line.trimStart().startsWith("{term:"));
+  assert.equal(concepts.length,24,"all 24 concept introductions must remain present");
+  for (const [index,line] of concepts.entries()) {
+    for (const field of ["term:","plain:","example:","note:","source:","sourceLabel:"]) {
+      assert.ok(line.includes(field),"concept "+(index+1)+" missing "+field);
+    }
+  }
+  assert.match(data,/A chatbot is software you can talk to by typing or speaking/);
+  assert.doesNotMatch(data,/A help chatbot might walk you through a return, while a language model/);
+  assert.match(data,/Artificial general intelligence \(AGI\) is a disputed idea/);
+  assert.match(data,/Retrieval-augmented generation \(RAG\)/);
+  assert.match(data,/MCP is an open standard/);
+  assert.equal((data.match(/previewNote:/g)||[]).length,10);
+  assert.equal((data.match(/firstStep:/g)||[]).length,10);
+});
+
+test("AIIP-EDU-02B exposes ten first-party resource previews without copying provider pages", () => {
+  const data=read("src/data/education.ts");
+  const page=read("src/pages/explore/education-news.astro");
+  const preview=read("src/pages/learn/[id].astro");
+  const css=read("src/styles/resource-preview.css");
+  const ids=[...data.matchAll(/^\s*\{id:"([^"]+)"/gm)].map(match=>match[1]);
+  assert.equal(ids.length,10);
+  assert.equal(new Set(ids).size,10);
+  assert.match(page,/href=\{"\/learn\/"\+resource\.id\}/);
+  assert.match(page,/View preview/);
+  assert.match(page,/Visit resource/);
+  assert.match(preview,/getStaticPaths\(\)/);
+  assert.match(preview,/educationResources\.map/);
+  assert.match(preview,/params: \{ id: resource\.id \}/);
+  assert.match(preview,/resource\.previewNote/);
+  assert.match(preview,/resource\.firstStep/);
+  assert.match(preview,/target="_blank" rel="noopener noreferrer"/);
+  assert.match(preview,/does not reproduce the provider's course page/);
+  assert.match(css,/max-width:520px/);
+  assert.match(css,/prefers-reduced-motion:reduce/);
+  assert.doesNotMatch(preview,/<iframe|fetch\(|<img|<script/);
+});
+
+test("AIIP-EDU-02B gives Education and News distinct non-starry hero compositions", () => {
+  const edu=read("src/pages/explore/education-news.astro");
+  const news=read("src/pages/explore/news.astro");
+  const eduStyle=read("src/styles/education-learning.css");
+  const newsStyle=read("src/styles/education-news.css");
+  assert.match(edu,/ed-studio__folio/);
+  assert.match(edu,/ed-studio__diagram/);
+  assert.doesNotMatch(edu,/ed-graphic__orbit|ed-graphic__core/);
+  assert.match(news,/en-bulletin__headline/);
+  assert.match(news,/en-bulletin__row/);
+  assert.doesNotMatch(news,/en-hero__signal-orbit|en-hero__signal-core/);
+  assert.match(eduStyle,/\.ed-ambient::before\{[^\n]*repeating-linear-gradient/);
+  assert.match(newsStyle,/\.en-sky::before\{[^\n]*repeating-linear-gradient/);
+  assert.match(news,/<iframe[^>]*sandbox="allow-scripts"/);
+  assert.match(news,/Replay animation/);
+});
