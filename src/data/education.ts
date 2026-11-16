@@ -5,7 +5,7 @@ export const educationLevels = [
     id: "first-steps", number: "01", label: "The basics", difficulty: "START HERE", icon: "✳", color: "mint",
     title: "Meet artificial intelligence.", subtitle: "Before the jargon, get comfortable with what AI actually means.",
     lead: "AI is a broad name for computer systems built to handle tasks such as recognizing patterns, understanding language, making predictions, or generating content. The interesting part is that these systems don't all work the same way.",
-    takeaway: "AI isn\'t just chatbots. It also helps apps filter spam, predict traffic, and recognize things in photos.",
+    takeaway: "AI isn't just chatbots. It also helps apps filter spam, predict traffic, and recognize things in photos.",
     practice: "Think of three apps you used today. Did they recommend something, recognize a face, or predict an outcome?",
     concepts: [
       {term:"What is AI?", kind:"FOUNDATION", plain:"AI describes systems that can perform tasks we usually connect with intelligence, such as recognizing a picture, understanding a question, or suggesting a next step. It is a broad field, not one app or one talking machine.", example:"A calculator carries out the math you enter. A photo app may use AI to find faces in an image.", note:"Being useful at a task does not mean the system thinks like a person.", source:"https://www.nist.gov/artificial-intelligence", sourceLabel:"NIST · Artificial intelligence"},
