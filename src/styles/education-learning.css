@@ -1,12 +1,12 @@
 /* AIIP-EDU-01. Original responsive learning atlas, isolated from existing perspectives. */
-.ed-world{--ed-ink:#f9f8ff;--ed-muted:#c2cddd;--ed-accent:#82ebe8;--ed-mint:#86f5d1;--ed-violet:#c2a6fb;--ed-peach:#ffcfb1;--ed-gold:#ffe2a0;--ed-cyan:#9de9ff;--ed-rose:#f8a8d4;color:var(--ed-ink);background:#090f1f;font-family:"DM Sans","Segoe UI",sans-serif;isolation:isolate;position:relative;overflow:clip;}
+.ed-world{--ed-ink:#f9f8ff;--ed-muted:#d0dddb;--ed-accent:#eec98e;--ed-mint:#86f5d1;--ed-violet:#c2a6fb;--ed-peach:#ffcfb1;--ed-gold:#ffe2a0;--ed-cyan:#9de9ff;--ed-rose:#f8a8d4;color:var(--ed-ink);background:#0c1921;font-family:"DM Sans","Segoe UI",sans-serif;isolation:isolate;position:relative;overflow:clip;}
 .ed-world *,.ed-world *::before,.ed-world *::after{box-sizing:border-box;}
 .ed-world :focus-visible{outline:3px solid #b7fbf6;outline-offset:4px;}
 .ed-world a{text-underline-offset:4px;}
 .ed-world [hidden]{display:none!important;}
-.ed-ambient{position:absolute;inset:0 0 auto;height:1220px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 53% 52% at 77% 18%,#51448474,transparent 75%),radial-gradient(ellipse 50% 55% at 5% 23%,#1b607056,transparent 76%),linear-gradient(#10192b,#090f1f);}
-.ed-ambient::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,#f2f2ff 1px,transparent 1.7px),radial-gradient(circle,#86efeb 1px,transparent 1.5px);background-size:183px 223px,227px 181px;background-position:22px 72px,116px 40px;opacity:.19;animation:ed-twinkle 24s ease-in-out infinite alternate;}
-.ed-ambient::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#c4d5ff09 1px,transparent 1px),linear-gradient(#c4d5ff09 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(#000,transparent 82%);}
+.ed-ambient{position:absolute;inset:0 0 auto;height:1230px;z-index:-1;pointer-events:none;background:linear-gradient(118deg,#173b3d 0%,#102b33 43%,#101c29 77%,#162c30 100%);}
+.ed-ambient::before{content:"";position:absolute;inset:0;opacity:.24;background:repeating-linear-gradient(0deg,transparent 0 55px,#8ed8c72b 56px,transparent 57px),repeating-linear-gradient(90deg,transparent 0 110px,#91d5c31c 111px,transparent 112px);mask-image:linear-gradient(#000,transparent 88%);}
+.ed-ambient::after{content:"";position:absolute;inset:0;opacity:.18;background:repeating-linear-gradient(125deg,transparent 0 225px,#e7d6ab34 226px,transparent 227px);mask-image:linear-gradient(#000,transparent 75%);}
 .ed-hero,.ed-lanes,.ed-map,.ed-how,.ed-resources,.ed-eli5,.ed-news-link{width:min(100%,1510px);margin:0 auto;padding-left:clamp(22px,6vw,92px);padding-right:clamp(22px,6vw,92px);}
 .ed-hero{padding-top:36px;padding-bottom:88px;min-height:635px;}
 .ed-hero__nav{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:70px;}
@@ -185,3 +185,48 @@
 @media(max-width:580px){.ed-hero,.ed-lanes,.ed-map,.ed-how,.ed-resources,.ed-eli5,.ed-news-link{padding-left:20px;padding-right:20px;}.ed-hero h1{font-size:clamp(40px,9.5vw,58px);}.ed-hero__graphic{width:min(72%,265px);}.ed-switch__item{padding:9px 11px;font-size:11px;}.ed-switch__item span{font-size:7px;}.ed-hero__actions{flex-direction:column;align-items:stretch;}.ed-action{justify-content:space-between;}.ed-level__label{font-size:11px;}.ed-chapter__intro{padding:25px;}.ed-chapter__art{width:230px;}.ed-chapter__concept-heading{padding:0 23px 20px;display:block;}.ed-chapter__concept-heading>p{margin-top:10px;}.ed-concepts{padding:0 19px;}.ed-try{margin:22px 19px 0;padding:19px;}.ed-chapter__next{padding:22px 19px 28px;flex-direction:column;align-items:stretch;}.ed-chapter__next button{text-align:center;}.ed-how__flow{display:flex;flex-direction:column;}.ed-how__arrow{align-self:center;transform:rotate(90deg);}.ed-resource-grid{grid-template-columns:1fr;}.ed-news-link__star{display:none;}.ed-eli5 h2{font-size:clamp(29px,8.4vw,44px);}.ed-footer{padding-left:20px;padding-right:20px;}}
 @media(max-width:355px){.ed-levels{grid-template-columns:repeat(2,minmax(0,1fr));}.ed-chapter__takeaway{display:block;}.ed-chapter__takeaway strong{white-space:normal;}.ed-switch{width:100%;justify-content:space-between;}.ed-switch__item{flex:1;justify-content:center;}}
 @media(prefers-reduced-motion:reduce){.ed-world *,.ed-world *::before,.ed-world *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+
+/* AIIP-EDU-02B: Learning-studio language, replacing the repetitive star/orbit hero.
+   The illustrated folio is decorative. Navigation and lesson controls remain semantic. */
+.ed-overline__star{color:#ffe0a6;text-shadow:none;}
+.ed-hero h1 em{color:#ffdeb1;text-shadow:none;}
+.ed-action--primary{background:#f5dbab;color:#18343a!important;box-shadow:7px 7px 0 #06232b;}
+.ed-action--primary:hover{background:#ffe9c7;}
+.ed-studio{width:min(100%,435px);aspect-ratio:auto;min-height:432px;filter:none;transform:rotate(-2deg);}
+.ed-studio::before{content:none;}
+.ed-studio__tab{position:absolute;z-index:3;top:-20px;left:8%;padding:8px 12px;background:#f1b869;color:#11353a;border:2px solid #123a3c;font:800 10px/1.4 ui-monospace,monospace;letter-spacing:.08em;transform:rotate(-4deg);}
+.ed-studio__folio{position:absolute;inset:16px 12px 11px 0;padding:28px 28px 22px;background:#f3e5cd;border:3px solid #14383b;box-shadow:16px 17px 0 #e4ab68,21px 23px 0 #09272e;color:#15393b;display:flex;flex-direction:column;}
+.ed-studio__folio::before{content:"";position:absolute;top:0;bottom:0;left:14px;width:1px;background:#cf8b7b86;pointer-events:none;}
+.ed-studio__top{display:flex;justify-content:space-between;gap:12px;font:800 9px ui-monospace,monospace;letter-spacing:.1em;color:#486667;border-bottom:1px solid #9ab9ae;padding-bottom:18px;}
+.ed-studio__heading{font:800 clamp(30px,3.4vw,44px)/1.04 "Syne",sans-serif;letter-spacing:-.07em;margin:29px 0 19px;color:#153c3d;}
+.ed-studio__heading strong{color:#b44b40;}
+.ed-studio__rule{height:4px;width:82%;background:linear-gradient(90deg,#c2604c 0 40%,#2c7770 40% 72%,#d4ad69 72%);}
+.ed-studio__diagram{display:flex;align-items:center;justify-content:space-between;gap:5px;margin:27px 0 16px;font:800 10px/1.5 ui-monospace,monospace;}
+.ed-studio__diagram span{display:grid;place-items:center;gap:7px;text-align:center;padding:12px 5px;min-width:0;flex:1;min-height:72px;border:1px solid #567c74;background:#e1e9d9;color:#255c52;}
+.ed-studio__diagram span:nth-of-type(2){background:#f7d8bc;border-color:#cb8b69;color:#8a4735;}
+.ed-studio__diagram b{font-size:15px;display:block;}
+.ed-studio__diagram i{font:800 12px "DM Sans",sans-serif;color:#b44b40;font-style:normal;}
+.ed-studio__foot{margin-top:auto;padding-top:13px;border-top:1px dashed #8ab0a5;display:flex;justify-content:space-between;gap:12px;align-items:center;font:800 9px/1.35 ui-monospace,monospace;letter-spacing:.035em;color:#426d63;}
+.ed-studio__foot strong{font-size:12px;color:#a44c40;}
+.ed-studio__stamp{position:absolute;right:-10px;bottom:8px;transform:rotate(8deg);z-index:4;padding:15px 17px;border:3px double #8e3736;background:#f1dfc8;color:#933938;text-align:center;font:800 11px/1.2 ui-monospace,monospace;box-shadow:3px 4px 0 #0b2f35;}
+/* Use diagrammatic, page-like shapes in lesson art instead of repeated orbits. */
+.ed-chapter__art-ring{border-radius:8px!important;transform:rotate(-8deg)!important;border-style:dashed;}
+.ed-chapter__art-ring--inner{transform:rotate(7deg)!important;border-style:solid;}
+.ed-chapter__art-core{transform:none;border-radius:9px;background:linear-gradient(135deg,#315e5b,#173642);box-shadow:8px 9px 0 #0b2730;}
+.ed-chapter__art-core span{transform:none!important;}
+.ed-chapter__art-grid{border-radius:5px;transform:rotate(-7deg);}
+.ed-chapter__art-node{border-radius:2px;box-shadow:none;}
+/* Resource cards are index cards with direct and on-site preview routes. */
+.ed-resource__preview{height:154px;background:repeating-linear-gradient(0deg,#e4e2d0 0 30px,#d5d9ca 31px,#e4e2d0 32px);border-bottom:5px solid var(--card);color:#1d3e40;padding:17px 20px;}
+.ed-resource__preview::after{content:none;}
+.ed-resource__provider{color:#1a4e51;letter-spacing:.07em;}
+.ed-resource__topic{margin-top:15px;display:inline-flex;align-self:flex-start;padding:5px 8px;background:#153d40;color:#f3e8d5;font:800 10px/1.3 ui-monospace,monospace;}
+.ed-resource__monogram{top:37%;right:8%;font-size:49px;color:#254d49;text-shadow:none;opacity:.76;}
+.ed-resource__site{color:#496b6b;font-size:10px;}
+.ed-resource__links{display:flex;flex-direction:column;align-items:flex-end;gap:7px;margin-left:auto;}
+.ed-resource__links a{font:800 12px/1.5 "DM Sans",sans-serif;text-decoration:underline;text-underline-offset:4px;}
+.ed-resource__links .ed-resource__internal{color:#f5d6a1;white-space:normal;}
+.ed-resource__foot>span{flex:1;min-width:100px;}
+@media(max-width:820px){.ed-studio{width:min(90%,390px);min-height:415px;transform:none;}}
+@media(max-width:580px){.ed-studio{width:min(100%,320px);min-height:390px;margin:25px auto 15px;}.ed-studio__folio{inset:16px 12px 10px 0;padding:23px 17px 22px;}.ed-studio__heading{font-size:31px;margin:20px 0 13px;}.ed-studio__diagram{margin:16px 0;gap:3px;font-size:8px;}.ed-studio__diagram span{padding:7px 3px;min-height:66px;}.ed-studio__stamp{right:-3px;bottom:3px;padding:10px;font-size:9px;}.ed-studio__foot strong{font-size:10px;}}
+@media(prefers-reduced-motion:reduce){.ed-studio,.ed-studio *{animation:none!important;transition:none!important;}}
