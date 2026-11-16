@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { educationLevels, educationResources } from "../../data/education";
 import "../../styles/education-learning.css";
+import "../../styles/education-editorial.css";
+import LinkPreview from "../../components/LinkPreview.astro";
 const lanes = [
   {label:"I want to use AI", description:"Start with conversations, useful prompts, and habits that keep you in control.", level:"everyday-skills", icon:"↗", accent:"peach"},
   {label:"I want to understand it", description:"Follow how models learn, recognize patterns, and produce answers.", level:"patterns-and-models", icon:"◎", accent:"violet"},
@@ -72,7 +74,8 @@ const lanes = [
         <h2 id="ed-map-title">Six steps, from curious to capable.</h2>
         <p>Pick a level. Each one gives you plain-language explanations, everyday examples, and something small to try.</p>
       </div>
-      <div class="ed-levels" role="group" aria-label="Choose a learning level">
+      <div class="ed-learning-workbench">
+        <div class="ed-levels" role="group" aria-label="Choose a learning level">
         {educationLevels.map((level,i) => (
           <button type="button" class:list={["ed-level","ed-level--"+level.color]} data-ed-level={level.id} aria-pressed={i===0?"true":"false"} aria-controls={"ed-panel-"+level.id}>
             <span class="ed-level__line" aria-hidden="true"></span>
@@ -131,6 +134,7 @@ const lanes = [
           </section>
         ))}
       </div>
+      </div>
     </section>
 
     <section class="ed-how" aria-labelledby="ed-how-title">
@@ -155,7 +159,7 @@ const lanes = [
       <div class="ed-section-heading">
         <p class="ed-eyebrow">GO FURTHER</p>
         <h2 id="ed-resources-title">Find your next place to learn.</h2>
-        <p>Browse these curated starting points. Each has a short preview here so you can decide whether to visit the provider. We do not copy their course pages or guarantee current offerings, prices, or enrollment.</p>
+        <p>These links show a preview from each website when its title, description, and image are available. If a site blocks previews, you can still open it directly. Check the provider for current courses and pricing.</p>
       </div>
       <div class="ed-filters" role="group" aria-label="Filter resources by learning level">
         <button type="button" data-ed-filter="all" aria-pressed="true">All resources</button>
@@ -165,23 +169,12 @@ const lanes = [
       </div>
       <div class="ed-resource-grid">
         {educationResources.map((resource) => (
-          <article class:list={["ed-resource","ed-resource--"+resource.theme]} data-ed-resource={resource.level}>
-            <div class="ed-resource__preview" aria-hidden="true">
-              <span class="ed-resource__provider">{resource.provider}</span>
-              <span class="ed-resource__topic">{resource.audience}</span>
-              <span class="ed-resource__monogram">{resource.monogram}</span>
-              <span class="ed-resource__site">{resource.domain}</span>
-            </div>
-            <div class="ed-resource__content">
-              <p class="ed-resource__meta">{resource.format} <span>·</span> {resource.level.toUpperCase()}</p>
-              <h3>{resource.name}</h3>
-              <p>{resource.description}</p>
-              <div class="ed-resource__foot"><span>{resource.access}</span><div class="ed-resource__links"><a class="ed-resource__internal" href={"/learn/"+resource.id} aria-label={"Read our preview of "+resource.name}>View preview <span aria-hidden="true">→</span></a><a href={resource.url} target="_blank" rel="noopener noreferrer" aria-label={"Open "+resource.name+" at "+resource.provider+" in a new tab"}>Visit resource <span aria-hidden="true">↗</span></a></div></div>
-            </div>
-          </article>
+          <div class="ed-resource-live" data-ed-resource={resource.level}>
+            <LinkPreview url={resource.url} fallbackTitle={resource.name} fallbackDescription={resource.description} />
+          </div>
         ))}
       </div>
-      <p class="ed-resources__note">These are our own editorial previews, not screenshots or copies of provider websites. Always check the original provider for current content, fees, prerequisites, and availability.</p>
+      <p class="ed-resources__note">Previews show information supplied by external websites, not a review or endorsement. Some sites may not provide an image or may block previews. Follow the link to confirm content, fees, prerequisites, and availability.</p>
     </section>
 
     <section class="ed-eli5" aria-labelledby="ed-eli5-title">
