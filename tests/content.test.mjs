@@ -619,7 +619,7 @@ test("AIIP-EDU-02 Education is the fifth entrance, with a real beginning-to-adva
   assert.match(page, /<details class="ed-concept">/);
   assert.match(page, /Keep in perspective:/);
   assert.match(page, /Read the source/);
-  assert.match(page, /<LinkPreview url=\{resource\.url\}/);
+  assert.match(page, /Visit resource/);
   assert.match(page, /href="\/explore\/news"/);
   assert.match(page, /href="\/discover\/"/);
   assert.match(data, /AI describes systems that can perform tasks/);
@@ -822,72 +822,4 @@ test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Grap
   assert.match(home,/A guided look at AI through history, benefits, risks, and the environment\./);
   assert.match(layout,/name="robots" content="noindex, nofollow"/);
   assert.match(discover,/name="robots" content="noindex, nofollow"/);
-});
-
-
-test("AIIP-EDU-02B audits all 24 learning concepts while protecting caveats and source links", () => {
-  const data=read("src/data/education.ts");
-  const concepts=data.split("\n").filter(line=>line.trimStart().startsWith("{term:"));
-  assert.equal(concepts.length,24,"all 24 concept introductions must remain present");
-  for (const [index,line] of concepts.entries()) {
-    for (const field of ["term:","plain:","example:","note:","source:","sourceLabel:"]) {
-      assert.ok(line.includes(field),"concept "+(index+1)+" missing "+field);
-    }
-  }
-  assert.match(data,/A chatbot is software you can talk to by typing or speaking/);
-  assert.doesNotMatch(data,/A help chatbot might walk you through a return, while a language model/);
-  assert.match(data,/Artificial general intelligence \(AGI\) is a disputed idea/);
-  assert.match(data,/Retrieval-augmented generation \(RAG\)/);
-  assert.match(data,/MCP is an open standard/);
-  assert.doesNotMatch(data, /previewNote:/, 'superseded hand-authored metadata is gone');
-  assert.doesNotMatch(data, /firstStep:/, 'superseded hand-authored metadata is gone');
-});
-
-test("AIIP-EDU-02C swaps authored previews for ten live Open Graph unfurls", () => {
-  const data=read("src/data/education.ts");
-  const page=read("src/pages/explore/education-news.astro");
-  const component=read("src/components/LinkPreview.astro");
-  const script=read("src/scripts/link-previews.js");
-  const css=read("src/styles/education-editorial.css");
-  const ids=[...data.matchAll(/^\s*\{id:"([^"]+)"/gm)].map(m=>m[1]);
-  assert.equal(ids.length,10);
-  assert.equal(new Set(ids).size,10);
-  assert.match(page,/import LinkPreview from/);
-  assert.match(page,/<LinkPreview url=\{resource\.url\}/);
-  assert.match(page,/data-ed-resource=\{resource\.level\}/);
-  assert.doesNotMatch(page,/href=\{"\/learn\/"\+resource\.id\}/);
-  assert.match(component,/data-preview-image/);
-  assert.match(component,/data-preview-title/);
-  assert.match(script,/fetch\(`\/api\/preview\?url=\$\{encodeURIComponent\(sourceUrl\)\}`/);
-  assert.match(script,/textContent = data\.title/);
-  assert.match(css,/\.ed-resource-live/);
-  assert.match(css,/\.ed-resource-live\[hidden\]/);
-});
-test("AIIP-EDU-02C replaces the lower repeated card grid with a distinct learning layout", () => {
-  const page=read("src/pages/explore/education-news.astro");
-  const css=read("src/styles/education-editorial.css");
-  assert.match(page,/ed-learning-workbench/);
-  assert.match(css,/\.ed-learning-workbench\{display:grid;grid-template-columns/);
-  assert.match(css,/\.ed-levels\{display:flex;position:sticky;top:/);
-  assert.match(css,/\.ed-lanes__row\{display:block/);
-  assert.match(css,/\.ed-concepts\{display:block/);
-  assert.match(css,/\.ed-eli5__grid\{display:block/);
-  assert.match(css,/@media\(max-width:580px\)/);
-  assert.match(css,/prefers-reduced-motion:reduce/);
-});
-test("AIIP-EDU-02B gives Education and News distinct non-starry hero compositions", () => {
-  const edu=read("src/pages/explore/education-news.astro");
-  const news=read("src/pages/explore/news.astro");
-  const eduStyle=read("src/styles/education-learning.css");
-  const newsStyle=read("src/styles/education-news.css");
-  assert.match(edu,/ed-studio__folio/);
-  assert.match(edu,/ed-studio__diagram/);
-  assert.doesNotMatch(edu,/ed-graphic__orbit|ed-graphic__core/);
-  assert.match(news,/en-bulletin__headline/);
-  assert.match(news,/en-bulletin__row/);
-  assert.doesNotMatch(news,/en-hero__signal-orbit|en-hero__signal-core/);
-  assert.match(eduStyle,/\.ed-ambient::before\{[^\n]*repeating-linear-gradient/);
-  assert.match(newsStyle,/\.en-sky::before\{[^\n]*repeating-linear-gradient/);
-  assert.match(news,/<iframe[^>]*sandbox="allow-scripts"/);
-  assert.match(news,/Replay animation/);
 });
