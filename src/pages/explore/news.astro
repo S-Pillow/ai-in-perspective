@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import "../../styles/education-news.css";
+---
+<BaseLayout title="AI News | Coming Soon" description="AI News is coming to AI in Perspective. We are preparing a sourced feed of useful, surprising, and concerning AI developments." bodyClass="exhibit-body">
+  <SiteHeader subtle />
+  <main class="en-soon" id="content" data-en-soon>
+    <div class="en-sky" aria-hidden="true"></div>
+    <section class="en-hero" aria-labelledby="en-title">
+      <div class="en-hero__nav"><a class="en-back" href="/explore/education-news">← Back to Education</a><nav class="en-section-switch" aria-label="Education and News sections"><a href="/explore/education-news">Education</a><a href="/explore/news" aria-current="page">News · Coming Soon</a></nav></div>
+      <div class="en-hero__grid">
+        <div class="en-hero__copy">
+          <p class="en-eyebrow"><span class="en-live-dot" aria-hidden="true"></span> PERSPECTIVE 05 / NEWS IN THE WORKS</p>
+          <h1 id="en-title">News <span>&amp;</span> Perspective</h1>
+          <p class="en-pixel-headline">COMING <span>SOON</span><span class="en-blink" aria-hidden="true">_</span></p>
+          <p class="en-lead">Good news, unsettling incidents, surprising discoveries, and new models. We want to cover the stories that matter, with original sources and enough context to understand what really happened.</p>
+          <div class="en-hero__actions">
+            <a class="en-primary" href="#arcade">Enjoy the arcade break <span aria-hidden="true">↓</span></a>
+            <a class="en-quiet" href="#what-is-next">How News will work <span aria-hidden="true">↘</span></a>
+          </div>
+          <p class="en-progress"><span aria-hidden="true">▰▰▰▱▱▱▱▱▱▱</span> Checking sources before we publish</p>
+        </div>
+        <div class="en-hero__signal" aria-hidden="true">
+          <div class="en-hero__signal-orbit en-hero__signal-orbit--a"></div>
+          <div class="en-hero__signal-orbit en-hero__signal-orbit--b"></div>
+          <div class="en-hero__signal-core"><span>?</span></div>
+          <span class="en-hero__signal-bit en-hero__signal-bit--a"></span>
+          <span class="en-hero__signal-bit en-hero__signal-bit--b"></span>
+          <span class="en-hero__signal-bit en-hero__signal-bit--c"></span>
+          <span class="en-hero__signal-caption">NEWS / IN PREPARATION</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="en-arcade" id="arcade" aria-labelledby="en-arcade-title">
+      <div class="en-section-heading">
+        <div>
+          <p class="en-eyebrow en-eyebrow--pink">A LITTLE ARCADE INTERMISSION</p>
+          <h2 id="en-arcade-title">While we build, enjoy the show.</h2>
+          <p>We are checking the feeds and working out how to present AI news fairly. In the meantime, the pixel-fighter animation has its own home here.</p>
+        </div>
+        <div class="en-arcade__mark" aria-hidden="true">★<span>05</span></div>
+      </div>
+      <div class="en-arcade__cabinet">
+        <div class="en-arcade__top"><span><span class="en-arcade__led" aria-hidden="true"></span> ARCADE MODE</span><span>AI IN PERSPECTIVE / 05</span></div>
+        <iframe id="en-fighter" class="en-arcade__frame" title="Retro pixel-art fighter animation. Use the Replay animation button to start over." src="/arcade/education-news-fighter.html" loading="eager" tabindex="-1" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+        <div class="en-arcade__bottom">
+          <p>A short animated fighter combo. Click inside the scene to replay it, or use the button. <a href="/licenses/instalanding-MIT-LICENSE.txt" target="_blank" rel="noopener noreferrer">Animation license and credit</a>.</p>
+          <button type="button" class="en-replay" data-en-replay><span aria-hidden="true">↻</span> Replay animation</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="what-is-next" class="en-next" aria-labelledby="en-next-title">
+      <div class="en-next__heading">
+        <p class="en-eyebrow">WHAT THE NEWS ROOM WILL COVER</p>
+        <h2 id="en-next-title">Interesting stories. The context to match.</h2>
+        <p>We are gathering a mix of independent reporting, research, official announcements, and verified incidents before turning on a live feed.</p>
+      </div>
+      <div class="en-next__cards">
+        <article class="en-next__card en-next__card--learn">
+          <div class="en-next__card-top"><span class="en-next__number">01 / THE STORIES</span><span class="en-next__stamp">PLANNED</span></div>
+          <span class="en-next__glyph" aria-hidden="true">✳</span>
+          <h3>Good, bad, strange, and important.</h3>
+          <p>AI helping people, documented harm and misuse, new model releases, unexpected experiments, and the safety and policy decisions shaping the field.</p>
+          <span class="en-next__small">FIVE EDITORIAL LENSES / MANY SOURCES</span>
+        </article>
+        <article class="en-next__card en-next__card--news">
+          <div class="en-next__card-top"><span class="en-next__number">02 / THE SOURCES</span><span class="en-next__stamp">IN REVIEW</span></div>
+          <span class="en-next__glyph" aria-hidden="true">⌁</span>
+          <h3>Start with the original reporting.</h3>
+          <p>We plan to combine several publishers and research sources, including MIT News, arXiv, MIT Technology Review, The Verge, OpenAI, Google DeepMind, and Anthropic. We will verify feeds and credit every source.</p>
+          <span class="en-next__small">RSS IS PLANNED / NO LIVE HEADLINES YET</span>
+        </article>
+      </div>
+      <p class="en-next__footnote">Nothing on this page is a current headline feed. Once sources and safeguards are tested, the news will move in. Education is already open if you want to learn in the meantime.</p>
+    </section>
+    <footer class="en-footer"><span>AI IN PERSPECTIVE · NEWS / COMING SOON</span><a href="/explore/education-news">Learn AI in Education <span aria-hidden="true">↗</span></a></footer>
+  </main>
+  <script>
+    const replayButton = document.querySelector("[data-en-replay]");
+    const fighterFrame = document.getElementById("en-fighter");
+    if (replayButton && fighterFrame) {
+      let playNumber = 0;
+      replayButton.addEventListener("click", () => {
+        playNumber += 1;
+        fighterFrame.setAttribute("src", "/arcade/education-news-fighter.html?replay=" + playNumber);
+      });
+    }
+  </script>
+</BaseLayout>
