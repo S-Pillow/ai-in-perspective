@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 55
+- **Record revision:** 56
 - **Last reconciled:** 2026-11-15
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -448,3 +448,13 @@
 - **UI/interaction:** Original cyan/violet/gold atlas, accessible disclosure controls, six chapter selectors with aria-pressed/hidden and focus, resource filters, reduced motion and mobile breakpoints. Preserves sources and editorial caveats, no em dashes or unnecessary visual disclaimers. Existing fifth Discover entrance visual and other approved pages remain unchanged.
 - **Implementation scope:** New src/data/education.ts, src/styles/education-learning.css, src/scripts/education.js, src/pages/explore/news.astro, docs/design/AIIP-EDU-02-learning-atlas.md. Updated src/pages/explore/education-news.astro, News-only scoped CSS src/styles/education-news.css, content/interaction tests, this record and historical Education/News arcade design doc. No dependencies, new assets, service, domain or production behavior altered.
 - **Gates:** Exact-SHA source tests and Astro static build, Git-linked protected preview, authenticated read-only route regression and owner visual/keyboard/mobile assessment are required. Do not merge or deploy publicly until separately authorized. Parallel unmerged docs/aiip-news-sources-anthropic branch contains a newer but incomparable proposed PCR revision; reconcile before any future main mutation.
+
+
+## AIIP-EDU-02A | Protected learning prototype validated at exact code SHA (2026-11-15)
+
+- **Verified source commit:** 8fc8d20c476e16a589edfd7524294c21720810a3 on feature/aiip-education-path-news-arcade. Previous feature implementation a66d39f7366309d142d60613b4e57748c992e34a passed GitHub Actions 43807183821. Follow-up focused code commit 8fc8d20c476e16a589edfd7524294c21720810a3 improved the source for AGI/ASI from a generic NIST overview to IBM's explicit AGI comparison, corrected rotated level icon readability, and repaired the 580-820 px assistant diagram layout.
+- **CI:** GitHub Actions run 43807457006 completed SUCCESS for exact commit 8fc8d20c476e16a589edfd7524294c21720810a3, including every content contract, new Education active-panel/filter/replay state checks, and Astro static production build. No unrelated source changes.
+- **Protected preview:** Vercel Git-linked deployment dpl_2k8DfWH4ZBvLgDXtDBZYwePRtwN1 READY for the exact code SHA, target=null. Preview: https://ai-in-perspective-3delv01hh-spillow82-4062.vercel.app/explore/education-news ; News: https://ai-in-perspective-3delv01hh-spillow82-4062.vercel.app/explore/news .
+- **Hosted read-only smoke:** Both Education and News routes returned HTTP 200; Education markup has six level controls and panels, twenty-four native expandable topics, ten linked resource cards and a News cross-link. New AGI source link confirmed. News contains sandboxed fighter iframe, functional Replay button source, MIT license reference and explicit "NO LIVE HEADLINES YET" text. The same preview returned 200 for the arcade asset, Discover entrance, History, Risks, Benefits and Environment. The fifth Discover destination still points to Education as requested.
+- **Boundary:** This is code/HTML/interaction-mock and protected deployment validation, not an actual rendered desktop/mobile screenshot, true assistive-technology test, real keyboard browser run, link-audit of every external course, or owner visual acceptance. Production main remains 3f031cb6b0073529df9c3dcc17c164fbd923ab6e. Draft PR #3 remains unmerged, with no production rollout or external RSS.
+- **Parallel documentation:** The docs/aiip-news-sources-anthropic branch separately proposed PCR revision 56 and an expanded seven-source roster while based on the same main. Reconcile revisions and source records before merging either branch. This entry adds evidence only and does not override the owner's earlier balanced-source decision.
