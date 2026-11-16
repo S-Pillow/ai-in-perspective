@@ -1,0 +1,20 @@
+/* Live Open Graph cards. Media is provided by the linked site, never by a fake thumbnail. */
+.lp-card{min-width:0;height:100%;font-family:"DM Sans",system-ui,sans-serif;}
+.lp-card[hidden],.lp-card [hidden]{display:none!important;}
+.lp-card__link{height:100%;display:flex;flex-direction:column;overflow:hidden;border-radius:15px;text-decoration:none!important;border:1px solid #577c80;background:#14282e;color:#f8f6ef!important;transition:transform .18s,border-color .18s,box-shadow .18s;}
+.lp-card__link:hover{transform:translateY(-4px);border-color:#f1ce95;box-shadow:0 13px 26px #07131b7a;}
+.lp-card__link:focus-visible{outline:3px solid #f6d8a4;outline-offset:4px;}
+.lp-card__visual{position:relative;aspect-ratio:16/9;background:#c8d7d0;overflow:hidden;}
+.lp-card__visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.lp-card__placeholder{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;gap:15px;padding:18px;background:linear-gradient(135deg,#b3c7bb,#e7d9ba);color:#224f4c;}
+.lp-card__placeholder span{font:800 10px/1.5 ui-monospace,monospace;letter-spacing:.1em;}
+.lp-card__placeholder strong{font:850 clamp(20px,2.5vw,34px)/1.15 "Syne",system-ui,sans-serif;letter-spacing:-.045em;overflow-wrap:anywhere;}
+.lp-card__content{padding:20px 21px 21px;display:flex;flex:1;flex-direction:column;min-width:0;}
+.lp-card__site{margin:0 0 10px;color:#afe1cf;font:800 11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere;}
+.lp-card__content h3{margin:0 0 12px;color:#f9f5e9;font:800 clamp(18px,1.8vw,22px)/1.27 "Syne",system-ui,sans-serif;letter-spacing:-.03em;overflow-wrap:anywhere;}
+.lp-card__description{margin:0 0 18px;color:#cbd8d6;font-size:13px;line-height:1.65;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+.lp-card__bottom{margin-top:auto;border-top:1px solid #5471798f;padding-top:14px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;font-size:11px;}
+.lp-card__status{color:#abc4c1;}
+.lp-card__action{color:#ffe0ac;font-weight:800;white-space:nowrap;}
+@media(max-width:640px){.lp-card__content{padding:19px;}.lp-card__placeholder strong{font-size:26px;}.lp-card__description{-webkit-line-clamp:3;}}
+@media(prefers-reduced-motion:reduce){.lp-card__link{transition:none!important;}.lp-card__link:hover{transform:none;}}
