@@ -7,7 +7,7 @@
     "dev": "node scripts/unpack-wayfinder.mjs && astro dev",
     "build": "node scripts/unpack-wayfinder.mjs && astro build",
     "preview": "astro preview",
-    "check:content": "node --test tests/content.test.mjs",
+    "check:content": "node --test tests/*.test.mjs",
     "check": "npm run check:content && npm run build"
   },
   "dependencies": {
