@@ -622,17 +622,17 @@ test("AIIP-EDU-02 Education is the fifth entrance, with a real beginning-to-adva
   assert.match(page, /Visit resource/);
   assert.match(page, /href="\/explore\/news"/);
   assert.match(page, /href="\/discover\/"/);
-  assert.match(data, /AI describes systems that can perform tasks/);
+  assert.match(data, /AI is a broad term for computer systems/);
   assert.match(data, /Generative AI/);
   assert.match(data, /Artificial narrow intelligence \(ANI\)/);
   assert.match(data, /neural networks/i);
-  assert.match(data, /Graphics processors \(GPUs\)/);
-  assert.match(data, /Retrieval-augmented generation \(RAG\)/);
-  assert.match(data, /MCP is an open standard/);
+  assert.match(data, /GPUs are processors designed to handle many calculations/);
+  assert.match(data, /Retrieval-augmented generation, or RAG/);
+  assert.match(data, /Model Context Protocol \(MCP\) is an open way/);
   assert.match(data, /Agents vs\. agentic workflows/);
-  assert.match(data, /A local model is downloaded and runs on your own computer/);
+  assert.match(data, /A local model runs on your own computer/);
   assert.equal((data.match(/id: "[a-z-]+", number: "/g)||[]).length,6,"six stages");
-  assert.equal((data.match(/\{term:/g)||[]).length,28,"28 concept introductions across six levels");
+  assert.equal((data.match(/\{term:/g)||[]).length,32,"32 sourced topics across six levels");
   assert.equal((data.match(/\{id:"/g)||[]).length,10,"10 linked resources");
   for (const fragment of ["ai.google/learn-ai-skills/","www.coursera.org/articles/how-to-learn-artificial-intelligence/",
     "developers.google.com/machine-learning/crash-course","developer.amd.com/amd-ai-academy/",
@@ -835,7 +835,7 @@ test("AIIP-EDU-03 content expands naturally beyond four topics while keeping the
   for(const topic of ["Large language models (LLMs)","Multimodal foundation models","ANI, AGI and ASI"]) assert.ok(basics.includes(topic),topic);
   assert.ok(basics.indexOf("Large language models (LLMs)")<basics.indexOf("Multimodal foundation models"));
   assert.ok(basics.indexOf("Multimodal foundation models")<basics.indexOf("ANI, AGI and ASI"));
-  assert.equal((data.match(/\{term:/g)||[]).length,28);
+  assert.equal((data.match(/\{term:/g)||[]).length,32);
   assert.match(page,/educationLevels\.map\(\(level,i\) => \(/);
   assert.match(page,/class:list=\{\["ed-level","ed-level--"\+level\.color\]\}/);
   assert.match(page,/class:list=\{\["ed-chapter","ed-chapter--"\+level\.color\]\}/);
@@ -850,7 +850,7 @@ test("AIIP-EDU-03 content expands naturally beyond four topics while keeping the
 test("AIIP-EDU-03 teaches company-oriented training, local CPU/GPU inference, sourced water and a guided RAG project", () => {
   const data=read("src/data/education.ts");
   assert.match(data,/supervised learning/i);
-  assert.match(data,/support team labels thousands of past requests/);
+  assert.match(data,/support company could label thousands of requests/);
   assert.match(data,/unsupervised learning/);
   assert.match(data,/reinforcement learning/);
   assert.match(data,/What AI companies actually do during training/);
@@ -881,4 +881,45 @@ test("AIIP-EDU-03 presents owner-supplied builder links with clear referral disc
   assert.match(page,/Referral link/);
   assert.match(news,/COMING SOON/);
   assert.match(news,/sandbox="allow-scripts"/);
+});
+
+test("AIIP-EDU-04 four practical topics are sourced, placed in the intended level and do not alter site structure", () => {
+  const data=read("src/data/education.ts");
+  const page=read("src/pages/explore/education-news.astro");
+  const sections = [
+    ["everyday-skills","patterns-and-models",["Why AI makes things up"]],
+    ["inside-modern-ai","connect-and-build",["Context windows, memory, and why AI loses track","Open-weight vs. proprietary models"]],
+    ["connect-and-build","beyond-the-basics",["Prompt injection and tool permissions"]]
+  ];
+  for (const [start,end,topics] of sections) {
+    const excerpt=data.slice(data.indexOf('id: "'+start+'"'),data.indexOf('id: "'+end+'"'));
+    for(const term of topics) {
+      const i=excerpt.indexOf('{term:"'+term+'"');
+      assert.ok(i>=0,term+" appears in the correct level");
+      const line=excerpt.split("\n").find(l=>l.includes('{term:"'+term+'"'));
+      assert.ok(line?.includes("note:")&&line.includes("source:")&&line.includes("sourceLabel:"),term+" retains source and caveat");
+      assert.ok(line.includes("more:")&&line.includes("example:"),term+" supports a useful explanation and example");
+    }
+  }
+  const expected=[
+    ["first-steps","everyday-skills",6],
+    ["everyday-skills","patterns-and-models",5],
+    ["patterns-and-models","inside-modern-ai",5],
+    ["inside-modern-ai","connect-and-build",6],
+    ["connect-and-build","beyond-the-basics",6]
+  ];
+  for(const [a,b,n] of expected) {
+    const span=data.slice(data.indexOf('id: "'+a+'"'),data.indexOf('id: "'+b+'"'));
+    assert.equal((span.match(/\{term:/g)||[]).length,n,a);
+  }
+  const last=data.slice(data.indexOf('id: "beyond-the-basics"'),data.indexOf("export const educationResources"));
+  assert.equal((last.match(/\{term:/g)||[]).length,4);
+  assert.match(data,/A context window is the amount of information/);
+  assert.match(data,/not the same as saved memory/);
+  assert.match(data,/Open-weight vs. proprietary models/);
+  assert.match(data,/not the same as having an unrestricted open-source license/);
+  assert.match(data,/email is something to read, not a source of permission/);
+  assert.match(data,/Google Developers · Hallucination definition/);
+  assert.match(page,/data-ed-level=\{level\.id\}/);
+  assert.match(page,/class:list=\{\["ed-chapter","ed-chapter--"\+level\.color\]\}/);
 });
