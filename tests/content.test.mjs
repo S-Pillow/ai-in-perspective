@@ -630,7 +630,7 @@ test("AIIP-EDU-02 Education is the fifth entrance, with a real beginning-to-adva
   assert.match(data, /Retrieval-augmented generation \(RAG\)/);
   assert.match(data, /MCP is an open standard/);
   assert.match(data, /Agents vs\. agentic workflows/);
-  assert.match(data, /local model runs on equipment you control/);
+  assert.match(data, /A local model is downloaded and runs on your own computer/);
   assert.equal((data.match(/id: "[a-z-]+", number: "/g)||[]).length,6,"six stages");
   assert.equal((data.match(/\{term:/g)||[]).length,28,"28 concept introductions across six levels");
   assert.equal((data.match(/\{id:"/g)||[]).length,10,"10 linked resources");
