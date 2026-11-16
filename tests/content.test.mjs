@@ -851,8 +851,8 @@ test("AIIP-EDU-03 teaches company-oriented training, local CPU/GPU inference, so
   const data=read("src/data/education.ts");
   assert.match(data,/supervised learning/i);
   assert.match(data,/support company could label thousands of requests/);
-  assert.match(data,/unsupervised learning/);
-  assert.match(data,/reinforcement learning/);
+  assert.match(data,/unsupervised learning/i);
+  assert.match(data,/reinforcement learning/i);
   assert.match(data,/What AI companies actually do during training/);
   assert.match(data,/Ollama/);
   assert.match(data,/GPU memory \(VRAM\)/);
