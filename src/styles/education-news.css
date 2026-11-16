@@ -1,10 +1,10 @@
 /* AIIP-EDUNEWS-01. Original page skin around a sandboxed user-supplied arcade animation. */
-.en-soon{--en-bg:#171d23;--en-cyan:#d2ede5;--en-pink:#ffc79a;--en-violet:#d2b4cf;--en-gold:#ffd49a;--en-ink:#fbf4e9;--en-muted:#d2d5d0;color:var(--en-ink);background:#171d23;font-family:"DM Sans","Segoe UI",sans-serif;overflow:clip;position:relative;isolation:isolate;}
+.en-soon{--en-bg:#080b18;--en-cyan:#86ecf2;--en-pink:#f8a6d4;--en-violet:#afa8fc;--en-gold:#ffd49a;--en-ink:#f9f6ff;--en-muted:#c5ccdc;color:var(--en-ink);background:#080b18;font-family:"DM Sans","Segoe UI",sans-serif;overflow:clip;position:relative;isolation:isolate;}
 .en-soon *,.en-soon *::before,.en-soon *::after{box-sizing:border-box;}
 .en-soon :focus-visible{outline:3px solid #94fbf5;outline-offset:4px;}
-.en-sky{position:absolute;z-index:-1;inset:0 0 auto;height:1010px;pointer-events:none;background:linear-gradient(122deg,#1d3334 0%,#222c32 46%,#3c2929 100%);overflow:hidden;}
-.en-sky::before{content:"";position:absolute;inset:0;opacity:.34;background:repeating-linear-gradient(90deg,transparent 0 109px,#e7d5c020 110px,transparent 111px),repeating-linear-gradient(0deg,transparent 0 89px,#d8bb9f1a 90px,transparent 91px);mask-image:linear-gradient(#000,transparent 82%);}
-.en-sky::after{content:"";position:absolute;right:-18%;top:0;bottom:0;width:55%;background:repeating-linear-gradient(125deg,transparent 0 38px,#e9d0ba20 39px,transparent 40px);mask-image:linear-gradient(#000,transparent 86%);opacity:.32;}
+.en-sky{position:absolute;z-index:-1;inset:0 0 auto;height:950px;pointer-events:none;background:radial-gradient(ellipse 54% 61% at 84% 23%,#38337480,transparent 78%),radial-gradient(ellipse 68% 71% at 18% 20%,#18385870,transparent 80%),radial-gradient(circle at 50% 43%,#171b3e,transparent 80%);overflow:hidden;}
+.en-sky::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,#eff1ff 1px,transparent 2px),radial-gradient(circle,#80c5ea 1px,transparent 1.5px);background-size:210px 178px,173px 241px;background-position:37px 73px,91px 28px;opacity:.26;animation:en-twinkle 20s ease-in-out infinite alternate;}
+.en-sky::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 96%,#a0adff18 97%),linear-gradient(90deg,transparent 96%,#a0adff18 97%);background-size:55px 55px;opacity:.23;mask-image:linear-gradient(#000,transparent 80%);}
 .en-hero,.en-arcade,.en-next{padding-left:clamp(21px,6vw,94px);padding-right:clamp(21px,6vw,94px);max-width:1510px;margin:auto;}
 .en-hero{padding-top:38px;padding-bottom:40px;}
 .en-back{display:inline-flex;align-items:center;color:#c0dce8!important;font-weight:700;font-size:13px;text-decoration:none;margin-bottom:36px;}
@@ -89,43 +89,3 @@
 .en-section-switch a[aria-current="page"]{color:#18233c;background:#c7bcfc;box-shadow:0 0 17px #a594ed55;}
 .en-section-switch a:not([aria-current]):hover{background:#303956;color:white;}
 @media(max-width:480px){.en-hero__nav{align-items:start;}.en-section-switch{width:100%;}.en-section-switch a{flex:1;text-align:center;font-size:11px;padding:10px;}}
-
-/* AIIP-EDU-02B: An editorial bulletin/press room rather than another orbital starfield. */
-.en-hero h1 span{color:#ffcc9b;}
-.en-pixel-headline{color:#f3ddc2;text-shadow:none;letter-spacing:.065em;}
-.en-pixel-headline span:first-child{color:#f8b986;}
-.en-hero__signal.en-bulletin{width:min(100%,425px);min-height:435px;aspect-ratio:auto;display:flex;flex-direction:column;justify-self:center;padding:26px 25px 20px;background:#f2e7d3;color:#21353a;border:4px solid #142e31;box-shadow:15px 17px 0 #b45b50,21px 23px 0 #0e242a;transform:rotate(2deg);filter:none;}
-.en-bulletin::before{content:none!important;}
-.en-bulletin__top{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:3px solid #244a4d;padding-bottom:13px;font:800 9px/1.5 ui-monospace,monospace;letter-spacing:.08em;}
-.en-bulletin__top span:last-child{background:#b65f51;color:#fff2e4;padding:5px 8px;text-align:center;}
-.en-bulletin__headline{font:900 clamp(32px,3.3vw,48px)/1.04 "Syne",sans-serif;letter-spacing:-.075em;max-width:370px;padding:22px 0 20px;}
-.en-bulletin__headline em{font-style:normal;color:#b1564b;}
-.en-bulletin__divider{height:5px;background:repeating-linear-gradient(90deg,#2b5656 0 29px,#b85f4e 30px 45px,#eed4ac 46px 57px);}
-.en-bulletin__row{display:flex;align-items:start;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #b6c1b6;font-size:12px;line-height:1.35;}
-.en-bulletin__row span{font:800 9px/1.4 ui-monospace,monospace;color:#7b514b;white-space:nowrap;}
-.en-bulletin__row strong{text-align:right;font:700 12px/1.4 "DM Sans",sans-serif;}
-.en-bulletin__bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:18px;font:800 10px ui-monospace,monospace;letter-spacing:.04em;color:#963b32;}
-.en-bulletin__bottom span:last-child{color:#315e58;}
-.en-primary{background:#f5ca94;color:#142831!important;box-shadow:7px 7px 0 #0d252e;}
-.en-primary:hover{background:#ffe4b6;}
-.en-quiet{border-color:#d4b9a8;color:#f8e2d5!important;background:#493330a8;}
-.en-quiet:hover{background:#62413b;}
-.en-next{border-top:3px solid #9e6554;}
-.en-next__card{border-radius:3px;background:linear-gradient(160deg,#24383b,#18282e);border-color:#8c8d7b;}
-.en-next__card--news{background:linear-gradient(160deg,#3b302e,#221f26);border-color:#a46c59;}
-.en-arcade__cabinet{border-radius:5px;border-color:#d4a78d;box-shadow:11px 11px 0 #0d191f,0 0 0 1px #30305c inset;}
-.en-progress span{color:#f5c996;}
-@media(max-width:700px){.en-hero__signal.en-bulletin{width:min(94%,390px);min-height:395px;transform:none;margin:10px auto 18px;}}
-@media(max-width:530px){.en-hero__signal.en-bulletin{width:min(100%,320px);min-height:380px;padding:19px 17px;}.en-bulletin__headline{font-size:35px;padding:16px 0;}.en-bulletin__row{font-size:11px;}.en-bulletin__row strong{font-size:11px;}}
-
-/* AIIP-EDU-02C: editorial desk below the arcade, not a second pair of glowing cards. */
-.en-next__cards{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border-top:3px solid #dca97d;}
-.en-next__card,.en-next__card--news{border:0;border-bottom:1px solid #776e65;border-radius:0;background:transparent;padding:clamp(24px,3.5vw,49px) clamp(17px,3.2vw,46px) clamp(28px,3.5vw,46px);}
-.en-next__card:first-child{border-right:1px solid #776e65;}
-.en-next__card-top{align-items:baseline;}
-.en-next__stamp{border-radius:0;border-color:#ba8e69;background:transparent;color:#e6bf92;}
-.en-next__glyph{display:none;}
-.en-next__card h3{max-width:460px;font-size:clamp(26px,3.2vw,44px);margin:28px 0 15px;}
-.en-next__card>p{max-width:630px;margin:0 0 26px;min-height:0;font-size:15px;line-height:1.75;}
-.en-next__small{font-size:10px;letter-spacing:.055em;}
-@media(max-width:700px){.en-next__cards{grid-template-columns:1fr;}.en-next__card:first-child{border-right:0;}.en-next__card,.en-next__card--news{padding:27px 4px;}}
