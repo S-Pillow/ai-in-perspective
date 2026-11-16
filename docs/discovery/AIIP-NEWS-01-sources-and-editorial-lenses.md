@@ -2,9 +2,25 @@
 
 **Status:** News discovery only. Approved direction and candidate source addition, not an active RSS integration, automated collection, generated summary, or public news section. This is a working design and source register under AIPF v8.10.1.
 
-**Owner intent, November 2026:** News that is interesting, cool, surprising, useful, alarming or concerning, with examples of AI helping real people, incidents of AI-enabled misuse or agents behaving unexpectedly, and new model releases. The owner specifically asked to include [Anthropic News](https://www.anthropic.com/news) and supplied visual references showing a large featured story with a smaller adjacent story list. Those references inform hierarchy, not copying another publisher's page or media.
+**Owner intent, November 2026:** News that is interesting, cool, surprising, useful, alarming or concerning, with examples of AI helping real people, incidents of AI-enabled misuse or agents behaving unexpectedly, and new model releases. The owner asked to **add** [Anthropic News](https://www.anthropic.com/news) **to the existing proposed source list**, not replace the list with Anthropic or make Anthropic the dominant source. The supplied visual references suggest a large featured story with a smaller adjacent story list. Those references inform hierarchy, not copying another publisher's page or media.
 
-## Registered candidate: Anthropic News
+## Full initial candidate source roster
+
+This roster preserves the **six sources already proposed** in the earlier News discussion and **adds Anthropic as a seventh**. All seven are **candidates**, not confirmed automated integrations. Individual feed endpoints, licensing/display rights, freshness and topic coverage require verification before any scheduled ingestion. Do not reduce this to an Anthropic-only feed.
+
+| Candidate publisher | Source type and expected contribution | Website or proposed feed | Verification state |
+|---|---|---|---|
+| **MIT News: Artificial Intelligence** | University research and applied science | https://news.mit.edu/rss/topic/artificial-intelligence2 | Proposed feed; publisher-side availability and reuse terms require validation |
+| **arXiv: Artificial Intelligence** | New preprint research, clearly marked *not peer-reviewed by default* | https://rss.arxiv.org/rss/cs.AI | Proposed category RSS; test scheduling and stable identifiers |
+| **MIT Technology Review: AI** | Independent technology journalism and analysis | https://www.technologyreview.com/topic/artificial-intelligence/feed | Proposed feed; verify endpoint and excerpt/image reuse rights |
+| **The Verge: AI** | Technology industry, releases, products and policy reporting | https://www.theverge.com/rss/ai-artificial-intelligence/index.xml | Proposed feed; verify endpoint, freshness and publisher conditions |
+| **OpenAI News** | First-party AI model/product, research and safety announcements | https://openai.com/news/rss.xml | Proposed feed; do not assume availability without successful direct check |
+| **Google DeepMind Blog** | First-party model and scientific research announcements | https://deepmind.google/blog/rss.xml | Proposed feed; do not assume availability without successful direct check |
+| **Anthropic News** | First-party model launches, research uses and safety/security reports | https://www.anthropic.com/news | Newly added publisher; official RSS unverified, possible unofficial bridge documented below |
+
+**Coverage policy:** A balanced News page should draw from independent journalism, university/research sources and multiple AI companies. The source list is not exclusive or capped at seven; additional reputable outlets, regulators and incident reporting sources can be considered later. Company statements remain company statements, and a research preprint remains preliminary regardless of how engaging the story is. Do not give Anthropic a special ranking simply because it supplied the visual example.
+
+## Anthropic addition: source details
 
 | Field | Source record |
 |---|---|
@@ -67,4 +83,4 @@ Each card should make the original publisher, publication date, headline, link, 
 
 ## Discovery result
 
-**Include Anthropic News in the planned News source list.** Do not pretend Anthropic offers an official RSS feed. First implementation should prefer stable, well-documented native publisher feeds and test the Anthropic bridge or a compliant listing adapter separately. A compelling news experience can cover useful, harmful, strange and consequential AI developments without confusing the level of evidence with how emotional a headline sounds.
+**Retain the six previously proposed sources and add Anthropic News as another candidate.** Do not pretend Anthropic offers an official RSS feed. First implementation should prefer stable, well-documented native publisher feeds and test the Anthropic bridge or a compliant listing adapter separately. A compelling news experience can cover useful, harmful, strange and consequential AI developments without confusing the level of evidence with how emotional a headline sounds.

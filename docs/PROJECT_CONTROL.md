@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 55
+- **Record revision:** 56
 - **Last reconciled:** 2026-11-15
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -443,3 +443,10 @@
 - **Evidence:** Official Anthropic News and Security listings inspected; the common official RSS paths /news/rss.xml and /rss.xml returned 404. A reachable unofficial community RSS at https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml was examined but its lastBuildDate was 2026-11-10 at verification and its freshness is not guaranteed. Distinguish publisher reports and model marketing from independent evidence; distinguish human-directed AI-enabled cyber operations from unsupported claims that AI literally escaped control.
 - **Decision state:** Candidate source and editorial taxonomy documented in docs/discovery/AIIP-NEWS-01-sources-and-editorial-lenses.md. Five candidate lenses: AI Doing Good, AI Gone Wrong, New Models & Tools, Strange & Surprising, Safety, Policy & Society, with a separate topic and evidence-status data model. Technical source-adapter choice, permissions, broader roster, implementation, scheduling and publication remain OPEN, subject to a separate owner decision.
 - **Scope:** Docs-only feature branch; no live page, navigation, RSS, feed fetch, automated publishing, API, secrets, build, deployment or domain changes. Preserve production main and existing Coming Soon page. No claims of News production readiness.
+
+## AIIP-NEWS-01A | Existing seven-source roster clarified (2026-11-15)
+
+- **Owner correction:** "I didn't mean only Anthropic. I asked to add it that meant add it to the existing list." Anthropic is a **seventh candidate alongside the original six**, not a replacement or preferred publisher.
+- **Retained existing candidates:** MIT News AI, arXiv cs.AI, MIT Technology Review AI, The Verge AI, OpenAI News and Google DeepMind Blog. Added Anthropic News as candidate seven. See `docs/discovery/AIIP-NEWS-01-sources-and-editorial-lenses.md` for the full roster, each tentative endpoint, source class and verification status.
+- **Editorial implications:** Mix research, independent reporting, and different companies; company announcements are attributed, arXiv items marked preprints, no single publisher's PR feed controls the page. Each feed's usability and license remain unverified until discovery tests.
+- **Change scope:** Documentation correction only on unmerged `docs/aiip-news-sources-anthropic` branch. No RSS scheduling, code, UI, public deployment or source ranking was modified. Current public Coming Soon page is unchanged.
