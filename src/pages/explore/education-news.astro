@@ -117,7 +117,7 @@ const lanes = [
                     <p>{concept.plain}</p>
                     <div class="ed-concept__example"><strong>In real life</strong><p>{concept.example}</p></div>
                     {concept.more?.length ? <div class="ed-concept__more"><h5>Look a little closer</h5>{concept.more.map((paragraph) => <p>{paragraph}</p>)}</div> : null}
-                    {concept.steps?.length ? <div class="ed-concept__steps"><h5>Build it step by step</h5><ol>{concept.steps.map((step) => <li>{step.replace(/^\\d+\\.\\s*/, "")}</li>)}</ol></div> : null}
+                    {concept.steps?.length ? <div class="ed-concept__steps"><h5>Build it step by step</h5><ol>{concept.steps.map((step) => <li>{step.replace(/^[0-9]+[.] +/, "")}</li>)}</ol></div> : null}
                     <p class="ed-concept__caution"><strong>Keep in perspective:</strong> {concept.note}</p>
                     <a href={concept.source} target={concept.source.startsWith("/")?undefined:"_blank"} rel={concept.source.startsWith("/")?undefined:"noopener noreferrer"}>Read the source <span aria-hidden="true">↗</span><span class="ed-concept__source">{concept.sourceLabel}</span></a>
                     {concept.extraSources?.length ? <div class="ed-concept__additional"><span>Additional reading</span><ul>{concept.extraSources.map((item) => <li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} <span aria-hidden="true">↗</span></a></li>)}</ul></div> : null}
