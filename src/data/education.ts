@@ -97,3 +97,64 @@ export const educationResources = [
   {id:"karpathy", provider:"ANDREJ KARPATHY", domain:"youtube.com", name:"Let's build GPT", level:"advanced", format:"Coding walkthrough", access:"YouTube", theme:"violet", monogram:"GPT", description:"Follow a transformer language model being built in code from the ground up.", url:"https://www.youtube.com/watch?v=kCc8FmEb1nY", audience:"Understand AI"},
   {id:"mit", provider:"MIT / GETSMARTER", domain:"mit-online.getsmarter.com", name:"AI for Business Strategy", level:"intermediate", format:"Online short course", access:"Check program fees", theme:"rose", monogram:"MIT", description:"A structured program exploring AI applications, business decisions, and technology limits.", url:"https://info.mit-online.getsmarter.com/presentations/lp/mit-artificial-intelligence-online-short-course/", audience:"Lead with AI"}
 ];
+
+
+// Builder references provided by the site owner plus verified official product documentation.
+// Referral URLs are retained exactly as supplied and labeled on-page. No endorsement ranking.
+export const educationBuildTools = [
+  {
+    "title": "Websites and web applications",
+    "summary": "Hosted builders for experimenting with websites and web apps without starting from a code editor.",
+    "items": [
+      {
+        "name": "GoDaddy Airo AI Builder",
+        "purpose": "Describe a website or web app and iterate using its hosted builder. Explore the result before deciding whether to publish.",
+        "url": "https://airo-builder.godaddy.com/?referralId=5vLty-MMm2Fv",
+        "referral": true
+      },
+      {
+        "name": "Hostinger AI Builder",
+        "purpose": "Create a site or web app from a description, with visual or agentic editing options and hosting choices.",
+        "url": "https://www.hostinger.com/ai-builder?REFERRALCODE=IWHSPILLOPKR",
+        "referral": true
+      }
+    ]
+  },
+  {
+    "title": "Code-based and standalone applications",
+    "summary": "Useful when you want to edit source files, run tests, and keep more direct control of your project.",
+    "items": [
+      {
+        "name": "Cursor",
+        "purpose": "An AI-enabled code editor and coding agent for working with files, projects, tests and code changes.",
+        "url": "https://cursor.com/"
+      },
+      {
+        "name": "OpenAI Codex",
+        "purpose": "A coding agent for building, debugging and reviewing software in a repository or coding environment.",
+        "url": "https://openai.com/codex/"
+      },
+      {
+        "name": "Claude (Cowork capabilities)",
+        "purpose": "Use Claude to work across chosen files and tools; Cowork is now integrated into Claude. For hands-on code editing, compare Claude Code as well.",
+        "url": "https://claude.com/product/cowork"
+      },
+      {
+        "name": "Langflow",
+        "purpose": "A visual workflow editor with a RAG tutorial that connects document loading, embeddings, retrieval and a language model.",
+        "url": "https://docs.langflow.org/chat-with-rag"
+      }
+    ]
+  },
+  {
+    "title": "Plan, build and verify the work",
+    "summary": "Use a repeatable development process so a working demo does not become an untested release.",
+    "items": [
+      {
+        "name": "AI Prompt-First Development Framework (AIPF)",
+        "purpose": "Explore a structured workflow for planning, building, testing, reviewing and releasing AI-assisted software.",
+        "url": "https://stevenpillow.com/aipf"
+      }
+    ]
+  }
+];
