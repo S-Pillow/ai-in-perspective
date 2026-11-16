@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
-import { educationLevels, educationResources } from "../../data/education";
+import { educationLevels, educationResources, educationBuildTools } from "../../data/education";
 import "../../styles/education-learning.css";
 const lanes = [
   {label:"I want to use AI", description:"Start with conversations, useful prompts, and habits that keep you in control.", level:"everyday-skills", icon:"↗", accent:"peach"},
@@ -30,7 +30,7 @@ const lanes = [
             <a href="#learning-levels" class="ed-action ed-action--primary">Start learning <span aria-hidden="true">↘</span></a>
             <a href="#learning-resources" class="ed-action ed-action--secondary">Browse learning resources <span aria-hidden="true">↓</span></a>
           </div>
-          <p class="ed-hero__aside">Six levels · 24 short concept introductions · Learn at your own pace</p>
+          <p class="ed-hero__aside">Six levels · Clear explanations, real examples, and ways to build</p>
         </div>
         <div class="ed-hero__graphic" aria-hidden="true">
           <div class="ed-graphic__orbit ed-graphic__orbit--outer"></div>
@@ -102,8 +102,8 @@ const lanes = [
               </div>
             </div>
             <div class="ed-chapter__concept-heading">
-              <div><span class="ed-eyebrow">OPEN A TOPIC TO LEARN MORE</span><h4>Four things to understand.</h4></div>
-              <p>Each introduction includes a real example, an important limitation, and a source to explore.</p>
+              <div><span class="ed-eyebrow">OPEN A TOPIC TO LEARN MORE</span><h4>Topics to explore.</h4></div>
+              <p>Open any topic for an example, helpful context, things to watch for, and sources to explore.</p>
             </div>
             <div class="ed-concepts">
               {level.concepts.map((concept,j) => (
@@ -116,15 +116,38 @@ const lanes = [
                   <div class="ed-concept__body">
                     <p>{concept.plain}</p>
                     <div class="ed-concept__example"><strong>In real life</strong><p>{concept.example}</p></div>
+                    {concept.more?.length ? <div class="ed-concept__more"><h5>Look a little closer</h5>{concept.more.map((paragraph) => <p>{paragraph}</p>)}</div> : null}
+                    {concept.steps?.length ? <div class="ed-concept__steps"><h5>Build it step by step</h5><ol>{concept.steps.map((step) => <li>{step.replace(/^\\d+\\.\\s*/, "")}</li>)}</ol></div> : null}
                     <p class="ed-concept__caution"><strong>Keep in perspective:</strong> {concept.note}</p>
                     <a href={concept.source} target={concept.source.startsWith("/")?undefined:"_blank"} rel={concept.source.startsWith("/")?undefined:"noopener noreferrer"}>Read the source <span aria-hidden="true">↗</span><span class="ed-concept__source">{concept.sourceLabel}</span></a>
+                    {concept.extraSources?.length ? <div class="ed-concept__additional"><span>Additional reading</span><ul>{concept.extraSources.map((item) => <li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} <span aria-hidden="true">↗</span></a></li>)}</ul></div> : null}
                   </div>
                 </details>
               ))}
             </div>
-            <div class="ed-try"><span class="ed-try__icon" aria-hidden="true">↗</span><div><strong>A small thing to try</strong><p>{level.practice}</p></div></div>
+            <div class="ed-try"><span class="ed-try__icon" aria-hidden="true">↗</span><div><strong>Try it for yourself</strong><p>{level.practice}</p></div></div>
+            {level.id === "connect-and-build" ? (
+              <section class="ed-build-tools" aria-labelledby="ed-build-tools-title">
+                <p class="ed-eyebrow">BUILDING STARTING POINTS</p>
+                <h4 id="ed-build-tools-title">Tools to turn an idea into something real</h4>
+                <p class="ed-build-tools__intro">Choose based on what you want to make: a website, an app with source code, or a workflow connecting AI to documents. You can explore the options before committing to a platform.</p>
+                <div class="ed-build-tools__groups">
+                  {educationBuildTools.map((group) => (
+                    <div class="ed-build-tools__group">
+                      <h5>{group.title}</h5>
+                      <p>{group.summary}</p>
+                      <ul>
+                        {group.items.map((tool) => (
+                          <li><a href={tool.url} target="_blank" rel="noopener noreferrer">{tool.name} <span aria-hidden="true">↗</span></a>{tool.referral ? <span class="ed-build-tools__referral">Referral link</span> : null}<p>{tool.purpose}</p></li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <p class="ed-build-tools__disclosure">Some links above include referral codes supplied by the site author. Tools may require subscriptions, accounts, paid hosting, or API credits. Review pricing, data permissions, and export options before using real project data.</p>
+              </section>
+            ) : null}
             <div class="ed-chapter__next">
-              <span>Go at your own pace. There's no test to pass.</span>
               {i < educationLevels.length-1 ? <button type="button" data-ed-next={educationLevels[i+1].id}>Next level <span aria-hidden="true">→</span></button> : <a href="#learning-resources">Find resources <span aria-hidden="true">↗</span></a>}
             </div>
           </section>
