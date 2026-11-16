@@ -3,8 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { educationLevels, educationResources } from "../../data/education";
 import "../../styles/education-learning.css";
-import "../../styles/education-editorial.css";
-import LinkPreview from "../../components/LinkPreview.astro";
 const lanes = [
   {label:"I want to use AI", description:"Start with conversations, useful prompts, and habits that keep you in control.", level:"everyday-skills", icon:"↗", accent:"peach"},
   {label:"I want to understand it", description:"Follow how models learn, recognize patterns, and produce answers.", level:"patterns-and-models", icon:"◎", accent:"violet"},
@@ -34,18 +32,17 @@ const lanes = [
           </div>
           <p class="ed-hero__aside">Six levels · 24 short concept introductions · Learn at your own pace</p>
         </div>
-        <div class="ed-hero__graphic ed-studio" aria-hidden="true">
-          <div class="ed-studio__tab">THE LEARNING STUDIO / 01</div>
-          <div class="ed-studio__folio">
-            <div class="ed-studio__top"><span>FIELD NOTES</span><span>AI / EXPLAINED</span></div>
-            <div class="ed-studio__heading">START WITH<br /><strong>A QUESTION.</strong></div>
-            <div class="ed-studio__rule"></div>
-            <div class="ed-studio__diagram">
-              <span><b>01</b> ASK</span><i>→</i><span><b>02</b> EXPLORE</span><i>→</i><span><b>03</b> UNDERSTAND</span>
-            </div>
-            <div class="ed-studio__foot"><span>NOT PERFECT ANSWERS.</span><strong>BETTER QUESTIONS.</strong></div>
-          </div>
-          <div class="ed-studio__stamp">LEARN<br/>AT YOUR<br/>OWN PACE</div>
+        <div class="ed-hero__graphic" aria-hidden="true">
+          <div class="ed-graphic__orbit ed-graphic__orbit--outer"></div>
+          <div class="ed-graphic__orbit ed-graphic__orbit--inner"></div>
+          <div class="ed-graphic__network"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="ed-graphic__core"><span>AI</span></div>
+          <span class="ed-graphic__node ed-graphic__node--a"></span>
+          <span class="ed-graphic__node ed-graphic__node--b"></span>
+          <span class="ed-graphic__node ed-graphic__node--c"></span>
+          <span class="ed-graphic__tag ed-graphic__tag--a">LEARN</span>
+          <span class="ed-graphic__tag ed-graphic__tag--b">EXPLORE</span>
+          <span class="ed-graphic__tag ed-graphic__tag--c">BUILD</span>
         </div>
       </div>
     </section>
@@ -59,7 +56,7 @@ const lanes = [
       <div class="ed-lanes__row">
         {lanes.map((lane,index) => (
           <a href="#learning-levels" class:list={["ed-lane","ed-lane--"+lane.accent]} data-ed-jump={lane.level}>
-            <span class="ed-lane__top"><small>0{index+1}</small><span aria-hidden="true">↗</span></span>
+            <span class="ed-lane__top"><small>PATH 0{index+1}</small><span aria-hidden="true">↗</span></span>
             <span class="ed-lane__icon" aria-hidden="true">{lane.icon}</span>
             <strong>{lane.label}</strong>
             <span class="ed-lane__description">{lane.description}</span>
@@ -74,8 +71,7 @@ const lanes = [
         <h2 id="ed-map-title">Six steps, from curious to capable.</h2>
         <p>Pick a level. Each one gives you plain-language explanations, everyday examples, and something small to try.</p>
       </div>
-      <div class="ed-learning-workbench">
-        <div class="ed-levels" role="group" aria-label="Choose a learning level">
+      <div class="ed-levels" role="group" aria-label="Choose a learning level">
         {educationLevels.map((level,i) => (
           <button type="button" class:list={["ed-level","ed-level--"+level.color]} data-ed-level={level.id} aria-pressed={i===0?"true":"false"} aria-controls={"ed-panel-"+level.id}>
             <span class="ed-level__line" aria-hidden="true"></span>
@@ -134,7 +130,6 @@ const lanes = [
           </section>
         ))}
       </div>
-      </div>
     </section>
 
     <section class="ed-how" aria-labelledby="ed-how-title">
@@ -158,8 +153,8 @@ const lanes = [
     <section class="ed-resources" id="learning-resources" aria-labelledby="ed-resources-title">
       <div class="ed-section-heading">
         <p class="ed-eyebrow">GO FURTHER</p>
-        <h2 id="ed-resources-title">Find your next place to learn.</h2>
-        <p>These links show a preview from each website when its title, description, and image are available. If a site blocks previews, you can still open it directly. Check the provider for current courses and pricing.</p>
+        <h2 id="ed-resources-title">Good places to keep learning.</h2>
+        <p>A starter shelf from the resource collection. Some are free guides, some are videos, and others are structured programs. Check each provider for current enrollment and pricing.</p>
       </div>
       <div class="ed-filters" role="group" aria-label="Filter resources by learning level">
         <button type="button" data-ed-filter="all" aria-pressed="true">All resources</button>
@@ -169,12 +164,24 @@ const lanes = [
       </div>
       <div class="ed-resource-grid">
         {educationResources.map((resource) => (
-          <div class="ed-resource-live" data-ed-resource={resource.level}>
-            <LinkPreview url={resource.url} fallbackTitle={resource.name} fallbackDescription={resource.description} />
-          </div>
+          <article class:list={["ed-resource","ed-resource--"+resource.theme]} data-ed-resource={resource.level}>
+            <div class="ed-resource__preview" aria-hidden="true">
+              <span class="ed-resource__provider">{resource.provider}</span>
+              <span class="ed-resource__orb ed-resource__orb--one"></span>
+              <span class="ed-resource__orb ed-resource__orb--two"></span>
+              <span class="ed-resource__monogram">{resource.monogram}</span>
+              <span class="ed-resource__site">{resource.domain}</span>
+            </div>
+            <div class="ed-resource__content">
+              <p class="ed-resource__meta">{resource.format} <span>·</span> {resource.level.toUpperCase()}</p>
+              <h3>{resource.name}</h3>
+              <p>{resource.description}</p>
+              <div class="ed-resource__foot"><span>{resource.access}</span><a href={resource.url} target="_blank" rel="noopener noreferrer" aria-label={"Open "+resource.name+" at "+resource.provider+" in a new tab"}>Visit resource <span aria-hidden="true">↗</span></a></div>
+            </div>
+          </article>
         ))}
       </div>
-      <p class="ed-resources__note">Previews show information supplied by external websites, not a review or endorsement. Some sites may not provide an image or may block previews. Follow the link to confirm content, fees, prerequisites, and availability.</p>
+      <p class="ed-resources__note">Each card links directly to its provider. Courses, programs, and enrollment details can change, so check the provider before signing up. More lessons and resources can be added as we review them.</p>
     </section>
 
     <section class="ed-eli5" aria-labelledby="ed-eli5-title">
