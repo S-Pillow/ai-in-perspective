@@ -5,7 +5,7 @@ export const educationLevels = [
     id: "first-steps", number: "01", label: "The basics", difficulty: "START HERE", icon: "✳", color: "mint",
     title: "Meet artificial intelligence.", subtitle: "Before the jargon, get comfortable with what AI actually means.",
     lead: "AI is a broad name for computer systems built to handle tasks such as recognizing patterns, understanding language, making predictions, or generating content. The interesting part is that these systems don't all work the same way.",
-    takeaway: "AI is a family of techniques, not one single machine.",
+    takeaway: "AI is not just chatbots. It also helps with things like traffic predictions, image recognition, and spam filters.",
     practice: "Think of three apps you used today. Did they recommend something, recognize a face, or predict an outcome?",
     concepts: [
       {term:"What is AI?", kind:"FOUNDATION", plain:"AI describes systems that can perform tasks we associate with intelligence, such as interpreting information, learning patterns, planning, or producing language. Not every ordinary computer program needs AI.", example:"A calculator follows arithmetic rules. A photo app might use a trained model to detect faces.", note:"Being useful at a task does not mean the system thinks like a person.", source:"https://www.nist.gov/artificial-intelligence", sourceLabel:"NIST · Artificial intelligence"},
@@ -61,7 +61,7 @@ export const educationLevels = [
     title: "When AI connects to the world.", subtitle: "Learn what changes when an assistant can search, use tools, and act.",
     lead: "An AI application becomes more useful when it can work with approved documents, software, and services. But adding tools also adds permissions, error handling, security boundaries, and a need to verify its results.",
     takeaway: "Connecting a model to a tool changes what it can do and what can go wrong.",
-    practice: "Sketch an assistant that answers questions from three verified documents. What sources can it read, and what actions should require your approval?",
+    practice: "Use the seven-step Langflow example below to create a document Q&A helper from fictional files. Test both answerable and unanswerable questions before you try real documents.",
     concepts: [
       {term:"RAG and embeddings", kind:"WORKING WITH SOURCES", plain:"Retrieval-augmented generation (RAG) finds relevant material and provides it to the model while it answers. Embeddings can help find similar meaning, but keyword and hybrid searches also matter.", example:"A support assistant retrieves the right section of a handbook before drafting an answer with a citation.", note:"A retrieved document can be outdated or malicious. RAG improves grounding but does not guarantee truth.", source:"https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation", sourceLabel:"Microsoft Learn · RAG"},
       {term:"APIs and Model Context Protocol", kind:"CONNECTIONS", plain:"An API lets software exchange data or perform operations. MCP is an open standard that lets AI applications connect to tools, data, and reusable workflows through compatible servers.", example:"A connected assistant might look up a calendar event with a permitted tool instead of guessing the meeting time.", note:"MCP is not an AI model or an automatic safety guarantee. Permissions still matter.", source:"https://modelcontextprotocol.io/introduction", sourceLabel:"Model Context Protocol · Introduction"},
