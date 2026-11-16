@@ -1,0 +1,34 @@
+---
+import '../styles/link-preview.css';
+interface Props {
+  url: string;
+  fallbackTitle?: string;
+  fallbackDescription?: string;
+}
+const { url, fallbackTitle = '', fallbackDescription = '' } = Astro.props;
+const hostname = (() => {
+  try { return new URL(url).hostname.replace(/^www\./, ''); }
+  catch { return 'External website'; }
+})();
+---
+<article class="lp-card" data-link-preview data-preview-url={url}>
+  <a class="lp-card__link" href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
+    <div class="lp-card__visual">
+      <div class="lp-card__placeholder" data-preview-placeholder aria-hidden="true">
+        <span>WEBSITE PREVIEW</span>
+        <strong>{hostname}</strong>
+      </div>
+      <img data-preview-image alt="" loading="lazy" referrerpolicy="no-referrer" hidden />
+    </div>
+    <div class="lp-card__content">
+      <p class="lp-card__site" data-preview-site>{hostname}</p>
+      <h3 data-preview-title>{fallbackTitle || hostname}</h3>
+      <p class="lp-card__description" data-preview-description>{fallbackDescription || 'Visit the original website for details.'}</p>
+      <div class="lp-card__bottom">
+        <span class="lp-card__status" data-preview-status>Resource link</span>
+        <span class="lp-card__action">Visit website <span aria-hidden="true">↗</span></span>
+      </div>
+    </div>
+  </a>
+</article>
+<script>import '../scripts/link-previews.js';</script>
