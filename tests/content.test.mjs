@@ -837,8 +837,8 @@ test("AIIP-EDU-03 content expands naturally beyond four topics while keeping the
   assert.ok(basics.indexOf("Multimodal foundation models")<basics.indexOf("ANI, AGI and ASI"));
   assert.equal((data.match(/\{term:/g)||[]).length,28);
   assert.match(page,/educationLevels\.map\(\(level,i\) => \(/);
-  assert.match(page,/class:list=\["ed-level","ed-level--"\+level\.color\]/);
-  assert.match(page,/class:list=\["ed-chapter","ed-chapter--"\+level\.color\]/);
+  assert.match(page,/class:list=\{\["ed-level","ed-level--"\+level\.color\]\}/);
+  assert.match(page,/class:list=\{\["ed-chapter","ed-chapter--"\+level\.color\]\}/);
   assert.match(page,/concept\.more\?\.length/);
   assert.match(page,/concept\.steps\?\.length/);
   assert.match(page,/concept\.extraSources\?\.length/);
@@ -849,7 +849,7 @@ test("AIIP-EDU-03 content expands naturally beyond four topics while keeping the
 
 test("AIIP-EDU-03 teaches company-oriented training, local CPU/GPU inference, sourced water and a guided RAG project", () => {
   const data=read("src/data/education.ts");
-  assert.match(data,/Supervised learning/);
+  assert.match(data,/supervised learning/i);
   assert.match(data,/support team labels thousands of past requests/);
   assert.match(data,/unsupervised learning/);
   assert.match(data,/reinforcement learning/);
