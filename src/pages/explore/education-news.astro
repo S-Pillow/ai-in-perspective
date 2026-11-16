@@ -59,7 +59,7 @@ const lanes = [
       <div class="ed-lanes__row">
         {lanes.map((lane,index) => (
           <a href="#learning-levels" class:list={["ed-lane","ed-lane--"+lane.accent]} data-ed-jump={lane.level}>
-            <span class="ed-lane__top"><small>PATH 0{index+1}</small><span aria-hidden="true">↗</span></span>
+            <span class="ed-lane__top"><small>0{index+1}</small><span aria-hidden="true">↗</span></span>
             <span class="ed-lane__icon" aria-hidden="true">{lane.icon}</span>
             <strong>{lane.label}</strong>
             <span class="ed-lane__description">{lane.description}</span>
