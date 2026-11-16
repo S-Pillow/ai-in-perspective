@@ -117,3 +117,15 @@
 .en-progress span{color:#f5c996;}
 @media(max-width:700px){.en-hero__signal.en-bulletin{width:min(94%,390px);min-height:395px;transform:none;margin:10px auto 18px;}}
 @media(max-width:530px){.en-hero__signal.en-bulletin{width:min(100%,320px);min-height:380px;padding:19px 17px;}.en-bulletin__headline{font-size:35px;padding:16px 0;}.en-bulletin__row{font-size:11px;}.en-bulletin__row strong{font-size:11px;}}
+
+/* AIIP-EDU-02C: editorial desk below the arcade, not a second pair of glowing cards. */
+.en-next__cards{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border-top:3px solid #dca97d;}
+.en-next__card,.en-next__card--news{border:0;border-bottom:1px solid #776e65;border-radius:0;background:transparent;padding:clamp(24px,3.5vw,49px) clamp(17px,3.2vw,46px) clamp(28px,3.5vw,46px);}
+.en-next__card:first-child{border-right:1px solid #776e65;}
+.en-next__card-top{align-items:baseline;}
+.en-next__stamp{border-radius:0;border-color:#ba8e69;background:transparent;color:#e6bf92;}
+.en-next__glyph{display:none;}
+.en-next__card h3{max-width:460px;font-size:clamp(26px,3.2vw,44px);margin:28px 0 15px;}
+.en-next__card>p{max-width:630px;margin:0 0 26px;min-height:0;font-size:15px;line-height:1.75;}
+.en-next__small{font-size:10px;letter-spacing:.055em;}
+@media(max-width:700px){.en-next__cards{grid-template-columns:1fr;}.en-next__card:first-child{border-right:0;}.en-next__card,.en-next__card--news{padding:27px 4px;}}
