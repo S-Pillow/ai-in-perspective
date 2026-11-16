@@ -632,7 +632,7 @@ test("AIIP-EDU-02 Education is the fifth entrance, with a real beginning-to-adva
   assert.match(data, /Agents vs\. agentic workflows/);
   assert.match(data, /local model runs on equipment you control/);
   assert.equal((data.match(/id: "[a-z-]+", number: "/g)||[]).length,6,"six stages");
-  assert.equal((data.match(/\{term:/g)||[]).length,24,"24 concept introductions");
+  assert.equal((data.match(/\{term:/g)||[]).length,28,"28 concept introductions across six levels");
   assert.equal((data.match(/\{id:"/g)||[]).length,10,"10 linked resources");
   for (const fragment of ["ai.google/learn-ai-skills/","www.coursera.org/articles/how-to-learn-artificial-intelligence/",
     "developers.google.com/machine-learning/crash-course","developer.amd.com/amd-ai-academy/",
@@ -822,4 +822,63 @@ test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Grap
   assert.match(home,/A guided look at AI through history, benefits, risks, and the environment\./);
   assert.match(layout,/name="robots" content="noindex, nofollow"/);
   assert.match(discover,/name="robots" content="noindex, nofollow"/);
+});
+
+test("AIIP-EDU-03 content expands naturally beyond four topics while keeping the original atlas controls", () => {
+  const data=read("src/data/education.ts");
+  const page=read("src/pages/explore/education-news.astro");
+  const style=read("src/styles/education-learning.css");
+  const start=data.indexOf('id: "first-steps"');
+  const second=data.indexOf('id: "everyday-skills"');
+  const basics=data.slice(start,second);
+  assert.equal((basics.match(/\{term:/g)||[]).length,6,"Basics includes LLMs, multimodal models, and ANI/AGI/ASI");
+  for(const topic of ["Large language models (LLMs)","Multimodal foundation models","ANI, AGI and ASI"]) assert.ok(basics.includes(topic),topic);
+  assert.ok(basics.indexOf("Large language models (LLMs)")<basics.indexOf("Multimodal foundation models"));
+  assert.ok(basics.indexOf("Multimodal foundation models")<basics.indexOf("ANI, AGI and ASI"));
+  assert.equal((data.match(/\{term:/g)||[]).length,28);
+  assert.match(page,/educationLevels\.map\(\(level,i\) => \(/);
+  assert.match(page,/class:list=\["ed-level","ed-level--"\+level\.color\]/);
+  assert.match(page,/class:list=\["ed-chapter","ed-chapter--"\+level\.color\]/);
+  assert.match(page,/concept\.more\?\.length/);
+  assert.match(page,/concept\.steps\?\.length/);
+  assert.match(page,/concept\.extraSources\?\.length/);
+  assert.match(style,/\.ed-concept\[open\]\{grid-column:1\/-1;\}/);
+  assert.doesNotMatch(page,/Four things to understand\.|Go at your own pace|Learn at your own pace/);
+  assert.doesNotMatch(data,/AI is a family of techniques, not one single machine/);
+});
+
+test("AIIP-EDU-03 teaches company-oriented training, local CPU/GPU inference, sourced water and a guided RAG project", () => {
+  const data=read("src/data/education.ts");
+  assert.match(data,/Supervised learning/);
+  assert.match(data,/support team labels thousands of past requests/);
+  assert.match(data,/unsupervised learning/);
+  assert.match(data,/reinforcement learning/);
+  assert.match(data,/What AI companies actually do during training/);
+  assert.match(data,/Ollama/);
+  assert.match(data,/GPU memory \(VRAM\)/);
+  assert.match(data,/stevenpillow\.com\/ai-water-perspective\//);
+  assert.match(data,/docs\.langflow\.org\/chat-with-rag/);
+  assert.match(data,/Vector Store RAG/);
+  assert.match(data,/Build it step by step|Keep credentials out of shared documents/);
+  const build=data.slice(data.indexOf('{term:"Make a tiny, testable assistant"'),data.indexOf('{term:"Pick tools that fit what you want to build"'));
+  assert.equal((build.match(/[0-9]+\. /g)||[]).length>=7,true,"seven hands-on build steps");
+});
+
+test("AIIP-EDU-03 presents owner-supplied builder links with clear referral disclosure and unchanged News source", () => {
+  const data=read("src/data/education.ts");
+  const page=read("src/pages/explore/education-news.astro");
+  const news=read("src/pages/explore/news.astro");
+  for(const url of [
+    "https://airo-builder.godaddy.com/?referralId=5vLty-MMm2Fv",
+    "https://www.hostinger.com/ai-builder?REFERRALCODE=IWHSPILLOPKR",
+    "https://cursor.com/","https://openai.com/codex/","https://claude.com/product/cowork",
+    "https://stevenpillow.com/aipf"
+  ]) assert.ok(data.includes(url),url);
+  assert.match(data,/export const educationBuildTools/);
+  assert.match(page,/educationBuildTools\.map/);
+  assert.match(page,/level\.id === "connect-and-build"/);
+  assert.match(page,/referral codes supplied by the site author/);
+  assert.match(page,/Referral link/);
+  assert.match(news,/COMING SOON/);
+  assert.match(news,/sandbox="allow-scripts"/);
 });
