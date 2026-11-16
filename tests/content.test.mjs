@@ -839,8 +839,8 @@ test("AIIP-EDU-02B audits all 24 learning concepts while protecting caveats and 
   assert.match(data,/Artificial general intelligence \(AGI\) is a disputed idea/);
   assert.match(data,/Retrieval-augmented generation \(RAG\)/);
   assert.match(data,/MCP is an open standard/);
-  assert.equal((data.match(/previewNote:/g)||[]).length,10);
-  assert.equal((data.match(/firstStep:/g)||[]).length,10);
+  assert.doesNotMatch(data, /previewNote:/, 'superseded hand-authored metadata is gone');
+  assert.doesNotMatch(data, /firstStep:/, 'superseded hand-authored metadata is gone');
 });
 
 test("AIIP-EDU-02C swaps authored previews for ten live Open Graph unfurls", () => {
