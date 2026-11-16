@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { educationResources } from "../../data/education";
+import "../../styles/resource-preview.css";
+
+export function getStaticPaths() {
+  return educationResources.map((resource) => ({
+    params: { id: resource.id },
+    props: { resource }
+  }));
+}
+const { resource } = Astro.props;
+---
+<BaseLayout title={resource.name + " | Education resource preview"} description={"Our curated preview of " + resource.name + " from " + resource.provider + ". Check the provider for current offerings."} bodyClass="exhibit-body">
+  <SiteHeader subtle />
+  <main id="content" class="rp-page">
+    <section class="rp-hero" aria-labelledby="rp-title">
+      <nav class="rp-nav" aria-label="Resource navigation">
+        <a href="/explore/education-news#learning-resources">← All learning resources</a>
+        <span>AI IN PERSPECTIVE / EDUCATION</span>
+      </nav>
+      <div class="rp-grid">
+        <div class="rp-copy">
+          <p class="rp-kicker">RESOURCE PREVIEW <span aria-hidden="true">/</span> {resource.level.toUpperCase()}</p>
+          <p class="rp-intro">Take a closer look before leaving this site.</p>
+          <h1 id="rp-title">{resource.name}</h1>
+          <p class="rp-provider">From {resource.provider}</p>
+          <p class="rp-lead">{resource.description}</p>
+          <dl class="rp-meta">
+            <div><dt>Format</dt><dd>{resource.format}</dd></div>
+            <div><dt>Learning level</dt><dd>{resource.level}</dd></div>
+            <div><dt>Good for</dt><dd>{resource.audience}</dd></div>
+            <div><dt>Access</dt><dd>{resource.access}</dd></div>
+          </dl>
+          <div class="rp-actions">
+            <a class="rp-provider-link" href={resource.url} target="_blank" rel="noopener noreferrer" aria-label={"Visit " + resource.name + " at the provider website, opens in a new tab"}>Visit the provider <span aria-hidden="true">↗</span></a>
+            <a class="rp-back-link" href="/explore/education-news#learning-resources">Choose another resource</a>
+          </div>
+        </div>
+        <aside class="rp-notes" aria-labelledby="rp-notes-title">
+          <div class="rp-notes__label"><span>FIELD GUIDE / {resource.monogram}</span><span>PREVIEW ONLY</span></div>
+          <h2 id="rp-notes-title">What makes this worth a look?</h2>
+          <p>{resource.previewNote}</p>
+          <div class="rp-notes__divider" aria-hidden="true"></div>
+          <h3>Your first step</h3>
+          <p>{resource.firstStep}</p>
+          <div class="rp-notes__foot"><span>{resource.domain}</span><span aria-hidden="true">↗</span></div>
+        </aside>
+      </div>
+    </section>
+    <section class="rp-disclosure" aria-labelledby="rp-disclosure-title">
+      <p class="rp-kicker">KNOW BEFORE YOU GO</p>
+      <h2 id="rp-disclosure-title">A guide, not a copy of their website.</h2>
+      <p>This preview is our own brief summary of why the resource may be helpful. It does not reproduce the provider's course page or promise specific lessons. Content, prerequisites, cost, enrollment, and availability can change. Check the provider's website for current details.</p>
+    </section>
+    <footer class="rp-footer"><a href="/explore/education-news">← Back to Education</a><a href="/methodology">Our evidence approach ↗</a></footer>
+  </main>
+</BaseLayout>
