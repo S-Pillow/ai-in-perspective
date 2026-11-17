@@ -35,3 +35,14 @@ Validation requires exact-SHA GitHub content contracts and Astro build, Git-link
 Education: gather and vet resources, categorize by audience and topic, assess accuracy, accessibility, source licensing and update cadence.
 
 News: independently decide RSS publishers, attribution rights, feed ingestion, caching, freshness dates, failures, deduplication, and how to separate reporting from interpretation. Implement only after a separate authorized data and content contract. The current page does not implement an RSS reader.
+
+## Supersession note: AIIP-EDU-02 (2026-11-15)
+
+This document records the original temporary combined Education & News Coming Soon experience and its source/license controls. By owner direction, the next feature splits that experience:
+
+- /explore/education-news becomes the Education learning page
+- /explore/news becomes the News Coming Soon arcade
+- public/arcade/education-news-fighter.html and its MIT license remain at their established URLs
+- no live RSS or automated news has been created
+
+The current design and implementation contract is docs/design/AIIP-EDU-02-learning-atlas.md. Earlier text in this historical design record is not current route status. Both routes remain protected preview work until separately approved for public release.

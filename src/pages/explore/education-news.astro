@@ -1,92 +1,232 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
-import "../../styles/education-news.css";
+import { educationLevels, educationResources, educationBuildTools } from "../../data/education";
+import "../../styles/education-learning.css";
+const lanes = [
+  {label:"I want to use AI", description:"Start with conversations, useful prompts, and habits that keep you in control.", level:"everyday-skills", icon:"↗", accent:"peach"},
+  {label:"I want to understand it", description:"Follow how models learn, recognize patterns, and produce answers.", level:"patterns-and-models", icon:"◎", accent:"violet"},
+  {label:"I want to build with it", description:"Work toward RAG, tool connections, MCP, agents, and reliable workflows.", level:"connect-and-build", icon:"⌁", accent:"mint"}
+];
 ---
-<BaseLayout title="Education & News | Coming Soon" description="Education and News is coming to AI in Perspective. Curated learning resources and thoughtful AI news coverage are being planned." bodyClass="exhibit-body">
+<BaseLayout title="Learn AI | Education & News" description="Explore artificial intelligence from beginner to advanced. Understand AI, machine learning, neural networks, RAG, MCP, and agents, with practical examples and learning resources." bodyClass="exhibit-body">
   <SiteHeader subtle />
-  <main class="en-soon" id="content" data-en-soon>
-    <div class="en-sky" aria-hidden="true"></div>
-    <section class="en-hero" aria-labelledby="en-title">
-      <a class="en-back" href="/discover/">← All perspectives</a>
-      <div class="en-hero__grid">
-        <div class="en-hero__copy">
-          <p class="en-eyebrow"><span class="en-live-dot" aria-hidden="true"></span> PERSPECTIVE 05 / BUILD IN PROGRESS</p>
-          <h1 id="en-title">Education <span>&amp;</span> News</h1>
-          <p class="en-pixel-headline">COMING <span>SOON</span><span class="en-blink" aria-hidden="true">_</span></p>
-          <p class="en-lead">There's more to explore, and we want to get it right. We're gathering useful ways to learn about AI and working out how to bring you news with the sources and context you deserve.</p>
-          <div class="en-hero__actions">
-            <a class="en-primary" href="#arcade">See the arcade break <span aria-hidden="true">↓</span></a>
-            <a class="en-quiet" href="#what-is-next">What's coming <span aria-hidden="true">↘</span></a>
+  <main class="ed-world" id="content" data-ed-root>
+    <div class="ed-ambient" aria-hidden="true"></div>
+    <section class="ed-hero" aria-labelledby="ed-title">
+      <div class="ed-hero__nav">
+        <a href="/discover/" class="ed-back">← All perspectives</a>
+        <nav class="ed-switch" aria-label="Education and News sections">
+          <a class="ed-switch__item ed-switch__item--current" href="/explore/education-news" aria-current="page">Education</a>
+          <a class="ed-switch__item" href="/explore/news">News <span>COMING SOON</span></a>
+        </nav>
+      </div>
+      <div class="ed-hero__layout">
+        <div class="ed-hero__copy">
+          <p class="ed-overline"><span class="ed-overline__star" aria-hidden="true">✳</span> PERSPECTIVE 05 / THE LEARNING PATH</p>
+          <h1 id="ed-title">You don't have to be an expert <em>to understand AI.</em></h1>
+          <p class="ed-hero__lead">Start with the basics, learn what makes AI work, and build up to the tools and ideas behind modern systems. No coding needed at the beginning. Just curiosity.</p>
+          <div class="ed-hero__actions">
+            <a href="#learning-levels" class="ed-action ed-action--primary">Start learning <span aria-hidden="true">↘</span></a>
+            <a href="#learning-resources" class="ed-action ed-action--secondary">Browse learning resources <span aria-hidden="true">↓</span></a>
           </div>
-          <p class="en-progress"><span aria-hidden="true">▰▰▰▱▱▱▱▱▱▱</span> Still assembling the good stuff</p>
+          <p class="ed-hero__aside">Six levels · Clear explanations, real examples, and ways to build</p>
         </div>
-        <div class="en-hero__signal" aria-hidden="true">
-          <div class="en-hero__signal-orbit en-hero__signal-orbit--a"></div>
-          <div class="en-hero__signal-orbit en-hero__signal-orbit--b"></div>
-          <div class="en-hero__signal-core"><span>?</span></div>
-          <span class="en-hero__signal-bit en-hero__signal-bit--a"></span>
-          <span class="en-hero__signal-bit en-hero__signal-bit--b"></span>
-          <span class="en-hero__signal-bit en-hero__signal-bit--c"></span>
-          <span class="en-hero__signal-caption">NEW CONTENT LOADING</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="en-arcade" id="arcade" aria-labelledby="en-arcade-title">
-      <div class="en-section-heading">
-        <div>
-          <p class="en-eyebrow en-eyebrow--pink">A LITTLE ARCADE INTERMISSION</p>
-          <h2 id="en-arcade-title">While we build, enjoy the show.</h2>
-          <p>Our next perspective is still taking shape. In the meantime, here's a retro pixel-fighter animation to keep the screen interesting.</p>
-        </div>
-        <div class="en-arcade__mark" aria-hidden="true">★<span>05</span></div>
-      </div>
-      <div class="en-arcade__cabinet">
-        <div class="en-arcade__top"><span><span class="en-arcade__led" aria-hidden="true"></span> ARCADE MODE</span><span>AI IN PERSPECTIVE / 05</span></div>
-        <iframe id="en-fighter" class="en-arcade__frame" title="Retro pixel-art fighter animation. Use the Replay animation button to start over." src="/arcade/education-news-fighter.html" loading="eager" tabindex="-1" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
-        <div class="en-arcade__bottom">
-          <p>A short animated fighter combo. Click inside the scene to replay it, or use the button. <a href="/licenses/instalanding-MIT-LICENSE.txt" target="_blank" rel="noopener noreferrer">Animation license and credit</a>.</p>
-          <button type="button" class="en-replay" data-en-replay><span aria-hidden="true">↻</span> Replay animation</button>
+        <div class="ed-hero__graphic" aria-hidden="true">
+          <div class="ed-graphic__orbit ed-graphic__orbit--outer"></div>
+          <div class="ed-graphic__orbit ed-graphic__orbit--inner"></div>
+          <div class="ed-graphic__network"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="ed-graphic__core"><span>AI</span></div>
+          <span class="ed-graphic__node ed-graphic__node--a"></span>
+          <span class="ed-graphic__node ed-graphic__node--b"></span>
+          <span class="ed-graphic__node ed-graphic__node--c"></span>
+          <span class="ed-graphic__tag ed-graphic__tag--a">LEARN</span>
+          <span class="ed-graphic__tag ed-graphic__tag--b">EXPLORE</span>
+          <span class="ed-graphic__tag ed-graphic__tag--c">BUILD</span>
         </div>
       </div>
     </section>
 
-    <section id="what-is-next" class="en-next" aria-labelledby="en-next-title">
-      <div class="en-next__heading">
-        <p class="en-eyebrow">TWO THINGS WE'RE WORKING TOWARD</p>
-        <h2 id="en-next-title">The real content comes next.</h2>
-        <p>This is a temporary stop while we choose the resources and figure out the best way to cover AI news.</p>
+    <section class="ed-lanes" aria-labelledby="ed-lanes-title">
+      <div class="ed-section-heading">
+        <p class="ed-eyebrow">CHOOSE YOUR OWN STARTING POINT</p>
+        <h2 id="ed-lanes-title">What do you want to do with AI?</h2>
+        <p>Start with what interests you, or explore the six levels in order.</p>
       </div>
-      <div class="en-next__cards">
-        <article class="en-next__card en-next__card--learn">
-          <div class="en-next__card-top"><span class="en-next__number">01 / EDUCATION</span><span class="en-next__stamp">PLANNED</span></div>
-          <span class="en-next__glyph" aria-hidden="true">✳</span>
-          <h3>Learn something useful.</h3>
-          <p>Clear explanations, practical guides, and carefully chosen resources for anyone who wants to understand AI better. We're collecting and reviewing the material before putting it here.</p>
-          <span class="en-next__small">LESS NOISE / MORE UNDERSTANDING</span>
-        </article>
-        <article class="en-next__card en-next__card--news">
-          <div class="en-next__card-top"><span class="en-next__number">02 / NEWS</span><span class="en-next__stamp">PLANNING</span></div>
-          <span class="en-next__glyph" aria-hidden="true">⌁</span>
-          <h3>Follow the news. Keep the context.</h3>
-          <p>We're exploring an RSS-based news feed. The aim is to link back to original reporting, show when something was published, and help you understand why it matters.</p>
-          <span class="en-next__small">RSS IS A PLAN / NO LIVE FEED YET</span>
-        </article>
+      <div class="ed-lanes__row">
+        {lanes.map((lane,index) => (
+          <a href="#learning-levels" class:list={["ed-lane","ed-lane--"+lane.accent]} data-ed-jump={lane.level}>
+            <span class="ed-lane__top"><small>PATH 0{index+1}</small><span aria-hidden="true">↗</span></span>
+            <span class="ed-lane__icon" aria-hidden="true">{lane.icon}</span>
+            <strong>{lane.label}</strong>
+            <span class="ed-lane__description">{lane.description}</span>
+          </a>
+        ))}
       </div>
-      <p class="en-next__footnote">No lessons or live headlines are being presented here yet. This page will change as the content and sourcing approach are ready.</p>
     </section>
-    <footer class="en-footer"><span>AI IN PERSPECTIVE · EDUCATION & NEWS / COMING SOON</span><a href="/discover/">Explore the other perspectives <span aria-hidden="true">↗</span></a></footer>
+
+    <section class="ed-map" id="learning-levels" aria-labelledby="ed-map-title">
+      <div class="ed-section-heading ed-section-heading--center">
+        <p class="ed-eyebrow">YOUR ROADMAP</p>
+        <h2 id="ed-map-title">Explore AI in six levels.</h2>
+        <p>Pick a level to read explanations, see how the ideas work in real life, and follow sources when you want more detail.</p>
+      </div>
+      <div class="ed-levels" role="group" aria-label="Choose a learning level">
+        {educationLevels.map((level,i) => (
+          <button type="button" class:list={["ed-level","ed-level--"+level.color]} data-ed-level={level.id} aria-pressed={i===0?"true":"false"} aria-controls={"ed-panel-"+level.id}>
+            <span class="ed-level__line" aria-hidden="true"></span>
+            <span class="ed-level__number">{level.number}</span>
+            <span class="ed-level__label">{level.label}</span>
+            <span class="ed-level__chevron" aria-hidden="true">↗</span>
+          </button>
+        ))}
+      </div>
+      <div class="ed-panels">
+        {educationLevels.map((level,i) => (
+          <section class:list={["ed-chapter","ed-chapter--"+level.color]} id={"ed-panel-"+level.id} data-ed-panel={level.id} aria-labelledby={"ed-heading-"+level.id} tabindex="-1" hidden={i>0}>
+            <div class="ed-chapter__intro">
+              <div class="ed-chapter__copy">
+                <p class="ed-chapter__eyebrow">LEVEL {level.number} <span>·</span> {level.difficulty}</p>
+                <h3 id={"ed-heading-"+level.id}>{level.title}</h3>
+                <p class="ed-chapter__subtitle">{level.subtitle}</p>
+                <p>{level.lead}</p>
+                <div class="ed-chapter__takeaway"><span aria-hidden="true">✳</span><strong>Worth remembering:</strong> {level.takeaway}</div>
+              </div>
+              <div class="ed-chapter__art" aria-hidden="true">
+                <span class="ed-chapter__art-grid"></span>
+                <span class="ed-chapter__art-ring"></span>
+                <span class="ed-chapter__art-ring ed-chapter__art-ring--inner"></span>
+                <span class="ed-chapter__art-core"><span>{level.icon}</span></span>
+                <span class="ed-chapter__art-node"></span>
+                <span class="ed-chapter__art-index">{level.number} / 06</span>
+              </div>
+            </div>
+            <div class="ed-chapter__concept-heading">
+              <div><span class="ed-eyebrow">OPEN A TOPIC TO LEARN MORE</span><h4>Topics to explore.</h4></div>
+              <p>Open any topic for an example, helpful context, things to watch for, and sources to explore.</p>
+            </div>
+            <div class="ed-concepts">
+              {level.concepts.map((concept,j) => (
+                <details class="ed-concept">
+                  <summary>
+                    <span class="ed-concept__index">{String(j+1).padStart(2,"0")}</span>
+                    <span class="ed-concept__heading"><span>{concept.kind}</span><strong>{concept.term}</strong></span>
+                    <span class="ed-concept__toggle" aria-hidden="true">+</span>
+                  </summary>
+                  <div class="ed-concept__body">
+                    <p>{concept.plain}</p>
+                    <div class="ed-concept__example"><strong>In real life</strong><p>{concept.example}</p></div>
+                    {concept.more?.length ? <div class="ed-concept__more"><h5>Look a little closer</h5>{concept.more.map((paragraph) => <p>{paragraph}</p>)}</div> : null}
+                    {concept.steps?.length ? <div class="ed-concept__steps"><h5>Build it step by step</h5><ol>{concept.steps.map((step) => <li>{step.replace(/^[0-9]+[.] +/, "")}</li>)}</ol></div> : null}
+                    <p class="ed-concept__caution"><strong>Keep in perspective:</strong> {concept.note}</p>
+                    <a href={concept.source} target={concept.source.startsWith("/")?undefined:"_blank"} rel={concept.source.startsWith("/")?undefined:"noopener noreferrer"}>Read the source <span aria-hidden="true">↗</span><span class="ed-concept__source">{concept.sourceLabel}</span></a>
+                    {concept.extraSources?.length ? <div class="ed-concept__additional"><span>Additional reading</span><ul>{concept.extraSources.map((item) => <li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} <span aria-hidden="true">↗</span></a></li>)}</ul></div> : null}
+                  </div>
+                </details>
+              ))}
+            </div>
+            <div class="ed-try"><span class="ed-try__icon" aria-hidden="true">↗</span><div><strong>Try it for yourself</strong><p>{level.practice}</p></div></div>
+            {level.id === "connect-and-build" ? (
+              <section class="ed-build-tools" aria-labelledby="ed-build-tools-title">
+                <p class="ed-eyebrow">BUILDING STARTING POINTS</p>
+                <h4 id="ed-build-tools-title">Tools to turn an idea into something real</h4>
+                <p class="ed-build-tools__intro">Choose based on what you want to make: a website, an app with source code, or a workflow connecting AI to documents. You can explore the options before committing to a platform.</p>
+                <div class="ed-build-tools__groups">
+                  {educationBuildTools.map((group) => (
+                    <div class="ed-build-tools__group">
+                      <h5>{group.title}</h5>
+                      <p>{group.summary}</p>
+                      <ul>
+                        {group.items.map((tool) => (
+                          <li><a href={tool.url} target="_blank" rel="noopener noreferrer">{tool.name} <span aria-hidden="true">↗</span></a>{tool.referral ? <span class="ed-build-tools__referral">Referral link</span> : null}<p>{tool.purpose}</p></li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <p class="ed-build-tools__disclosure">Some links above include referral codes supplied by the site author. Tools may require subscriptions, accounts, paid hosting, or API credits. Review pricing, data permissions, and export options before using real project data.</p>
+              </section>
+            ) : null}
+            <div class="ed-chapter__next">
+              {i < educationLevels.length-1 ? <button type="button" data-ed-next={educationLevels[i+1].id}>Next level <span aria-hidden="true">→</span></button> : <a href="#learning-resources">Find resources <span aria-hidden="true">↗</span></a>}
+            </div>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section class="ed-how" aria-labelledby="ed-how-title">
+      <div class="ed-how__header">
+        <p class="ed-eyebrow">THE BIG PICTURE</p>
+        <h2 id="ed-how-title">How does an AI assistant answer a question?</h2>
+        <p>This is one common way an assistant can use outside documents. Not every assistant searches for information before answering.</p>
+      </div>
+      <div class="ed-how__flow">
+        <div class="ed-how__node"><span>01 / YOU</span><strong>Ask a question</strong><p>You give the assistant a goal and some context.</p></div>
+        <span class="ed-how__arrow" aria-hidden="true">→</span>
+        <div class="ed-how__node"><span>02 / INFORMATION</span><strong>Find relevant material</strong><p>A connected system may retrieve approved sources.</p></div>
+        <span class="ed-how__arrow" aria-hidden="true">→</span>
+        <div class="ed-how__node"><span>03 / MODEL</span><strong>Generate an answer</strong><p>The model uses the context to produce a response.</p></div>
+        <span class="ed-how__arrow" aria-hidden="true">→</span>
+        <div class="ed-how__node"><span>04 / YOU AGAIN</span><strong>Check before trusting</strong><p>Review sources and important claims.</p></div>
+      </div>
+      <p class="ed-how__note">Not every chatbot retrieves sources. A tool-using agent may also take actions, which need separate permissions and safeguards.</p>
+    </section>
+
+    <section class="ed-resources" id="learning-resources" aria-labelledby="ed-resources-title">
+      <div class="ed-section-heading">
+        <p class="ed-eyebrow">GO FURTHER</p>
+        <h2 id="ed-resources-title">Explore learning resources.</h2>
+        <p>These guides, videos, and courses are starting points for learning more. Some are free; others may have fees or enrollment requirements. Check each provider for current details.</p>
+      </div>
+      <div class="ed-filters" role="group" aria-label="Filter resources by learning level">
+        <button type="button" data-ed-filter="all" aria-pressed="true">All resources</button>
+        <button type="button" data-ed-filter="beginner" aria-pressed="false">Beginner</button>
+        <button type="button" data-ed-filter="intermediate" aria-pressed="false">Intermediate</button>
+        <button type="button" data-ed-filter="advanced" aria-pressed="false">Advanced</button>
+      </div>
+      <div class="ed-resource-grid">
+        {educationResources.map((resource) => (
+          <article class:list={["ed-resource","ed-resource--"+resource.theme]} data-ed-resource={resource.level}>
+            <div class="ed-resource__preview" aria-hidden="true">
+              <span class="ed-resource__provider">{resource.provider}</span>
+              <span class="ed-resource__orb ed-resource__orb--one"></span>
+              <span class="ed-resource__orb ed-resource__orb--two"></span>
+              <span class="ed-resource__monogram">{resource.monogram}</span>
+              <span class="ed-resource__site">{resource.domain}</span>
+            </div>
+            <div class="ed-resource__content">
+              <p class="ed-resource__meta">{resource.format} <span>·</span> {resource.level.toUpperCase()}</p>
+              <h3>{resource.name}</h3>
+              <p>{resource.description}</p>
+              <div class="ed-resource__foot"><span>{resource.access}</span><a href={resource.url} target="_blank" rel="noopener noreferrer" aria-label={"Open "+resource.name+" at "+resource.provider+" in a new tab"}>Visit resource <span aria-hidden="true">↗</span></a></div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="ed-resources__note">Each card links directly to its provider. Courses, programs, and enrollment details can change, so check the provider before signing up. More lessons and resources can be added as we review them.</p>
+    </section>
+
+    <section class="ed-eli5" aria-labelledby="ed-eli5-title">
+      <p class="ed-eyebrow">THE EASY VERSION</p>
+      <h2 id="ed-eli5-title"><span>Explain</span> <span>Like</span> <span>I'm</span> <span class="ed-eli5__last">Five:<svg viewBox="0 0 153 22" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M4 10Q37 4 78 8T149 7"/><path d="M11 18Q52 13 87 17T145 15"/></svg></span></h2>
+      <div class="ed-eli5__grid">
+        <article><span>01 / WHAT IS IT?</span><h3>AI finds patterns and helps with tasks.</h3><p>It can recognize pictures, suggest things, or make new text. Different kinds of AI do different jobs.</p></article>
+        <article><span>02 / HOW DOES IT LEARN?</span><h3>It learns from lots of examples.</h3><p>Training helps a model spot patterns. It can still make mistakes when something is new or different.</p></article>
+        <article><span>03 / WHO'S IN CHARGE?</span><h3>You still need to check its work.</h3><p>AI can be helpful, but important decisions and actions deserve a second look from a person.</p></article>
+      </div>
+    </section>
+
+    <section class="ed-news-link" aria-labelledby="ed-news-link-title">
+      <div>
+        <p class="ed-eyebrow">THE NEXT HALF OF THIS PERSPECTIVE</p>
+        <h2 id="ed-news-link-title">Curious about what's happening in AI right now?</h2>
+        <p>The News section is taking shape. We're checking sources and designing a feed that keeps reporting and interpretation separate. The arcade has moved there while we build it.</p>
+        <a href="/explore/news">Visit News Coming Soon <span aria-hidden="true">↗</span></a>
+      </div>
+      <span class="ed-news-link__star" aria-hidden="true">✦</span>
+    </section>
+    <footer class="ed-footer"><span>AI IN PERSPECTIVE / EDUCATION</span><a href="/methodology">How we use evidence ↗</a><a href="/discover/">← All perspectives</a></footer>
   </main>
-  <script>
-    const replayButton = document.querySelector("[data-en-replay]");
-    const fighterFrame = document.getElementById("en-fighter");
-    if (replayButton && fighterFrame) {
-      let playNumber = 0;
-      replayButton.addEventListener("click", () => {
-        playNumber += 1;
-        fighterFrame.setAttribute("src", "/arcade/education-news-fighter.html?replay=" + playNumber);
-      });
-    }
-  </script>
+  <script>import "../../scripts/education.js";</script>
 </BaseLayout>

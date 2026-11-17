@@ -81,3 +81,11 @@
 @media(max-width:700px){.en-hero__grid{grid-template-columns:1fr;}.en-hero__signal{width:min(66%,260px);margin:12px auto 0;}.en-hero{padding-top:32px;}.en-section-heading{align-items:start;}.en-arcade__mark{font-size:40px;}.en-next__cards{grid-template-columns:1fr;}.en-next__card>p{min-height:0;}}
 @media(max-width:530px){.en-hero__signal{width:min(74%,240px);}.en-arcade{padding-left:12px;padding-right:12px;}.en-arcade__frame{aspect-ratio:10/11;}.en-arcade__top{padding:12px 13px;font-size:9px;}.en-arcade__bottom{padding:16px;}.en-arcade__bottom p{font-size:12px;}.en-replay{width:100%;justify-content:center;}.en-section-heading{padding-left:9px;padding-right:9px;}.en-arcade__mark{display:none;}.en-next{padding-top:62px;padding-bottom:68px;}.en-hero h1{font-size:clamp(42px,10.5vw,61px);}.en-progress{align-items:start;flex-direction:column;gap:4px;}}
 @media(prefers-reduced-motion:reduce){.en-soon *,.en-soon *::before,.en-soon *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+/* News-only cross-links after the Education / News split. */
+.en-hero__nav{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:30px;}
+.en-hero__nav .en-back{margin:0;}
+.en-section-switch{display:inline-flex;align-items:center;gap:4px;padding:5px;border-radius:50px;background:#171e36d9;border:1px solid #747ca270;}
+.en-section-switch a{padding:9px 15px;border-radius:99px;color:#d3d9ef;text-decoration:none;font-size:12px;font-weight:800;}
+.en-section-switch a[aria-current="page"]{color:#18233c;background:#c7bcfc;box-shadow:0 0 17px #a594ed55;}
+.en-section-switch a:not([aria-current]):hover{background:#303956;color:white;}
+@media(max-width:480px){.en-hero__nav{align-items:start;}.en-section-switch{width:100%;}.en-section-switch a{flex:1;text-align:center;font-size:11px;padding:10px;}}
