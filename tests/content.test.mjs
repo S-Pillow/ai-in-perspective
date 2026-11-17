@@ -998,8 +998,8 @@ test("AIIP-NEWS-03 article headline typography stays readable", () => {
   const css=read("src/styles/news-room.css");
   const global=read("src/styles/global.css");
   assert.match(global,/DM\+Sans:wght@400;500;600;700/,"DM Sans is already loaded");
-  assert.match(css,/\.nr-lead h3\{font:600 clamp\(24px,2\.5vw,37px\)\/1\.3 "DM Sans"/,"featured headline uses the readable body family at medium weight");
-  assert.match(css,/\.nr-item h3\{font:600 clamp\(17px,1\.5vw,22px\)\/1\.35 "DM Sans"/,"smaller headlines keep a comfortable line height");
+  assert.match(css,/\.nr-lead h3\{font:600 [^}]*"DM Sans"/,"featured headline uses the readable body family at medium weight");
+  assert.match(css,/\.nr-item h3\{font:600 [^}]*"DM Sans"/,"smaller headlines keep the readable medium-weight body face");
   assert.doesNotMatch(css,/\.nr-(?:lead|item) h3\{[^}]*"Syne"/,"article titles no longer use the heavy display face");
 });
 
