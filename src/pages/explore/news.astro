@@ -45,14 +45,14 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
 
     <section class="nr-stories" id="stories" aria-labelledby="nr-stories-title">
       <div class="nr-stories__heading">
-        <div><p class="en-eyebrow">CURATED EXAMPLES / ORIGINAL SOURCES</p><h2 id="nr-stories-title">Five stories. Five ways to look closer.</h2></div>
+        <div><p class="en-eyebrow">SELECTED STORIES / ORIGINAL SOURCES</p><h2 id="nr-stories-title">Five stories. Five ways to look closer.</h2></div>
         <p>Research findings, company announcements, and independent reporting don't carry the same kind of evidence. Each story explains which kind you're reading.</p>
       </div>
       <div class="nr-filters" role="group" aria-label="Filter stories by perspective">
         <button type="button" class="nr-filter" data-news-filter="All" aria-pressed="true">All stories</button>
         {NEWS_LENSES.map((lens) => <button type="button" class="nr-filter" data-news-filter={lens} aria-pressed="false">{lens}</button>)}
       </div>
-      <p class="nr-results" data-news-results aria-live="polite" aria-atomic="true">Showing all {NEWS_STORIES.length} editorial examples</p>
+      <p class="nr-results" data-news-results aria-live="polite" aria-atomic="true">Showing all {NEWS_STORIES.length} stories</p>
 
       <div class="nr-story-grid" data-news-grid>
         <article class="nr-lead" data-news-item data-news-lens={lead.lens}>
@@ -81,7 +81,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
           )}
         </div>
       </div>
-      <p class="nr-empty" data-news-empty hidden>No stories in this small editorial selection match that lens. Other topics are still being researched.</p>
+      <p class="nr-empty" data-news-empty hidden>No selected stories match this perspective. Try another category.</p>
       <p class="nr-disclaimer">The five selected stories are curated manually. Collected source links come from a dated saved snapshot, not a real-time feed. Article claims are attributed to their publishers, not automatically fact-checked. No third-party article text or photographs are republished here.</p>
     </section>
 
@@ -181,7 +181,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
           if (match) showing++;
         }
         if (empty) empty.hidden = showing !== 0;
-        if (resultLine) resultLine.textContent = showing === 0 ? "No stories in this selection" : "Showing " + showing + " of " + items.length + " editorial examples";
+        if (resultLine) resultLine.textContent = showing === 0 ? "No stories in this selection" : "Showing " + showing + " of " + items.length + " stories";
       });
     }
   </script>

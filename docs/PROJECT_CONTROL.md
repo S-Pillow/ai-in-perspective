@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 69
+- **Record revision:** 70
 - **Last reconciled:** 2026-11-16
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -583,3 +583,11 @@
 - **Implementation boundary:** Remove only the temporary status aside, stale title/description/footer preview language, and their now-unused News CSS. Reflow the remaining editorial hero as a readable single column. Preserve curated article cards, five lens filters, snapshot timestamps and evidence attribution, publication dates, News source links, Education content, and licensed arcade.
 - **Truthfulness boundary:** The feed is still a saved snapshot with no activated daily publishing job. Keep a durable, compact disclosure near the curated stories that the collected links reflect a dated snapshot rather than a real-time feed, and continue showing the actual UTC snapshot timestamp in the feed section. Retire launch scaffolding without implying an automated live service.
 - **Verification and deployment:** Add a regression test for absence of temporary copy, single-column hero, presence of dated snapshot/arcade. Run full content, News, and Astro build checks and inspect exact-SHA protected preview. Maintain Draft PR #4 unmerged and production/Education unchanged. Rights and operator write-mode/no-op gate remain open.
+
+
+## AIIP-NEWS-04E | Retire temporary "editorial examples" and dated preview labels (2026-11-17)
+
+- **Owner feedback:** The user also identified "Showing all 5 editorial examples" and "Editorial preview prepared Nov 16, 2026" as inappropriate permanent copy. The dated editorial-preview paragraph and temporary research status box had already been removed in AIIP-NEWS-04D. Do not reintroduce either one.
+- **Change:** Rename curated section label from "CURATED EXAMPLES / ORIGINAL SOURCES" to "SELECTED STORIES / ORIGINAL SOURCES". Change the static count to "Showing all 5 stories" and dynamic filter count to "Showing N of 5 stories". Make the empty-selection message evergreen. Preserve curated stories and editorial lens semantics.
+- **Honesty and operations:** The source snapshot's true UTC timestamp and concise explanation that collected links are not a real-time feed remain. No false claim that automatic daily publication is active. All News data, Education files, CSS, collector, CI configuration and production remain unchanged.
+- **Verification:** Content contract asserts the permanent labels and absence of temporary public-facing text; run GitHub content/news/Astro tests and protected preview checks on exact SHA. Draft PR #4 stays unmerged and scheduled publishing remains off.

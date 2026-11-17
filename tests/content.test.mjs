@@ -772,7 +772,7 @@ test("AIIP-NEWS-03 News keeps the licensed arcade and permanent source-aware lay
   assert.equal(filters[0].selected,false);
   assert.equal(items[0].hidden,false);
   assert.equal(items[1].hidden,true);
-  assert.match(results.textContent,/Showing 1 of 2 editorial examples/);
+  assert.match(results.textContent,/Showing 1 of 2 stories/);
   assert.equal(empty.hidden,true);
 });
 
@@ -1032,4 +1032,15 @@ test("AIIP-NEWS-04D keeps the permanent News hero and dated-snapshot disclosure 
   assert.match(page,/id="our-approach"/);
   assert.match(page,/id="arcade"/);
   assert.match(style,/\.nr-hero__grid\{max-width:920px;/);
+});
+
+
+test("AIIP-NEWS-04E finished News labels avoid temporary editorial-preview language",()=>{
+  const page=read("src/pages/explore/news.astro");
+  assert.match(page,/SELECTED STORIES \/ ORIGINAL SOURCES/);
+  assert.match(page,/Showing all \{NEWS_STORIES.length\} stories/);
+  assert.match(page,/"Showing " \+ showing \+ " of " \+ items.length \+ " stories"/);
+  assert.doesNotMatch(page,/CURATED EXAMPLES|editorial examples|Editorial preview prepared|RESEARCH PREVIEW|Manual preview/);
+  assert.match(page,/dated saved snapshot, not a real-time feed/);
+  assert.match(page,/formatSnapshotTimeUtc\(feedSnapshot.publishedAt\)/);
 });
