@@ -113,7 +113,7 @@ test("Astro uses a checked-in, validated snapshot and does not fetch publishers 
   assert.ok(fixture.articles.every(a=>a.lens===null && a.editorialNote===null));
   assert.ok(fixture.articles.every(a=>a.publishedAt===null || a.publishedAt<=fixture.publishedAt));
   assert.match(page,/validateSnapshot\(savedNewsSnapshot\)/);assert.match(page,/latestArticles\.map/);
-  assert.match(page,/not been assigned one of our editorial perspectives/);
+  assert.match(page,/without an automatically assigned editorial perspective/);
   assert.match(page,/Date not provided/);assert.doesNotMatch(page,/\bfetch\s*\(/);
   assert.match(page,/ENABLED_NEWS_FEEDS\.map/);
   assert.match(page,/sourceBuckets/);
