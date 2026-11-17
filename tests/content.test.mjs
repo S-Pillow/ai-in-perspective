@@ -1114,9 +1114,11 @@ test("AIIP-INTRO-01B explicit flat webpage and visibly rising globe are required
   const renderer=read("scripts/render-intro-flyover.mjs");
   assert.match(page,/intro-flyover-page-surface" aria-hidden="true"/);
   assert.match(style,/border:2px solid #7bd7edb8/);
-  assert.match(style,/perspective:900px/);
+  assert.match(style,/perspective:2800px/);
   assert.match(js,/plane\.animate\(INTRO_SURFACE_FRAMES/);
-  assert.match(renderer,/sheetProjectedWidth>300/);
+  assert.match(renderer,/sheetProjectedWidth>500/);
+  assert.match(renderer,/sheetProjectedWidth<2400/);
+  assert.match(renderer,/sheetVisibleHeight>100/);
   assert.match(renderer,/sheetHasBorder/);
   assert.match(renderer,/planetVisibleHeight>200/);
 });

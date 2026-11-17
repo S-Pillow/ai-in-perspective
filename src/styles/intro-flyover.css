@@ -4,7 +4,7 @@
  * The original page, global styles, navigation and content are not replaced.
  */
 .intro-stage.intro-flyover{
-  perspective:900px;
+  perspective:2800px;
   perspective-origin:50% 27%;
 }
 .intro-stage.intro-flyover .intro-center{

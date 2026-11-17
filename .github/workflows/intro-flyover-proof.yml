@@ -59,11 +59,21 @@ jobs:
             -vf "scale=720:576" -c:v libx264 -preset fast -crf 30 \
             -pix_fmt yuv420p -movflags +faststart \
             intro-flyover-proof/intro-flyover-compact.mp4
+          for spec in "flat:01-flat" "travel:02-travel" "upright:04-upright" "globe:05-globe-rise" "closing:06-closing"; do
+            name="${spec%%:*}"
+            file="${spec#*:}"
+            ffmpeg -hide_banner -loglevel error -y -i "intro-flyover-proof/${file}.png" \
+              -vf "scale=720:576" -q:v 6 "intro-flyover-proof/frame-${name}.jpg"
+          done
           node - <<'NODE'
           const {readFileSync}=require('node:fs');
           for(const [kind,file] of [
             ['VIDEO','intro-flyover-proof/intro-flyover-compact.mp4'],
-            ['POSTER','intro-flyover-proof/06-closing.png'],
+            ['FLAT','intro-flyover-proof/frame-flat.jpg'],
+            ['TRAVEL','intro-flyover-proof/frame-travel.jpg'],
+            ['UPRIGHT','intro-flyover-proof/frame-upright.jpg'],
+            ['GLOBE','intro-flyover-proof/frame-globe.jpg'],
+            ['POSTER','intro-flyover-proof/frame-closing.jpg'],
           ]){
             const bytes=readFileSync(file);
             const base64=bytes.toString('base64');

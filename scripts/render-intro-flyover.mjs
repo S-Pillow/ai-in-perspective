@@ -36,6 +36,8 @@ try{
       planetTop:Math.round(rect.top),
       planetVisibleHeight:Math.round(globeVisibleHeight),
       sheetProjectedWidth:Math.round(sheetRect.width),
+      sheetTop:Math.round(sheetRect.top),
+      sheetVisibleHeight:Math.round(Math.max(0,Math.min(sheetRect.bottom,innerHeight)-Math.max(sheetRect.top,0))),
       sheetProjectedHeight:Math.round(sheetRect.height),
       sheetHasBorder:getComputedStyle(sheet).borderTopWidth!=="0px",
       screenHeight:innerHeight,
@@ -59,8 +61,9 @@ try{
   assert.equal(checkpoints.flat.continueHref,"/discover/");
   assert.ok(checkpoints.flat.cameraPitchMetric>.7,"camera shows the actual webpage nearly horizontal");
   assert.ok(checkpoints.flat.sheetHasBorder,"flat website has an actual framed surface");
-  assert.ok(checkpoints.flat.sheetProjectedWidth>300,"flat website spans enough of the frame");
-  assert.ok(checkpoints.flat.sheetProjectedHeight>40,"flat website is visible, not a collapsed line");
+  assert.ok(checkpoints.flat.sheetProjectedWidth>500 && checkpoints.flat.sheetProjectedWidth<2400,"flat website must fit recognizably within the camera frame");
+  assert.ok(checkpoints.flat.sheetProjectedHeight>100 && checkpoints.flat.sheetProjectedHeight<1100,"flat website is a readable ground plane, not a collapsed or huge projection");
+  assert.ok(checkpoints.flat.sheetVisibleHeight>100,"the flat website sheet must actually be in the visible viewport");
   assert.ok(checkpoints.upright.cameraPitchMetric<.025,"page is vertical before the globe rises");
   assert.ok(checkpoints.upright.planetOpacity<.02,"globe remains hidden at upright transition");
   assert.ok(checkpoints.globeRising.planetOpacity>.25,"globe rises after upright transition");

@@ -20,10 +20,10 @@ export const INTRO_FLYOVER_MARKERS = Object.freeze({
 /** A single continuous camera moves the existing text page. */
 export const INTRO_CAMERA_FRAMES = Object.freeze([
   // The website is truly horizontal and has a visible outline while the camera travels.
-  {offset:0,    transform:"translateY(20svh) rotateX(80deg) scale(1.60)"},
-  {offset:0.15, transform:"translateY(20svh) rotateX(80deg) scale(1.60)"},
-  {offset:0.29, transform:"translateY(2svh) rotateX(80deg) scale(1.60)"},
-  {offset:0.45, transform:"translateY(-29svh) rotateX(80deg) scale(1.65)"},
+  {offset:0,    transform:"translateY(20svh) rotateX(80deg) scale(1.22)"},
+  {offset:0.15, transform:"translateY(20svh) rotateX(80deg) scale(1.22)"},
+  {offset:0.29, transform:"translateY(2svh) rotateX(80deg) scale(1.22)"},
+  {offset:0.45, transform:"translateY(-29svh) rotateX(80deg) scale(1.30)"},
   {offset:0.55, transform:"translateY(-25svh) rotateX(56deg) scale(.95)"},
   {offset:0.65, transform:"translateY(-9svh) rotateX(0deg) scale(.72)"},
   {offset:0.72, transform:"translateY(-9svh) rotateX(0deg) scale(.72)"},
