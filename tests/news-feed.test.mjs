@@ -108,10 +108,15 @@ test("collector returns per-source diagnostics, retains disabled sources and nee
 test("Astro uses a checked-in, validated snapshot and does not fetch publishers in visitors' browsers",()=>{
   const page=readFileSync(new URL("../src/pages/explore/news.astro",import.meta.url),"utf8");
   const fixture=JSON.parse(readFileSync(new URL("../src/data/news-snapshot.json",import.meta.url),"utf8"));
-  assert.equal(validateSnapshot(fixture),fixture);assert.equal(fixture.articles.length,0);
+  assert.equal(validateSnapshot(fixture),fixture);assert.equal(fixture.articles.length,40);
+  assert.equal(new Set(fixture.articles.map(a=>a.publisher)).size,5);
+  assert.ok(fixture.articles.every(a=>a.lens===null && a.editorialNote===null));
+  assert.ok(fixture.articles.every(a=>a.publishedAt===null || a.publishedAt<=fixture.publishedAt));
   assert.match(page,/validateSnapshot\(savedNewsSnapshot\)/);assert.match(page,/latestArticles\.map/);
   assert.match(page,/not been assigned one of our editorial perspectives/);
   assert.match(page,/Date not provided/);assert.doesNotMatch(page,/\bfetch\s*\(/);
+  assert.match(page,/ENABLED_NEWS_FEEDS\.map/);
+  assert.match(page,/sourceBuckets/);
 });
 
 test("read-only snapshot export rejects --write combinations before network access", async()=>{

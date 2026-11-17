@@ -4,6 +4,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 import { NEWS_LENSES, NEWS_REVIEW_DATE, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview } from "../../data/newsEditorial.mjs";
 import savedNewsSnapshot from "../../data/news-snapshot.json";
 import { validateSnapshot } from "../../../scripts/news/feed-core.mjs";
+import { ENABLED_NEWS_FEEDS } from "../../data/newsFeeds.mjs";
 import "../../styles/education-news.css";
 import "../../styles/news-room.css";
 
@@ -11,7 +12,14 @@ validateEditorialPreview();
 const lead = NEWS_STORIES.find((story) => story.featured);
 const otherStories = NEWS_STORIES.filter((story) => !story.featured);
 const feedSnapshot = validateSnapshot(savedNewsSnapshot);
-const latestArticles = feedSnapshot.articles.slice(0, 16);
+// Show a cross-section rather than letting the most active publisher dominate.
+const sourceBuckets = ENABLED_NEWS_FEEDS.map(source => feedSnapshot.articles.filter(article => article.sourceId === source.id));
+const latestArticles = [];
+for (let offset = 0; offset < 8 && latestArticles.length < 16; offset++) {
+  for (const articles of sourceBuckets) {
+    if (articles[offset] && latestArticles.length < 16) latestArticles.push(articles[offset]);
+  }
+}
 const feedSourceType = (value) => ({preprint:"Preprint · not peer reviewed by default",company_announcement:"Company announcement · attributed claim",independent_reporting:"Independent reporting",university:"University research report"})[value] ?? "Publisher article";
 const feedStatusLabel = (value) => ({preprint:"Preprint",attributed_primary_source:"Provider report",unreviewed:"Not independently verified",independent_reporting:"Independently reported",corroborated:"Independently corroborated"})[value] ?? "Source link";
 const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T12:00:00Z"));
@@ -96,8 +104,8 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
       <div class="nr-feed__intro">
         <div>
           <p class="en-eyebrow">SOURCE SNAPSHOT / NEWS DATA</p>
-          <h2 id="nr-feed-title">Latest from the source feeds.</h2>
-          <p>Feed entries link directly to original publishers. These links have not been assigned one of our editorial perspectives or independently fact-checked. Check the original source before relying on a claim.</p>
+          <h2 id="nr-feed-title">Recent links from across the sources.</h2>
+          <p>Feed entries are sampled across publishers and link directly to their original articles. The newest items from each source are shown without an automatically assigned editorial perspective or independent fact-check. Check the original source before relying on a claim.</p>
         </div>
         <div class="nr-feed__status" aria-label="News snapshot status">
           <span>{latestArticles.length ? "SAVED SNAPSHOT" : "COLLECTION NOT PUBLISHED"}</span>

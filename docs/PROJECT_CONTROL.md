@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 65
+- **Record revision:** 66
 - **Last reconciled:** 2026-11-16
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -547,3 +547,12 @@
 - **Build/test:** Pin \`fast-xml-parser\` in \`package.json\`, add \`tests/news-feed.test.mjs\` with synthetic RSS/Atom, hostile content, deduplication, unknown dates, disabled sources, empty/preprint feed, failure retention, no-op snapshot and render boundary regression coverage. Add npm \`news:check\`, \`news:probe\` and explicit local \`news:collect\`, and update CI to run offline contract tests plus nonblocking, read-only live source probes. No scheduled GitHub Actions workflow or npm runtime server.
 - **Evidence:** \`docs/design/AIIP-NEWS-04-feed-collector.md\` contains source policy, scripts, safeguards, data contract, operator steps, rollout gates, and no-op/deployment protections. Green CI/Astro and connected-runner read-only feed probes must be examined before marking sources truly usable; a successful CI does not grant feed/content rights.
 - **Release boundary:** Draft PR #4 and protected preview only, no main merge, no production deploy, no cron, no auto-update workflow or generated claims presented as independently verified. Final News feed publication requires source rights review, actual runner HTTP/XML results, a populated and visually reviewed snapshot, and separate approval. Education release at \`9712e9f4791b5f319fc3744b324c4ed529229db1\` stays untouched.
+
+
+## AIIP-NEWS-04A | Controlled real-source preview snapshot (2026-11-17)
+
+- **Source probe accepted for review:** GitHub Actions run \`44006589935\` passed existing site contracts, all 15 initial News RSS/Atom offline tests and Astro build after correcting CDATA-title parsing. In the runner's read-only probe, **all five enabled RSS/Atom sources returned parsed entries**: MIT News 50 RSS, arXiv cs.AI 276 RSS, The Verge 10 Atom, OpenAI News 1398 RSS and DeepMind 100 RSS. The working reader normalized a possible 40-entry snapshot. No data files were written in that probe.
+- **Review-only export:** A separate read-only CI export produced schema \`news-snapshot-v1\` at \`2026-11-17T02:59:19.913Z\`, with **40 normalized article records, 8 per enabled source**, source status \`ok\` for all five, and disabled records for MIT Technology Review and Anthropic. All titles/links were parsed from publishers, no article text or photos copied, no AI summaries, no editorial lens inferred. This is feed parsing evidence, not independent proof of each article's substantive claims.
+- **Feature-branch snapshot staging:** The 40-row review snapshot is checked into \`src/data/news-snapshot.json\` on the Draft PR branch only. The News UI displays 16 sampled entries rotated across publishers (latest within each source), preserving one editor-selected featured story and four curated examples above. It explicitly separates original reporting/attributed company claims/preprints and states snapshot publication time is not live refresh time. This allows actual card rendering and visual inspection without production.
+- **Test changes:** Update the snapshot fixture contract to require 40 source-attributed unreviewed entries and validate five-source diversity. Keep hostile XML/source URL, id/date, empty/failure, no-op and Education/arcade regressions. The read-only CI export has no write permission, git commit, automation or production deploy side effect.
+- **Remaining blockers:** Desktop/mobile/keyboard owner review of the populated source cards, source display-rights review, live on-disk write/no-op operator smoke, decision on scheduled low-frequency publishing, and owner production approval. **Do not merge PR #4 to main yet.**
