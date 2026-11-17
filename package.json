@@ -8,12 +8,16 @@
     "build": "node scripts/unpack-wayfinder.mjs && astro build",
     "preview": "astro preview",
     "check:content": "node --test tests/content.test.mjs",
-    "check": "npm run check:content && npm run build"
+    "check": "npm run check:content && npm run news:check && npm run build",
+    "news:check": "node --test tests/news-feed.test.mjs",
+    "news:probe": "node scripts/news/collect.mjs --dry-run",
+    "news:collect": "node scripts/news/collect.mjs --write"
   },
   "dependencies": {
     "astro": "^5.16.0",
     "three": "0.187.0",
-    "gsap": "3.15.1"
+    "gsap": "3.15.1",
+    "fast-xml-parser": "5.12.1"
   },
   "engines": {
     "node": ">=20.11.0"
