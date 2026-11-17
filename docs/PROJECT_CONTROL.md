@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 71
+- **Record revision:** 72
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -602,3 +602,12 @@
 - **Accessible/fallback behavior:** Original Skip introduction and Continue to explore links remain. Skip motion finishes the animation without navigation, Replay flyover restarts. ?flyover=off restores original Intro. Reduced-motion and <=620px widths use baseline Intro to keep real paragraphs readable. Motion does not send requests or save user state.
 - **Evidence and stop:** Node source tests and Astro build on exact commit, then GitHub-hosted Playwright/ffmpeg locally render and inspect scenes and export a poster, scene frames, report and MP4 as short-lived PR artifacts. Review desktop exact-SHA protected Vercel preview, route/CTA and reduced-motion/phone state. Human acceptance of visual story remains open; any render failure must be disclosed. PR stays DRAFT; **no merge or production publish without new owner approval.** If the experiment is rejected, discard branch/PR without touching main.
 - **Governing design artifact:** docs/design/AIIP-INTRO-01-flyover-experiment.md. Reference and content should not be treated as an exact copy of OpenDesign's video or as proof of video export until the browser job succeeds.
+
+
+## AIIP-INTRO-01A — Browser proof accepted, experiment media delivered (2026-11-17)
+
+- GitHub Actions visual-proof runner **44021119794**, job **133830577546** built the actual Intro, used Playwright/Chromium at 1440 × 1152, inspected the real DOM and rendered a silent 18.5333 s MP4 (278 frames at 15 fps) and six scene screenshots.
+- Deterministic browser checkpoints: flat 1.8 s camera pitch metric 0.70466, Earth opacity 0 and vertical top 1738 px; travelling 6 s Earth still hidden; overview 10.5 s Earth still hidden; upright 12.1 s camera pitch exactly 0, Earth opacity 0/top 1738; Earth rising 14.2 s opacity 0.61027/top 1164; closing 18.5 s Earth opacity 0.98/top 829. Original /discover/ CTA, no horizontal desktop overflow, reduced-motion/phone fallback and ?flyover=off all passed.
+- GitHub Actions artifact storage quota blocked the normal artifact ZIP upload. This is a **delivery/retention limitation, not a video render failure**. No unrelated artifacts were deleted, no plan or storage settings changed. To provide a reviewable film, the same CI runner additionally generated a compact **720 × 576 silent H.264 MP4** plus original 1440 × 1152 closing poster. Their encoded bytes were transferred through verified labelled CI log chunks into GitHub Git blobs and committed only to this experimental branch.
+- Review-only assets: public/experiments/intro-flyover-silent.mp4 (242,607 bytes) and public/experiments/intro-flyover-poster.png (1,298,457 bytes), both available at the exact PR Vercel preview routes. The video is a downscaled review copy of the verified full-resolution render; it is **not** a 1440 × 1152 delivered MP4. The first attempt failed in setup because ffmpeg was missing, corrected by installing the runner package; later render passed, upload artifact was unavailable. No soundtrack was supplied/reused.
+- All ordinary content/news regression tests and Astro build passed on the second run; the visual proof was successful through video generation. Only media attachment and updated documentation were modified after that test; rerun branch content/build/asset smoke to confirm it serves. Human judgement of polish and reading holds remains open. The original published Intro at production main 4f0215aa1941fd129762c9923cd25349fbcbc03b remains untouched.
