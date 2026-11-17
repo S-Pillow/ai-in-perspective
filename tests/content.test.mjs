@@ -1111,6 +1111,9 @@ test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a 
   const readme = read("README.md");
   const control = read("docs/PROJECT_CONTROL.md");
   assert.match(readme, /News currently uses a \*\*dated saved snapshot\*\*, not a live or automatically refreshed feed/);
+  assert.match(readme, /<h1 align="center">AI in Perspective<\/h1>/);
+  assert.match(readme, /```bash/);
+  assert.doesNotMatch(readme, /\\`/);
   assert.match(readme, /merged commit is not considered deployed until a matching production build is \*\*READY\*\*/);
   assert.match(readme, /\[PR #7\]\(https:\/\/github\.com\/S-Pillow\/ai-in-perspective\/pull\/7\)/);
   assert.doesNotMatch(readme, /PR #3.*still \*\*unmerged\*\*|News Coming Soon route|temporary combined Education & News/);
