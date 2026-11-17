@@ -1044,3 +1044,81 @@ test("AIIP-NEWS-04E finished News labels avoid temporary editorial-preview langu
   assert.match(page,/dated saved snapshot, not a real-time feed/);
   assert.match(page,/formatSnapshotTimeUtc\(feedSnapshot.publishedAt\)/);
 });
+
+
+test("AIIP-INTRO-01 flyover reuses original copy and remains reversible", async () => {
+  const page=read("src/pages/intro.astro");
+  const css=read("src/styles/intro-flyover.css");
+  const js=read("src/scripts/intro-flyover.js");
+  const originalCSS=read("src/styles/global.css");
+  assert.match(page,/import "\.\.\/styles\/intro-flyover\.css"/);
+  assert.match(page,/import "\.\.\/scripts\/intro-flyover\.js"/);
+  for(const phrase of ["AI HAS","ARRIVED","You can choose to ignore it.","There are real risks","You don't have to embrace everything about AI","The choice begins with","Continue to explore"]){
+    assert.ok(page.includes(phrase),"original copy retained: "+phrase);
+  }
+  assert.match(page,/intro-earth-art/);
+  assert.match(page,/intro-earth-cloud-texture/);
+  assert.match(page,/href="\/discover\/" class="intro-continue"/);
+  assert.match(page,/href="\/discover\/" class="intro-skip"/);
+  assert.match(page,/data-intro-flyover-skip hidden/);
+  assert.match(page,/data-intro-flyover-replay hidden/);
+  assert.match(js,/params\.get\("flyover"\)==="off"/);
+  assert.match(js,/params\.get\("flyoverAt"\)/);
+  assert.match(js,/window\.__introFlyoverSeek=seek/);
+  assert.match(js,/window\.__introFlyoverDuration=/);
+  assert.match(js,/prefers-reduced-motion: reduce/);
+  assert.match(js,/max-width: 620px/);
+  assert.match(js,/event\.key==="Escape"/);
+  assert.match(css,/\.intro-stage\.intro-flyover\{/);
+  assert.match(css,/\.intro-flyover-action\[hidden\]/);
+  assert.match(originalCSS,/@media \(prefers-reduced-motion: reduce\)/);
+  assert.doesNotMatch(js,/\bfetch\s*\(|https?:\/\/|setInterval|localStorage/);
+});
+
+test("AIIP-INTRO-01 upright page precedes Earth rising on the editable 18.5-second timeline", async () => {
+  const {
+    INTRO_FLYOVER_DURATION_MS, INTRO_FLYOVER_SCENES, INTRO_FLYOVER_MARKERS,
+    INTRO_CAMERA_FRAMES, INTRO_GLOBE_FRAMES, INTRO_SURFACE_FRAMES, INTRO_AURA_FRAMES,
+    INTRO_HORIZON_FRAMES, getIntroFlyoverScene,
+  }=await import("../src/data/introFlyover.mjs");
+  assert.equal(INTRO_FLYOVER_DURATION_MS,18500);
+  assert.deepEqual(INTRO_FLYOVER_SCENES.map(s=>s.id),["establish","travel","overview","globe","closing"]);
+  assert.equal(INTRO_FLYOVER_SCENES[0].start,0);
+  assert.equal(INTRO_FLYOVER_SCENES.at(-1).end,18.5);
+  for(let i=1;i<INTRO_FLYOVER_SCENES.length;i++)
+    assert.equal(INTRO_FLYOVER_SCENES[i-1].end,INTRO_FLYOVER_SCENES[i].start);
+  for(const frames of [INTRO_CAMERA_FRAMES,INTRO_SURFACE_FRAMES,INTRO_GLOBE_FRAMES,INTRO_AURA_FRAMES,INTRO_HORIZON_FRAMES]){
+    assert.equal(frames[0].offset,0);
+    assert.equal(frames.at(-1).offset,1);
+    assert.ok(frames.every((f,i)=>i===0||f.offset>frames[i-1].offset));
+  }
+  const upright=INTRO_CAMERA_FRAMES.find(f=>f.offset===INTRO_FLYOVER_MARKERS.pageUprightAt);
+  assert.match(upright.transform,/rotateX\(0deg\)/);
+  assert.ok(INTRO_FLYOVER_MARKERS.globeRiseStartsAt>INTRO_FLYOVER_MARKERS.pageUprightAt);
+  assert.equal(INTRO_GLOBE_FRAMES.find(f=>f.offset===INTRO_FLYOVER_MARKERS.globeRiseStartsAt).opacity,0);
+  assert.ok(INTRO_GLOBE_FRAMES.filter(f=>f.offset<=INTRO_FLYOVER_MARKERS.pageUprightAt).every(f=>f.opacity===0));
+  assert.ok(INTRO_GLOBE_FRAMES.find(f=>f.offset===INTRO_FLYOVER_MARKERS.globeSettledAt).opacity>.9);
+  assert.equal(getIntroFlyoverScene(0).id,"establish");
+  assert.equal(getIntroFlyoverScene(6).id,"travel");
+  assert.equal(getIntroFlyoverScene(11).id,"overview");
+  assert.equal(getIntroFlyoverScene(13).id,"globe");
+  assert.equal(getIntroFlyoverScene(17).id,"closing");
+  assert.throws(()=>getIntroFlyoverScene(NaN),/Invalid/);
+});
+
+
+test("AIIP-INTRO-01B explicit flat webpage and visibly rising globe are required",()=>{
+  const page=read("src/pages/intro.astro");
+  const style=read("src/styles/intro-flyover.css");
+  const js=read("src/scripts/intro-flyover.js");
+  const renderer=read("scripts/render-intro-flyover.mjs");
+  assert.match(page,/intro-flyover-page-surface" aria-hidden="true"/);
+  assert.match(style,/border:2px solid #7bd7edb8/);
+  assert.match(style,/perspective:2800px/);
+  assert.match(js,/plane\.animate\(INTRO_SURFACE_FRAMES/);
+  assert.match(renderer,/sheetProjectedWidth>500/);
+  assert.match(renderer,/sheetProjectedWidth<2400/);
+  assert.match(renderer,/sheetVisibleHeight>100/);
+  assert.match(renderer,/sheetHasBorder/);
+  assert.match(renderer,/planetVisibleHeight>200/);
+});

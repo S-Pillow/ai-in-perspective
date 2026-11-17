@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/intro-flyover.css";
 ---
 <BaseLayout title="The choice begins with understanding" description="A moment to consider what understanding AI makes possible." bodyClass="intro-body">
   <main id="content" class="intro-stage">
@@ -93,6 +94,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </svg>
     </div>
     <div class="intro-center">
+      <div class="intro-flyover-page-surface" aria-hidden="true"></div>
       <a href="/intro" class="intro-brand" aria-label="AI in Perspective introduction">AI <span>in Perspective</span></a>
       <div class="intro-message" aria-label="Opening statement">
         <h1 class="intro-line intro-line--first"><span class="intro-headline-lead">AI HAS</span> <span class="intro-headline-arrived">ARRIVED</span></h1>
@@ -103,12 +105,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
       <a href="/discover/" class="intro-continue">Continue to explore <span aria-hidden="true">→</span></a>
     </div>
+    <button type="button" class="intro-flyover-action" data-intro-flyover-skip hidden>Skip motion</button>
+    <button type="button" class="intro-flyover-action" data-intro-flyover-replay hidden>Replay flyover</button>
     <a href="/discover/" class="intro-skip">Skip introduction <span aria-hidden="true">↗</span></a>
     <span class="intro-caption" aria-hidden="true">PERSPECTIVE BEGINS HERE</span>
   </main>
-  <script>
-    // Keep the action visible without waiting for animation. Motion never blocks entry.
-    const stage = document.querySelector(".intro-stage");
-    stage?.classList.add("intro-ready");
-  </script>
+  <script>import "../scripts/intro-flyover.js";</script>
 </BaseLayout>

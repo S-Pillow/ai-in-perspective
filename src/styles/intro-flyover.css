@@ -1,0 +1,92 @@
+/*
+ * AIIP-INTRO-01: reversible, silent flyover experiment.
+ * This file only applies when the Intro JS opts into .intro-flyover.
+ * The original page, global styles, navigation and content are not replaced.
+ */
+.intro-stage.intro-flyover{
+  perspective:2800px;
+  perspective-origin:50% 27%;
+}
+.intro-stage.intro-flyover .intro-center{
+  transform-origin:50% 50%;
+  transform-style:preserve-3d;
+  backface-visibility:visible;
+  will-change:transform;
+}
+.intro-stage.intro-flyover .intro-line,
+.intro-stage.intro-flyover .intro-continue{
+  animation:none!important;
+  opacity:1!important;
+}
+.intro-stage.intro-flyover .intro-line{
+  transform:none!important;
+}
+.intro-stage.intro-flyover .intro-planet,
+.intro-stage.intro-flyover .intro-earth-aura,
+.intro-stage.intro-flyover .intro-title-horizon,
+.intro-stage.intro-flyover .intro-planet::before{
+  animation:none!important;
+}
+.intro-stage.intro-flyover .intro-planet,
+.intro-stage.intro-flyover .intro-earth-aura,
+.intro-stage.intro-flyover .intro-title-horizon{
+  opacity:0;
+  will-change:transform,opacity;
+}
+.intro-stage.intro-flyover .intro-planet::before{
+  opacity:1;
+}
+.intro-flyover-action{
+  position:absolute;
+  z-index:10;
+  left:clamp(17px,3vw,54px);
+  top:22px;
+  border:1px solid #8de1ec8a;
+  border-radius:4px;
+  color:#d8f7fc;
+  background:#08182bdd;
+  padding:9px 12px;
+  font:650 11px/1.3 var(--display);
+  cursor:pointer;
+  letter-spacing:.04em;
+  box-shadow:0 2px 18px #02060f80;
+}
+.intro-flyover-action[hidden]{display:none!important;}
+.intro-flyover-action:hover,
+.intro-flyover-action:focus-visible{
+  border-color:#b2f8fd;
+  color:white;
+  background:#12344c;
+}
+.intro-stage.intro-flyover .intro-skip{z-index:12;}
+@media(max-width:620px){
+  .intro-flyover-action{left:16px;top:45px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .intro-flyover-action{display:none!important;}
+}
+
+
+/* A visible physical page surface behind *existing* Intro words.
+   Earlier rotated text alone had no surface and did not look flat. */
+.intro-flyover-page-surface{display:none;}
+.intro-stage.intro-flyover .intro-flyover-page-surface{
+  display:block;
+  position:absolute;
+  inset:-4svh -5vw -7svh;
+  border:2px solid #7bd7edb8;
+  border-radius:12px;
+  background:
+    linear-gradient(90deg,#61bcdf0d 1px,transparent 1px),
+    linear-gradient(#61bcdf0d 1px,transparent 1px),
+    radial-gradient(ellipse at 50% 7%,#214976f2,#102441fb 53%,#061425ff);
+  background-size:46px 46px,46px 46px,auto;
+  box-shadow:inset 0 0 0 5px #09213b,0 0 0 1px #09263d,0 20px 80px #000b1cbd;
+  transform:translateZ(-3px);
+  pointer-events:none;
+  will-change:opacity;
+  z-index:-1;
+}
+.intro-stage.intro-flyover .intro-center{isolation:isolate;}
+.intro-stage.intro-flyover .intro-brand,
+.intro-stage.intro-flyover .intro-message{position:relative;z-index:1;}

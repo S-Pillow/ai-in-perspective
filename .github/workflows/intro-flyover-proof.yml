@@ -1,0 +1,99 @@
+name: AIIP Intro Flyover Experiment — visual & silent video proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/intro-flyover-proof.yml
+      - src/pages/intro.astro
+      - src/data/introFlyover.mjs
+      - src/scripts/intro-flyover.js
+      - src/styles/intro-flyover.css
+      - scripts/render-intro-flyover.mjs
+      - tests/content.test.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install repository dependencies
+        run: npm install --no-audit --no-fund
+      - name: Verify Intro and News content contracts
+        run: npm run check:content
+      - name: Install read-only browser render dependencies
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.65.0
+          npx playwright install chromium --with-deps
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Build static site
+        run: npm run build
+      - name: Start local Astro preview (no deployment)
+        run: |
+          nohup npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/aiip-intro-preview.log 2>&1 &
+          for i in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:4173/intro > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/aiip-intro-preview.log
+          exit 1
+      - name: Check scene boundaries and render silent MP4
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node scripts/render-intro-flyover.mjs
+      - name: Make a compact silent MP4 and expose base64 for controlled proof transfer
+        run: |
+          ffmpeg -hide_banner -loglevel error -y \
+            -i intro-flyover-proof/intro-flyover-silent.mp4 \
+            -vf "scale=720:576" -c:v libx264 -preset fast -crf 30 \
+            -pix_fmt yuv420p -movflags +faststart \
+            intro-flyover-proof/intro-flyover-compact.mp4
+          for spec in "flat:01-flat" "travel:02-travel" "upright:04-upright" "globe:05-globe-rise" "closing:06-closing"; do
+            name="${spec%%:*}"
+            file="${spec#*:}"
+            ffmpeg -hide_banner -loglevel error -y -i "intro-flyover-proof/${file}.png" \
+              -vf "scale=720:576" -q:v 6 "intro-flyover-proof/frame-${name}.jpg"
+          done
+          node - <<'NODE'
+          const {readFileSync}=require('node:fs');
+          for(const [kind,file] of [
+            ['VIDEO','intro-flyover-proof/intro-flyover-compact.mp4'],
+            ['FLAT','intro-flyover-proof/frame-flat.jpg'],
+            ['TRAVEL','intro-flyover-proof/frame-travel.jpg'],
+            ['UPRIGHT','intro-flyover-proof/frame-upright.jpg'],
+            ['GLOBE','intro-flyover-proof/frame-globe.jpg'],
+            ['POSTER','intro-flyover-proof/frame-closing.jpg'],
+          ]){
+            const bytes=readFileSync(file);
+            const base64=bytes.toString('base64');
+            console.log('INTRO_MEDIA_'+kind+'_BYTES='+bytes.length);
+            for(let i=0;i<base64.length;i+=8000){
+              const index=String(i/8000).padStart(4,'0');
+              console.log('INTRO_MEDIA_'+kind+'_PART_'+index+'='+base64.slice(i,i+8000));
+            }
+            console.log('INTRO_MEDIA_'+kind+'_DONE='+Math.ceil(base64.length/8000));
+          }
+          NODE
+      - name: Upload poster, scene frames and silent proof video
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: intro-flyover-review
+          path: |
+            intro-flyover-proof/*.png
+            intro-flyover-proof/*.mp4
+            intro-flyover-proof/report.json
+          retention-days: 7
+          if-no-files-found: warn
