@@ -808,7 +808,7 @@ test("AIIP-RELEASE-01 preserves MIT license and creator credit for the arcade an
   assert.match(page, /href="\/licenses\/instalanding-MIT-LICENSE\.txt"/);
   assert.match(page, /Animation license and credit/);
   assert.match(page, /sandbox="allow-scripts"/);
-  assert.match(page, /RSS IS PLANNED \/ NO LIVE HEADLINES YET/);
+  assert.match(page, /not a live feed/);
   assert.ok(!page.includes("\u2014"),"Site copy must not use em dashes");
 });
 
