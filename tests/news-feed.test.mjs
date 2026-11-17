@@ -4,6 +4,8 @@ import { readFileSync } from "node:fs";
 import {NEWS_FEEDS,ENABLED_NEWS_FEEDS} from "../src/data/newsFeeds.mjs";
 import {parseFeedXml,parseDate,safeArticleUrl,normalizeArticle,validateSnapshot,mergeSnapshot,newEmptySnapshot,sortArticles,MAX_FEED_BYTES} from "../scripts/news/feed-core.mjs";
 import {collectOneFeed,collectAll,runCli} from "../scripts/news/collect.mjs";
+import {getVisibleFeedArticles,canonicalArticleLink,formatSnapshotTimeUtc} from "../src/data/newsPresentation.mjs";
+import {NEWS_STORIES} from "../src/data/newsEditorial.mjs";
 const MIT=NEWS_FEEDS.find(s=>s.id==="mit_news_ai"),ARXIV=NEWS_FEEDS.find(s=>s.id==="arxiv_cs_ai"),OPENAI=NEWS_FEEDS.find(s=>s.id==="openai_news");
 const NOW="2026-11-16T14:00:00.000Z";
 const RSS='<?xml version="1.0"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><item><title>New AI &amp; research</title><link>https://news.mit.edu/2026/test?utm_source=rss&amp;id=1</link><pubDate>Mon, 16 Nov 2026 09:00:00 -0500</pubDate></item><item><title><![CDATA[Another discovery]]></title><link>https://news.mit.edu/2026/another</link></item></channel></rss>';
@@ -113,13 +115,51 @@ test("Astro uses a checked-in, validated snapshot and does not fetch publishers 
   assert.ok(fixture.articles.every(a=>a.lens===null && a.editorialNote===null));
   assert.ok(fixture.articles.every(a=>a.publishedAt===null || a.publishedAt<=fixture.publishedAt));
   assert.match(page,/validateSnapshot\(savedNewsSnapshot\)/);assert.match(page,/latestArticles\.map/);
-  assert.match(page,/without an automatically assigned editorial perspective/);
+  assert.match(page,/no automatically assigned editorial perspective/);
   assert.match(page,/Date not provided/);assert.doesNotMatch(page,/\bfetch\s*\(/);
-  assert.match(page,/ENABLED_NEWS_FEEDS\.map/);
-  assert.match(page,/sourceBuckets/);
+  assert.match(page,/ENABLED_NEWS_FEEDS/);
+  assert.match(page,/getVisibleFeedArticles/);
 });
 
 test("read-only snapshot export rejects --write combinations before network access", async()=>{
   await assert.rejects(()=>runCli(["--preview-json","--write"]),/usage:/);
   await assert.rejects(()=>runCli(["--dry-run","--write"]),/usage:/);
+});
+
+
+test("AIIP-NEWS-04B curated items are not duplicated in the balanced visible source feed",()=>{
+  const snapshot=JSON.parse(readFileSync(new URL("../src/data/news-snapshot.json",import.meta.url),"utf8"));
+  const visible=getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,16);
+  assert.equal(snapshot.articles.length,40,"saved historical snapshot stays complete");
+  assert.equal(visible.length,16,"show sixteen balanced source links");
+  const curatedUrls=new Set(NEWS_STORIES.map(x=>canonicalArticleLink(x.url)));
+  assert.ok(snapshot.articles.some(x=>curatedUrls.has(canonicalArticleLink(x.url))),"fixture contains a duplicate to catch");
+  assert.ok(visible.every(x=>!curatedUrls.has(canonicalArticleLink(x.url))),"no repeated curated links");
+  assert.equal(new Set(visible.map(x=>x.id)).size,visible.length,"unique visible article IDs");
+  assert.equal(new Set(visible.map(x=>x.sourceId)).size,5,"all five publishers represented");
+  assert.equal(new Set(visible.slice(0,5).map(x=>x.sourceId)).size,5,"first rotation stays balanced");
+  assert.equal(getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,0).length,0);
+  assert.equal(canonicalArticleLink("https://news.mit.edu/2026/test?utm_source=rss&id=2#headline"),
+    canonicalArticleLink("https://news.mit.edu/2026/test?id=2"));
+});
+
+test("AIIP-NEWS-04B news layout is compact and snapshot date shows an explicit UTC time",()=>{
+  const page=readFileSync(new URL("../src/pages/explore/news.astro",import.meta.url),"utf8");
+  const css=readFileSync(new URL("../src/styles/news-room.css",import.meta.url),"utf8");
+  const stamp=formatSnapshotTimeUtc("2026-11-17T02:59:19.913Z");
+  assert.match(stamp,/Nov 17, 2026/);
+  assert.match(stamp,/2:59 AM/);
+  assert.match(stamp,/UTC/);
+  assert.equal(formatSnapshotTimeUtc(null),null);
+  assert.match(page,/href="#source-feed">Browse source links/);
+  assert.match(page,/datetime=\{feedSnapshot.publishedAt \?\? undefined\}/);
+  assert.match(page,/formatSnapshotTimeUtc\(feedSnapshot.publishedAt\)/);
+  assert.match(css,/\.nr-lead\{[^}]*align-self:start/);
+  assert.match(css,/\.nr-stack\{[^}]*grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css,/\.nr-stories h2,[^{]*\{[^}]*"DM Sans"/);
+  assert.match(css,/\.nr-feed h2\{[^}]*"DM Sans"/);
+  assert.match(css,/@media\(max-width:1100px\)/);
+  assert.match(css,/@media\(max-width:620px\)/);
+  assert.match(css,/\.nr-lead h3\{font:600[^}]*"DM Sans"/);
+  assert.match(css,/\.nr-item h3\{font:600[^}]*"DM Sans"/);
 });

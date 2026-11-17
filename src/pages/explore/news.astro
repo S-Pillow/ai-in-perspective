@@ -5,6 +5,7 @@ import { NEWS_LENSES, NEWS_REVIEW_DATE, NEWS_SOURCES, NEWS_STORIES, validateEdit
 import savedNewsSnapshot from "../../data/news-snapshot.json";
 import { validateSnapshot } from "../../../scripts/news/feed-core.mjs";
 import { ENABLED_NEWS_FEEDS } from "../../data/newsFeeds.mjs";
+import { getVisibleFeedArticles, formatSnapshotTimeUtc } from "../../data/newsPresentation.mjs";
 import "../../styles/education-news.css";
 import "../../styles/news-room.css";
 
@@ -12,14 +13,8 @@ validateEditorialPreview();
 const lead = NEWS_STORIES.find((story) => story.featured);
 const otherStories = NEWS_STORIES.filter((story) => !story.featured);
 const feedSnapshot = validateSnapshot(savedNewsSnapshot);
-// Show a cross-section rather than letting the most active publisher dominate.
-const sourceBuckets = ENABLED_NEWS_FEEDS.map(source => feedSnapshot.articles.filter(article => article.sourceId === source.id));
-const latestArticles = [];
-for (let offset = 0; offset < 8 && latestArticles.length < 16; offset++) {
-  for (const articles of sourceBuckets) {
-    if (articles[offset] && latestArticles.length < 16) latestArticles.push(articles[offset]);
-  }
-}
+// Display links from every publisher without repeating any of the curated stories.
+const latestArticles = getVisibleFeedArticles(feedSnapshot.articles, ENABLED_NEWS_FEEDS, NEWS_STORIES, 16);
 const feedSourceType = (value) => ({preprint:"Preprint · not peer reviewed by default",company_announcement:"Company announcement · attributed claim",independent_reporting:"Independent reporting",university:"University research report"})[value] ?? "Publisher article";
 const feedStatusLabel = (value) => ({preprint:"Preprint",attributed_primary_source:"Provider report",unreviewed:"Not independently verified",independent_reporting:"Independently reported",corroborated:"Independently corroborated"})[value] ?? "Source link";
 const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T12:00:00Z"));
@@ -43,7 +38,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
           <h1 id="en-title">News <span>&amp;</span> Perspective<span class="nr-title-dot">.</span></h1>
           <p class="en-lead">The useful, troubling, remarkable, and important things happening in AI, with the original reporting close at hand and enough context to think for yourself.</p>
           <div class="en-hero__actions">
-            <a class="en-primary" href="#stories">Explore the stories <span aria-hidden="true">↓</span></a>
+            <a class="en-primary" href="#source-feed">Browse source links <span aria-hidden="true">↓</span></a>
             <a class="en-quiet" href="#our-approach">How we choose them <span aria-hidden="true">↘</span></a>
           </div>
         </div>
@@ -105,12 +100,12 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
         <div>
           <p class="en-eyebrow">SOURCE SNAPSHOT / NEWS DATA</p>
           <h2 id="nr-feed-title">Recent links from across the sources.</h2>
-          <p>Feed entries are sampled across publishers and link directly to their original articles. The newest items from each source are shown without an automatically assigned editorial perspective or independent fact-check. Check the original source before relying on a claim.</p>
+          <p>Feed entries are sampled across publishers, without repeating the curated stories above. The newest links from each source have no automatically assigned editorial perspective or independent fact-check. Check the original source before relying on a claim.</p>
         </div>
         <div class="nr-feed__status" aria-label="News snapshot status">
           <span>{latestArticles.length ? "SAVED SNAPSHOT" : "COLLECTION NOT PUBLISHED"}</span>
-          <strong>{feedSnapshot.publishedAt ? new Intl.DateTimeFormat("en-US", {month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}).format(new Date(feedSnapshot.publishedAt)) : "Awaiting first checked update"}</strong>
-          <small>{latestArticles.length ? "This is the date the saved list changed, not a live-feed timestamp." : "Feed collection is in testing; these are not automatically updated headlines."}</small>
+          <strong><time datetime={feedSnapshot.publishedAt ?? undefined}>{feedSnapshot.publishedAt ? formatSnapshotTimeUtc(feedSnapshot.publishedAt) : "Awaiting first checked update"}</time></strong>
+          <small>{latestArticles.length ? "This is when the saved snapshot changed (UTC), not a live-feed refresh." : "Feed collection is in testing; these are not automatically updated headlines."}</small>
         </div>
       </div>
       {latestArticles.length ? (
