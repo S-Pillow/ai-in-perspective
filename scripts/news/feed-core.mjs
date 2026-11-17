@@ -11,12 +11,13 @@ const MAX_TITLE = 240;
 const PARSER = new XMLParser({
   ignoreAttributes:false, attributeNamePrefix:"@_", textNodeName:"#text",
   parseTagValue:false, parseAttributeValue:false, trimValues:true,
-  cdataPropName:"#text", processEntities:true, allowBooleanAttributes:false,
+  processEntities:true, allowBooleanAttributes:false,
 });
 
 export const sourceById = (id, sources=NEWS_FEEDS) => sources.find(s=>s.id===id) ?? null;
 const asList = x => x===undefined || x===null ? [] : Array.isArray(x) ? x : [x];
 const nodeText = x => {
+  if(Array.isArray(x))return x.map(nodeText).filter(Boolean).join(" ");
   if(typeof x==="string" || typeof x==="number") return String(x);
   if(x && typeof x==="object" && x["#text"]!==undefined) return nodeText(x["#text"]);
   return "";
