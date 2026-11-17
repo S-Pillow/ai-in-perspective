@@ -52,8 +52,32 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node scripts/render-intro-flyover.mjs
+      - name: Make a compact silent MP4 and expose base64 for controlled proof transfer
+        run: |
+          ffmpeg -hide_banner -loglevel error -y \
+            -i intro-flyover-proof/intro-flyover-silent.mp4 \
+            -vf "scale=720:576" -c:v libx264 -preset fast -crf 30 \
+            -pix_fmt yuv420p -movflags +faststart \
+            intro-flyover-proof/intro-flyover-compact.mp4
+          node - <<'NODE'
+          const {readFileSync}=require('node:fs');
+          for(const [kind,file] of [
+            ['VIDEO','intro-flyover-proof/intro-flyover-compact.mp4'],
+            ['POSTER','intro-flyover-proof/06-closing.png'],
+          ]){
+            const bytes=readFileSync(file);
+            const base64=bytes.toString('base64');
+            console.log('INTRO_MEDIA_'+kind+'_BYTES='+bytes.length);
+            for(let i=0;i<base64.length;i+=8000){
+              const index=String(i/8000).padStart(4,'0');
+              console.log('INTRO_MEDIA_'+kind+'_PART_'+index+'='+base64.slice(i,i+8000));
+            }
+            console.log('INTRO_MEDIA_'+kind+'_DONE='+Math.ceil(base64.length/8000));
+          }
+          NODE
       - name: Upload poster, scene frames and silent proof video
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: intro-flyover-review
