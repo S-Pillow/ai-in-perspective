@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 71
+- **Record revision:** 72
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -598,3 +598,10 @@
 - **Implementation boundary:** On all /explore/* perspective routes and the supporting /methodology route, retain existing content/links and header hierarchy. Promote the existing header Explore link to a clearly identified "All perspectives" navigation control; append one shared, high-contrast bottom section with a direct /discover/ link and a "Back to top" anchor. Adapt a coherent gradient/glow treatment to History, Risks, Benefits, Environment, Education and News accents; do not duplicate source code from Uiverse examples, add external scripts, autoplay effects, tracking or dependencies.
 - **Acceptance evidence:** Check source-level route coverage, correct absolute /discover/ target, keyboard focus, responsive layout rules, and reduced-motion behavior; run content/News checks and static build on the exact commit. Rendered desktop/mobile accessibility/visual judgment is an owner or capable browser observer gate, not proven by source assertions or CI alone.
 - **Durability and release:** New branch feature/aiip-nav-perspective-return from main 4f0215aa1941fd129762c9923cd25349fbcbc03b, with Draft PR for owner review. Existing production, unrelated News/Education content, data collection, Intro and flyover experiment remain untouched. No merge or production release without explicit owner acceptance.
+
+
+## AIIP-NEWS-05 | Education-to-News navigation truthfulness correction (2026-11-17)
+- **Owner-observed defect:** A desktop screenshot of the draft navigation preview shows the Education section switcher still marking News \`COMING SOON\` even though News was published from main \`4f0215aa\` on 2026-11-17. The Education page also retained stale "taking shape" body copy and a "Visit News Coming Soon" link.
+- **Bounded correction:** Replace the incorrect News tab badge with an ordinary News link, and update only the adjacent Education News-promo text and CTA to describe the published curated News and dated, non-live source snapshot. Preserve the existing News route, publication truthfulness, arcade, article data, curriculum and all other navigation. No new content feed, automatic refresh, CSS redesign, or external dependency.
+- **Verification:** A focused content regression proves the Education switcher and CTA link to \`/explore/news\`, the Coming Soon labels are absent, the News switch marks its current page correctly, and saved-snapshot qualifiers remain. GitHub content/News tests plus Astro build are required on the exact new commit; hosted visual review remains operator-owned.
+- **Release boundary:** Applied as a documented scope addition on Draft PR #6; owner review is still pending. No merge, production deploy or changes to the abandoned flyover experiment.

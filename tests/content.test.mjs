@@ -1066,3 +1066,15 @@ test("AIIP-NAV-01 prominent return to perspectives uses a real shared destinatio
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
 });
+
+
+test("AIIP-NEWS-05 Education links to published News without stale Coming Soon labels", () => {
+  const edu = read("src/pages/explore/education-news.astro");
+  const news = read("src/pages/explore/news.astro");
+  assert.match(edu, /<a class="ed-switch__item" href="\/explore\/news">News<\/a>/);
+  assert.match(edu, /href="\/explore\/news">Explore News &amp; Perspective/);
+  assert.match(edu, /dated snapshot, not a live feed/);
+  assert.doesNotMatch(edu, /News Coming Soon|News <span>COMING SOON<\/span>|The News section is taking shape|while we build it/);
+  assert.match(news, /<a href="\/explore\/news" aria-current="page">News<\/a>/);
+  assert.match(news, /saved snapshot, not a real-time feed/);
+});
