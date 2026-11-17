@@ -110,3 +110,29 @@
  .nr-item,.nr-filter,.nr-source{transition:none;}
  .nr-item:hover{transform:none;}
 }
+
+
+/* Static source snapshot. Visually subordinate to the approved editorial lead. */
+.nr-feed{padding:56px clamp(21px,6vw,94px) 68px;max-width:1510px;margin:0 auto;border-top:1px solid #263e56;}
+.nr-feed__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,340px);gap:32px;align-items:end;margin-bottom:26px;}
+.nr-feed__intro .en-eyebrow{margin-bottom:13px;}
+.nr-feed h2{font:800 clamp(28px,3.5vw,49px)/1.14 "Syne","Manrope",sans-serif;letter-spacing:-.05em;margin:0 0 14px;}
+.nr-feed__intro p:not(.en-eyebrow){font:400 14px/1.7 "DM Sans","Segoe UI",sans-serif;color:#c5d3e0;max-width:710px;margin:0;}
+.nr-feed__status{padding:20px 22px;border:1px solid #4b687b;border-radius:11px;background:#102336;display:flex;flex-direction:column;gap:7px;}
+.nr-feed__status>span{font:700 10px/1.4 ui-monospace,monospace;letter-spacing:.11em;color:#98eee9;}
+.nr-feed__status strong{font:600 17px/1.4 "DM Sans",sans-serif;color:#edf8ff;}
+.nr-feed__status small{font:400 12px/1.6 "DM Sans",sans-serif;color:#c5d1e0;}
+.nr-feed__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.nr-feed__item,.nr-feed__empty{background:#0e1a2a;border:1px solid #395368;border-radius:12px;padding:24px;}
+.nr-feed__item h3{font:600 clamp(18px,1.65vw,23px)/1.34 "DM Sans","Segoe UI",sans-serif;letter-spacing:-.01em;margin:14px 0 20px;}
+.nr-feed__item h3 a{color:#f5faff;text-decoration:none;}
+.nr-feed__item h3 a:hover{text-decoration:underline;text-underline-offset:3px;color:#a7f0ee;}
+.nr-feed__meta,.nr-feed__bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.nr-feed__meta{color:#b9d4e0;font:700 10px/1.5 ui-monospace,monospace;letter-spacing:.03em;}
+.nr-feed__meta span:first-child{color:#a4f1e8;}
+.nr-feed__bottom{padding-top:12px;border-top:1px solid #365167;color:#b7c8d7;font:600 11px/1.5 "DM Sans",sans-serif;}
+.nr-feed__empty{color:#dde7f0;}
+.nr-feed__empty strong{display:block;font:600 19px/1.5 "DM Sans",sans-serif;margin-bottom:8px;}
+.nr-feed__empty p{color:#b6cbd8;font:400 14px/1.7 "DM Sans",sans-serif;margin:0;}
+@media(max-width:940px){.nr-feed__intro{grid-template-columns:1fr;}}
+@media(max-width:620px){.nr-feed__list{grid-template-columns:1fr;}.nr-feed__item,.nr-feed__empty{padding:20px;}}

@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 64
+- **Record revision:** 65
 - **Last reconciled:** 2026-11-16
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -537,3 +537,13 @@
 - **Authorized correction:** Replace only the featured and supporting article h3 typography in `src/styles/news-room.css`: use the site's already-loaded DM Sans at weight 600, reduce negative tracking, slightly moderate font size and increase line height. Leave the hero display type, topic labels, content, article links, arcade, Education, model and feed code unchanged. No new font request or build dependency.
 - **Test control:** Add a focused content-contract regression test for the two article-headline selectors and loaded font; retain the broader News/arcade/Education tests. Publish only to the protected feature-branch preview, inspect exact commit and record any remaining unverified browser/mobile checks.
 - **Release boundary:** Draft PR #4 remains unmerged; public `main` production stays at Education commit `9712e9f4791b5f319fc3744b324c4ed529229db1`. No automatic feed activation, scheduled job, new RSS licensing claim or production approval.
+
+
+## AIIP-NEWS-04 | Bounded RSS/Atom collector, offline verification and manual review gate (2026-11-17)
+
+- **Owner direction:** After accepting the News editorial preview, the owner explicitly approved proceeding with functional News work. This authorizes implementation and tests of source fetching, normalization, data snapshots and failure safeguards, **not unattended public News publishing or automatic merge**. Preserve Education and the accepted News editorial layout/type.
+- **Implementation:** Add \`src/data/newsFeeds.mjs\` allowlist with five candidate feeds (MIT News, arXiv cs.AI, The Verge AI, OpenAI News, Google DeepMind), two disabled candidates (MIT Technology Review pending access/reuse verification; Anthropic pending official feed verification). Add \`scripts/news/feed-core.mjs\` RSS/Atom parser, normalization, stable IDs, strict hostname/date checks, fail-closed snapshot validator and partial-failure retention. Add \`scripts/news/collect.mjs\` bounded read-only probe by default; opt-in local \`--write\` only on meaningful content change, with no Git commit, schedule, upload or deployment side effect.
+- **Presentation:** Add checked-in **empty, honest** \`src/data/news-snapshot.json\` as \`news-snapshot-v1\`, and add a secondary latest-source-snapshot zone to the approved News page. Keep the owner-reviewed five editorial examples and their human perspective labels distinct from unreviewed future RSS entries; no automatic tagging, fabricated recency, feed snippets, AI summaries or external photos. News page remains useful even if no feeds have been published.
+- **Build/test:** Pin \`fast-xml-parser\` in \`package.json\`, add \`tests/news-feed.test.mjs\` with synthetic RSS/Atom, hostile content, deduplication, unknown dates, disabled sources, empty/preprint feed, failure retention, no-op snapshot and render boundary regression coverage. Add npm \`news:check\`, \`news:probe\` and explicit local \`news:collect\`, and update CI to run offline contract tests plus nonblocking, read-only live source probes. No scheduled GitHub Actions workflow or npm runtime server.
+- **Evidence:** \`docs/design/AIIP-NEWS-04-feed-collector.md\` contains source policy, scripts, safeguards, data contract, operator steps, rollout gates, and no-op/deployment protections. Green CI/Astro and connected-runner read-only feed probes must be examined before marking sources truly usable; a successful CI does not grant feed/content rights.
+- **Release boundary:** Draft PR #4 and protected preview only, no main merge, no production deploy, no cron, no auto-update workflow or generated claims presented as independently verified. Final News feed publication requires source rights review, actual runner HTTP/XML results, a populated and visually reviewed snapshot, and separate approval. Education release at \`9712e9f4791b5f319fc3744b324c4ed529229db1\` stays untouched.

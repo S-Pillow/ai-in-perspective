@@ -22,5 +22,10 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Validate content contracts
         run: npm run check:content
+      - name: Validate News RSS/Atom contracts (offline)
+        run: npm run news:check
       - name: Astro static build
         run: npm run build
+      - name: Probe permitted News feeds (read-only diagnostics, not publication)
+        run: npm run news:probe
+        continue-on-error: true

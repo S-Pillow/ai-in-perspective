@@ -2,12 +2,18 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { NEWS_LENSES, NEWS_REVIEW_DATE, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview } from "../../data/newsEditorial.mjs";
+import savedNewsSnapshot from "../../data/news-snapshot.json";
+import { validateSnapshot } from "../../../scripts/news/feed-core.mjs";
 import "../../styles/education-news.css";
 import "../../styles/news-room.css";
 
 validateEditorialPreview();
 const lead = NEWS_STORIES.find((story) => story.featured);
 const otherStories = NEWS_STORIES.filter((story) => !story.featured);
+const feedSnapshot = validateSnapshot(savedNewsSnapshot);
+const latestArticles = feedSnapshot.articles.slice(0, 16);
+const feedSourceType = (value) => ({preprint:"Preprint · not peer reviewed by default",company_announcement:"Company announcement · attributed claim",independent_reporting:"Independent reporting",university:"University research report"})[value] ?? "Publisher article";
+const feedStatusLabel = (value) => ({preprint:"Preprint",attributed_primary_source:"Provider report",unreviewed:"Not independently verified",independent_reporting:"Independently reported",corroborated:"Independently corroborated"})[value] ?? "Source link";
 const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T12:00:00Z"));
 ---
 <BaseLayout title="AI News & Perspective | Editorial Preview" description="Explore sourced AI developments through five editorial lenses. The newsroom is a manually reviewed preview, not a live or automatically refreshed news feed." bodyClass="exhibit-body">
@@ -83,6 +89,41 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
       </div>
       <p class="nr-empty" data-news-empty hidden>No stories in this small editorial selection match that lens. Other topics are still being researched.</p>
       <p class="nr-disclaimer">Editorial preview prepared {formatDate(NEWS_REVIEW_DATE)}. These are links to real, dated source articles, not a real-time feed, verified outcomes, or automatically written summaries. No third-party article text or photographs are republished here.</p>
+    </section>
+
+
+    <section class="nr-feed" id="source-feed" aria-labelledby="nr-feed-title">
+      <div class="nr-feed__intro">
+        <div>
+          <p class="en-eyebrow">SOURCE SNAPSHOT / NEWS DATA</p>
+          <h2 id="nr-feed-title">Latest from the source feeds.</h2>
+          <p>Feed entries link directly to original publishers. These links have not been assigned one of our editorial perspectives or independently fact-checked. Check the original source before relying on a claim.</p>
+        </div>
+        <div class="nr-feed__status" aria-label="News snapshot status">
+          <span>{latestArticles.length ? "SAVED SNAPSHOT" : "COLLECTION NOT PUBLISHED"}</span>
+          <strong>{feedSnapshot.publishedAt ? new Intl.DateTimeFormat("en-US", {month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}).format(new Date(feedSnapshot.publishedAt)) : "Awaiting first checked update"}</strong>
+          <small>{latestArticles.length ? "This is the date the saved list changed, not a live-feed timestamp." : "Feed collection is in testing; these are not automatically updated headlines."}</small>
+        </div>
+      </div>
+      {latestArticles.length ? (
+        <div class="nr-feed__list">
+          {latestArticles.map((article) =>
+            <article class="nr-feed__item">
+              <div class="nr-feed__meta"><span>{article.publisher}</span><span>{feedSourceType(article.sourceType)}</span></div>
+              <h3><a href={article.url} target="_blank" rel="noopener noreferrer">{article.title} <span aria-hidden="true">↗</span></a></h3>
+              <div class="nr-feed__bottom">
+                <time datetime={article.publishedAt ?? undefined}>{article.publishedAt ? formatDate(article.publishedAt.slice(0,10)) : "Date not provided"}</time>
+                <span>{feedStatusLabel(article.evidenceStatus)}</span>
+              </div>
+            </article>
+          )}
+        </div>
+      ) : (
+        <div class="nr-feed__empty">
+          <strong>No automatic feed snapshot has been published yet.</strong>
+          <p>The collector and parser are being validated with real feeds and offline tests. The five editor-picked links above are still available to explore.</p>
+        </div>
+      )}
     </section>
 
     <section class="nr-approach" id="our-approach" aria-labelledby="nr-approach-title">

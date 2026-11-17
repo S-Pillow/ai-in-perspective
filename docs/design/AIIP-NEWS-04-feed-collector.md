@@ -1,0 +1,68 @@
+# AIIP-NEWS-04 | Bounded RSS/Atom collector and source snapshot
+
+**State (2026-11-17):** Feature-branch implementation and test contract on Draft PR #4. **Not activated or deployed to production.** This does not replace the owner-approved News editorial preview or alter Education.
+
+## Intent and operational limits
+
+The owner approved continuing the News experience after visually approving the five curated stories and lighter DM Sans headlines. This work adds a real RSS/Atom collection path **behind** the reviewed static News page, without automatically publishing unreviewed claims or triggering repeated Hobby deployments.
+
+- **Static-first:** Astro renders a checked-in, validated \`src/data/news-snapshot.json\`. Visitors do not fetch publisher feeds and are not exposed to feed credentials or cross-origin requests.
+- **Two distinct content types:** The five owner-reviewed editorial examples retain their manually assigned perspectives. Automatic feed items appear in a separate "Latest from the source feeds" section and **never receive an AI Doing Good/Gone Wrong or other editorial lens automatically**. They retain source-type and evidence labels. Blank snapshots honestly say no feed snapshot has been published.
+- **Source statuses and freshness:** A saved \`publishedAt\` is when a changed local snapshot was produced, **not** the most recent publisher check, an article publish date or evidence of a current live feed. Unknown article dates remain unknown. The command prints transient per-source diagnostics; the site never invents success or recency after a failed check.
+- **No service expansion:** No database, API route, external LLM or AI-generated summaries, cron/schedule, GitHub auto-commit, autonomous deploy, third-party licensed image use or paid provider integration.
+
+## Candidate source policy
+
+| Feed / origin | Collection flag | Known caution |
+| --- | --- | --- |
+| MIT News AI, \`news.mit.edu\` | Enabled for read-only probe | Actual runner XML access and publisher reuse requirements must be reviewed before automated publishing |
+| arXiv cs.AI, \`rss.arxiv.org\` | Enabled | Can legitimately be empty; paper links remain labeled "preprint" |
+| The Verge AI RSS, \`theverge.com\` | Enabled | Independent journalism; article title/link only until reuse review |
+| OpenAI News RSS, \`openai.com\` | Enabled | First-party/company claims are **not independently corroborated** |
+| Google DeepMind RSS, \`deepmind.google\` | Enabled | First-party/company claims are **not independently corroborated** |
+| MIT Technology Review AI | **Disabled** | Review feed access policy and display rights |
+| Anthropic News | **Disabled** | No verified official RSS; unofficial third-party bridge not trusted |
+
+These five enabled sources are **candidate read-only fetch targets**; being enabled in the source allowlist does **not** constitute live publisher validation, permission to syndicate article text, or production activation. External feed availability is an operational condition, not an assumption.
+
+## Local/offline commands
+
+Project requires Node 20.11+ and adds a pinned \`fast-xml-parser\` dependency for proper RSS/Atom XML parsing. From a clean checkout:
+
+\`\`\`sh
+npm install --no-audit --no-fund
+npm run news:check           # offline, synthetic/malicious fixtures; no external calls
+npm run check                # existing content tests + news tests + Astro build
+npm run news:probe           # read-only live feed probes, no file writes
+npm run news:collect         # EXPLICIT operator action: updates local JSON only when content changes
+\`\`\`
+
+**Important:** \`npm run news:collect\` is a manual local file write, **not permission to commit** \`news-snapshot.json\`, merge a branch, turn on cron or publish to production. Run a dry-run first, inspect source responses and display rights, and obtain explicit approval before committing an actual headline snapshot. A successful command never calls Git or Vercel. By default it is read-only and outputs sanitized JSON diagnostics with source ID, entry count, success/empty/degraded state, bounded error code and whether a new snapshot would be written.
+
+The GitHub PR build uses offline tests and an **optional read-only** probe step (nonblocking if a publisher refuses access). Live source outcomes should be assessed in the GitHub logs: a green GitHub build by itself is **not** evidence that every publisher RSS endpoint worked.
+
+## Data and behavior contract
+
+\`news-snapshot-v1\` is checked at Astro build and before writing: schema, ISO timestamp or null, stable source ID, allowlisted publisher and HTTPS article hostname, safe title, canonical article URL, deterministic article ID, original date or null, \`firstSeenAt\`, evidence qualifier, optional human-reviewed perspective and commentary, source status and optional human-picked featured ID.
+
+- Bounded collector: at most 9 seconds per request, streaming response cap 3 MB, at most 3,000 parsed items per feed, and up to two redirects strictly within that feed's **allowlisted publisher domains** over HTTPS only. Unapproved cross-host redirects, HTTP feeds, non-XML responses, malformed XML, DTD, entity declarations and oversized input fail closed.
+- Parser: uses a standards-aware XML parser for RSS 2.0 and Atom; extracts text-only title, linked canonical article URL and dates without copying descriptions, embedded publisher HTML or images.
+- Normalization: strips common marketing tracking parameters only; preserves meaningful query parameters; rejects foreign hosts and embedded credentials; stable SHA-256 source/URL identifiers; distinguishes provider announcements, preprints and unreviewed independent/university reporting. The system does not infer fact-checking from a valid headline.
+- Deduplication: canonical URL within source; no automatic cross-publisher story fusion or inferred causal links.
+- Retention: at most 8 entries per source and 40 entries total, sorted with known dates ahead of unknown dates. Failed or empty sources retain their last good entries; partial successes can add new entries from working sources. Human editorial labels and first-seen information persist for the same article ID.
+- **No-op behavior:** if the meaningful article content/metadata is unchanged, the existing snapshot is returned without touching its timestamp or file. Logging a successful fetch alone does not trigger a new Vercel build. Only an explicit \`--write\` changes the local JSON, by atomic rename.
+- Invalid item policy: individual bad titles, dates or URLs are skipped; a defective feed does not poison the page. Live source-level failure outcomes are diagnosed without exposing raw response bodies or secrets.
+
+## Tests and evidence
+
+\`tests/news-feed.test.mjs\` uses mocked \`fetch\` and RSS/Atom XML strings; tests assert regular/empty feeds, CDATA, named entity decoding, alternate links, timestamp integrity, prohibited hosts/userinfo/schemes, XXE-like DTD/entity rejection, oversize and malformed errors, canonical IDs, dedupe, provider and preprint qualifiers, partial failures, legitimate empty arXiv days, retention, no-op signature, editorial label preservation, and disabled feeds. \`npm run check\` also retains the 36 existing Education/News and site content contracts.
+
+**Release and acceptance sequence:**
+
+1. Run focused offline tests and full Astro build on the exact Draft PR #4 SHA. Check that Education files remain unchanged, arcade license/replay works, and source snapshot validates.
+2. Review the read-only GitHub-hosted publisher probe's HTTP/XML outcomes; inspect redirects and source-rights evidence for each enabled feed. Do not publish a source failing transport or reuse checks.
+3. Operator manually performs a representative local or controlled-runner **write-mode** collection into a review branch, checks actual article links and displayed labels and date sorting in the protected preview, and confirms unchanged runs make zero Git changes.
+4. Review desktop/mobile/keyboard and screen-reader behavior of the **populated** feed snapshot. The empty bootstrap preview alone cannot prove actual latest-news card rendering.
+5. Only a separate approved activation unit may schedule a low-frequency update and publish source snapshots to main. First consider one reviewable commit per day **only when data changes**, and the existing team-wide Vercel Hobby deployment allowance.
+
+**Stop conditions:** no live-source or content-rights proof, persistent publisher 403/robots/redirect restrictions, stale/incorrect dates, invalid host links, no reviewed snapshot or broken UI tests => stay Draft/unmerged. Never silently bypass feed restrictions with an unofficial Anthropic bridge.
