@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
-import { NEWS_LENSES, NEWS_REVIEW_DATE, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview } from "../../data/newsEditorial.mjs";
+import { NEWS_LENSES, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview } from "../../data/newsEditorial.mjs";
 import savedNewsSnapshot from "../../data/news-snapshot.json";
 import { validateSnapshot } from "../../../scripts/news/feed-core.mjs";
 import { ENABLED_NEWS_FEEDS } from "../../data/newsFeeds.mjs";
@@ -19,7 +19,7 @@ const feedSourceType = (value) => ({preprint:"Preprint · not peer reviewed by d
 const feedStatusLabel = (value) => ({preprint:"Preprint",attributed_primary_source:"Provider report",unreviewed:"Not independently verified",independent_reporting:"Independently reported",corroborated:"Independently corroborated"})[value] ?? "Source link";
 const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T12:00:00Z"));
 ---
-<BaseLayout title="AI News & Perspective | Editorial Preview" description="Explore sourced AI developments through five editorial lenses. The newsroom is a manually reviewed preview, not a live or automatically refreshed news feed." bodyClass="exhibit-body">
+<BaseLayout title="AI News & Perspective | AI in Perspective" description="Explore curated AI stories and attributed publisher links across five editorial lenses, with clear evidence labels and dated source snapshots." bodyClass="exhibit-body">
   <SiteHeader subtle />
   <main class="en-soon en-newsroom" id="content" data-newsroom>
     <div class="en-sky" aria-hidden="true"></div>
@@ -33,22 +33,13 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
         </nav>
       </div>
       <div class="nr-hero__grid">
-        <div>
-          <p class="en-eyebrow"><span class="nr-eyebrow-mark" aria-hidden="true"></span> PERSPECTIVE / NEWS DESK</p>
-          <h1 id="en-title">News <span>&amp;</span> Perspective<span class="nr-title-dot">.</span></h1>
-          <p class="en-lead">The useful, troubling, remarkable, and important things happening in AI, with the original reporting close at hand and enough context to think for yourself.</p>
-          <div class="en-hero__actions">
-            <a class="en-primary" href="#source-feed">Browse source links <span aria-hidden="true">↓</span></a>
-            <a class="en-quiet" href="#our-approach">How we choose them <span aria-hidden="true">↘</span></a>
-          </div>
+        <p class="en-eyebrow"><span class="nr-eyebrow-mark" aria-hidden="true"></span> PERSPECTIVE / NEWS DESK</p>
+        <h1 id="en-title">News <span>&amp;</span> Perspective<span class="nr-title-dot">.</span></h1>
+        <p class="en-lead">The useful, troubling, remarkable, and important things happening in AI, with the original reporting close at hand and enough context to think for yourself.</p>
+        <div class="en-hero__actions">
+          <a class="en-primary" href="#source-feed">Browse source links <span aria-hidden="true">↓</span></a>
+          <a class="en-quiet" href="#our-approach">How we choose them <span aria-hidden="true">↘</span></a>
         </div>
-        <aside class="nr-hero__status" aria-labelledby="nr-status-title">
-          <span class="nr-status__index" aria-hidden="true">01 / RESEARCH PREVIEW</span>
-          <h2 id="nr-status-title">A first look, not a live feed.</h2>
-          <p>These are five manually selected, source-linked examples. They do not update automatically, and appearing here is not an endorsement of a publisher's claims.</p>
-          <div class="nr-status__detail"><span>Stories reviewed</span><strong>{formatDate(NEWS_REVIEW_DATE)}</strong></div>
-          <div class="nr-status__detail"><span>Refresh mode</span><strong>Manual preview</strong></div>
-        </aside>
       </div>
     </section>
 
@@ -91,7 +82,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
         </div>
       </div>
       <p class="nr-empty" data-news-empty hidden>No stories in this small editorial selection match that lens. Other topics are still being researched.</p>
-      <p class="nr-disclaimer">Editorial preview prepared {formatDate(NEWS_REVIEW_DATE)}. These are links to real, dated source articles, not a real-time feed, verified outcomes, or automatically written summaries. No third-party article text or photographs are republished here.</p>
+      <p class="nr-disclaimer">The five selected stories are curated manually. Collected source links come from a dated saved snapshot, not a real-time feed. Article claims are attributed to their publishers, not automatically fact-checked. No third-party article text or photographs are republished here.</p>
     </section>
 
 
@@ -163,7 +154,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
         </div>
       </div>
     </section>
-    <footer class="en-footer"><span>AI IN PERSPECTIVE · NEWS / EDITORIAL PREVIEW</span><a href="/explore/education-news">Explore AI in Education <span aria-hidden="true">↗</span></a></footer>
+    <footer class="en-footer"><span>AI IN PERSPECTIVE · NEWS / SOURCES & CONTEXT</span><a href="/explore/education-news">Explore AI in Education <span aria-hidden="true">↗</span></a></footer>
   </main>
   <script>
     const replayButton = document.querySelector("button[data-en-replay]");

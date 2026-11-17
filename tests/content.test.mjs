@@ -696,16 +696,16 @@ test("AIIP-EDU-02 keyboard-friendly level and resource controls isolate one sele
   assert.equal(panels[1].hidden,false);
 });
 
-test("AIIP-NEWS-03 News keeps the licensed arcade and exposes a sourced, explicitly non-live editorial preview", async () => {
+test("AIIP-NEWS-03 News keeps the licensed arcade and permanent source-aware layout", async () => {
   const page=read("src/pages/explore/news.astro");
   const css=read("src/styles/education-news.css");
   const newsCss=read("src/styles/news-room.css");
   const arcade=read("public/arcade/education-news-fighter.html");
   const license=read("public/licenses/instalanding-MIT-LICENSE.txt");
-  assert.match(page, /<BaseLayout title="AI News & Perspective \| Editorial Preview"/);
+  assert.match(page, /<BaseLayout title="AI News & Perspective \| AI in Perspective"/);
   assert.match(page, /<SiteHeader subtle \/>/);
   assert.match(page, /id="en-title"/);
-  assert.match(page, /not a live feed/);
+  assert.match(page, /not a real-time feed/);
   assert.match(page, /id="stories"/);
   assert.match(page, /id="our-approach"/);
   assert.match(page, /data-news-filter=\{lens\}/);
@@ -723,7 +723,7 @@ test("AIIP-NEWS-03 News keeps the licensed arcade and exposes a sourced, explici
   assert.match(css, /\.en-arcade__frame/);
   assert.match(css, /\.en-section-switch/);
   assert.match(css, /prefers-reduced-motion:reduce/);
-  assert.match(newsCss, /\.nr-hero__status/);
+  assert.match(newsCss, /\.nr-hero__grid\{max-width:920px/);
   assert.match(newsCss, /\.nr-story-grid/);
   assert.match(newsCss, /prefers-reduced-motion:reduce/);
   assert.match(arcade, /<canvas id="fighter"/);
@@ -808,7 +808,7 @@ test("AIIP-RELEASE-01 preserves MIT license and creator credit for the arcade an
   assert.match(page, /href="\/licenses\/instalanding-MIT-LICENSE\.txt"/);
   assert.match(page, /Animation license and credit/);
   assert.match(page, /sandbox="allow-scripts"/);
-  assert.match(page, /not a live feed/);
+  assert.match(page, /not a real-time feed/);
   assert.ok(!page.includes("\u2014"),"Site copy must not use em dashes");
 });
 
@@ -916,7 +916,7 @@ test("AIIP-EDU-03 presents owner-supplied builder links with clear referral disc
   assert.match(page,/level\.id === "connect-and-build"/);
   assert.match(page,/referral codes supplied by the site author/);
   assert.match(page,/Referral link/);
-  assert.match(news,/not a live feed/);
+  assert.match(news,/not a real-time feed/);
   assert.match(news,/sandbox="allow-scripts"/);
 });
 
@@ -1008,7 +1008,7 @@ test("AIIP-NEWS-03 public Education and the News research-only transport boundar
   const edu=read("src/pages/explore/education-news.astro");
   const data=read("src/data/newsEditorial.mjs");
   const testHarness=read("research/news/news-feed-preflight.mjs");
-  assert.match(news,/NEWS_REVIEW_DATE/);
+  assert.doesNotMatch(news,/NEWS_REVIEW_DATE/);
   assert.match(news,/not a real-time feed/);
   assert.match(news,/referrerpolicy="no-referrer"/);
   assert.match(edu,/educationLevels/);
@@ -1016,4 +1016,20 @@ test("AIIP-NEWS-03 public Education and the News research-only transport boundar
   assert.doesNotMatch(news, /setInterval|setTimeout|\/api\/|import\.meta\.env|process\.env/);
   assert.doesNotMatch(data, /(^|\W)fetch\s*\(/);
   assert.match(testHarness,/research-only preflight/);
+});
+
+
+test("AIIP-NEWS-04D keeps the permanent News hero and dated-snapshot disclosure without preview scaffolding",()=>{
+  const page=read("src/pages/explore/news.astro");
+  const style=read("src/styles/news-room.css");
+  assert.doesNotMatch(page,/A first look, not a live feed|RESEARCH PREVIEW|Manual preview|EDITORIAL PREVIEW/);
+  assert.doesNotMatch(page,/nr-hero__status|nr-status-title|nr-status__detail/);
+  assert.doesNotMatch(style,/\.nr-hero__status|\.nr-status__index|\.nr-status__detail/);
+  assert.match(page,/PERSPECTIVE \/ NEWS DESK/);
+  assert.match(page,/href="#source-feed">Browse source links/);
+  assert.match(page,/saved snapshot, not a real-time feed/);
+  assert.match(page,/formatSnapshotTimeUtc\(feedSnapshot.publishedAt\)/);
+  assert.match(page,/id="our-approach"/);
+  assert.match(page,/id="arcade"/);
+  assert.match(style,/\.nr-hero__grid\{max-width:920px;/);
 });
