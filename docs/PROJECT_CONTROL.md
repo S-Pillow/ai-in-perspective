@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 63
+- **Record revision:** 64
 - **Last reconciled:** 2026-11-16
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -530,3 +530,10 @@
 - **Implementation classification and intent:** An original UI/content proof, not a real News ingestion pipeline. Additive News-only CSS; Education source and design unchanged; semantic article links, filter controls, live result count, source disclosures, and no hidden network requests. No RSS parser, cron, API, database, build/deployment setting change, external billing or quota use through the code.
 - **Verification gates:** GitHub content contracts and Astro static build on final branch source; check unmodified Education source blob parity; protect all original arcade license and replay behavior; Source/HTTPS host allowlist, dates, titles, injection and duplicate examples must pass tests. Link provenance in News contract. Protected Vercel preview and responsive/browser acceptance remain separate. Existing automatic GitHub→Vercel integrations may deploy branch previews, which are not production acceptance.
 - **Release decision:** Feature branch / Draft PR owner review only, no \`main\` merge or production deploy. Real feed collection (RSS/Atom fetch, sanitization, per-source errors, retention, no-op snapshots and permissions) remains a separate authorization unit. Keep disabled Anthropic unofficial feed disabled until source-policy and freshness verification.
+
+## AIIP-NEWS-03A | Article headline readability correction (2026-11-17)
+
+- **Owner feedback:** Protected Draft PR #4 News preview layout is accepted in principle (“Looks good”), but bold, very tightly spaced article headlines were hard to read; the owner asked for a different font for article titles only.
+- **Authorized correction:** Replace only the featured and supporting article h3 typography in `src/styles/news-room.css`: use the site's already-loaded DM Sans at weight 600, reduce negative tracking, slightly moderate font size and increase line height. Leave the hero display type, topic labels, content, article links, arcade, Education, model and feed code unchanged. No new font request or build dependency.
+- **Test control:** Add a focused content-contract regression test for the two article-headline selectors and loaded font; retain the broader News/arcade/Education tests. Publish only to the protected feature-branch preview, inspect exact commit and record any remaining unverified browser/mobile checks.
+- **Release boundary:** Draft PR #4 remains unmerged; public `main` production stays at Education commit `9712e9f4791b5f319fc3744b324c4ed529229db1`. No automatic feed activation, scheduled job, new RSS licensing claim or production approval.

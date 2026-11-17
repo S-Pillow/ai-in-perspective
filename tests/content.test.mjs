@@ -994,6 +994,15 @@ test("AIIP-NEWS-03 editorial validator fails closed on unsafe sources, dates, du
   assert.throws(()=>validateEditorialPreview([NEWS_STORIES[0],NEWS_STORIES[0]]),/invalid_or_duplicate_id/);
 });
 
+test("AIIP-NEWS-03 article headline typography stays readable", () => {
+  const css=read("src/styles/news-room.css");
+  const global=read("src/styles/global.css");
+  assert.match(global,/DM\+Sans:wght@400;500;600;700/,"DM Sans is already loaded");
+  assert.match(css,/\.nr-lead h3\{font:600 clamp\(24px,2\.5vw,37px\)\/1\.3 "DM Sans"/,"featured headline uses the readable body family at medium weight");
+  assert.match(css,/\.nr-item h3\{font:600 clamp\(17px,1\.5vw,22px\)\/1\.35 "DM Sans"/,"smaller headlines keep a comfortable line height");
+  assert.doesNotMatch(css,/\.nr-(?:lead|item) h3\{[^}]*"Syne"/,"article titles no longer use the heavy display face");
+});
+
 test("AIIP-NEWS-03 public Education and the News research-only transport boundary remain separate", () => {
   const news=read("src/pages/explore/news.astro");
   const edu=read("src/pages/explore/education-news.astro");

@@ -44,7 +44,7 @@
 .nr-story__type{color:#a5bdcc;font:700 10px/1.4 ui-monospace,monospace;letter-spacing:.01em;}
 .nr-story__source{font:700 11px/1.5 ui-monospace,monospace;letter-spacing:.065em;color:#b9cbd9;margin:9px 0 12px;}
 .nr-story__source span{margin:0 4px;}
-.nr-lead h3{font:750 clamp(24px,2.7vw,39px)/1.2 "Syne","Manrope",sans-serif;letter-spacing:-.05em;margin:0 0 18px;}
+.nr-lead h3{font:600 clamp(24px,2.5vw,37px)/1.3 "DM Sans","Segoe UI",sans-serif;letter-spacing:-.017em;margin:0 0 18px;}
 .nr-lead h3 a,.nr-item h3 a{color:#f6f9ff;text-decoration:none;}
 .nr-lead h3 a:hover,.nr-item h3 a:hover{color:#a9f5ef;text-decoration:underline;text-underline-offset:4px;}
 .nr-story__context{font:400 14px/1.73 "DM Sans","Segoe UI",sans-serif;color:#d0d9e6;margin:0 0 21px;}
@@ -57,7 +57,7 @@
 .nr-item{display:grid;grid-template-columns:35px minmax(0,1fr);gap:13px;min-width:0;background:#0f1725ed;border:1px solid #34495e;border-radius:12px;padding:23px;transition:border-color .15s,transform .15s;}
 .nr-item:hover{border-color:#6facc1;transform:translateY(-1px);}
 .nr-item__number{color:#75b6b9;font:700 14px/1.5 ui-monospace,monospace;}
-.nr-item h3{font:750 clamp(17px,1.6vw,23px)/1.24 "Syne","Manrope",sans-serif;letter-spacing:-.028em;margin:0 0 12px;}
+.nr-item h3{font:600 clamp(17px,1.5vw,22px)/1.35 "DM Sans","Segoe UI",sans-serif;letter-spacing:-.01em;margin:0 0 12px;}
 .nr-item .nr-story__context{font-size:12.5px;line-height:1.6;margin:0 0 15px;}
 .nr-item .nr-story__top{margin:0 0 8px;}
 .nr-item .nr-story__tag{padding:6px 8px;font-size:9px;}
