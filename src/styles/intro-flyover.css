@@ -1,0 +1,67 @@
+/*
+ * AIIP-INTRO-01: reversible, silent flyover experiment.
+ * This file only applies when the Intro JS opts into .intro-flyover.
+ * The original page, global styles, navigation and content are not replaced.
+ */
+.intro-stage.intro-flyover{
+  perspective:1450px;
+  perspective-origin:50% 42%;
+}
+.intro-stage.intro-flyover .intro-center{
+  transform-origin:50% 12%;
+  transform-style:preserve-3d;
+  backface-visibility:visible;
+  will-change:transform;
+}
+.intro-stage.intro-flyover .intro-line,
+.intro-stage.intro-flyover .intro-continue{
+  animation:none!important;
+  opacity:1!important;
+}
+.intro-stage.intro-flyover .intro-line{
+  transform:none!important;
+}
+.intro-stage.intro-flyover .intro-planet,
+.intro-stage.intro-flyover .intro-earth-aura,
+.intro-stage.intro-flyover .intro-title-horizon,
+.intro-stage.intro-flyover .intro-planet::before{
+  animation:none!important;
+}
+.intro-stage.intro-flyover .intro-planet,
+.intro-stage.intro-flyover .intro-earth-aura,
+.intro-stage.intro-flyover .intro-title-horizon{
+  opacity:0;
+  will-change:transform,opacity;
+}
+.intro-stage.intro-flyover .intro-planet::before{
+  opacity:1;
+}
+.intro-flyover-action{
+  position:absolute;
+  z-index:10;
+  left:clamp(17px,3vw,54px);
+  top:22px;
+  border:1px solid #8de1ec8a;
+  border-radius:4px;
+  color:#d8f7fc;
+  background:#08182bdd;
+  padding:9px 12px;
+  font:650 11px/1.3 var(--display);
+  cursor:pointer;
+  letter-spacing:.04em;
+  box-shadow:0 2px 18px #02060f80;
+}
+.intro-flyover-action[hidden]{display:none!important;}
+.intro-flyover-action:hover,
+.intro-flyover-action:focus-visible{
+  border-color:#b2f8fd;
+  color:white;
+  background:#12344c;
+}
+.intro-stage.intro-flyover .intro-skip{z-index:12;}
+@media(max-width:620px){
+  .intro-flyover-action{left:16px;top:45px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .intro-flyover-action{display:none!important;}
+}
