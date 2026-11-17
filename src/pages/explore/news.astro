@@ -1,91 +1,152 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import { NEWS_LENSES, NEWS_REVIEW_DATE, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview } from "../../data/newsEditorial.mjs";
 import "../../styles/education-news.css";
+import "../../styles/news-room.css";
+
+validateEditorialPreview();
+const lead = NEWS_STORIES.find((story) => story.featured);
+const otherStories = NEWS_STORIES.filter((story) => !story.featured);
+const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T12:00:00Z"));
 ---
-<BaseLayout title="AI News | Coming Soon" description="AI News is coming to AI in Perspective. We are preparing a sourced feed of useful, surprising, and concerning AI developments." bodyClass="exhibit-body">
+<BaseLayout title="AI News & Perspective | Editorial Preview" description="Explore sourced AI developments through five editorial lenses. The newsroom is a manually reviewed preview, not a live or automatically refreshed news feed." bodyClass="exhibit-body">
   <SiteHeader subtle />
-  <main class="en-soon" id="content" data-en-soon>
+  <main class="en-soon en-newsroom" id="content" data-newsroom>
     <div class="en-sky" aria-hidden="true"></div>
-    <section class="en-hero" aria-labelledby="en-title">
-      <div class="en-hero__nav"><a class="en-back" href="/explore/education-news">← Back to Education</a><nav class="en-section-switch" aria-label="Education and News sections"><a href="/explore/education-news">Education</a><a href="/explore/news" aria-current="page">News · Coming Soon</a></nav></div>
-      <div class="en-hero__grid">
-        <div class="en-hero__copy">
-          <p class="en-eyebrow"><span class="en-live-dot" aria-hidden="true"></span> PERSPECTIVE 05 / NEWS IN THE WORKS</p>
-          <h1 id="en-title">News <span>&amp;</span> Perspective</h1>
-          <p class="en-pixel-headline">COMING <span>SOON</span><span class="en-blink" aria-hidden="true">_</span></p>
-          <p class="en-lead">Good news, unsettling incidents, surprising discoveries, and new models. We want to cover the stories that matter, with original sources and enough context to understand what really happened.</p>
+
+    <section class="en-hero nr-hero" aria-labelledby="en-title">
+      <div class="en-hero__nav">
+        <a class="en-back" href="/explore/education-news">← Education</a>
+        <nav class="en-section-switch" aria-label="Education and News sections">
+          <a href="/explore/education-news">Education</a>
+          <a href="/explore/news" aria-current="page">News</a>
+        </nav>
+      </div>
+      <div class="nr-hero__grid">
+        <div>
+          <p class="en-eyebrow"><span class="nr-eyebrow-mark" aria-hidden="true"></span> PERSPECTIVE / NEWS DESK</p>
+          <h1 id="en-title">News <span>&amp;</span> Perspective<span class="nr-title-dot">.</span></h1>
+          <p class="en-lead">The useful, troubling, remarkable, and important things happening in AI, with the original reporting close at hand and enough context to think for yourself.</p>
           <div class="en-hero__actions">
-            <a class="en-primary" href="#arcade">Enjoy the arcade break <span aria-hidden="true">↓</span></a>
-            <a class="en-quiet" href="#what-is-next">How News will work <span aria-hidden="true">↘</span></a>
+            <a class="en-primary" href="#stories">Explore the stories <span aria-hidden="true">↓</span></a>
+            <a class="en-quiet" href="#our-approach">How we choose them <span aria-hidden="true">↘</span></a>
           </div>
-          <p class="en-progress"><span aria-hidden="true">▰▰▰▱▱▱▱▱▱▱</span> Checking sources before we publish</p>
         </div>
-        <div class="en-hero__signal" aria-hidden="true">
-          <div class="en-hero__signal-orbit en-hero__signal-orbit--a"></div>
-          <div class="en-hero__signal-orbit en-hero__signal-orbit--b"></div>
-          <div class="en-hero__signal-core"><span>?</span></div>
-          <span class="en-hero__signal-bit en-hero__signal-bit--a"></span>
-          <span class="en-hero__signal-bit en-hero__signal-bit--b"></span>
-          <span class="en-hero__signal-bit en-hero__signal-bit--c"></span>
-          <span class="en-hero__signal-caption">NEWS / IN PREPARATION</span>
-        </div>
+        <aside class="nr-hero__status" aria-labelledby="nr-status-title">
+          <span class="nr-status__index" aria-hidden="true">01 / RESEARCH PREVIEW</span>
+          <h2 id="nr-status-title">A first look, not a live feed.</h2>
+          <p>These are five manually selected, source-linked examples. They do not update automatically, and appearing here is not an endorsement of a publisher's claims.</p>
+          <div class="nr-status__detail"><span>Stories reviewed</span><strong>{formatDate(NEWS_REVIEW_DATE)}</strong></div>
+          <div class="nr-status__detail"><span>Refresh mode</span><strong>Manual preview</strong></div>
+        </aside>
       </div>
     </section>
 
-    <section class="en-arcade" id="arcade" aria-labelledby="en-arcade-title">
-      <div class="en-section-heading">
-        <div>
-          <p class="en-eyebrow en-eyebrow--pink">A LITTLE ARCADE INTERMISSION</p>
-          <h2 id="en-arcade-title">While we build, enjoy the show.</h2>
-          <p>We are checking the feeds and working out how to present AI news fairly. In the meantime, the pixel-fighter animation has its own home here.</p>
+    <section class="nr-stories" id="stories" aria-labelledby="nr-stories-title">
+      <div class="nr-stories__heading">
+        <div><p class="en-eyebrow">CURATED EXAMPLES / ORIGINAL SOURCES</p><h2 id="nr-stories-title">Five stories. Five ways to look closer.</h2></div>
+        <p>Research findings, company announcements, and independent reporting don't carry the same kind of evidence. Each story explains which kind you're reading.</p>
+      </div>
+      <div class="nr-filters" role="group" aria-label="Filter stories by perspective">
+        <button type="button" class="nr-filter" data-news-filter="All" aria-pressed="true">All stories</button>
+        {NEWS_LENSES.map((lens) => <button type="button" class="nr-filter" data-news-filter={lens} aria-pressed="false">{lens}</button>)}
+      </div>
+      <p class="nr-results" data-news-results aria-live="polite" aria-atomic="true">Showing all {NEWS_STORIES.length} editorial examples</p>
+
+      <div class="nr-story-grid" data-news-grid>
+        <article class="nr-lead" data-news-item data-news-lens={lead.lens}>
+          <div class="nr-lead__art" aria-hidden="true"><span class="nr-lead__ring nr-lead__ring--one"></span><span class="nr-lead__ring nr-lead__ring--two"></span><span class="nr-lead__cross">+</span><span class="nr-lead__art-label">IN FOCUS / 01</span></div>
+          <div class="nr-lead__body">
+            <div class="nr-story__top"><span class="nr-story__tag">{lead.lens}</span><span class="nr-story__type">{lead.sourceType}</span></div>
+            <p class="nr-story__source">{lead.publisher} <span aria-hidden="true">·</span> <time datetime={lead.publishedAt}>{formatDate(lead.publishedAt)}</time></p>
+            <h3><a href={lead.url} target="_blank" rel="noopener noreferrer">{lead.title} <span aria-hidden="true">↗</span></a></h3>
+            <p class="nr-story__context">{lead.context}</p>
+            <p class="nr-story__evidence"><span class="nr-evidence__mark" aria-hidden="true"></span>{lead.evidenceStatus}</p>
+            <a class="nr-story__read" href={lead.url} target="_blank" rel="noopener noreferrer">Read the original at {lead.publisher} <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <div class="nr-stack">
+          {otherStories.map((story, index) =>
+            <article class="nr-item" data-news-item data-news-lens={story.lens}>
+              <div class="nr-item__number" aria-hidden="true">0{index + 2}</div>
+              <div class="nr-item__content">
+                <div class="nr-story__top"><span class="nr-story__tag">{story.lens}</span><span class="nr-story__type">{story.sourceType}</span></div>
+                <p class="nr-story__source">{story.publisher} <span aria-hidden="true">·</span> <time datetime={story.publishedAt}>{formatDate(story.publishedAt)}</time></p>
+                <h3><a href={story.url} target="_blank" rel="noopener noreferrer">{story.title} <span aria-hidden="true">↗</span></a></h3>
+                <p class="nr-story__context">{story.context}</p>
+                <p class="nr-story__evidence"><span class="nr-evidence__mark" aria-hidden="true"></span>{story.evidenceStatus}</p>
+              </div>
+            </article>
+          )}
         </div>
+      </div>
+      <p class="nr-empty" data-news-empty hidden>No stories in this small editorial selection match that lens. Other topics are still being researched.</p>
+      <p class="nr-disclaimer">Editorial preview prepared {formatDate(NEWS_REVIEW_DATE)}. These are links to real, dated source articles, not a real-time feed, verified outcomes, or automatically written summaries. No third-party article text or photographs are republished here.</p>
+    </section>
+
+    <section class="nr-approach" id="our-approach" aria-labelledby="nr-approach-title">
+      <div class="nr-approach__intro"><p class="en-eyebrow">WHAT WE CHECK</p><h2 id="nr-approach-title">A headline is the beginning of the question.</h2><p>A story is easier to understand when you know who reported it, what actually happened, and which parts are still uncertain.</p></div>
+      <div class="nr-approach__grid">
+        <article><span>01 / SOURCE</span><h3>Who is saying it?</h3><p>We distinguish independent reporting, university research, preprints, and first-party company announcements. Each article points back to its source.</p></article>
+        <article><span>02 / EVIDENCE</span><h3>What is established?</h3><p>An experiment isn't a product rollout. A company claim isn't independent confirmation. A preprint isn't automatically peer-reviewed.</p></article>
+        <article><span>03 / CONTEXT</span><h3>Why does it matter?</h3><p>Look past novelty and hype to the people affected, real limits, and unanswered questions. Different perspectives can belong in the same news cycle.</p></article>
+      </div>
+    </section>
+
+    <section class="nr-sources" aria-labelledby="nr-sources-title">
+      <div class="nr-sources__intro"><p class="en-eyebrow">THE SOURCE DESK</p><h2 id="nr-sources-title">Seven starting points. More voices to follow.</h2><p>The source list mixes research, independent reporting, and AI companies. These are discovery candidates, not seven running RSS integrations. Anthropic's official RSS is not verified.</p></div>
+      <div class="nr-sources__list">
+        {NEWS_SOURCES.map((source) =>
+          <a href={source.url} class="nr-source" target="_blank" rel="noopener noreferrer">
+            <span class="nr-source__name">{source.name}</span><span class="nr-source__type">{source.type}</span><span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    </section>
+
+    <section class="en-arcade nr-arcade" id="arcade" aria-labelledby="en-arcade-title">
+      <div class="en-section-heading">
+        <div><p class="en-eyebrow en-eyebrow--pink">A LITTLE ARCADE INTERMISSION</p><h2 id="en-arcade-title">Take an arcade break.</h2><p>The original pixel-fighter animation is still here, with its license and replay controls. It is separate from the news content.</p></div>
         <div class="en-arcade__mark" aria-hidden="true">★<span>05</span></div>
       </div>
       <div class="en-arcade__cabinet">
         <div class="en-arcade__top"><span><span class="en-arcade__led" aria-hidden="true"></span> ARCADE MODE</span><span>AI IN PERSPECTIVE / 05</span></div>
-        <iframe id="en-fighter" class="en-arcade__frame" title="Retro pixel-art fighter animation. Use the Replay animation button to start over." src="/arcade/education-news-fighter.html" loading="eager" tabindex="-1" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+        <iframe id="en-fighter" class="en-arcade__frame" title="Retro pixel-art fighter animation. Use the Replay animation button to start over." src="/arcade/education-news-fighter.html" loading="lazy" tabindex="-1" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
         <div class="en-arcade__bottom">
           <p>A short animated fighter combo. Click inside the scene to replay it, or use the button. <a href="/licenses/instalanding-MIT-LICENSE.txt" target="_blank" rel="noopener noreferrer">Animation license and credit</a>.</p>
           <button type="button" class="en-replay" data-en-replay><span aria-hidden="true">↻</span> Replay animation</button>
         </div>
       </div>
     </section>
-
-    <section id="what-is-next" class="en-next" aria-labelledby="en-next-title">
-      <div class="en-next__heading">
-        <p class="en-eyebrow">WHAT THE NEWS ROOM WILL COVER</p>
-        <h2 id="en-next-title">Interesting stories. The context to match.</h2>
-        <p>We are gathering a mix of independent reporting, research, official announcements, and verified incidents before turning on a live feed.</p>
-      </div>
-      <div class="en-next__cards">
-        <article class="en-next__card en-next__card--learn">
-          <div class="en-next__card-top"><span class="en-next__number">01 / THE STORIES</span><span class="en-next__stamp">PLANNED</span></div>
-          <span class="en-next__glyph" aria-hidden="true">✳</span>
-          <h3>Good, bad, strange, and important.</h3>
-          <p>AI helping people, documented harm and misuse, new model releases, unexpected experiments, and the safety and policy decisions shaping the field.</p>
-          <span class="en-next__small">FIVE EDITORIAL LENSES / MANY SOURCES</span>
-        </article>
-        <article class="en-next__card en-next__card--news">
-          <div class="en-next__card-top"><span class="en-next__number">02 / THE SOURCES</span><span class="en-next__stamp">IN REVIEW</span></div>
-          <span class="en-next__glyph" aria-hidden="true">⌁</span>
-          <h3>Start with the original reporting.</h3>
-          <p>We plan to combine several publishers and research sources, including MIT News, arXiv, MIT Technology Review, The Verge, OpenAI, Google DeepMind, and Anthropic. We will verify feeds and credit every source.</p>
-          <span class="en-next__small">RSS IS PLANNED / NO LIVE HEADLINES YET</span>
-        </article>
-      </div>
-      <p class="en-next__footnote">Nothing on this page is a current headline feed. Once sources and safeguards are tested, the news will move in. Education is already open if you want to learn in the meantime.</p>
-    </section>
-    <footer class="en-footer"><span>AI IN PERSPECTIVE · NEWS / COMING SOON</span><a href="/explore/education-news">Learn AI in Education <span aria-hidden="true">↗</span></a></footer>
+    <footer class="en-footer"><span>AI IN PERSPECTIVE · NEWS / EDITORIAL PREVIEW</span><a href="/explore/education-news">Explore AI in Education <span aria-hidden="true">↗</span></a></footer>
   </main>
   <script>
-    const replayButton = document.querySelector("[data-en-replay]");
+    const replayButton = document.querySelector("button[data-en-replay]");
     const fighterFrame = document.getElementById("en-fighter");
     if (replayButton && fighterFrame) {
       let playNumber = 0;
       replayButton.addEventListener("click", () => {
         playNumber += 1;
         fighterFrame.setAttribute("src", "/arcade/education-news-fighter.html?replay=" + playNumber);
+      });
+    }
+    const filters = Array.from(document.querySelectorAll("button[data-news-filter]"));
+    const items = Array.from(document.querySelectorAll("[data-news-item]"));
+    const resultLine = document.querySelector("[data-news-results]");
+    const empty = document.querySelector("[data-news-empty]");
+    for (const filter of filters) {
+      filter.addEventListener("click", () => {
+        const active = filter.getAttribute("data-news-filter");
+        for (const button of filters) button.setAttribute("aria-pressed", button === filter ? "true" : "false");
+        let showing = 0;
+        for (const item of items) {
+          const match = active === "All" || item.getAttribute("data-news-lens") === active;
+          item.hidden = !match;
+          if (match) showing++;
+        }
+        if (empty) empty.hidden = showing !== 0;
+        if (resultLine) resultLine.textContent = showing === 0 ? "No stories in this selection" : "Showing " + showing + " of " + items.length + " editorial examples";
       });
     }
   </script>

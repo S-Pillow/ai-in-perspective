@@ -696,29 +696,36 @@ test("AIIP-EDU-02 keyboard-friendly level and resource controls isolate one sele
   assert.equal(panels[1].hidden,false);
 });
 
-test("AIIP-EDU-02 News retains the protected arcade while real RSS stays deferred", async () => {
+test("AIIP-NEWS-03 News keeps the licensed arcade and exposes a sourced, explicitly non-live editorial preview", async () => {
   const page=read("src/pages/explore/news.astro");
   const css=read("src/styles/education-news.css");
+  const newsCss=read("src/styles/news-room.css");
   const arcade=read("public/arcade/education-news-fighter.html");
   const license=read("public/licenses/instalanding-MIT-LICENSE.txt");
-  assert.match(page, /<BaseLayout title="AI News \| Coming Soon"/);
+  assert.match(page, /<BaseLayout title="AI News & Perspective \| Editorial Preview"/);
   assert.match(page, /<SiteHeader subtle \/>/);
   assert.match(page, /id="en-title"/);
-  assert.match(page, /COMING <span>SOON<\/span>/);
+  assert.match(page, /not a live feed/);
+  assert.match(page, /id="stories"/);
+  assert.match(page, /id="our-approach"/);
+  assert.match(page, /data-news-filter=\{lens\}/);
+  assert.match(page, /data-news-lens=\{story\.lens\}/);
+  assert.match(page, /data-news-results aria-live="polite"/);
+  assert.match(page, /NEWS_SOURCES\.map/);
   assert.match(page, /id="arcade"/);
-  assert.match(page, /id="what-is-next"/);
   assert.match(page, /data-en-replay/);
   assert.match(page, /<iframe[^>]*src="\/arcade\/education-news-fighter\.html"[^>]*sandbox="allow-scripts"/);
   assert.match(page, /tabindex="-1" sandbox="allow-scripts"/);
   assert.doesNotMatch(page, /sandbox="[^"]*allow-same-origin/);
-  assert.match(page, /RSS IS PLANNED \/ NO LIVE HEADLINES YET/);
   assert.match(page, /MIT-LICENSE\.txt/);
   assert.match(page, /href="\/explore\/education-news"/);
-  assert.match(page, /Anthropic/);
-  assert.doesNotMatch(page, /<article[^>]*data-(?:news|rss)-item|rss-parser|api\/news/);
+  assert.doesNotMatch(page, /\bfetch\(|rss-parser|api\/news/);
   assert.match(css, /\.en-arcade__frame/);
   assert.match(css, /\.en-section-switch/);
   assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(newsCss, /\.nr-hero__status/);
+  assert.match(newsCss, /\.nr-story-grid/);
+  assert.match(newsCss, /prefers-reduced-motion:reduce/);
   assert.match(arcade, /<canvas id="fighter"/);
   assert.match(arcade, /<article id="gamepad"/);
   assert.match(arcade, /window\.__renderAt/);
@@ -729,14 +736,44 @@ test("AIIP-EDU-02 News retains the protected arcade while real RSS stays deferre
   const script = page.split("<script>")[1]?.split("</script>")[0];
   assert.ok(script&&script.includes("replayButton.addEventListener"));
   const events={},links=[];
-  const button={addEventListener(name,fn){events[name]=fn;}};
+  const replay={addEventListener(name,fn){events[name]=fn;}};
   const frame={setAttribute(name,value){links.push({name,value});}};
-  runInNewContext(script,{document:{querySelector:()=>button,getElementById:()=>frame}});
+  const filters=["All","AI Doing Good"].map(label=>({
+    label, selected:false, addEventListener(name,cb){this.callback=cb;},
+    getAttribute(name){return name==="data-news-filter"?label:null;},
+    setAttribute(name,value){if(name==="aria-pressed")this.selected=value==="true";}
+  }));
+  const items=["AI Doing Good","AI Gone Wrong"].map(lens=>({
+    lens,hidden:false,getAttribute(name){return name==="data-news-lens"?lens:null;}
+  }));
+  const results={textContent:""};
+  const empty={hidden:true};
+  runInNewContext(script,{document:{
+    querySelector(selector){
+      if(selector==="button[data-en-replay]")return replay;
+      if(selector==="[data-news-results]")return results;
+      if(selector==="[data-news-empty]")return empty;
+      return null;
+    },
+    getElementById:()=>frame,
+    querySelectorAll(selector){
+      if(selector==="button[data-news-filter]")return filters;
+      if(selector==="[data-news-item]")return items;
+      return [];
+    }
+  }});
   events.click();events.click();
   assert.deepEqual(links,[
     {name:"src",value:"/arcade/education-news-fighter.html?replay=1"},
     {name:"src",value:"/arcade/education-news-fighter.html?replay=2"}
   ]);
+  filters[1].callback();
+  assert.equal(filters[1].selected,true);
+  assert.equal(filters[0].selected,false);
+  assert.equal(items[0].hidden,false);
+  assert.equal(items[1].hidden,true);
+  assert.match(results.textContent,/Showing 1 of 2 editorial examples/);
+  assert.equal(empty.hidden,true);
 });
 
 test("AIIP-RELEASE-01 museum wording is absent from shared live navigation and links reach real pages", () => {
@@ -879,7 +916,7 @@ test("AIIP-EDU-03 presents owner-supplied builder links with clear referral disc
   assert.match(page,/level\.id === "connect-and-build"/);
   assert.match(page,/referral codes supplied by the site author/);
   assert.match(page,/Referral link/);
-  assert.match(news,/COMING SOON/);
+  assert.match(news,/not a live feed/);
   assert.match(news,/sandbox="allow-scripts"/);
 });
 
@@ -922,4 +959,52 @@ test("AIIP-EDU-04 four practical topics are sourced, placed in the intended leve
   assert.match(data,/Google Developers · Hallucination definition/);
   assert.match(page,/data-ed-level=\{level\.id\}/);
   assert.match(page,/class:list=\{\["ed-chapter","ed-chapter--"\+level\.color\]\}/);
+});
+
+test("AIIP-NEWS-03 curated stories are source-validated, dated, and labeled as editorial preview", async () => {
+  const { NEWS_REVIEW_DATE, NEWS_LENSES, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview }=await import("../src/data/newsEditorial.mjs");
+  assert.equal(NEWS_REVIEW_DATE,"2026-11-16");
+  assert.equal(NEWS_LENSES.length,5);
+  assert.equal(NEWS_SOURCES.length,7);
+  assert.equal(NEWS_STORIES.length,5);
+  assert.equal(NEWS_STORIES.filter(x=>x.featured).length,1);
+  assert.equal(validateEditorialPreview(),true);
+  assert.deepEqual(new Set(NEWS_STORIES.map(x=>x.lens)),new Set(NEWS_LENSES));
+  for(const story of NEWS_STORIES){
+    assert.ok(story.title.length>=10);
+    assert.ok(story.context.length>=50);
+    assert.match(story.url,/^https:\/\//);
+    assert.ok(story.publishedAt<=NEWS_REVIEW_DATE);
+    assert.ok(story.evidenceStatus);
+  }
+  assert.ok(NEWS_STORIES.find(x=>x.publisher==="Anthropic").evidenceStatus.includes("not independent verification"));
+  assert.ok(NEWS_STORIES.find(x=>x.publisher==="arXiv").evidenceStatus.includes("not peer reviewed"));
+});
+
+test("AIIP-NEWS-03 editorial validator fails closed on unsafe sources, dates, duplicate IDs and unreviewed categories", async () => {
+  const { NEWS_STORIES,validateEditorialPreview }=await import("../src/data/newsEditorial.mjs");
+  const withFirst=edit=>[{...NEWS_STORIES[0],...edit},...NEWS_STORIES.slice(1)];
+  assert.throws(()=>validateEditorialPreview(withFirst({url:"javascript:alert(1)"})),/unsafe_article_url/);
+  assert.throws(()=>validateEditorialPreview(withFirst({url:"https://news.mit.edu.evil.example/2026/x"})),/unsafe_article_url/);
+  assert.throws(()=>validateEditorialPreview(withFirst({url:"http://news.mit.edu/2026/x"})),/unsafe_article_url/);
+  assert.throws(()=>validateEditorialPreview(withFirst({publishedAt:"2026-12-20"})),/invalid_article_date/);
+  assert.throws(()=>validateEditorialPreview(withFirst({title:"<script>alert(1)</script>"})),/invalid_preview_text/);
+  assert.throws(()=>validateEditorialPreview(withFirst({lens:"The AI apocalypse"})),/unknown_lens/);
+  assert.throws(()=>validateEditorialPreview(withFirst({featured:false})),/exactly_one_editorial_example_lead/);
+  assert.throws(()=>validateEditorialPreview([NEWS_STORIES[0],NEWS_STORIES[0]]),/invalid_or_duplicate_id/);
+});
+
+test("AIIP-NEWS-03 public Education and the News research-only transport boundary remain separate", () => {
+  const news=read("src/pages/explore/news.astro");
+  const edu=read("src/pages/explore/education-news.astro");
+  const data=read("src/data/newsEditorial.mjs");
+  const testHarness=read("research/news/news-feed-preflight.mjs");
+  assert.match(news,/NEWS_REVIEW_DATE/);
+  assert.match(news,/not a real-time feed/);
+  assert.match(news,/referrerpolicy="no-referrer"/);
+  assert.match(edu,/educationLevels/);
+  assert.doesNotMatch(edu,/newsEditorial|news-room\.css/);
+  assert.doesNotMatch(news, /setInterval|setTimeout|\/api\/|import\.meta\.env|process\.env/);
+  assert.doesNotMatch(data, /(^|\W)fetch\s*\(/);
+  assert.match(testHarness,/research-only preflight/);
 });
