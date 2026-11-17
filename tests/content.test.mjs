@@ -132,13 +132,14 @@ test("pre-release site opts out of indexing", () => {
   assert.match(read("src/layouts/BaseLayout.astro"), /noindex, nofollow/);
 });
 
-test("current public release governance and protected preview are documented", () => {
+test("current public release governance and News publication boundary are documented", () => {
   const control = read("docs/PROJECT_CONTROL.md");
   assert.match(control, /AIPF v8\.10\.1/);
   assert.match(control, /owner-accepted 2026-11-12/);
   assert.match(control, /GitHub main is the live source/);
   assert.match(control, /separate prototype-preview project is protected with Vercel Authentication/);
-  assert.match(control, /No RSS feed or educational resource catalog is active/);
+  assert.match(control, /32-topic Education, and separate curated News page with dated saved RSS\/Atom snapshot are published/);
+  assert.match(control, /no daily automated publication is active/);
 });
 
 test("isolated Core lab is a genuine 3D scene and preserves six accessible exhibit destinations", () => {
@@ -1077,4 +1078,45 @@ test("AIIP-NEWS-05 Education links to published News without stale Coming Soon l
   assert.doesNotMatch(edu, /News Coming Soon|News <span>COMING SOON<\/span>|The News section is taking shape|while we build it/);
   assert.match(news, /<a href="\/explore\/news" aria-current="page">News<\/a>/);
   assert.match(news, /saved snapshot, not a real-time feed/);
+});
+
+
+test("AIIP-COPY-STATUS-01 Discover About counters match five published perspectives and separate News", () => {
+  const page = read("public/discover/index.html");
+  const worlds = page.split("const WORLDS=[")[1]?.split("];")[0] || "";
+  const paths = [...worlds.matchAll(/url:'(\/explore\/[^']+)'/g)].map(match => match[1]);
+  assert.deepEqual(paths, [
+    "/explore/history", "/explore/risks", "/explore/benefits",
+    "/explore/environment", "/explore/education-news"
+  ]);
+  for (const path of paths) {
+    assert.ok(read("src/pages" + path + ".astro").includes("<BaseLayout"), "live page for " + path);
+  }
+  assert.ok(read("src/pages/explore/news.astro").includes("<BaseLayout"));
+  assert.match(page, /Turn the ring to choose from five perspectives, all available to explore/);
+  assert.match(page, /Education also connects to a separate News section/);
+  const modal = page.split('<div class="stats">')[1]?.split('<div class="worlds"')[0] || "";
+  assert.match(modal, /<b>5<\/b><span>Perspectives<\/span>/);
+  assert.match(modal, /<b>5<\/b><span>Open now<\/span>/);
+  assert.match(modal, /<b>1<\/b><span>News section<\/span>/);
+  assert.doesNotMatch(modal, /Current links|In development|Coming Soon/);
+});
+
+test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a complete independent audit", () => {
+  const page = read("src/pages/methodology.astro");
+  assert.match(page, /Editorial scope:/);
+  assert.match(page, /not a certification that every published claim has received an independent research audit/);
+  assert.match(page, /further editorial review remains ongoing/);
+  assert.doesNotMatch(page, /Development status:|unfinished topic pages/);
+  const readme = read("README.md");
+  const control = read("docs/PROJECT_CONTROL.md");
+  assert.match(readme, /News currently uses a \*\*dated saved snapshot\*\*, not a live or automatically refreshed feed/);
+  assert.match(readme, /<h1 align="center">AI in Perspective<\/h1>/);
+  assert.match(readme, /```bash/);
+  assert.doesNotMatch(readme, /\\`/);
+  assert.match(readme, /merged commit is not considered deployed until a matching production build is \*\*READY\*\*/);
+  assert.match(readme, /\[PR #7\]\(https:\/\/github\.com\/S-Pillow\/ai-in-perspective\/pull\/7\)/);
+  assert.doesNotMatch(readme, /PR #3.*still \*\*unmerged\*\*|News Coming Soon route|temporary combined Education & News/);
+  assert.match(control, /\*\*Record revision:\*\* 74/);
+  assert.match(control, /\*\*Current release checkpoint\*\*.*619024976f3bf5ba202f4b768555f9e76abcfbbb/);
 });
