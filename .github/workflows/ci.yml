@@ -27,5 +27,5 @@ jobs:
       - name: Astro static build
         run: npm run build
       - name: Probe permitted News feeds (read-only diagnostics, not publication)
-        run: npm run news:probe
+        run: node scripts/news/collect.mjs --preview-json
         continue-on-error: true

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {NEWS_FEEDS,ENABLED_NEWS_FEEDS} from "../src/data/newsFeeds.mjs";
 import {parseFeedXml,parseDate,safeArticleUrl,normalizeArticle,validateSnapshot,mergeSnapshot,newEmptySnapshot,sortArticles,MAX_FEED_BYTES} from "../scripts/news/feed-core.mjs";
-import {collectOneFeed,collectAll} from "../scripts/news/collect.mjs";
+import {collectOneFeed,collectAll,runCli} from "../scripts/news/collect.mjs";
 const MIT=NEWS_FEEDS.find(s=>s.id==="mit_news_ai"),ARXIV=NEWS_FEEDS.find(s=>s.id==="arxiv_cs_ai"),OPENAI=NEWS_FEEDS.find(s=>s.id==="openai_news");
 const NOW="2026-11-16T14:00:00.000Z";
 const RSS='<?xml version="1.0"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><item><title>New AI &amp; research</title><link>https://news.mit.edu/2026/test?utm_source=rss&amp;id=1</link><pubDate>Mon, 16 Nov 2026 09:00:00 -0500</pubDate></item><item><title><![CDATA[Another discovery]]></title><link>https://news.mit.edu/2026/another</link></item></channel></rss>';
@@ -112,4 +112,9 @@ test("Astro uses a checked-in, validated snapshot and does not fetch publishers 
   assert.match(page,/validateSnapshot\(savedNewsSnapshot\)/);assert.match(page,/latestArticles\.map/);
   assert.match(page,/not been assigned one of our editorial perspectives/);
   assert.match(page,/Date not provided/);assert.doesNotMatch(page,/\bfetch\s*\(/);
+});
+
+test("read-only snapshot export rejects --write combinations before network access", async()=>{
+  await assert.rejects(()=>runCli(["--preview-json","--write"]),/usage:/);
+  await assert.rejects(()=>runCli(["--dry-run","--write"]),/usage:/);
 });

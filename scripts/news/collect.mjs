@@ -90,7 +90,7 @@ export async function collectAll({fetchImpl=fetch,now=new Date().toISOString(),p
   };
 }
 export async function runCli(args=process.argv.slice(2)){
-  if(args.some(s=>!["--dry-run","--write"].includes(s))||args.includes("--write")&&args.includes("--dry-run"))throw new Error("usage: node scripts/news/collect.mjs [--dry-run | --write]");
+  if(args.some(s=>!["--dry-run","--write","--preview-json"].includes(s)) || args.length>1)throw new Error("usage: node scripts/news/collect.mjs [--dry-run | --preview-json | --write]");
   const write=args.includes("--write");
   let previous;
   try{previous=JSON.parse(await readFile(SNAPSHOT_PATH,"utf8"));}
@@ -107,6 +107,7 @@ export async function runCli(args=process.argv.slice(2)){
     }catch(err){await unlink(temp).catch(()=>{});throw err;}
   }
   process.stdout.write(JSON.stringify(output,null,2)+"\n");
+  if(args.includes("--preview-json"))process.stdout.write("NEWS_PREVIEW_SNAPSHOT_JSON="+JSON.stringify(result.snapshot)+"\n");
   // Read-only probing must not fail a build because a third-party feed is offline.
   return output;
 }
