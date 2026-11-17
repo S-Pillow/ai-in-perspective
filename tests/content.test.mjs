@@ -1044,3 +1044,37 @@ test("AIIP-NEWS-04E finished News labels avoid temporary editorial-preview langu
   assert.match(page,/dated saved snapshot, not a real-time feed/);
   assert.match(page,/formatSnapshotTimeUtc\(feedSnapshot.publishedAt\)/);
 });
+
+test("AIIP-NAV-01 prominent return to perspectives uses a real shared destination and motion-safe styles", () => {
+  const layout = read("src/layouts/BaseLayout.astro");
+  const header = read("src/components/SiteHeader.astro");
+  const exit = read("src/components/PerspectiveReturn.astro");
+  const css = read("src/styles/perspective-navigation.css");
+  assert.match(layout, /pagePath\.startsWith\("\/explore\/"\)/);
+  assert.match(layout, /<PerspectiveReturn tone=\{perspectiveTone\} \/>/);
+  assert.match(layout, /id="page-top"/);
+  assert.match(header, /header-perspectives-link/);
+  assert.match(header, /href="\/discover\/"/);
+  assert.match(exit, /See another perspective/);
+  assert.match(exit, /href="\/discover\/"/);
+  assert.match(exit, /href="#page-top"/);
+  for (const tone of ["history", "risks", "benefits", "environment", "education-news", "news"]) {
+    assert.ok(css.includes(".perspective-return--" + tone), "missing topic accent for " + tone);
+    assert.match(read("src/pages/explore/" + tone + ".astro"), /<BaseLayout/);
+  }
+  assert.match(css, /\.perspective-return__cta:focus-visible/);
+  assert.match(css, /@media \(max-width: 620px\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+});
+
+
+test("AIIP-NEWS-05 Education links to published News without stale Coming Soon labels", () => {
+  const edu = read("src/pages/explore/education-news.astro");
+  const news = read("src/pages/explore/news.astro");
+  assert.match(edu, /<a class="ed-switch__item" href="\/explore\/news">News<\/a>/);
+  assert.match(edu, /href="\/explore\/news">Explore News &amp; Perspective/);
+  assert.match(edu, /dated snapshot, not a live feed/);
+  assert.doesNotMatch(edu, /News Coming Soon|News <span>COMING SOON<\/span>|The News section is taking shape|while we build it/);
+  assert.match(news, /<a href="\/explore\/news" aria-current="page">News<\/a>/);
+  assert.match(news, /saved snapshot, not a real-time feed/);
+});

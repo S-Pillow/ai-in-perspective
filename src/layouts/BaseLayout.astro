@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import "../styles/perspective-navigation.css";
+import PerspectiveReturn from "../components/PerspectiveReturn.astro";
 
 interface Props {
   title: string;
@@ -7,6 +9,9 @@ interface Props {
   bodyClass?: string;
 }
 const { title, description, bodyClass = "" } = Astro.props;
+const pagePath = Astro.url.pathname;
+const showPerspectiveReturn = pagePath.startsWith("/explore/") || pagePath === "/methodology";
+const perspectiveTone = pagePath.startsWith("/explore/") ? pagePath.split("/")[2] : "default";
 const pageTitle = title === "AI in Perspective" ? title : title + " | AI in Perspective";
 const canonicalUrl = new URL(Astro.url.pathname, "https://ai-in-perspective.vercel.app").href;
 const socialImageUrl = "https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg";
@@ -38,8 +43,9 @@ const socialImageUrl = "https://ai-in-perspective.vercel.app/social/ai-in-perspe
     <meta name="robots" content="noindex, nofollow" />
     <title>{pageTitle}</title>
   </head>
-  <body class={bodyClass}>
+  <body id="page-top" class={bodyClass}>
     <a class="skip-link" href="#content">Skip to content</a>
     <slot />
+    {showPerspectiveReturn && <PerspectiveReturn tone={perspectiveTone} />}
   </body>
 </html>

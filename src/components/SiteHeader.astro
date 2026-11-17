@@ -1,5 +1,7 @@
 ---
 const { subtle = false } = Astro.props;
+const path = Astro.url.pathname;
+const showReturn = path.startsWith("/explore/") || path === "/methodology";
 ---
 <header class:list={["site-header", { "site-header--subtle": subtle }]}>
   <a class="brand" href="/discover/" aria-label="AI in Perspective, explore the perspectives">
@@ -7,7 +9,11 @@ const { subtle = false } = Astro.props;
     <span>AI <span class="brand-light">in Perspective</span></span>
   </a>
   <nav class="header-links" aria-label="Primary navigation">
-    <a href="/discover/">Explore</a>
+    {showReturn ? (
+      <a href="/discover/" class="header-perspectives-link"><span aria-hidden="true">←</span> All perspectives</a>
+    ) : (
+      <a href="/discover/">Explore</a>
+    )}
     <a href="/explore/history">The story</a>
     <a href="/methodology">Our approach</a>
     <a href="/intro" class="header-quiet">Replay opening <span aria-hidden="true">↗</span></a>

@@ -1,0 +1,20 @@
+---
+interface Props {
+  tone?: string;
+}
+const { tone = "default" } = Astro.props;
+const tones = ["history", "risks", "benefits", "environment", "education-news", "news"];
+const theme = tones.includes(tone) ? tone : "default";
+---
+<section class:list={["perspective-return", `perspective-return--${theme}`]} aria-labelledby="perspective-return-title">
+  <div class="perspective-return__content">
+    <p class="perspective-return__eyebrow"><span aria-hidden="true">✦</span> KEEP EXPLORING</p>
+    <h2 id="perspective-return-title">There is more to the picture.</h2>
+    <p class="perspective-return__description">Discover another side of AI, then decide what the evidence means to you.</p>
+    <a class="perspective-return__cta" href="/discover/">
+      <span>See another perspective</span>
+      <span class="perspective-return__arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="perspective-return__top" href="#page-top"><span aria-hidden="true">↑</span> Back to top</a>
+  </div>
+</section>

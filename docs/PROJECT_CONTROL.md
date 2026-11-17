@@ -1,7 +1,7 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 70
-- **Last reconciled:** 2026-11-16
+- **Record revision:** 72
+- **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
 - **Historical baseline:** v2.0 PRD (superseded for current scope).
@@ -591,3 +591,17 @@
 - **Change:** Rename curated section label from "CURATED EXAMPLES / ORIGINAL SOURCES" to "SELECTED STORIES / ORIGINAL SOURCES". Change the static count to "Showing all 5 stories" and dynamic filter count to "Showing N of 5 stories". Make the empty-selection message evergreen. Preserve curated stories and editorial lens semantics.
 - **Honesty and operations:** The source snapshot's true UTC timestamp and concise explanation that collected links are not a real-time feed remain. No false claim that automatic daily publication is active. All News data, Education files, CSS, collector, CI configuration and production remain unchanged.
 - **Verification:** Content contract asserts the permanent labels and absence of temporary public-facing text; run GitHub content/news/Astro tests and protected preview checks on exact SHA. Draft PR #4 stays unmerged and scheduled publishing remains off.
+
+
+## AIIP-NAV-01 | Perspective return-navigation correction (2026-11-17)
+- **Owner evidence / scope:** The owner reports that the small top and bottom "All perspectives" links are not visible enough on every perspective page. Owner authorizes a more prominent, on-theme "See another perspective" action, with discretion to adapt the supplied Uiverse snippets and optional back-to-top navigation. This is a bounded workflow/wayfinding correction, not a new product route or sitewide redesign.
+- **Implementation boundary:** On all /explore/* perspective routes and the supporting /methodology route, retain existing content/links and header hierarchy. Promote the existing header Explore link to a clearly identified "All perspectives" navigation control; append one shared, high-contrast bottom section with a direct /discover/ link and a "Back to top" anchor. Adapt a coherent gradient/glow treatment to History, Risks, Benefits, Environment, Education and News accents; do not duplicate source code from Uiverse examples, add external scripts, autoplay effects, tracking or dependencies.
+- **Acceptance evidence:** Check source-level route coverage, correct absolute /discover/ target, keyboard focus, responsive layout rules, and reduced-motion behavior; run content/News checks and static build on the exact commit. Rendered desktop/mobile accessibility/visual judgment is an owner or capable browser observer gate, not proven by source assertions or CI alone.
+- **Durability and release:** New branch feature/aiip-nav-perspective-return from main 4f0215aa1941fd129762c9923cd25349fbcbc03b, with Draft PR for owner review. Existing production, unrelated News/Education content, data collection, Intro and flyover experiment remain untouched. No merge or production release without explicit owner acceptance.
+
+
+## AIIP-NEWS-05 | Education-to-News navigation truthfulness correction (2026-11-17)
+- **Owner-observed defect:** A desktop screenshot of the draft navigation preview shows the Education section switcher still marking News \`COMING SOON\` even though News was published from main \`4f0215aa\` on 2026-11-17. The Education page also retained stale "taking shape" body copy and a "Visit News Coming Soon" link.
+- **Bounded correction:** Replace the incorrect News tab badge with an ordinary News link, and update only the adjacent Education News-promo text and CTA to describe the published curated News and dated, non-live source snapshot. Preserve the existing News route, publication truthfulness, arcade, article data, curriculum and all other navigation. No new content feed, automatic refresh, CSS redesign, or external dependency.
+- **Verification:** A focused content regression proves the Education switcher and CTA link to \`/explore/news\`, the Coming Soon labels are absent, the News switch marks its current page correctly, and saved-snapshot qualifiers remain. GitHub content/News tests plus Astro build are required on the exact new commit; hosted visual review remains operator-owned.
+- **Release boundary:** Applied as a documented scope addition on Draft PR #6; owner review is still pending. No merge, production deploy or changes to the abandoned flyover experiment.
