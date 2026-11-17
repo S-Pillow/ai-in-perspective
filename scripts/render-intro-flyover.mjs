@@ -24,13 +24,20 @@ try{
     window.__introFlyoverSeek(t);
     const center=document.querySelector(".intro-center");
     const earth=document.querySelector(".intro-planet");
+    const sheet=document.querySelector(".intro-flyover-page-surface");
     const camera=new DOMMatrixReadOnly(getComputedStyle(center).transform);
     const rect=earth.getBoundingClientRect();
+    const sheetRect=sheet.getBoundingClientRect();
+    const globeVisibleHeight=Math.max(0,Math.min(rect.bottom,innerHeight)-Math.max(rect.top,0));
     return {
       at:t,
       cameraPitchMetric:Math.abs(camera.m23),
       planetOpacity:Number(getComputedStyle(earth).opacity),
       planetTop:Math.round(rect.top),
+      planetVisibleHeight:Math.round(globeVisibleHeight),
+      sheetProjectedWidth:Math.round(sheetRect.width),
+      sheetProjectedHeight:Math.round(sheetRect.height),
+      sheetHasBorder:getComputedStyle(sheet).borderTopWidth!=="0px",
       screenHeight:innerHeight,
       title:document.querySelector(".intro-headline-arrived")?.textContent,
       continueHref:document.querySelector(".intro-continue")?.getAttribute("href"),
@@ -50,11 +57,15 @@ try{
   assert.equal(checkpoints.flat.active,true);
   assert.equal(checkpoints.flat.title?.trim(),"ARRIVED");
   assert.equal(checkpoints.flat.continueHref,"/discover/");
-  assert.ok(checkpoints.flat.cameraPitchMetric>.2,"flat scene has camera pitch");
+  assert.ok(checkpoints.flat.cameraPitchMetric>.7,"camera shows the actual webpage nearly horizontal");
+  assert.ok(checkpoints.flat.sheetHasBorder,"flat website has an actual framed surface");
+  assert.ok(checkpoints.flat.sheetProjectedWidth>300,"flat website spans enough of the frame");
+  assert.ok(checkpoints.flat.sheetProjectedHeight>40,"flat website is visible, not a collapsed line");
   assert.ok(checkpoints.upright.cameraPitchMetric<.025,"page is vertical before the globe rises");
   assert.ok(checkpoints.upright.planetOpacity<.02,"globe remains hidden at upright transition");
   assert.ok(checkpoints.globeRising.planetOpacity>.25,"globe rises after upright transition");
   assert.ok(checkpoints.globeRising.planetTop<checkpoints.upright.planetTop,"globe actually moves upward");
+  assert.ok(checkpoints.globeRising.planetVisibleHeight>200,"globe must visibly enter the viewport");
   assert.ok(checkpoints.closing.planetOpacity>.9,"globe settles at close");
   assert.ok(!checkpoints.closing.horizontalOverflow,"no horizontal overflow in finished desktop frame");
   const shots=[

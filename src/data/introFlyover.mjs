@@ -19,32 +19,39 @@ export const INTRO_FLYOVER_MARKERS = Object.freeze({
 
 /** A single continuous camera moves the existing text page. */
 export const INTRO_CAMERA_FRAMES = Object.freeze([
-  { offset:0,    transform:"rotateX(68deg) translateY(15svh) scale(.76)" },
-  { offset:0.15, transform:"rotateX(68deg) translateY(15svh) scale(.76)" },
-  { offset:0.29, transform:"rotateX(68deg) translateY(-6svh) scale(.76)" },
-  { offset:0.45, transform:"rotateX(68deg) translateY(-25svh) scale(.76)" },
-  { offset:0.55, transform:"rotateX(43deg) translateY(-12svh) scale(.64)" },
-  { offset:0.65, transform:"rotateX(0deg) translateY(-4svh) scale(.72)" },
-  { offset:0.72, transform:"rotateX(0deg) translateY(-4svh) scale(.72)" },
-  { offset:0.86, transform:"rotateX(0deg) translateY(0svh) scale(1)" },
-  { offset:1,    transform:"rotateX(0deg) translateY(0svh) scale(1)" },
+  // The website is truly horizontal and has a visible outline while the camera travels.
+  {offset:0,    transform:"translateY(20svh) rotateX(80deg) scale(1.60)"},
+  {offset:0.15, transform:"translateY(20svh) rotateX(80deg) scale(1.60)"},
+  {offset:0.29, transform:"translateY(2svh) rotateX(80deg) scale(1.60)"},
+  {offset:0.45, transform:"translateY(-29svh) rotateX(80deg) scale(1.65)"},
+  {offset:0.55, transform:"translateY(-25svh) rotateX(56deg) scale(.95)"},
+  {offset:0.65, transform:"translateY(-9svh) rotateX(0deg) scale(.72)"},
+  {offset:0.72, transform:"translateY(-9svh) rotateX(0deg) scale(.72)"},
+  {offset:0.86, transform:"translateY(0svh) rotateX(0deg) scale(1)"},
+  {offset:1,    transform:"translateY(0svh) rotateX(0deg) scale(1)"},
+]);
+export const INTRO_SURFACE_FRAMES = Object.freeze([
+  {offset:0,opacity:1},{offset:.45,opacity:1},
+  {offset:.65,opacity:.9},{offset:.78,opacity:.6},
+  {offset:.86,opacity:0},{offset:1,opacity:0},
+]);
+/** The globe must enter the visible viewport, not just change opacity offscreen. */
+export const INTRO_GLOBE_FRAMES = Object.freeze([
+  {offset:0,opacity:0,transform:"translateX(-50%) translateY(90svh) scale(.96)"},
+  {offset:.65,opacity:0,transform:"translateX(-50%) translateY(90svh) scale(.96)"},
+  {offset:.66,opacity:0,transform:"translateX(-50%) translateY(90svh) scale(.96)"},
+  {offset:.72,opacity:.45,transform:"translateX(-50%) translateY(-13svh) scale(.98)"},
+  {offset:.77,opacity:.98,transform:"translateX(-50%) translateY(-52svh) scale(1)"},
+  {offset:.86,opacity:.98,transform:"translateX(-50%) translateY(-52svh) scale(1)"},
+  {offset:1,opacity:.98,transform:"translateX(-50%) translateY(-52svh) scale(1)"},
 ]);
 
-/** Globe and light remain below the frame until after 65% upright marker. */
-export const INTRO_GLOBE_FRAMES = Object.freeze([
-  {offset:0,    opacity:0,   transform:"translateX(-50%) translateY(76svh) scale(.96)"},
-  {offset:0.65, opacity:0,   transform:"translateX(-50%) translateY(76svh) scale(.96)"},
-  {offset:0.66, opacity:0,   transform:"translateX(-50%) translateY(76svh) scale(.96)"},
-  {offset:0.76, opacity:0.58,transform:"translateX(-50%) translateY(30svh) scale(.98)"},
-  {offset:0.86, opacity:0.98,transform:"translateX(-50%) translateY(0svh) scale(1)"},
-  {offset:1,    opacity:0.98,transform:"translateX(-50%) translateY(0svh) scale(1)"},
-]);
 export const INTRO_AURA_FRAMES = Object.freeze([
   {offset:0,    opacity:0, transform:"translateX(-50%) translateY(42svh)"},
   {offset:0.66, opacity:0, transform:"translateX(-50%) translateY(42svh)"},
-  {offset:0.79, opacity:0.75,transform:"translateX(-50%) translateY(6svh)"},
-  {offset:0.86, opacity:1, transform:"translateX(-50%) translateY(0svh)"},
-  {offset:1,    opacity:1, transform:"translateX(-50%) translateY(0svh)"},
+  {offset:0.79, opacity:0.75,transform:"translateX(-50%) translateY(-30svh)"},
+  {offset:0.86, opacity:1, transform:"translateX(-50%) translateY(-38svh)"},
+  {offset:1,    opacity:1, transform:"translateX(-50%) translateY(-38svh)"},
 ]);
 export const INTRO_HORIZON_FRAMES = Object.freeze([
   {offset:0,opacity:0}, {offset:0.66,opacity:0},

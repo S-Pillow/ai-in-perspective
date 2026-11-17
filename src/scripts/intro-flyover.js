@@ -1,6 +1,6 @@
 import {
   INTRO_FLYOVER_DURATION_MS,
-  INTRO_CAMERA_FRAMES, INTRO_GLOBE_FRAMES,
+  INTRO_CAMERA_FRAMES, INTRO_GLOBE_FRAMES, INTRO_SURFACE_FRAMES,
   INTRO_AURA_FRAMES, INTRO_HORIZON_FRAMES,
 } from "../data/introFlyover.mjs";
 
@@ -23,13 +23,15 @@ if(stage){
   const skip=stage.querySelector("[data-intro-flyover-skip]");
   if(!disabled){
     const center=stage.querySelector(".intro-center");
+    const plane=stage.querySelector(".intro-flyover-page-surface");
     const globe=stage.querySelector(".intro-planet");
     const aura=stage.querySelector(".intro-earth-aura");
     const horizon=stage.querySelector(".intro-title-horizon");
-    if(center && globe && aura && horizon){
+    if(center && plane && globe && aura && horizon){
       stage.classList.add("intro-flyover");
       const tracks=[
         center.animate(INTRO_CAMERA_FRAMES,{duration:INTRO_FLYOVER_DURATION_MS,fill:"both",easing:"linear"}),
+        plane.animate(INTRO_SURFACE_FRAMES,{duration:INTRO_FLYOVER_DURATION_MS,fill:"both",easing:"linear"}),
         globe.animate(INTRO_GLOBE_FRAMES,{duration:INTRO_FLYOVER_DURATION_MS,fill:"both",easing:"linear"}),
         aura.animate(INTRO_AURA_FRAMES,{duration:INTRO_FLYOVER_DURATION_MS,fill:"both",easing:"linear"}),
         horizon.animate(INTRO_HORIZON_FRAMES,{duration:INTRO_FLYOVER_DURATION_MS,fill:"both",easing:"linear"}),

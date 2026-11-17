@@ -4,11 +4,11 @@
  * The original page, global styles, navigation and content are not replaced.
  */
 .intro-stage.intro-flyover{
-  perspective:1450px;
-  perspective-origin:50% 42%;
+  perspective:900px;
+  perspective-origin:50% 27%;
 }
 .intro-stage.intro-flyover .intro-center{
-  transform-origin:50% 12%;
+  transform-origin:50% 50%;
   transform-style:preserve-3d;
   backface-visibility:visible;
   will-change:transform;
@@ -65,3 +65,28 @@
 @media(prefers-reduced-motion:reduce){
   .intro-flyover-action{display:none!important;}
 }
+
+
+/* A visible physical page surface behind *existing* Intro words.
+   Earlier rotated text alone had no surface and did not look flat. */
+.intro-flyover-page-surface{display:none;}
+.intro-stage.intro-flyover .intro-flyover-page-surface{
+  display:block;
+  position:absolute;
+  inset:-4svh -5vw -7svh;
+  border:2px solid #7bd7edb8;
+  border-radius:12px;
+  background:
+    linear-gradient(90deg,#61bcdf0d 1px,transparent 1px),
+    linear-gradient(#61bcdf0d 1px,transparent 1px),
+    radial-gradient(ellipse at 50% 7%,#214976f2,#102441fb 53%,#061425ff);
+  background-size:46px 46px,46px 46px,auto;
+  box-shadow:inset 0 0 0 5px #09213b,0 0 0 1px #09263d,0 20px 80px #000b1cbd;
+  transform:translateZ(-3px);
+  pointer-events:none;
+  will-change:opacity;
+  z-index:-1;
+}
+.intro-stage.intro-flyover .intro-center{isolation:isolate;}
+.intro-stage.intro-flyover .intro-brand,
+.intro-stage.intro-flyover .intro-message{position:relative;z-index:1;}

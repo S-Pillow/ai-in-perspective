@@ -1078,7 +1078,7 @@ test("AIIP-INTRO-01 flyover reuses original copy and remains reversible", async 
 test("AIIP-INTRO-01 upright page precedes Earth rising on the editable 18.5-second timeline", async () => {
   const {
     INTRO_FLYOVER_DURATION_MS, INTRO_FLYOVER_SCENES, INTRO_FLYOVER_MARKERS,
-    INTRO_CAMERA_FRAMES, INTRO_GLOBE_FRAMES, INTRO_AURA_FRAMES,
+    INTRO_CAMERA_FRAMES, INTRO_GLOBE_FRAMES, INTRO_SURFACE_FRAMES, INTRO_AURA_FRAMES,
     INTRO_HORIZON_FRAMES, getIntroFlyoverScene,
   }=await import("../src/data/introFlyover.mjs");
   assert.equal(INTRO_FLYOVER_DURATION_MS,18500);
@@ -1087,7 +1087,7 @@ test("AIIP-INTRO-01 upright page precedes Earth rising on the editable 18.5-seco
   assert.equal(INTRO_FLYOVER_SCENES.at(-1).end,18.5);
   for(let i=1;i<INTRO_FLYOVER_SCENES.length;i++)
     assert.equal(INTRO_FLYOVER_SCENES[i-1].end,INTRO_FLYOVER_SCENES[i].start);
-  for(const frames of [INTRO_CAMERA_FRAMES,INTRO_GLOBE_FRAMES,INTRO_AURA_FRAMES,INTRO_HORIZON_FRAMES]){
+  for(const frames of [INTRO_CAMERA_FRAMES,INTRO_SURFACE_FRAMES,INTRO_GLOBE_FRAMES,INTRO_AURA_FRAMES,INTRO_HORIZON_FRAMES]){
     assert.equal(frames[0].offset,0);
     assert.equal(frames.at(-1).offset,1);
     assert.ok(frames.every((f,i)=>i===0||f.offset>frames[i-1].offset));
@@ -1104,4 +1104,19 @@ test("AIIP-INTRO-01 upright page precedes Earth rising on the editable 18.5-seco
   assert.equal(getIntroFlyoverScene(13).id,"globe");
   assert.equal(getIntroFlyoverScene(17).id,"closing");
   assert.throws(()=>getIntroFlyoverScene(NaN),/Invalid/);
+});
+
+
+test("AIIP-INTRO-01B explicit flat webpage and visibly rising globe are required",()=>{
+  const page=read("src/pages/intro.astro");
+  const style=read("src/styles/intro-flyover.css");
+  const js=read("src/scripts/intro-flyover.js");
+  const renderer=read("scripts/render-intro-flyover.mjs");
+  assert.match(page,/intro-flyover-page-surface" aria-hidden="true"/);
+  assert.match(style,/border:2px solid #7bd7edb8/);
+  assert.match(style,/perspective:900px/);
+  assert.match(js,/plane\.animate\(INTRO_SURFACE_FRAMES/);
+  assert.match(renderer,/sheetProjectedWidth>300/);
+  assert.match(renderer,/sheetHasBorder/);
+  assert.match(renderer,/planetVisibleHeight>200/);
 });
