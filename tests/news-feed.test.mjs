@@ -163,3 +163,17 @@ test("AIIP-NEWS-04B news layout is compact and snapshot date shows an explicit U
   assert.match(css,/\.nr-lead h3\{font:600[^}]*"DM Sans"/);
   assert.match(css,/\.nr-item h3\{font:600[^}]*"DM Sans"/);
 });
+
+
+test("AIIP-NEWS-04C owner retention policy keeps dated older news visible until displaced",()=>{
+  const snapshot=JSON.parse(readFileSync(new URL("../src/data/news-snapshot.json",import.meta.url),"utf8"));
+  const aged=snapshot.articles.map(article=>({...article,publishedAt:"2019-01-01T00:00:00.000Z"}));
+  const selected=getVisibleFeedArticles(aged,ENABLED_NEWS_FEEDS,NEWS_STORIES,16);
+  assert.equal(selected.length,16,"do not shrink the feed merely because articles are older than seven days");
+  assert.ok(selected.every(article=>article.publishedAt==="2019-01-01T00:00:00.000Z"));
+  assert.equal(new Set(selected.map(article=>article.sourceId)).size,5,"balance across publisher sources remains");
+  assert.equal(snapshot.articles.length,40,"retention buffer unchanged");
+  const page=readFileSync(new URL("../src/pages/explore/news.astro",import.meta.url),"utf8");
+  assert.match(page,/Articles from across the sources\./,"the section does not promise a date-limited recent feed");
+  assert.match(page,/formatDate\(article.publishedAt.slice\(0,10\)\)/,"preserve original publication dates");
+});
