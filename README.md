@@ -12,11 +12,11 @@ An interactive, evidence-first look at artificial intelligence: where it came fr
 
 The site had its first **public soft launch** on November 14, 2026. The production environment is built from the `main` branch of `S-Pillow/ai-in-perspective`.
 
-- **Live now:** interactive introduction; five-topic Discover experience; dedicated History, Benefits, Environment, and Risks & Safety pages; a temporary combined Education & News arcade/Coming Soon experience.
-- **Approved, awaiting production release:** [Education PR #3](https://github.com/S-Pillow/ai-in-perspective/pull/3) replaces the temporary Education destination with a six-level, 32-topic learning page and gives News a separate Coming Soon route with the existing licensed arcade. The owner approved its dark visual design and editorial changes. As of November 16, this PR is still **unmerged**, because Vercel's Hobby deployment quota has blocked a reliable final production release. Source and tests are ahead of the current live website.
-- **Future work, not live:** automated AI news gathering, RSS adapters, ranking, summaries or publishing. Candidate publishers and editorial categories are recorded in [News source discovery](docs/discovery/AIIP-NEWS-01-sources-and-editorial-lenses.md). The separate `feature/aiip-news-feed` branch is reserved for News implementation and must be reconciled with accepted `main` after Education's release.
+- **Live now (November 17, 2026):** the interactive Intro, five-perspective Discover ring, published History, Risks & Safety, Benefits, Environment and Education pages, and the separate News page. Education contains a six-level, 32-topic learning path. News presents five curated stories, up to 16 attributed source links selected from a dated 40-article snapshot, and the licensed arcade.
+- **Latest production release:** [PR #6](https://github.com/S-Pillow/ai-in-perspective/pull/6) merged the perspective-return navigation and corrected the outdated Education-to-News "Coming Soon" labels. Production Vercel deployment `dpl_ESSWH9N8JBKmphrQVFfdMb6vAQ9d` reports `READY` for `main` commit `619024976f3bf5ba202f4b768555f9e76abcfbbb`; the published route checks passed.
+- **Not activated:** a scheduled daily News collection/publication job, real-time feeds, or automatic editorial classification. News source links are from a dated saved snapshot, not a live feed. Publisher-rights checks and approved operator verification remain prerequisites for automated publishing; see [News source discovery](docs/discovery/AIIP-NEWS-01-sources-and-editorial-lenses.md).
 
-The public soft launch still has outstanding browser/device accessibility review and search-indexing decisions. Do not describe preview-only features or unfinished News functionality as live.
+The public site still needs broad device/keyboard/accessibility review, independent editorial verification beyond already-reviewed material, and a separate search-indexing decision. Published does not mean every claim has undergone a comprehensive independent research audit.
 
 ## Technology and repository
 
@@ -42,11 +42,11 @@ For source/content regression checks and a static production build:
 npm run check
 ```
 
-The `check` script runs the Node content tests and the Astro build. The `dev` and `build` scripts also unpack the existing Wayfinder assets before starting Astro. A passing build is not a substitute for checking rendered layout, keyboard operation, reduced-motion preferences, or real external links.
+The `check` script runs content and News tests plus the Astro build. The `dev` and `build` scripts also unpack the existing Wayfinder assets before starting Astro. A passing build is not a substitute for checking rendered layout, keyboard operation, reduced-motion preferences, or real external links.
 
 ## GitHub and release workflow
 
-1. Scope changes on a feature branch. Keep Education fixes separate from the future News-feed implementation.
+1. Scope changes on a feature branch. Keep bounded copy/navigation fixes separate from activating automated News collection or publication.
 2. Run the content tests and build; inspect the actual rendered experience where visual/interaction acceptance matters.
 3. Open or update a pull request and record the owner's acceptance. Production merges are an explicit release action, not an automatic consequence of completed code.
 4. Merge into `main` only with the required release gates satisfied. Vercel then builds and publishes production from the merged commit; verify that the live deployment matches that SHA and that the key routes work.

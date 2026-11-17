@@ -1078,3 +1078,40 @@ test("AIIP-NEWS-05 Education links to published News without stale Coming Soon l
   assert.match(news, /<a href="\/explore\/news" aria-current="page">News<\/a>/);
   assert.match(news, /saved snapshot, not a real-time feed/);
 });
+
+
+test("AIIP-COPY-STATUS-01 Discover About counters match five published perspectives and separate News", () => {
+  const page = read("public/discover/index.html");
+  const worlds = page.split("const WORLDS=[")[1]?.split("];")[0] || "";
+  const paths = [...worlds.matchAll(/url:'(\/explore\/[^']+)'/g)].map(match => match[1]);
+  assert.deepEqual(paths, [
+    "/explore/history", "/explore/risks", "/explore/benefits",
+    "/explore/environment", "/explore/education-news"
+  ]);
+  for (const path of paths) {
+    assert.ok(read("src/pages" + path + ".astro").includes("<BaseLayout"), "live page for " + path);
+  }
+  assert.ok(read("src/pages/explore/news.astro").includes("<BaseLayout"));
+  assert.match(page, /Turn the ring to choose from five perspectives, all available to explore/);
+  assert.match(page, /Education also connects to a separate News section/);
+  const modal = page.split('<div class="stats">')[1]?.split('<div class="worlds"')[0] || "";
+  assert.match(modal, /<b>5<\/b><span>Perspectives<\/span>/);
+  assert.match(modal, /<b>5<\/b><span>Open now<\/span>/);
+  assert.match(modal, /<b>1<\/b><span>News section<\/span>/);
+  assert.doesNotMatch(modal, /Current links|In development|Coming Soon/);
+});
+
+test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a complete independent audit", () => {
+  const page = read("src/pages/methodology.astro");
+  assert.match(page, /Editorial scope:/);
+  assert.match(page, /not a certification that every published claim has received an independent research audit/);
+  assert.match(page, /further editorial review remains ongoing/);
+  assert.doesNotMatch(page, /Development status:|unfinished topic pages/);
+  const readme = read("README.md");
+  const control = read("docs/PROJECT_CONTROL.md");
+  assert.match(readme, /News source links are from a dated saved snapshot, not a live feed/);
+  assert.match(readme, /main.*commit \`619024976f3bf5ba202f4b768555f9e76abcfbbb\`/);
+  assert.doesNotMatch(readme, /PR #3.*still \*\*unmerged\*\*|News Coming Soon route|temporary combined Education & News/);
+  assert.match(control, /\*\*Record revision:\*\* 73/);
+  assert.match(control, /\*\*Current release checkpoint\*\*.*619024976f3bf5ba202f4b768555f9e76abcfbbb/);
+});
