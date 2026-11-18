@@ -1149,3 +1149,46 @@ test("AIIP-NEWS-06B daily publication remains limited to a validated snapshot on
   assert.doesNotMatch(read(".github/workflows/ci.yml"),/--preview-json/);
   assert.match(read("src/pages/explore/news.astro"),/data-news-snapshot-sha256=\{snapshotDigest\}/);
 });
+
+
+test("AIIP-DISCOVER-01B scene-adaptive typography preserves the cinematic subtitle and routes",()=>{
+  const page=read("public/discover/index.html");
+  const worlds=page.split("const WORLDS=[")[1]?.split("];")[0] || "";
+  const expected=[
+    ["History","history","How artificial intelligence began and how it developed","/explore/history"],
+    ["Risks & Safety","risks","What can go wrong, what helps, and what we are still missing","/explore/risks"],
+    ["Benefits","benefits","Where AI is helping people — and where evidence matters","/explore/benefits"],
+    ["Environment","environment","The energy, water, and infrastructure behind AI","/explore/environment"],
+    ["Education & News","education","Keep learning. Follow developments with perspective.","/explore/education-news"]
+  ];
+  const records=[...worlds.matchAll(/\{name:'([^']+)',sub:'([^']+)'[^\n]+?url:'([^']+)',typography:'([^']+)'\}/g)];
+  assert.deepEqual(records.map(m=>[m[1],m[4],m[2],m[3]]),expected);
+  for(const [,key] of expected){
+    const selector='.title[data-typography="'+key+'"]{';
+    const rule=page.split(selector)[1]?.split("}")[0] || "";
+    assert.match(rule,/--heading-ink:#[a-f0-9]{6}/);
+    assert.match(rule,/--descriptor-ink:#[a-f0-9]{6}/);
+    assert.match(rule,/--title-scrim:/);
+  }
+  const benefit=page.split('.title[data-typography="benefits"]{')[1]?.split("}")[0] || "";
+  assert.match(benefit,/--heading-ink:#32182f;--descriptor-ink:#32182f/);
+  assert.match(benefit,/--title-scrim:255,222,145/);
+  assert.match(page,/\.title\{[^}]+isolation:isolate/);
+  assert.match(page,/\.title::before\{[^}]+radial-gradient\(ellipse closest-side/);
+  assert.match(page,/\.name\{color:var\(--heading-ink\)\}/);
+  assert.match(page,/\.name \.it\{font-style:italic;color:inherit\}/);
+  assert.match(page,/\.name,\.sub\{text-shadow:var\(--title-shadow\)\}/);
+  const subRules=[...page.matchAll(/\.sub\{([^}]+)\}/g)].map(m=>m[1]);
+  assert.ok(subRules.length>=2);
+  assert.ok(subRules.some(s=>s.includes("color:var(--descriptor-ink)")&&s.includes("font:500")&&s.includes("letter-spacing:.10em")));
+  assert.ok(subRules.some(s=>s.includes("max-width:min(52ch,100%)")&&s.includes("text-wrap:balance")));
+  for(const rule of subRules) assert.doesNotMatch(rule,/(?:background|border(?:-radius)?|backdrop-filter|box-shadow|padding)\s*:/);
+  assert.match(page,/@media\(max-width:380px\)[^\n]*\.sub\{font-size:11px;letter-spacing:\.08em\}/);
+  assert.match(page,/<div class="sub" id="sub"><\/div>/);
+  assert.match(page,/const render=\(\)=>\{titleEl\.dataset\.typography=w\.typography;/);
+  assert.match(page,/subEl\.textContent=w\.sub/);
+  assert.match(page,/setActive\.t=setTimeout\(render,320\)/);
+  assert.match(page,/topicCta\.href=w\.url/);
+  assert.match(page,/prefers-reduced-motion:reduce/);
+  // These source contracts do not prove rendered contrast on animated artwork.
+});

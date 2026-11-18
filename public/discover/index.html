@@ -132,20 +132,28 @@ a{color:inherit;text-decoration:none}
 .med:focus-visible .med-halo{opacity:1}
 
 /* ───────── Title ───────── */
-.title{position:absolute;left:0;right:0;text-align:center;pointer-events:none;padding:0 24px;opacity:0;transition:opacity 1.4s var(--ease) .3s}
+.title{position:absolute;left:0;right:0;text-align:center;pointer-events:none;padding:0 24px;opacity:0;transition:opacity 1.4s var(--ease) .3s;isolation:isolate;
+  --heading-ink:#f5f2ec;--descriptor-ink:#f5f2ec;--title-shadow:0 1px 3px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.65);
+  --title-scrim:0,0,0;--scrim-strength:.50;--scrim-middle:.24}
 .ready .title{opacity:1}
-.title::before{content:'';position:absolute;left:50%;top:50%;width:min(1100px,130vw);height:150%;transform:translate(-50%,-50%);z-index:-1;
-  background:radial-gradient(closest-side,rgba(0,0,0,.42),rgba(0,0,0,.18) 55%,transparent);filter:blur(10px)}
-.title.light::before{background:radial-gradient(closest-side,rgba(30,10,30,.55),rgba(30,10,30,.25) 55%,transparent)}
-.name,.sub{text-shadow:0 2px 24px rgba(0,0,0,.55),0 0 2px rgba(0,0,0,.35)}
+/* Scene-local title typography: a feathered atmospheric field, never a descriptor card. */
+.title[data-typography="history"]{--heading-ink:#eef2ff;--descriptor-ink:#edf2ff;--title-scrim:7,12,28;--scrim-strength:.58;--scrim-middle:.30}
+.title[data-typography="risks"]{--heading-ink:#fff3dc;--descriptor-ink:#fff3dc;--title-scrim:13,11,16;--scrim-strength:.72;--scrim-middle:.44}
+.title[data-typography="benefits"]{--heading-ink:#32182f;--descriptor-ink:#32182f;--title-shadow:0 0 2px rgba(255,239,177,.85),0 0 9px rgba(255,209,132,.38);--title-scrim:255,222,145;--scrim-strength:.30;--scrim-middle:.18}
+.title[data-typography="environment"]{--heading-ink:#effff7;--descriptor-ink:#e9fff2;--title-scrim:3,20,20;--scrim-strength:.63;--scrim-middle:.32}
+.title[data-typography="education"]{--heading-ink:#edfaff;--descriptor-ink:#edfaff;--title-scrim:3,15,30;--scrim-strength:.60;--scrim-middle:.30}
+.title::before{content:'';position:absolute;left:50%;top:50%;width:min(1100px,130vw);height:170%;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse closest-side,rgba(var(--title-scrim),var(--scrim-strength)) 0%,rgba(var(--title-scrim),var(--scrim-middle)) 55%,transparent 100%);filter:blur(12px)}
+.name,.sub{text-shadow:var(--title-shadow)}
+.name{color:var(--heading-ink)}
 .name{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(46px,8.6vw,142px);line-height:.92;letter-spacing:-.028em;
   margin:0 0 18px;white-space:nowrap}
 .name .ch{display:inline-block;animation:chIn 1.25s var(--ease) both}
-.name .it{font-style:italic;color:rgba(245,242,236,.8)}
+.name .it{font-style:italic;color:inherit}
 .name.out .ch{animation:chOut .38s cubic-bezier(.5,0,.75,0) both}
 @keyframes chIn{from{opacity:0;transform:translateY(.42em) rotate(5deg);filter:blur(12px)}}
 @keyframes chOut{to{opacity:0;transform:translateY(-.22em);filter:blur(10px)}}
-.sub{font:400 12.5px/1.4 'Geist Mono',monospace;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);transition:opacity .5s,transform .8s var(--ease)}
+.sub{font:500 12.5px/1.5 'Geist Mono',monospace;letter-spacing:.10em;text-transform:uppercase;color:var(--descriptor-ink);transition:opacity .5s,transform .8s var(--ease)}
 .sub.out{opacity:0;transform:translateY(6px)}
 .tag{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 12px;border-radius:999px;font:500 9.5px/1 'Geist Mono',monospace;letter-spacing:.26em;text-transform:uppercase;
   color:var(--ink);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:opacity .5s}
@@ -270,14 +278,18 @@ form{display:grid;gap:12px;margin-top:26px}
 .mark{font-size:clamp(19px,2.1vw,27px)}
 .mark-secondary{font-family:Geist,ui-sans-serif,system-ui,sans-serif;font-weight:300;font-size:.72em;letter-spacing:-.04em}
 .name{font-size:clamp(34px,7.25vw,108px);white-space:normal;text-wrap:balance}
-.sub{font-size:clamp(10px,1vw,12.5px);line-height:1.6;letter-spacing:.16em;max-width:60ch;margin-inline:auto}
+/* Cinematic subtitle: typography only, with no visible backing or control styling. */
+.sub{max-width:min(52ch,100%);margin-inline:auto;font-size:clamp(11px,1.1vw,13px);line-height:1.5;text-wrap:balance}
+.title[data-typography="benefits"] .sub{max-width:min(44ch,100%)}
 .topic-action{display:flex;justify-content:center;align-items:center;min-height:36px;margin-top:20px;font:500 10px/1.2 'Geist Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
 .topic-action [hidden]{display:none!important}
 .topic-action a{pointer-events:auto;border:1px solid rgba(245,242,236,.56);background:rgba(10,10,12,.62);border-radius:999px;color:#fff;padding:12px 19px;transition:background .2s,transform .2s}
 .topic-action a:hover,.topic-action a:focus-visible{background:rgba(255,255,255,.18);transform:translateY(-2px);outline:2px solid var(--accent);outline-offset:3px}
+.title[data-typography="benefits"] .topic-action a{color:#32182f;border-color:rgba(50,24,47,.75);background:rgba(255,235,173,.68)}
+.title[data-typography="benefits"] .topic-action a:hover,.title[data-typography="benefits"] .topic-action a:focus-visible{background:rgba(255,240,191,.9);outline-color:#32182f}
 .topic-action span#topic-planned{color:var(--ink);background:rgba(4,4,4,.42);border:1px solid rgba(255,255,255,.22);padding:11px 16px;border-radius:999px}
-@media(max-width:760px){.mark{font-size:21px}.name{font-size:clamp(33px,9vw,59px);max-width:94vw;margin-inline:auto}.title{padding-inline:14px}.sub{padding-inline:4px}.topic-action{margin-top:16px}}
-@media(max-width:380px){.mark{font-size:18px}.sub{font-size:10px}.name{font-size:31px}}
+@media(max-width:760px){.mark{font-size:21px}.name{font-size:clamp(33px,9vw,59px);max-width:94vw;margin-inline:auto}.title{padding-inline:14px}.sub{max-width:min(52ch,100%)}.topic-action{margin-top:16px}}
+@media(max-width:380px){.mark{font-size:18px}.sub{font-size:11px;letter-spacing:.08em}.name{font-size:31px}}
 </style>
 </head>
 <body>
@@ -1051,11 +1063,11 @@ const ICON={
   frontier:'<path d="M12 2.5c2.8 2.3 3.9 5.6 3.9 9.3L14.5 16h-5l-1.4-4.2c0-3.7 1.1-7 3.9-9.3z"/><circle cx="12" cy="9" r="1.6"/><path d="M8.3 12.5 5.5 16.5l4 .3M15.7 12.5l2.8 4-4 .3"/><path d="M10.7 18.5c.2 1.4 1.3 2.8 1.3 2.8s1.1-1.4 1.3-2.8"/>'
 };
 const WORLDS=[
-  {name:'History',sub:'How artificial intelligence began and how it developed',tag:'History · Ideas · Discovery',accent:'#c9d6ff',pos:'62% 44%',scale:1.35,paint:pOrbit,icon:ICON.orbit,bloom:0.4,anim:aOrbit,url:'/explore/history'},
-  {name:'Risks & Safety',sub:'What can go wrong, what helps, and what we are still missing',tag:'Risk · Safeguards · Responsibility',accent:'#ffc23d',pos:'50% 42%',scale:1.4,paint:pCircuit,icon:ICON.circuit,bloom:0.45,anim:aCircuit,url:'/explore/risks'},
-  {name:'Benefits',sub:'Where AI is helping people — and where evidence matters',tag:'Benefits · Human Impact',accent:'#ff9c78',pos:'50% 50%',scale:1.3,paint:pGrid,icon:ICON.horizon,bloom:0.4,anim:aGrid,url:'/explore/benefits'},
-  {name:'Environment',sub:'The energy, water, and infrastructure behind AI',tag:'Environment · Resources · Evidence',accent:'#5dff9d',pos:'50% 36%',scale:1.3,paint:pAurora,icon:ICON.aurora,bloom:0.38,anim:aAurora,url:'/explore/environment'},
-  {name:'Education & News',sub:'Keep learning. Follow developments with perspective.',tag:'Learning · Headlines · Context',accent:'#2ee6ff',pos:'50% 40%',scale:1.35,paint:pCity,icon:ICON.city,bloom:0.42,anim:aCity,url:'/explore/education-news'}
+  {name:'History',sub:'How artificial intelligence began and how it developed',tag:'History · Ideas · Discovery',accent:'#c9d6ff',pos:'62% 44%',scale:1.35,paint:pOrbit,icon:ICON.orbit,bloom:0.4,anim:aOrbit,url:'/explore/history',typography:'history'},
+  {name:'Risks & Safety',sub:'What can go wrong, what helps, and what we are still missing',tag:'Risk · Safeguards · Responsibility',accent:'#ffc23d',pos:'50% 42%',scale:1.4,paint:pCircuit,icon:ICON.circuit,bloom:0.45,anim:aCircuit,url:'/explore/risks',typography:'risks'},
+  {name:'Benefits',sub:'Where AI is helping people — and where evidence matters',tag:'Benefits · Human Impact',accent:'#ff9c78',pos:'50% 50%',scale:1.3,paint:pGrid,icon:ICON.horizon,bloom:0.4,anim:aGrid,url:'/explore/benefits',typography:'benefits'},
+  {name:'Environment',sub:'The energy, water, and infrastructure behind AI',tag:'Environment · Resources · Evidence',accent:'#5dff9d',pos:'50% 36%',scale:1.3,paint:pAurora,icon:ICON.aurora,bloom:0.38,anim:aAurora,url:'/explore/environment',typography:'environment'},
+  {name:'Education & News',sub:'Keep learning. Follow developments with perspective.',tag:'Learning · Headlines · Context',accent:'#2ee6ff',pos:'50% 40%',scale:1.35,paint:pCity,icon:ICON.city,bloom:0.42,anim:aCity,url:'/explore/education-news',typography:'education'}
 ];
 const N=WORLDS.length,STEP=TAU/N,ROMAN=['I','II','III','IV','V'];
 
@@ -1128,8 +1140,8 @@ function setActive(i){
   segs.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('past',k<i);s.setAttribute('aria-selected',k===i)});
   curEl.textContent=String(i+1).padStart(2,'0');
   topicCta.hidden=!w.url;topicPlanned.hidden=!!w.url;if(w.url){topicCta.href=w.url;topicCta.setAttribute('aria-label','Explore '+w.name);}
-  titleEl.classList.toggle('light',!!w.light);autoT=0;bgs[i].appendChild(live);liveIdx=i;sizeLive();
-  const render=()=>{const words=w.name.split(' ');let html='',n=0;
+  autoT=0;bgs[i].appendChild(live);liveIdx=i;sizeLive();
+  const render=()=>{titleEl.dataset.typography=w.typography;const words=w.name.split(' ');let html='',n=0;
     words.forEach((wd,wi)=>{const cls=wi===0?'ch it':'ch';for(const ch of wd)html+=`<span class="${cls}" style="animation-delay:${(n++)*.035}s">${ch}</span>`;
       if(wi<words.length-1)html+=`<span class="ch" style="animation-delay:${(n++)*.035}s">&nbsp;</span>`});
     nameEl.className='name';nameEl.innerHTML=html;subEl.textContent=w.sub;tagEl.textContent=w.tag;subEl.classList.remove('out');tagEl.classList.remove('out')};
