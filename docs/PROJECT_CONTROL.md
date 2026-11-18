@@ -1,13 +1,13 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 76
+- **Record revision:** 77
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
 - **Historical baseline:** v2.0 PRD (superseded for current scope).
 - **Repository:** `S-Pillow/ai-in-perspective`
 - **Delivery model:** GitHub main is the live source; Vercel production project ai-in-perspective serves https://ai-in-perspective.vercel.app . The separate prototype-preview project is protected with Vercel Authentication on all targets. PR #1 is merged.
-- **Current release checkpoint** (2026-11-18 UTC): PR #9 merged at main 4cfde3afb434e07160dca0fdb353feb3f5db0d21; production dpl_Gq19oTGYkcXS7bzbzwyyD4QBqoY2 READY; private review run 44238126738 and issue #8 succeeded. NEWS-06B publication release evidence belongs in its PR and issue #8.
+- **Current release checkpoint** (2026-11-18 UTC): PR #10 merged at 2f93d1d; scheduled News workflow configured, first automatic merge-triggered publication run 44242721738 SUCCESS; main snapshot commit 3dc48c02d47b32d41017d2373e26835962146137, Vercel dpl_B2x8CPBcqEekea2DGSHABgTHvWrv READY, public News digest verified with 16 cards across six publishers. First clock-triggered run remains unobserved. AIIP-DISCOVER-01 is preview-only pending visual review.
 - **Active state** (2026-11-18 UTC): The Intro, five-perspective Discover ring, History, Risks & Safety, Benefits, Environment, 32-topic Education, and separate curated News page with dated saved RSS/Atom snapshot are published. News arcade preserved; daily source-link publication is owner-authorized, subject to actual deployment verification.
 - **Owner authorization** (current): Owner explicitly clarified 'I say add them all I will take my chances with legal issues'. This supersedes the narrowed roster and rights-uncertainty hold for six native feeds (MIT News, arXiv, The Verge, OpenAI, Google DeepMind, TechCrunch). Accept unresolved metadata-only redistribution uncertainty, not proof of permission. No bypass of access blocks, article/image republication, unofficial Anthropic adapter or MIT Technology Review activation. Scheduled snapshot-only commits and production publication authorized subject to operational checks.
 - **Phase** (current): Public site and Education/News live; daily snapshot publication activation in verification. Custom domain, SEO/indexability, broad accessibility review and independent editorial audit remain separate.
@@ -632,3 +632,9 @@
 - **Authority:** All six native feeds approved for metadata-only collection and daily public link display despite unresolved redistribution uncertainty. No claim of clearance. Preserve original TechCrunch/Verge links and headlines; two disabled sources remain disabled.
 - **Behavior:** Add TechCrunch AI RSS and source desk link; balance forty records (max eight each), preserve failed/empty sources, up to sixteen unique visible links, no arbitrary age expiry. Preserve five manual stories and arcade. Validated candidate record precedes main-only snapshot write, exact base guard, non-force bot push, and public digest check. Stop if bot delivery fails. No other app mutations or new deployment credentials.
 - **Gates:** Exact-head content/offline/actual six-source collection, candidate build and preview; confirm TechCrunch parsed and retained; verify first automatic main delivery and record limitations. Clock-triggered run only claimed once observed.
+
+
+## AIIP-DISCOVER-01 | Discover descriptor contrast correction (2026-11-18)
+- **Authority:** Owner observed low contrast on Discover, especially Benefits, and explicitly approved the recommended dark translucent rounded backing, medium weight, tighter tracking and improved shadow. This approves implementation/preview, not a production merge or visual final acceptance.
+- **Scope:** Shared descriptor CSS in public/discover/index.html only; no copy, scene drawing, ring geometry, interaction, timing, topic routing, News source or automation changes. Compact responsive padding and wrapping; a stable backing independent of animated art. Acceptance: readable settled descriptor on all five scenes including Benefits, no overlap with heading/tag/action, responsive legibility, same destinations. Worst-case modeled contrast and source regression; actual visual acceptance remains owner review pending unless rendered-browser evidence observed.
+- **Baseline:** main 3dc48c02d47b32d41017d2373e26835962146137; production dpl_B2x8CPBcqEekea2DGSHABgTHvWrv READY. News scheduled main may advance independently; do not overwrite any new snapshot. Preview build/CI required; no merge or production deployment in this unit.

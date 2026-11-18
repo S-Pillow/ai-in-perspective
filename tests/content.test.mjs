@@ -1149,3 +1149,28 @@ test("AIIP-NEWS-06B daily publication remains limited to a validated snapshot on
   assert.doesNotMatch(read(".github/workflows/ci.yml"),/--preview-json/);
   assert.match(read("src/pages/explore/news.astro"),/data-news-snapshot-sha256=\{snapshotDigest\}/);
 });
+
+
+test("AIIP-DISCOVER-01 shared descriptor has a scene-independent contrast backing and compact wrapping",()=>{
+  const page=read("public/discover/index.html");
+  const css=page.match(/\/\* Readable descriptor across every animated scene[\s\S]*?\*\/\s*(\.sub\{[^}]+\})/)?.[1];
+  assert.ok(css);
+  assert.match(css,/font-weight:500/);
+  assert.match(css,/color:#f5f2ec/);
+  assert.match(css,/background:rgba\(9,12,20,\.88\)/);
+  assert.match(css,/letter-spacing:\.10em/);
+  assert.match(css,/max-width:min\(60ch,100%\)/);
+  assert.match(css,/border-radius:14px/);
+  assert.match(css,/text-shadow:0 1px 3px/);
+  assert.match(page,/@media\(max-width:760px\)[^\n]*\.sub\{padding:7px 12px;max-width:min\(60ch,100%\)\}/);
+  assert.match(page,/@media\(max-width:380px\)[^\n]*\.sub\{font-size:11px;letter-spacing:\.08em\}/);
+  assert.match(page,/<div class="sub" id="sub"><\/div>/);
+  assert.match(page,/subEl\.textContent=w\.sub/);
+  assert.match(page,/name:'Benefits',sub:'Where AI is helping people — and where evidence matters'/);
+  assert.equal((page.match(/url:'\/explore\/[^']+'/g)||[]).length,5);
+  // Worst case: backing over pure white; WCAG sRGB relative luminance.
+  const channel=x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4;};
+  const lum=rgb=>rgb.map(channel).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+  const backing=[9,12,20].map(c=>c*.88+255*.12);
+  assert.ok((lum([245,242,236])+.05)/(lum(backing)+.05)>=4.5);
+});
