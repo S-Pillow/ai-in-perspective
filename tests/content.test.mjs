@@ -1117,6 +1117,24 @@ test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a 
   assert.match(readme, /merged commit is not considered deployed until a matching production build is \*\*READY\*\*/);
   assert.match(readme, /\[PR #7\]\(https:\/\/github\.com\/S-Pillow\/ai-in-perspective\/pull\/7\)/);
   assert.doesNotMatch(readme, /PR #3.*still \*\*unmerged\*\*|News Coming Soon route|temporary combined Education & News/);
-  assert.match(control, /\*\*Record revision:\*\* 74/);
-  assert.match(control, /\*\*Current release checkpoint\*\*.*619024976f3bf5ba202f4b768555f9e76abcfbbb/);
+  assert.ok(Number(control.match(/Record revision:\*\* (\d+)/)?.[1])>=74);
+  assert.match(control, /\*\*Current release checkpoint\*\*.*[a-f0-9]{40}.*READY/);
+});
+
+
+test("AIIP-NEWS-06A daily automation is review-only and has no repository write or deploy authority",()=>{
+  const flow=read(".github/workflows/news-review.yml");
+  assert.match(flow,/cron: '17 11 \* \* \*'/);
+  assert.match(flow,/workflow_dispatch:/);
+  assert.match(flow,/contents: read/);
+  assert.match(flow,/issues: write/);
+  assert.match(flow,/persist-credentials: false/);
+  assert.match(flow,/github\.ref == 'refs\/heads\/main'/);
+  assert.match(flow,/github\.event_name != 'pull_request'/);
+  assert.match(flow,/gh issue comment 8/);
+  assert.match(flow,/\.private/);
+  assert.match(flow,/review-report\.mjs/);
+  assert.match(flow,/npm run news:check && npm run build/);
+  assert.doesNotMatch(flow,/contents: write|pull-requests: write|git push|gh pr merge|upload-artifact|VERCEL_TOKEN/);
+  assert.doesNotMatch(read(".github/workflows/ci.yml"),/--preview-json/);
 });

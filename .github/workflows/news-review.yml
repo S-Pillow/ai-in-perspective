@@ -1,0 +1,75 @@
+name: News daily private review
+
+on:
+  schedule:
+    - cron: '17 11 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/news-review.yml']
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/news-review.yml'
+      - 'scripts/news/**'
+      - 'src/data/newsFeeds.mjs'
+      - 'tests/news-feed.test.mjs'
+
+permissions: {}
+concurrency:
+  group: news-review-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.repository == 'S-Pillow/ai-in-perspective' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      report: ${{ steps.report.outputs.report }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Test offline collector and site contracts
+        run: npm run check:content && npm run news:check
+      - name: Collect into isolated runner checkout
+        run: |
+          set -euo pipefail
+          cp src/data/news-snapshot.json "$RUNNER_TEMP/news-before.json"
+          npm run --silent news:collect > "$RUNNER_TEMP/news-result.json"
+          git diff --name-only | awk '$0 != "src/data/news-snapshot.json" { bad=1 } END { exit bad }'
+      - name: Validate actual candidate and build
+        run: npm run news:check && npm run build
+      - name: Prepare validated private review report
+        id: report
+        env:
+          RUN_URL: https://github.com/S-Pillow/ai-in-perspective/actions/runs/${{ github.run_id }}
+        run: |
+          node scripts/news/review-report.mjs "$RUNNER_TEMP/news-before.json" src/data/news-snapshot.json "$RUNNER_TEMP/news-result.json" "$(git rev-parse HEAD)" "$RUN_URL"
+  record:
+    needs: collect
+    if: github.repository == 'S-Pillow/ai-in-perspective' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Record validated review result in private issue 8
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPORT_BASE64: ${{ needs.collect.outputs.report }}
+        run: |
+          set -euo pipefail
+          test "$(gh api repos/S-Pillow/ai-in-perspective --jq '.private')" = true
+          test "$(gh api repos/S-Pillow/ai-in-perspective/issues/8 --jq '.state')" = open
+          test -n "$REPORT_BASE64"
+          printf '%s' "$REPORT_BASE64" | base64 --decode > "$RUNNER_TEMP/news-review.md"
+          gh issue comment 8 --repo S-Pillow/ai-in-perspective --body-file "$RUNNER_TEMP/news-review.md"

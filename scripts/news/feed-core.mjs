@@ -108,7 +108,7 @@ export function validateSnapshot(snapshot, sources=NEWS_FEEDS) {
   if(snapshot.publishedAt!==null && parseDate(snapshot.publishedAt)!==snapshot.publishedAt) throw new Error("invalid_snapshot_date");
   if(!Array.isArray(snapshot.articles) || snapshot.articles.length>MAX_ARTICLES_TOTAL ||
      !Array.isArray(snapshot.sourceStatuses)) throw new Error("invalid_snapshot_arrays");
-  const ids=new Set(),statusIds=new Set();
+  const ids=new Set(),statusIds=new Set(),perSourceCount=new Map();
   for(const article of snapshot.articles){
     const source=sourceById(article?.sourceId,sources);
     if(!source || !source.enabled || source.publisher!==article.publisher || source.sourceType!==article.sourceType ||
@@ -116,6 +116,8 @@ export function validateSnapshot(snapshot, sources=NEWS_FEEDS) {
       !article.id.startsWith("news_") || typeof article.title!=="string" ||
       withoutMarkup(article.title)!==article.title) throw new Error("invalid_snapshot_article");
     ids.add(article.id);
+    perSourceCount.set(source.id,(perSourceCount.get(source.id)??0)+1);
+    if(perSourceCount.get(source.id)>MAX_ARTICLES_PER_SOURCE) throw new Error("invalid_snapshot_source_limit");
     if(safeArticleUrl(article.url,source)!==article.url) throw new Error("invalid_snapshot_article_url");
     const stableId="news_"+createHash("sha256").update(source.id+"|"+article.url).digest("hex").slice(0,24);
     if(stableId!==article.id) throw new Error("invalid_snapshot_article_id");
