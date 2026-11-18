@@ -18,7 +18,7 @@ export function getVisibleFeedArticles(articles, sources, curatedStories, limit 
   for (let index=0; index < maxLength && chosen.length < limit; index++) {
     for (const bucket of buckets) {
       const article=bucket[index];
-      if(article && !seen.has(article.id)) { chosen.push(article); seen.add(article.id); }
+      if(article && !seen.has(canonicalArticleLink(article.url))) { chosen.push(article); seen.add(canonicalArticleLink(article.url)); }
       if(chosen.length>=limit) break;
     }
   }

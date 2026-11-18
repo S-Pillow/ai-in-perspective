@@ -1,4 +1,4 @@
-name: News daily private review
+name: News daily collection and publication
 
 on:
   schedule:
@@ -29,6 +29,11 @@ jobs:
       contents: read
     outputs:
       report: ${{ steps.report.outputs.report }}
+      state: ${{ steps.report.outputs.state }}
+      candidate: ${{ steps.report.outputs.candidate }}
+      sha256: ${{ steps.report.outputs.sha256 }}
+      render_digest: ${{ steps.report.outputs.render_digest }}
+      base_sha: ${{ steps.report.outputs.base_sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -73,3 +78,68 @@ jobs:
           test -n "$REPORT_BASE64"
           printf '%s' "$REPORT_BASE64" | base64 --decode > "$RUNNER_TEMP/news-review.md"
           gh issue comment 8 --repo S-Pillow/ai-in-perspective --body-file "$RUNNER_TEMP/news-review.md"
+
+  publish:
+    needs: [collect, record]
+    if: github.repository == 'S-Pillow/ai-in-perspective' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.collect.outputs.base_sha }}
+          persist-credentials: true
+      - name: Validate exact main base and candidate fingerprint
+        env:
+          BASE_SHA: ${{ needs.collect.outputs.base_sha }}
+          CANDIDATE: ${{ needs.collect.outputs.candidate }}
+          EXPECTED_SHA256: ${{ needs.collect.outputs.sha256 }}
+          COLLECTION_STATE: ${{ needs.collect.outputs.state }}
+        run: |
+          set -euo pipefail
+          test "$BASE_SHA" = "$(git rev-parse HEAD)"
+          test "$BASE_SHA" = "$(git ls-remote origin refs/heads/main | cut -f1)"
+          test -n "$CANDIDATE"
+          printf '%s' "$CANDIDATE" | base64 --decode > "$RUNNER_TEMP/news-candidate.json"
+          test "$(sha256sum "$RUNNER_TEMP/news-candidate.json" | cut -d' ' -f1)" = "$EXPECTED_SHA256"
+          case "$COLLECTION_STATE" in
+            changed)
+              if cmp -s "$RUNNER_TEMP/news-candidate.json" src/data/news-snapshot.json; then exit 1; fi
+              ;;
+            unchanged|retain_previous)
+              cmp -s "$RUNNER_TEMP/news-candidate.json" src/data/news-snapshot.json
+              ;;
+            *) exit 1 ;;
+          esac
+      - name: Commit changed snapshot only
+        if: needs.collect.outputs.state == 'changed'
+        env:
+          BASE_SHA: ${{ needs.collect.outputs.base_sha }}
+        run: |
+          set -euo pipefail
+          test "$BASE_SHA" = "$(git ls-remote origin refs/heads/main | cut -f1)"
+          cp "$RUNNER_TEMP/news-candidate.json" src/data/news-snapshot.json
+          test "$(git diff --name-only)" = src/data/news-snapshot.json
+          git add -- src/data/news-snapshot.json
+          test "$(git diff --cached --name-only)" = src/data/news-snapshot.json
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'chore(news): publish validated daily source snapshot'
+          git push origin HEAD:refs/heads/main
+          echo "Published source commit $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Verify exact snapshot on public production
+        env:
+          RENDER_DIGEST: ${{ needs.collect.outputs.render_digest }}
+        run: |
+          set -euo pipefail
+          [[ "$RENDER_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          for attempt in $(seq 1 24); do
+            if curl --fail --silent --show-error --max-time 12 "https://ai-in-perspective.vercel.app/explore/news?news-check=$RENDER_DIGEST" -o "$RUNNER_TEMP/news-live.html" &&
+              grep -Fq "data-news-snapshot-sha256=\"$RENDER_DIGEST\"" "$RUNNER_TEMP/news-live.html"; then
+              echo "Public News verified: $RENDER_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::Public snapshot did not match; inspect Vercel delivery before retrying. No further deploy attempted."
+          exit 1

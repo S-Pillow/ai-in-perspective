@@ -11,6 +11,7 @@ export const NEWS_SOURCES = Object.freeze([
   { name: "MIT News", type: "University and research", url: "https://news.mit.edu/topic/artificial-intelligence2" },
   { name: "arXiv", type: "Preprints, not peer reviewed by default", url: "https://arxiv.org/list/cs.AI/recent" },
   { name: "MIT Technology Review", type: "Independent journalism", url: "https://www.technologyreview.com/topic/artificial-intelligence/" },
+  { name: "TechCrunch", type: "Independent technology reporting", url: "https://techcrunch.com/category/artificial-intelligence/" },
   { name: "The Verge", type: "Independent reporting", url: "https://www.theverge.com/ai-artificial-intelligence" },
   { name: "OpenAI", type: "First-party announcements", url: "https://openai.com/news/" },
   { name: "Google DeepMind", type: "First-party announcements", url: "https://deepmind.google/blog/" },

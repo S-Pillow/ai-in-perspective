@@ -55,7 +55,7 @@ export function buildReviewReport({previousText,candidateText,diagnostics,baseSh
     const x=bySource.get(s.id);
     return {sourceId:s.id,state:x.state,entries:x.entries,retained:candidate.articles.filter(a=>a.sourceId===s.id).length};
   });
-  const lines=["## Daily News review — "+diagnostics.state,"","**Review only. No production update.**","",
+  const lines=["## Daily News review — "+diagnostics.state,"","**Validated candidate. Production delivery is checked separately; this record is not deployment proof.**","",
     "Run: "+runUrl+"  ","Base checkout SHA: "+baseSha+"  ","Snapshot SHA-256: "+fingerprint(candidateText)+"  ",
     "Result: "+counts.before+" → "+counts.after+" stored; "+counts.added+" new IDs; "+counts.removed+" displaced; "+counts.visible+" eligible visible links.",
     "Saved snapshot timestamp: "+(candidate.publishedAt??"none"),"",
@@ -63,16 +63,19 @@ export function buildReviewReport({previousText,candidateText,diagnostics,baseSh
     ...sources.map(s=>"| "+s.sourceId+" | "+s.state+" | "+s.entries+" | "+s.retained+" |"),""];
   if(diagnostics.state==="changed"){
     const fence=String.fromCharCode(96).repeat(3);
-    lines.push("### Proposed snapshot (metadata only)","","Validate against current main, source rights, and current editorial rules before any release.","",
+    lines.push("### Proposed snapshot (metadata only)","","Publication requires the exact main base and validated candidate fingerprint.","",
       fence+"json",safeJson(candidate),fence);
   }else lines.push("Published snapshot retained byte-for-byte. No candidate needs publication from this run.");
   const body=lines.join("\n")+"\n";
   assert(Buffer.byteLength(body,"utf8")<=60000,"review_comment_size_limit");
-  return {body,state:diagnostics.state,counts,sources,sha256:fingerprint(candidateText)};
+  return {body,state:diagnostics.state,counts,sources,sha256:fingerprint(candidateText),renderDigest:fingerprint(JSON.stringify(candidate))};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const [previous,candidate,diagnostics,baseSha,runUrl]=process.argv.slice(2);
   const result=buildReviewReport({previousText:readFileSync(previous,"utf8"),candidateText:readFileSync(candidate,"utf8"),diagnostics:JSON.parse(readFileSync(diagnostics,"utf8")),baseSha,runUrl});
   appendFileSync(process.env.GITHUB_OUTPUT,"report="+Buffer.from(result.body,"utf8").toString("base64")+"\n");
+  appendFileSync(process.env.GITHUB_OUTPUT,"state="+result.state+"\nsha256="+result.sha256+"\nrender_digest="+result.renderDigest+"\nbase_sha="+baseSha+"\n");
+  appendFileSync(process.env.GITHUB_OUTPUT,"candidate="+Buffer.from(readFileSync(candidate,"utf8")).toString("base64")+"\n");
+  console.log(JSON.stringify({state:result.state,counts:result.counts,sources:result.sources,sha256:result.sha256,renderDigest:result.renderDigest}));
   appendFileSync(process.env.GITHUB_STEP_SUMMARY,result.body.split("### Proposed snapshot")[0]);
 }

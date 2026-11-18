@@ -21,7 +21,7 @@ Follow the interactive Discover ring, or go directly to a topic.
 
 [**Visit the News section**](https://ai-in-perspective.vercel.app/explore/news) for five selected AI stories, contextual editorial framing, original-source links, and the licensed arcade experience.
 
-> **Source freshness:** News currently uses a **dated saved snapshot**, not a live or automatically refreshed feed. The published selection draws on a 40-article RSS/Atom snapshot and provides 16 attributed source links. Daily private review collection is configured via [GitHub Actions](https://github.com/S-Pillow/ai-in-perspective/actions/workflows/news-review.yml) and [review issue #8](https://github.com/S-Pillow/ai-in-perspective/issues/8); automatic editorial classification and automatic production publication remain **disabled**.
+> **Source freshness:** News uses a **dated saved snapshot**, not a real-time feed. Six native feeds are checked daily. Up to 40 retained articles support up to 16 attributed source links. A validated change can trigger one snapshot-only production build; unchanged runs do not deploy. [Review queue](https://github.com/S-Pillow/ai-in-perspective/issues/8) and [workflow](https://github.com/S-Pillow/ai-in-perspective/actions/workflows/news-review.yml) record candidate and delivery evidence. The five selected stories remain manual; no automatic editorial classification.
 
 ## Our approach
 
@@ -47,8 +47,8 @@ Read the site's [editorial approach](https://ai-in-perspective.vercel.app/method
 | Intro, Discover, five perspectives, Education, News | **Published** |
 | Perspective-return navigation | **Published** ([PR #6](https://github.com/S-Pillow/ai-in-perspective/pull/6)) |
 | Discover availability labels and methodology copy | **Updated in source** ([PR #7](https://github.com/S-Pillow/ai-in-perspective/pull/7)); check the production deployment for rollout |
-| Daily News collection | **Private review workflow**; no public publishing ([review queue](https://github.com/S-Pillow/ai-in-perspective/issues/8)) |
-| Automatic News publication | **Not enabled**; rights and operational acceptance gates remain |
+| Daily News collection | **Configured**; [review queue](https://github.com/S-Pillow/ai-in-perspective/issues/8) |
+| Automatic News publication | **Owner-authorized snapshot-only workflow**; check workflow delivery evidence for actual rollout |
 | Cross-device/accessibility review, comprehensive editorial audit, search-indexing decision | **Open follow-ups** |
 
 Production is built from GitHub [`main`](https://github.com/S-Pillow/ai-in-perspective/tree/main) and served by [Vercel](https://ai-in-perspective.vercel.app). A merged commit is not considered deployed until a matching production build is **READY** and the affected public routes are checked. See the [Project Control Record](docs/PROJECT_CONTROL.md) and [GitHub Actions](https://github.com/S-Pillow/ai-in-perspective/actions) for authoritative verification evidence; this README is an orientation, not a live deployment monitor.
@@ -96,7 +96,7 @@ A successful test run or build does not establish visual, responsive, assistive-
 1. Work on a bounded feature branch. Keep changes to published copy/navigation separate from any future automated News publishing work.
 2. Run the relevant tests and Astro build. Inspect desktop/mobile layout and interactions when the visual experience is affected.
 3. Open a pull request; document scope, evidence, remaining risks, and the required owner acceptance.
-4. Merge into `main` only with explicit release authorization. The connected Vercel project then builds production.
+4. Merge application code into `main` only with explicit release authorization. The separate owner-authorized News workflow may commit validated snapshot-only changes. The connected Vercel project builds production.
 5. Confirm the **exact merge SHA**, Vercel **READY** status, live routes, and a known-good rollback candidate. Record final release evidence in the [Project Control Record](docs/PROJECT_CONTROL.md) or the linked pull-request release record.
 
 **Deployment budget:** The connected production and preview projects share the Vercel account's build allowance. Prefer one verified, coherent change over frequent speculative deployments; a GitHub merge alone does not prove a public release succeeded.

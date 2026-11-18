@@ -139,7 +139,7 @@ test("current public release governance and News publication boundary are docume
   assert.match(control, /GitHub main is the live source/);
   assert.match(control, /separate prototype-preview project is protected with Vercel Authentication/);
   assert.match(control, /32-topic Education, and separate curated News page with dated saved RSS\/Atom snapshot are published/);
-  assert.match(control, /no daily automated publication is active/);
+  assert.match(control, /daily source-link publication is owner-authorized/);
 });
 
 test("isolated Core lab is a genuine 3D scene and preserves six accessible exhibit destinations", () => {
@@ -966,7 +966,7 @@ test("AIIP-NEWS-03 curated stories are source-validated, dated, and labeled as e
   const { NEWS_REVIEW_DATE, NEWS_LENSES, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview }=await import("../src/data/newsEditorial.mjs");
   assert.equal(NEWS_REVIEW_DATE,"2026-11-16");
   assert.equal(NEWS_LENSES.length,5);
-  assert.equal(NEWS_SOURCES.length,7);
+  assert.equal(NEWS_SOURCES.length,8);
   assert.equal(NEWS_STORIES.length,5);
   assert.equal(NEWS_STORIES.filter(x=>x.featured).length,1);
   assert.equal(validateEditorialPreview(),true);
@@ -1110,7 +1110,7 @@ test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a 
   assert.doesNotMatch(page, /Development status:|unfinished topic pages/);
   const readme = read("README.md");
   const control = read("docs/PROJECT_CONTROL.md");
-  assert.match(readme, /News currently uses a \*\*dated saved snapshot\*\*, not a live or automatically refreshed feed/);
+  assert.match(readme, /News uses a \*\*dated saved snapshot\*\*, not a real-time feed/);
   assert.match(readme, /<h1 align="center">AI in Perspective<\/h1>/);
   assert.match(readme, /```bash/);
   assert.doesNotMatch(readme, /\\`/);
@@ -1122,7 +1122,7 @@ test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a 
 });
 
 
-test("AIIP-NEWS-06A daily automation is review-only and has no repository write or deploy authority",()=>{
+test("AIIP-NEWS-06B daily publication remains limited to a validated snapshot on main",()=>{
   const flow=read(".github/workflows/news-review.yml");
   assert.match(flow,/cron: '17 11 \* \* \*'/);
   assert.match(flow,/workflow_dispatch:/);
@@ -1135,6 +1135,17 @@ test("AIIP-NEWS-06A daily automation is review-only and has no repository write 
   assert.match(flow,/\.private/);
   assert.match(flow,/review-report\.mjs/);
   assert.match(flow,/npm run news:check && npm run build/);
-  assert.doesNotMatch(flow,/contents: write|pull-requests: write|git push|gh pr merge|upload-artifact|VERCEL_TOKEN/);
+  const publish=flow.split("  publish:")[1];
+  assert.ok(publish);
+  assert.match(publish,/needs: \[collect, record\]/);
+  assert.match(publish,/contents: write/);
+  assert.match(publish,/sha256sum/);
+  assert.match(publish,/git ls-remote origin refs\/heads\/main/);
+  assert.match(publish,/needs\.collect\.outputs\.state == 'changed'/);
+  assert.match(publish,/git add -- src\/data\/news-snapshot\.json/);
+  assert.match(publish,/git push origin HEAD:refs\/heads\/main/);
+  assert.match(publish,/data-news-snapshot-sha256/);
+  assert.doesNotMatch(flow,/pull-requests: write|--force|gh pr merge|upload-artifact|VERCEL_TOKEN/);
   assert.doesNotMatch(read(".github/workflows/ci.yml"),/--preview-json/);
+  assert.match(read("src/pages/explore/news.astro"),/data-news-snapshot-sha256=\{snapshotDigest\}/);
 });

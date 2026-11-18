@@ -1,4 +1,5 @@
 ---
+import { createHash } from "node:crypto";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { NEWS_LENSES, NEWS_SOURCES, NEWS_STORIES, validateEditorialPreview } from "../../data/newsEditorial.mjs";
@@ -13,6 +14,7 @@ validateEditorialPreview();
 const lead = NEWS_STORIES.find((story) => story.featured);
 const otherStories = NEWS_STORIES.filter((story) => !story.featured);
 const feedSnapshot = validateSnapshot(savedNewsSnapshot);
+const snapshotDigest = createHash("sha256").update(JSON.stringify(feedSnapshot)).digest("hex");
 // Display links from every publisher without repeating any of the curated stories.
 const latestArticles = getVisibleFeedArticles(feedSnapshot.articles, ENABLED_NEWS_FEEDS, NEWS_STORIES, 16);
 const feedSourceType = (value) => ({preprint:"Preprint · not peer reviewed by default",company_announcement:"Company announcement · attributed claim",independent_reporting:"Independent reporting",university:"University research report"})[value] ?? "Publisher article";
@@ -82,11 +84,11 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
         </div>
       </div>
       <p class="nr-empty" data-news-empty hidden>No selected stories match this perspective. Try another category.</p>
-      <p class="nr-disclaimer">The five selected stories are curated manually. Collected source links come from a dated saved snapshot, not a real-time feed. Article claims are attributed to their publishers, not automatically fact-checked. No third-party article text or photographs are republished here.</p>
+      <p class="nr-disclaimer">The five selected stories are curated manually. Collected source links come from a dated saved snapshot, not a real-time feed. Daily collection checks for changes before publication. Article claims are attributed to their publishers, not automatically fact-checked. No third-party article text or photographs are republished here.</p>
     </section>
 
 
-    <section class="nr-feed" id="source-feed" aria-labelledby="nr-feed-title">
+    <section class="nr-feed" id="source-feed" aria-labelledby="nr-feed-title" data-news-snapshot-sha256={snapshotDigest}>
       <div class="nr-feed__intro">
         <div>
           <p class="en-eyebrow">SOURCE SNAPSHOT / NEWS DATA</p>
@@ -96,7 +98,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
         <div class="nr-feed__status" aria-label="News snapshot status">
           <span>{latestArticles.length ? "SAVED SNAPSHOT" : "COLLECTION NOT PUBLISHED"}</span>
           <strong><time datetime={feedSnapshot.publishedAt ?? undefined}>{feedSnapshot.publishedAt ? formatSnapshotTimeUtc(feedSnapshot.publishedAt) : "Awaiting first checked update"}</time></strong>
-          <small>{latestArticles.length ? "This is when the saved snapshot changed (UTC), not a live-feed refresh." : "Feed collection is in testing; these are not automatically updated headlines."}</small>
+          <small>{latestArticles.length ? "This is when the saved snapshot changed (UTC), not a live-feed refresh." : "No validated source links are currently available."}</small>
         </div>
       </div>
       {latestArticles.length ? (
@@ -115,7 +117,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
       ) : (
         <div class="nr-feed__empty">
           <strong>No automatic feed snapshot has been published yet.</strong>
-          <p>The collector and parser are being validated with real feeds and offline tests. The five editor-picked links above are still available to explore.</p>
+          <p>The five editor-picked links above are still available to explore.</p>
         </div>
       )}
     </section>
@@ -130,7 +132,7 @@ const formatDate = (date) => new Intl.DateTimeFormat("en-US", { month: "short", 
     </section>
 
     <section class="nr-sources" aria-labelledby="nr-sources-title">
-      <div class="nr-sources__intro"><p class="en-eyebrow">THE SOURCE DESK</p><h2 id="nr-sources-title">Seven starting points. More voices to follow.</h2><p>The source list mixes research, independent reporting, and AI companies. These are discovery candidates, not seven running RSS integrations. Anthropic's official RSS is not verified.</p></div>
+      <div class="nr-sources__intro"><p class="en-eyebrow">THE SOURCE DESK</p><h2 id="nr-sources-title">Eight starting points. More voices to follow.</h2><p>The source list mixes research, independent reporting, and AI companies. Six native feeds are configured for daily headline-and-link collection. MIT Technology Review and Anthropic remain discovery links only; Anthropic's official RSS is not verified.</p></div>
       <div class="nr-sources__list">
         {NEWS_SOURCES.map((source) =>
           <a href={source.url} class="nr-source" target="_blank" rel="noopener noreferrer">
