@@ -43,6 +43,11 @@ export function safeArticleUrl(raw, source) {
   try{url=new URL(raw);}catch{throw new Error("invalid_article_url");}
   if(url.protocol!=="https:" || url.username || url.password || url.port ||
      !source.articleHosts.includes(url.hostname.toLowerCase())) throw new Error("forbidden_article_url");
+  // Honor native-link conditions without bypassing hostname or HTTPS checks.
+  if(source.preserveFeedMetadata){
+    if(/[\s\u0000-\u001f\u007f]/.test(raw))throw new Error("invalid_original_link");
+    return raw;
+  }
   url.hash="";
   for(const key of [...url.searchParams.keys()]) if(TRACKING.test(key)) url.searchParams.delete(key);
   url.searchParams.sort();
@@ -78,7 +83,7 @@ export function parseFeedXml(xml) {
 }
 export function normalizeArticle(raw, source, observedAt, previous=null) {
   const title=withoutMarkup(raw?.title);
-  if(!title) throw new Error("invalid_article_title");
+  if(!title || (source.preserveFeedMetadata && title!==raw.title)) throw new Error("invalid_article_title");
   const url=safeArticleUrl(raw?.link,source);
   const id="news_"+createHash("sha256").update(source.id+"|"+url).digest("hex").slice(0,24);
   const now=parseDate(observedAt);
@@ -86,7 +91,7 @@ export function normalizeArticle(raw, source, observedAt, previous=null) {
   const publishedAt=parseDate(raw.published);
   const updatedAt=parseDate(raw.updated);
   // Unknown dates remain unknown. A future publication date is suspicious, not "breaking".
-  const future=Date.parse(now)+48*3600*1000;
+  const future=Date.parse(now);
   if(publishedAt && Date.parse(publishedAt)>future) throw new Error("future_article_date");
   return {
     id,sourceId:source.id,publisher:source.publisher,sourceType:source.sourceType,title,url,
@@ -151,7 +156,7 @@ export function mergeSnapshot(previous, observations, at, sources=NEWS_FEEDS) {
   const old=validateSnapshot(previous??newEmptySnapshot(),sources);
   const date=parseDate(at);
   if(!date)throw new Error("invalid_collection_date");
-  const perSource=new Map();
+  const perSource=new Map(),protectedSources=new Set();
   const statuses=[];
   let successful=0;
   for(const source of sources){
@@ -166,7 +171,7 @@ export function mergeSnapshot(previous, observations, at, sources=NEWS_FEEDS) {
     if(success)successful++;
     const state=observation.state;
     statuses.push({sourceId:source.id,state,lastSuccessfulAt:success?date:past?.lastSuccessfulAt??null});
-    if(!success) continue;
+    if(!success){protectedSources.add(source.id);continue;}
     if(!Array.isArray(observation.articles))throw new Error("invalid_observation_articles");
     const originals=old.articles.filter(a=>a.sourceId===source.id);
     const originalById=new Map(originals.map(a=>[a.id,a]));
@@ -178,16 +183,25 @@ export function mergeSnapshot(previous, observations, at, sources=NEWS_FEEDS) {
         converted.push(normalizeArticle(entry,source,date,originalById.get(id)));
       }catch{ /* A bad article is isolated and counted by the collector. */ }
     }
+    if(converted.length===0)protectedSources.add(source.id);
     perSource.set(source.id,sortArticles([...converted,...originals]).slice(0,MAX_ARTICLES_PER_SOURCE));
   }
   if(!successful) return {state:"retain_previous",snapshot:old,statuses};
   const previousBySource=new Map(sources.map(s=>[s.id,old.articles.filter(a=>a.sourceId===s.id)]));
-  const merged=[];
+  // Preserve failed/empty source records first, then allocate fairly.
+  const merged=[],buckets=[];
   for(const source of sources){
     if(!source.enabled) continue;
-    merged.push(...(perSource.get(source.id)??previousBySource.get(source.id)).slice(0,MAX_ARTICLES_PER_SOURCE));
+    const bucket=(perSource.get(source.id)??previousBySource.get(source.id)).slice(0,MAX_ARTICLES_PER_SOURCE);
+    if(protectedSources.has(source.id))merged.push(...bucket);
+    else buckets.push(bucket);
   }
-  const articles=sortArticles(merged).slice(0,MAX_ARTICLES_TOTAL);
+  for(let i=0;i<MAX_ARTICLES_PER_SOURCE&&merged.length<MAX_ARTICLES_TOTAL;i++){
+    for(const bucket of buckets){
+      if(bucket[i]&&merged.length<MAX_ARTICLES_TOTAL)merged.push(bucket[i]);
+    }
+  }
+  const articles=sortArticles(merged);
   if(signature(old.articles)===signature(articles)) return {state:"unchanged",snapshot:old,statuses};
   const next={
     schemaVersion:NEWS_SNAPSHOT_SCHEMA,publishedAt:date,

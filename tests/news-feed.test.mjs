@@ -18,7 +18,8 @@ const a=(source=MIT,link="https://news.mit.edu/2026/test",title="A legitimate pa
 const resp=(body,{status=200,type="application/rss+xml",headers={}}={})=>new Response(body,{status,headers:{"content-type":type,...headers}});
 const fake=reply=>async()=>reply;
 test("source allowlist keeps Anthropic and MIT Technology Review disabled",()=>{
-  assert.equal(NEWS_FEEDS.length,7);assert.equal(ENABLED_NEWS_FEEDS.length,5);
+  assert.equal(NEWS_FEEDS.length,8);assert.equal(ENABLED_NEWS_FEEDS.length,6);
+  assert.equal(NEWS_FEEDS.find(s=>s.id==='techcrunch_ai').enabled,true);
   assert.equal(NEWS_FEEDS.find(s=>s.id==="anthropic_newsroom").enabled,false);
   assert.equal(NEWS_FEEDS.find(s=>s.id==="mit_technology_review_ai").enabled,false);
   for(const s of ENABLED_NEWS_FEEDS){assert.ok(s.feedUrl.startsWith("https://"));assert.ok(s.articleHosts.length);}
@@ -136,7 +137,7 @@ test("AIIP-NEWS-04B curated items are not duplicated in the balanced visible sou
   const visible=getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,16);
   const curatedUrls=new Set(NEWS_STORIES.map(x=>canonicalArticleLink(x.url)));
   const eligible=snapshot.articles.filter(x=>!curatedUrls.has(canonicalArticleLink(x.url)));
-  assert.equal(visible.length,Math.min(16,eligible.length),"show real available links up to sixteen");
+  assert.equal(visible.length,Math.min(16,new Set(eligible.map(x=>canonicalArticleLink(x.url))).size),"show real available unique links up to sixteen");
   assert.ok(visible.every(x=>!curatedUrls.has(canonicalArticleLink(x.url))),"no repeated curated links");
   assert.equal(new Set(visible.map(x=>x.id)).size,visible.length,"unique visible article IDs");
   const synthetic=ENABLED_NEWS_FEEDS.flatMap(source=>Array.from({length:8},(_,i)=>a(source,"https://"+source.articleHosts[0]+"/test-fixture-"+i)));
@@ -144,7 +145,7 @@ test("AIIP-NEWS-04B curated items are not duplicated in the balanced visible sou
   const selected=getVisibleFeedArticles(synthetic,ENABLED_NEWS_FEEDS,[{url:duplicate.url}],16);
   assert.equal(selected.length,16);
   assert.ok(selected.every(x=>x.id!==duplicate.id));
-  assert.equal(new Set(selected.slice(0,5).map(x=>x.sourceId)).size,5,"first rotation stays balanced");
+  assert.equal(new Set(selected.slice(0,6).map(x=>x.sourceId)).size,6,"first rotation stays balanced");
   assert.equal(getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,0).length,0);
   assert.equal(canonicalArticleLink("https://news.mit.edu/2026/test?utm_source=rss&id=2#headline"),
     canonicalArticleLink("https://news.mit.edu/2026/test?id=2"));
@@ -199,7 +200,7 @@ test("daily review write, no-op and complete failure use an isolated atomic snap
     const inputs={previousText:start,candidateText:next,diagnostics:changed,baseSha:"a".repeat(40),runUrl:"https://github.com/S-Pillow/ai-in-perspective/actions/runs/1"};
     const report=buildReviewReport(inputs);
     assert.equal(report.state,"changed");
-    assert.match(report.body,/Review only. No production update/);
+    assert.match(report.body,/Validated candidate. Production delivery is checked separately/);
     assert.match(report.body,/Proposed snapshot/);
     const before=await stat(path);
     const unchanged=await runCli(["--write"],{...options,now:"2026-11-17T14:00:00.000Z"});
@@ -223,4 +224,25 @@ test("daily review rejects per-publisher overflow and automatic editorial fields
   const malformed={...original,articles:[{...original.articles[0],editorialNote:"injected"}]};
   const diagnostics={mode:"local_write_only",state:"changed",previousCount:0,nextCount:1,snapshotPublishedAt:NOW,sources:NEWS_FEEDS.map(s=>({sourceId:s.id,state:s.enabled?"ok":"disabled",entries:s.enabled?1:0}))};
   assert.throws(()=>buildReviewReport({previousText:JSON.stringify(newEmptySnapshot()),candidateText:JSON.stringify(malformed),diagnostics,baseSha:"a".repeat(40),runUrl:"https://github.com/S-Pillow/ai-in-perspective/actions/runs/1"}),/automated_editorial_metadata/);
+});
+
+
+test("AIIP-NEWS-06B six-source retention is balanced within forty and preserves failed sources",()=>{
+  const enabled=ENABLED_NEWS_FEEDS;
+  const observations=enabled.map(s=>({sourceId:s.id,state:"ok",articles:Array.from({length:8},(_,i)=>({title:"Story "+i,link:"https://"+s.articleHosts[0]+"/article-"+i,published:NOW}))}));
+  const initial=mergeSnapshot(newEmptySnapshot(),observations,NOW);
+  assert.equal(initial.snapshot.articles.length,40);
+  const sizes=enabled.map(s=>initial.snapshot.articles.filter(a=>a.sourceId===s.id).length);
+  assert.ok(sizes.every(n=>n>=6&&n<=7));
+  assert.equal(mergeSnapshot(initial.snapshot,observations,"2026-11-17T14:00:00.000Z").state,"unchanged");
+  const failure=observations.map(o=>o.sourceId===MIT.id?{...o,state:"degraded",articles:[]}:o);
+  const merged=mergeSnapshot(initial.snapshot,failure,"2026-11-18T14:00:00.000Z");
+  assert.deepEqual(merged.snapshot.articles.filter(a=>a.sourceId===MIT.id),initial.snapshot.articles.filter(a=>a.sourceId===MIT.id));
+  const tech=enabled.find(s=>s.id==="techcrunch_ai");
+  const url="https://techcrunch.com/2026/11/16/story/?utm_source=feed&b=2&a=1";
+  assert.equal(normalizeArticle({title:"Original TechCrunch headline",link:url,published:NOW},tech,NOW).url,url);
+  assert.equal(safeArticleUrl(url,tech),url);
+  assert.throws(()=>normalizeArticle({title:"Editorial  alteration",link:url},tech,NOW),/invalid_article_title/);
+  const verge=enabled.find(s=>s.id==="verge_ai"),vurl="https://www.theverge.com/tech/123/story?utm_source=rss";
+  assert.equal(safeArticleUrl(vurl,verge),vurl);
 });
