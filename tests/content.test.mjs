@@ -1151,26 +1151,44 @@ test("AIIP-NEWS-06B daily publication remains limited to a validated snapshot on
 });
 
 
-test("AIIP-DISCOVER-01 shared descriptor has a scene-independent contrast backing and compact wrapping",()=>{
+test("AIIP-DISCOVER-01B scene-adaptive typography preserves the cinematic subtitle and routes",()=>{
   const page=read("public/discover/index.html");
-  const css=page.match(/\/\* Readable descriptor across every animated scene[\s\S]*?\*\/\s*(\.sub\{[^}]+\})/)?.[1];
-  assert.ok(css);
-  assert.match(css,/font-weight:500/);
-  assert.match(css,/color:#f5f2ec/);
-  assert.match(css,/background:rgba\(9,12,20,\.88\)/);
-  assert.match(css,/letter-spacing:\.10em/);
-  assert.match(css,/max-width:min\(60ch,100%\)/);
-  assert.match(css,/border-radius:14px/);
-  assert.match(css,/text-shadow:0 1px 3px/);
-  assert.match(page,/@media\(max-width:760px\)[^\n]*\.sub\{padding:7px 12px;max-width:min\(60ch,100%\)\}/);
+  const worlds=page.split("const WORLDS=[")[1]?.split("];")[0] || "";
+  const expected=[
+    ["History","history","How artificial intelligence began and how it developed","/explore/history"],
+    ["Risks & Safety","risks","What can go wrong, what helps, and what we are still missing","/explore/risks"],
+    ["Benefits","benefits","Where AI is helping people — and where evidence matters","/explore/benefits"],
+    ["Environment","environment","The energy, water, and infrastructure behind AI","/explore/environment"],
+    ["Education & News","education","Keep learning. Follow developments with perspective.","/explore/education-news"]
+  ];
+  const records=[...worlds.matchAll(/\{name:'([^']+)',sub:'([^']+)'[^\n]+?url:'([^']+)',typography:'([^']+)'\}/g)];
+  assert.deepEqual(records.map(m=>[m[1],m[4],m[2],m[3]]),expected);
+  for(const [,key] of expected){
+    const selector='.title[data-typography="'+key+'"]{';
+    const rule=page.split(selector)[1]?.split("}")[0] || "";
+    assert.match(rule,/--heading-ink:#[a-f0-9]{6}/);
+    assert.match(rule,/--descriptor-ink:#[a-f0-9]{6}/);
+    assert.match(rule,/--title-scrim:/);
+  }
+  const benefit=page.split('.title[data-typography="benefits"]{')[1]?.split("}")[0] || "";
+  assert.match(benefit,/--heading-ink:#32182f;--descriptor-ink:#32182f/);
+  assert.match(benefit,/--title-scrim:255,222,145/);
+  assert.match(page,/\.title\{[^}]+isolation:isolate/);
+  assert.match(page,/\.title::before\{[^}]+radial-gradient\(ellipse closest-side/);
+  assert.match(page,/\.name\{color:var\(--heading-ink\)\}/);
+  assert.match(page,/\.name \.it\{font-style:italic;color:inherit\}/);
+  assert.match(page,/\.name,\.sub\{text-shadow:var\(--title-shadow\)\}/);
+  const subRules=[...page.matchAll(/\.sub\{([^}]+)\}/g)].map(m=>m[1]);
+  assert.ok(subRules.length>=2);
+  assert.ok(subRules.some(s=>s.includes("color:var(--descriptor-ink)")&&s.includes("font:500")&&s.includes("letter-spacing:.10em")));
+  assert.ok(subRules.some(s=>s.includes("max-width:min(52ch,100%)")&&s.includes("text-wrap:balance")));
+  for(const rule of subRules) assert.doesNotMatch(rule,/(?:background|border(?:-radius)?|backdrop-filter|box-shadow|padding)\s*:/);
   assert.match(page,/@media\(max-width:380px\)[^\n]*\.sub\{font-size:11px;letter-spacing:\.08em\}/);
   assert.match(page,/<div class="sub" id="sub"><\/div>/);
+  assert.match(page,/const render=\(\)=>\{titleEl\.dataset\.typography=w\.typography;/);
   assert.match(page,/subEl\.textContent=w\.sub/);
-  assert.match(page,/name:'Benefits',sub:'Where AI is helping people — and where evidence matters'/);
-  assert.equal((page.match(/url:'\/explore\/[^']+'/g)||[]).length,5);
-  // Worst case: backing over pure white; WCAG sRGB relative luminance.
-  const channel=x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4;};
-  const lum=rgb=>rgb.map(channel).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
-  const backing=[9,12,20].map(c=>c*.88+255*.12);
-  assert.ok((lum([245,242,236])+.05)/(lum(backing)+.05)>=4.5);
+  assert.match(page,/setActive\.t=setTimeout\(render,320\)/);
+  assert.match(page,/topicCta\.href=w\.url/);
+  assert.match(page,/prefers-reduced-motion:reduce/);
+  // These source contracts do not prove rendered contrast on animated artwork.
 });
