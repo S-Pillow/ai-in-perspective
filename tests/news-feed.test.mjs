@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { mkdtemp, readFile, writeFile, rm, stat } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { buildReviewReport } from "../scripts/news/review-report.mjs";
 import {NEWS_FEEDS,ENABLED_NEWS_FEEDS} from "../src/data/newsFeeds.mjs";
 import {parseFeedXml,parseDate,safeArticleUrl,normalizeArticle,validateSnapshot,mergeSnapshot,newEmptySnapshot,sortArticles,MAX_FEED_BYTES} from "../scripts/news/feed-core.mjs";
 import {collectOneFeed,collectAll,runCli} from "../scripts/news/collect.mjs";
@@ -110,8 +114,8 @@ test("collector returns per-source diagnostics, retains disabled sources and nee
 test("Astro uses a checked-in, validated snapshot and does not fetch publishers in visitors' browsers",()=>{
   const page=readFileSync(new URL("../src/pages/explore/news.astro",import.meta.url),"utf8");
   const fixture=JSON.parse(readFileSync(new URL("../src/data/news-snapshot.json",import.meta.url),"utf8"));
-  assert.equal(validateSnapshot(fixture),fixture);assert.equal(fixture.articles.length,40);
-  assert.equal(new Set(fixture.articles.map(a=>a.publisher)).size,5);
+  assert.equal(validateSnapshot(fixture),fixture);assert.ok(fixture.articles.length<=40);
+  for(const source of ENABLED_NEWS_FEEDS)assert.ok(fixture.articles.filter(a=>a.sourceId===source.id).length<=8);
   assert.ok(fixture.articles.every(a=>a.lens===null && a.editorialNote===null));
   assert.ok(fixture.articles.every(a=>a.publishedAt===null || a.publishedAt<=fixture.publishedAt));
   assert.match(page,/validateSnapshot\(savedNewsSnapshot\)/);assert.match(page,/latestArticles\.map/);
@@ -130,14 +134,17 @@ test("read-only snapshot export rejects --write combinations before network acce
 test("AIIP-NEWS-04B curated items are not duplicated in the balanced visible source feed",()=>{
   const snapshot=JSON.parse(readFileSync(new URL("../src/data/news-snapshot.json",import.meta.url),"utf8"));
   const visible=getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,16);
-  assert.equal(snapshot.articles.length,40,"saved historical snapshot stays complete");
-  assert.equal(visible.length,16,"show sixteen balanced source links");
   const curatedUrls=new Set(NEWS_STORIES.map(x=>canonicalArticleLink(x.url)));
-  assert.ok(snapshot.articles.some(x=>curatedUrls.has(canonicalArticleLink(x.url))),"fixture contains a duplicate to catch");
+  const eligible=snapshot.articles.filter(x=>!curatedUrls.has(canonicalArticleLink(x.url)));
+  assert.equal(visible.length,Math.min(16,eligible.length),"show real available links up to sixteen");
   assert.ok(visible.every(x=>!curatedUrls.has(canonicalArticleLink(x.url))),"no repeated curated links");
   assert.equal(new Set(visible.map(x=>x.id)).size,visible.length,"unique visible article IDs");
-  assert.equal(new Set(visible.map(x=>x.sourceId)).size,5,"all five publishers represented");
-  assert.equal(new Set(visible.slice(0,5).map(x=>x.sourceId)).size,5,"first rotation stays balanced");
+  const synthetic=ENABLED_NEWS_FEEDS.flatMap(source=>Array.from({length:8},(_,i)=>a(source,"https://"+source.articleHosts[0]+"/test-fixture-"+i)));
+  const duplicate=synthetic[0];
+  const selected=getVisibleFeedArticles(synthetic,ENABLED_NEWS_FEEDS,[{url:duplicate.url}],16);
+  assert.equal(selected.length,16);
+  assert.ok(selected.every(x=>x.id!==duplicate.id));
+  assert.equal(new Set(selected.slice(0,5).map(x=>x.sourceId)).size,5,"first rotation stays balanced");
   assert.equal(getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,0).length,0);
   assert.equal(canonicalArticleLink("https://news.mit.edu/2026/test?utm_source=rss&id=2#headline"),
     canonicalArticleLink("https://news.mit.edu/2026/test?id=2"));
@@ -169,11 +176,51 @@ test("AIIP-NEWS-04C owner retention policy keeps dated older news visible until 
   const snapshot=JSON.parse(readFileSync(new URL("../src/data/news-snapshot.json",import.meta.url),"utf8"));
   const aged=snapshot.articles.map(article=>({...article,publishedAt:"2019-01-01T00:00:00.000Z"}));
   const selected=getVisibleFeedArticles(aged,ENABLED_NEWS_FEEDS,NEWS_STORIES,16);
-  assert.equal(selected.length,16,"do not shrink the feed merely because articles are older than seven days");
+  assert.equal(selected.length,getVisibleFeedArticles(snapshot.articles,ENABLED_NEWS_FEEDS,NEWS_STORIES,16).length,"do not shrink the feed merely because articles are older than seven days");
   assert.ok(selected.every(article=>article.publishedAt==="2019-01-01T00:00:00.000Z"));
-  assert.equal(new Set(selected.map(article=>article.sourceId)).size,5,"balance across publisher sources remains");
-  assert.equal(snapshot.articles.length,40,"retention buffer unchanged");
+  assert.ok(snapshot.articles.length<=40,"retention buffer cap unchanged");
   const page=readFileSync(new URL("../src/pages/explore/news.astro",import.meta.url),"utf8");
   assert.match(page,/Articles from across the sources\./,"the section does not promise a date-limited recent feed");
   assert.match(page,/formatDate\(article.publishedAt.slice\(0,10\)\)/,"preserve original publication dates");
+});
+
+
+test("daily review write, no-op and complete failure use an isolated atomic snapshot", async()=>{
+  const dir=await mkdtemp(join(tmpdir(),"aiip-news-review-"));
+  try{
+    const path=join(dir,"snapshot.json");
+    const start=JSON.stringify(newEmptySnapshot(),null,2)+"\n";
+    await writeFile(path,start);
+    const options={snapshotPath:path,fetchImpl:async url=>url.includes("news.mit.edu")?resp(RSS):resp("",{status:503}),now:NOW,stdout:{write(){}}};
+    const changed=await runCli(["--write"],options);
+    assert.equal(changed.state,"changed");
+    const next=await readFile(path,"utf8");
+    assert.notEqual(next,start);assert.equal(JSON.parse(next).articles.length,2);
+    const inputs={previousText:start,candidateText:next,diagnostics:changed,baseSha:"a".repeat(40),runUrl:"https://github.com/S-Pillow/ai-in-perspective/actions/runs/1"};
+    const report=buildReviewReport(inputs);
+    assert.equal(report.state,"changed");
+    assert.match(report.body,/Review only. No production update/);
+    assert.match(report.body,/Proposed snapshot/);
+    const before=await stat(path);
+    const unchanged=await runCli(["--write"],{...options,now:"2026-11-17T14:00:00.000Z"});
+    assert.equal(unchanged.state,"unchanged");
+    assert.equal(await readFile(path,"utf8"),next);
+    assert.equal((await stat(path)).mtimeMs,before.mtimeMs);
+    const failure=await runCli(["--write"],{...options,fetchImpl:async()=>resp("",{status:503}),now:"2026-11-18T14:00:00.000Z"});
+    assert.equal(failure.state,"retain_previous");
+    assert.equal(await readFile(path,"utf8"),next);
+    const retained=buildReviewReport({...inputs,previousText:next,diagnostics:failure});
+    assert.doesNotMatch(retained.body,/Proposed snapshot/);
+    assert.match(retained.body,/retained byte-for-byte/);
+    assert.throws(()=>buildReviewReport({...inputs,previousText:start,diagnostics:failure}),/collection_count_mismatch|no_op_modified_snapshot/);
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test("daily review rejects per-publisher overflow and automatic editorial fields",()=>{
+  const entries=Array.from({length:9},(_,i)=>a(MIT,"https://news.mit.edu/test-"+i));
+  assert.throws(()=>validateSnapshot({...newEmptySnapshot(),publishedAt:NOW,articles:entries}),/source_limit/);
+  const original={...newEmptySnapshot(),publishedAt:NOW,articles:[a()]};
+  const malformed={...original,articles:[{...original.articles[0],editorialNote:"injected"}]};
+  const diagnostics={mode:"local_write_only",state:"changed",previousCount:0,nextCount:1,snapshotPublishedAt:NOW,sources:NEWS_FEEDS.map(s=>({sourceId:s.id,state:s.enabled?"ok":"disabled",entries:s.enabled?1:0}))};
+  assert.throws(()=>buildReviewReport({previousText:JSON.stringify(newEmptySnapshot()),candidateText:JSON.stringify(malformed),diagnostics,baseSha:"a".repeat(40),runUrl:"https://github.com/S-Pillow/ai-in-perspective/actions/runs/1"}),/automated_editorial_metadata/);
 });

@@ -89,25 +89,25 @@ export async function collectAll({fetchImpl=fetch,now=new Date().toISOString(),p
     })),
   };
 }
-export async function runCli(args=process.argv.slice(2)){
+export async function runCli(args=process.argv.slice(2),{snapshotPath=SNAPSHOT_PATH,fetchImpl=fetch,now=new Date().toISOString(),stdout=process.stdout}={}){
   if(args.some(s=>!["--dry-run","--write","--preview-json"].includes(s)) || args.length>1)throw new Error("usage: node scripts/news/collect.mjs [--dry-run | --preview-json | --write]");
   const write=args.includes("--write");
   let previous;
-  try{previous=JSON.parse(await readFile(SNAPSHOT_PATH,"utf8"));}
+  try{previous=JSON.parse(await readFile(snapshotPath,"utf8"));}
   catch(err){if(err.code!=="ENOENT")throw err;previous=newEmptySnapshot();}
-  const result=await collectAll({previous});
+  const result=await collectAll({previous,fetchImpl,now});
   const output={mode:write?"local_write_only":"read_only",state:result.state,
     sources:result.diagnostics,previousCount:previous.articles.length,
     nextCount:result.snapshot.articles.length,
     snapshotPublishedAt:result.snapshot.publishedAt};
   if(write && result.state==="changed"){
-    const temp=SNAPSHOT_PATH+".pending-"+process.pid;
+    const temp=snapshotPath+".pending-"+process.pid;
     try{await writeFile(temp,JSON.stringify(result.snapshot,null,2)+"\n",{encoding:"utf8",flag:"wx"});
-      await rename(temp,SNAPSHOT_PATH);
+      await rename(temp,snapshotPath);
     }catch(err){await unlink(temp).catch(()=>{});throw err;}
   }
-  process.stdout.write(JSON.stringify(output,null,2)+"\n");
-  if(args.includes("--preview-json"))process.stdout.write("NEWS_PREVIEW_SNAPSHOT_JSON="+JSON.stringify(result.snapshot)+"\n");
+  stdout.write(JSON.stringify(output,null,2)+"\n");
+  if(args.includes("--preview-json"))stdout.write("NEWS_PREVIEW_SNAPSHOT_JSON="+JSON.stringify(result.snapshot)+"\n");
   // Read-only probing must not fail a build because a third-party feed is offline.
   return output;
 }

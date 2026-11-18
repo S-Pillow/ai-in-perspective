@@ -21,7 +21,7 @@ Follow the interactive Discover ring, or go directly to a topic.
 
 [**Visit the News section**](https://ai-in-perspective.vercel.app/explore/news) for five selected AI stories, contextual editorial framing, original-source links, and the licensed arcade experience.
 
-> **Source freshness:** News currently uses a **dated saved snapshot**, not a live or automatically refreshed feed. The published selection draws on a 40-article RSS/Atom snapshot and provides 16 attributed source links. Scheduled ingestion, automatic editorial classification, and automatic publication are **not enabled**.
+> **Source freshness:** News currently uses a **dated saved snapshot**, not a live or automatically refreshed feed. The published selection draws on a 40-article RSS/Atom snapshot and provides 16 attributed source links. Daily private review collection is configured via [GitHub Actions](https://github.com/S-Pillow/ai-in-perspective/actions/workflows/news-review.yml) and [review issue #8](https://github.com/S-Pillow/ai-in-perspective/issues/8); automatic editorial classification and automatic production publication remain **disabled**.
 
 ## Our approach
 
@@ -47,7 +47,8 @@ Read the site's [editorial approach](https://ai-in-perspective.vercel.app/method
 | Intro, Discover, five perspectives, Education, News | **Published** |
 | Perspective-return navigation | **Published** ([PR #6](https://github.com/S-Pillow/ai-in-perspective/pull/6)) |
 | Discover availability labels and methodology copy | **Updated in source** ([PR #7](https://github.com/S-Pillow/ai-in-perspective/pull/7)); check the production deployment for rollout |
-| Automated News collection and publishing | **Not enabled** |
+| Daily News collection | **Private review workflow**; no public publishing ([review queue](https://github.com/S-Pillow/ai-in-perspective/issues/8)) |
+| Automatic News publication | **Not enabled**; rights and operational acceptance gates remain |
 | Cross-device/accessibility review, comprehensive editorial audit, search-indexing decision | **Open follow-ups** |
 
 Production is built from GitHub [`main`](https://github.com/S-Pillow/ai-in-perspective/tree/main) and served by [Vercel](https://ai-in-perspective.vercel.app). A merged commit is not considered deployed until a matching production build is **READY** and the affected public routes are checked. See the [Project Control Record](docs/PROJECT_CONTROL.md) and [GitHub Actions](https://github.com/S-Pillow/ai-in-perspective/actions) for authoritative verification evidence; this README is an orientation, not a live deployment monitor.
@@ -86,7 +87,7 @@ Other useful commands:
 | `npm run preview` | Preview the generated build locally. |
 | `npm run news:probe` | Read-only News source probe; **does not publish**. |
 
-`npm run news:collect` is a **write-mode** collection command. It is **not** part of the normal development, testing, or deployment workflow and requires separate approved operator controls before use.
+`npm run news:collect` is a **write-mode** local snapshot command. It is used only in the isolated daily review checkout or by an approved operator; it never commits or publishes. See [the daily News review runbook](docs/design/AIIP-NEWS-06-daily-review.md).
 
 A successful test run or build does not establish visual, responsive, assistive-technology, or external-link acceptance by itself.
 

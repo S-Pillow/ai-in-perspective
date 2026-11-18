@@ -26,6 +26,5 @@ jobs:
         run: npm run news:check
       - name: Astro static build
         run: npm run build
-      - name: Probe permitted News feeds (read-only diagnostics, not publication)
-        run: node scripts/news/collect.mjs --preview-json
-        continue-on-error: true
+      - name: News source collection is managed by the private review workflow
+        run: echo 'Offline contracts passed; daily source collection runs independently.'

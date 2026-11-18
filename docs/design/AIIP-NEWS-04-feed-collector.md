@@ -1,6 +1,6 @@
 # AIIP-NEWS-04 | Bounded RSS/Atom collector and source snapshot
 
-**State (2026-11-17):** Feature-branch implementation and test contract on Draft PR #4. **Not activated or deployed to production.** This does not replace the owner-approved News editorial preview or alter Education.
+**Historical implementation record (2026-11-17):** PR #4's collector and populated snapshot have since been published. The separate [AIIP-NEWS-06 daily review runbook](AIIP-NEWS-06-daily-review.md) governs scheduled private collection and remaining public automation gates. The historical design and initial limitations below are preserved.
 
 ## Intent and operational limits
 
