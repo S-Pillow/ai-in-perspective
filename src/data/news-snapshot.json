@@ -1,37 +1,37 @@
 {
   "schemaVersion": "news-snapshot-v1",
-  "publishedAt": "2026-11-20T19:09:21.752Z",
+  "publishedAt": "2026-11-21T18:03:42.784Z",
   "featuredArticleId": null,
   "sourceStatuses": [
     {
       "sourceId": "mit_news_ai",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-20T19:09:21.752Z"
+      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
     },
     {
       "sourceId": "arxiv_cs_ai",
-      "state": "ok",
-      "lastSuccessfulAt": "2026-11-20T19:09:21.752Z"
+      "state": "empty",
+      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
     },
     {
       "sourceId": "verge_ai",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-20T19:09:21.752Z"
+      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
     },
     {
       "sourceId": "openai_news",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-20T19:09:21.752Z"
+      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
     },
     {
       "sourceId": "google_deepmind_blog",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-20T19:09:21.752Z"
+      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
     },
     {
       "sourceId": "techcrunch_ai",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-20T19:09:21.752Z"
+      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
     },
     {
       "sourceId": "mit_technology_review_ai",
@@ -45,6 +45,132 @@
     }
   ],
   "articles": [
+    {
+      "id": "news_e1f00bc2b5736ce09ab5b2dd",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "Here are the top AI agents that can live in your text messages",
+      "url": "https://techcrunch.com/2026/11/21/all-the-ai-agents-that-can-live-in-your-text-messages/",
+      "publishedAt": "2026-11-21T17:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_0b2ee309423ba73d6f0689c1",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "Is selling an AI version of your face to this microdrama startup the future of Hollywood?",
+      "url": "https://techcrunch.com/2026/11/21/is-selling-an-ai-version-of-your-face-to-this-microdrama-startup-the-future-of-hollywood/",
+      "publishedAt": "2026-11-21T16:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_e84680660163c4e17e04ebfe",
+      "sourceId": "verge_ai",
+      "publisher": "The Verge",
+      "sourceType": "independent_reporting",
+      "title": "Can Anthropic afford to put safety first?",
+      "url": "https://www.theverge.com/podcast/1038701/anthropic-ipo-ai-safety-openai-nvidia-structure",
+      "publishedAt": "2026-11-21T15:00:00.000Z",
+      "updatedAt": "2026-11-21T13:29:45.000Z",
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_fcd3fb9883c387a7be495182",
+      "sourceId": "verge_ai",
+      "publisher": "The Verge",
+      "sourceType": "independent_reporting",
+      "title": "Chess.com’s next move is a new hub for classic games, from mahjong to sudoku",
+      "url": "https://www.theverge.com/games/1038099/chess-classic-games-expansion-ai",
+      "publishedAt": "2026-11-21T14:00:00.000Z",
+      "updatedAt": "2026-11-19T23:04:02.000Z",
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_d91c9fde2d0ee40c9d326ed2",
+      "sourceId": "mit_news_ai",
+      "publisher": "MIT News",
+      "sourceType": "university",
+      "title": "Q&A: Enabling more human-like interactions and understanding in multimodal foundation models",
+      "url": "https://news.mit.edu/2026/qa-enabling-more-human-interactions-understanding-multimodal-foundation-models-1120",
+      "publishedAt": "2026-11-20T21:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_0c59148bedcde5d97c28c5d7",
+      "sourceId": "mit_news_ai",
+      "publisher": "MIT News",
+      "sourceType": "university",
+      "title": "New approach enables physically consistent AI models of chaotic systems",
+      "url": "https://news.mit.edu/new-approach-enables-physically-consistent-ai-models-chaotic-systems-1120",
+      "publishedAt": "2026-11-20T20:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_d5cccf533cf5c596fd5a6dfc",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "Daniel Ek backs AI researcher&#8217;s fusion power startup. Here&#8217;s what they&#8217;re building.",
+      "url": "https://techcrunch.com/2026/11/20/daniel-ek-backs-ai-researchers-fusion-power-startup-heres-what-theyre-building/",
+      "publishedAt": "2026-11-20T19:53:41.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_f226a5cd408b6f1a5f22eb04",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "AI claimed a solution to the 167-year-old Riemann hypothesis — and a human did, too",
+      "url": "https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/",
+      "publishedAt": "2026-11-20T19:32:08.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_43a589f53773a217fecf4f9c",
+      "sourceId": "verge_ai",
+      "publisher": "The Verge",
+      "sourceType": "independent_reporting",
+      "title": "Trump threatens ‘tremendous tax’ for moving AI data centers outside the US",
+      "url": "https://www.theverge.com/policy/1038892/trump-foreign-data-centers-tax",
+      "publishedAt": "2026-11-20T18:50:19.000Z",
+      "updatedAt": "2026-11-20T18:50:19.000Z",
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
     {
       "id": "news_f69c14fbb93da7c942431586",
       "sourceId": "techcrunch_ai",
@@ -67,7 +193,7 @@
       "title": "Anthropic mathematician claims to have solved prestigious Millennium Prize problem with Claude",
       "url": "https://www.theverge.com/ai-artificial-intelligence/1010051/anthropic-riemann-hypothesis-millennium-prize-problem",
       "publishedAt": "2026-11-20T16:34:13.000Z",
-      "updatedAt": "2026-11-20T16:34:13.000Z",
+      "updatedAt": "2026-11-20T16:57:47.000Z",
       "firstSeenAt": "2026-11-20T19:09:21.752Z",
       "lens": null,
       "evidenceStatus": "unreviewed",
@@ -116,20 +242,6 @@
       "editorialNote": null
     },
     {
-      "id": "news_e2410c97a03c910b3ea67817",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "Six AI-powered gadgets that could make your home office smarter",
-      "url": "https://techcrunch.com/2026/11/20/6-ai-powered-gadgets-that-could-make-your-home-office-smarter/",
-      "publishedAt": "2026-11-20T14:00:00.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
       "id": "news_420cc4223cf9b195b3464ff1",
       "sourceId": "verge_ai",
       "publisher": "The Verge",
@@ -141,6 +253,20 @@
       "firstSeenAt": "2026-11-20T19:09:21.752Z",
       "lens": null,
       "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_12af5a91f342894f1401c89f",
+      "sourceId": "openai_news",
+      "publisher": "OpenAI",
+      "sourceType": "company_announcement",
+      "title": "Combatting adversarial distillation",
+      "url": "https://openai.com/index/combatting-adversarial-distillation",
+      "publishedAt": "2026-11-20T10:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
+      "lens": null,
+      "evidenceStatus": "attributed_primary_source",
       "editorialNote": null
     },
     {
@@ -242,34 +368,6 @@
       "editorialNote": null
     },
     {
-      "id": "news_168f7e120b96d579220a19f7",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "Apple may be developing its own AI agent that runs your Mac",
-      "url": "https://techcrunch.com/2026/11/19/apple-may-be-developing-its-own-ai-agent-that-runs-your-mac/",
-      "publishedAt": "2026-11-20T00:56:01.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_8ed65a9ab13ae3a75b6fe84e",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "Anthropic&#8217;s 7 founders cashed out nearly $2B in record-breaking IPO",
-      "url": "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/",
-      "publishedAt": "2026-11-20T00:43:50.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
       "id": "news_2440ea2f371156dae4ae7296",
       "sourceId": "openai_news",
       "publisher": "OpenAI",
@@ -279,6 +377,20 @@
       "publishedAt": "2026-11-20T00:00:00.000Z",
       "updatedAt": null,
       "firstSeenAt": "2026-11-20T19:09:21.752Z",
+      "lens": null,
+      "evidenceStatus": "attributed_primary_source",
+      "editorialNote": null
+    },
+    {
+      "id": "news_4947619cc03c6d0dff369a4b",
+      "sourceId": "openai_news",
+      "publisher": "OpenAI",
+      "sourceType": "company_announcement",
+      "title": "Hebbia sees improvements in financial research with GPT-6 Astra",
+      "url": "https://openai.com/business/customer-stories/hebbia",
+      "publishedAt": "2026-11-20T00:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-21T18:03:42.784Z",
       "lens": null,
       "evidenceStatus": "attributed_primary_source",
       "editorialNote": null
@@ -306,62 +418,6 @@
       "url": "https://news.mit.edu/2026/ai-helps-researchers-investigate-how-medical-studies-share-code-1119",
       "publishedAt": "2026-11-19T22:15:00.000Z",
       "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_4d118c95818b4a7c312c9619",
-      "sourceId": "verge_ai",
-      "publisher": "The Verge",
-      "sourceType": "independent_reporting",
-      "title": "A brief history of Nvidia’s recent stock fluctuations",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1038063/nvidia-stock-market-price-earnings",
-      "publishedAt": "2026-11-19T21:59:35.000Z",
-      "updatedAt": "2026-11-20T14:20:13.000Z",
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_84f9cf4a4f210bd4c9abf84a",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "Meta&#8217;s new Muse Charm device may cost $300",
-      "url": "https://techcrunch.com/2026/11/19/metas-new-muse-charm-device-may-cost-300/",
-      "publishedAt": "2026-11-19T21:58:06.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_b66fe130885dc3cb590d76cd",
-      "sourceId": "verge_ai",
-      "publisher": "The Verge",
-      "sourceType": "independent_reporting",
-      "title": "Meta’s Muse Charm might cost $300",
-      "url": "https://www.theverge.com/tech/1038087/meta-muse-charm-ai-price",
-      "publishedAt": "2026-11-19T20:22:17.000Z",
-      "updatedAt": "2026-11-19T20:29:21.000Z",
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_4c62767a44aa01154d1e5713",
-      "sourceId": "verge_ai",
-      "publisher": "The Verge",
-      "sourceType": "independent_reporting",
-      "title": "Google is putting AI chats right on the homepage",
-      "url": "https://www.theverge.com/tech/1038059/google-search-homepage-ai-chats",
-      "publishedAt": "2026-11-19T20:05:06.000Z",
-      "updatedAt": "2026-11-19T20:14:34.000Z",
       "firstSeenAt": "2026-11-20T19:09:21.752Z",
       "lens": null,
       "evidenceStatus": "unreviewed",
@@ -438,20 +494,6 @@
       "editorialNote": null
     },
     {
-      "id": "news_c3d9d6aca3974ae441f6f168",
-      "sourceId": "openai_news",
-      "publisher": "OpenAI",
-      "sourceType": "company_announcement",
-      "title": "Get started with Daybreak Blue",
-      "url": "https://openai.com/business/learn/daybreak-blue-onboarding-demo",
-      "publishedAt": "2026-11-19T00:00:00.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "attributed_primary_source",
-      "editorialNote": null
-    },
-    {
       "id": "news_2802b95a23eb23895c764d1f",
       "sourceId": "google_deepmind_blog",
       "publisher": "Google DeepMind",
@@ -494,20 +536,6 @@
       "editorialNote": null
     },
     {
-      "id": "news_6976642ea37ab09b747b16f4",
-      "sourceId": "openai_news",
-      "publisher": "OpenAI",
-      "sourceType": "company_announcement",
-      "title": "The Silent Consensus",
-      "url": "https://openai.com/index/the-silent-consensus",
-      "publishedAt": "2026-11-18T10:00:00.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-18T19:26:26.318Z",
-      "lens": null,
-      "evidenceStatus": "attributed_primary_source",
-      "editorialNote": null
-    },
-    {
       "id": "news_b76eb24ca2ff8c2e4ec35e39",
       "sourceId": "mit_news_ai",
       "publisher": "MIT News",
@@ -515,34 +543,6 @@
       "title": "Helping AI text detectors keep up with changing conditions",
       "url": "https://news.mit.edu/2026/helping-ai-text-detectors-keep-up-with-changing-conditions-1118",
       "publishedAt": "2026-11-18T05:00:00.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-18T05:13:53.013Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_42dea25654b9816fb166a174",
-      "sourceId": "mit_news_ai",
-      "publisher": "MIT News",
-      "sourceType": "university",
-      "title": "Putting a spotlight on AI, society, and humanity",
-      "url": "https://news.mit.edu/2026/putting-spotlight-ai-society-humanity-1117",
-      "publishedAt": "2026-11-17T20:40:00.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-18T05:13:53.013Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_76a0d9f2d49a6e0ab960e6ac",
-      "sourceId": "mit_news_ai",
-      "publisher": "MIT News",
-      "sourceType": "university",
-      "title": "Q&A: Why building math muscles remains important in the AI era",
-      "url": "https://news.mit.edu/2026/qa-why-building-math-muscles-remains-important-ai-era-1117",
-      "publishedAt": "2026-11-17T05:00:00.000Z",
       "updatedAt": null,
       "firstSeenAt": "2026-11-18T05:13:53.013Z",
       "lens": null,
