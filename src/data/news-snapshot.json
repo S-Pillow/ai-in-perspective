@@ -1,37 +1,37 @@
 {
   "schemaVersion": "news-snapshot-v1",
-  "publishedAt": "2026-11-21T18:03:42.784Z",
+  "publishedAt": "2026-11-22T18:34:31.635Z",
   "featuredArticleId": null,
   "sourceStatuses": [
     {
       "sourceId": "mit_news_ai",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
+      "lastSuccessfulAt": "2026-11-22T18:34:31.635Z"
     },
     {
       "sourceId": "arxiv_cs_ai",
       "state": "empty",
-      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
+      "lastSuccessfulAt": "2026-11-22T18:34:31.635Z"
     },
     {
       "sourceId": "verge_ai",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
+      "lastSuccessfulAt": "2026-11-22T18:34:31.635Z"
     },
     {
       "sourceId": "openai_news",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
+      "lastSuccessfulAt": "2026-11-22T18:34:31.635Z"
     },
     {
       "sourceId": "google_deepmind_blog",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
+      "lastSuccessfulAt": "2026-11-22T18:34:31.635Z"
     },
     {
       "sourceId": "techcrunch_ai",
       "state": "ok",
-      "lastSuccessfulAt": "2026-11-21T18:03:42.784Z"
+      "lastSuccessfulAt": "2026-11-22T18:34:31.635Z"
     },
     {
       "sourceId": "mit_technology_review_ai",
@@ -45,6 +45,104 @@
     }
   ],
   "articles": [
+    {
+      "id": "news_b4c88f0920f9aa536947664f",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "Why data centers are at the center of the Big Tech backlash",
+      "url": "https://techcrunch.com/2026/11/22/why-data-centers-are-at-the-center-of-the-big-tech-backlash/",
+      "publishedAt": "2026-11-22T18:08:43.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_b4298421fa317d5afff07bda",
+      "sourceId": "verge_ai",
+      "publisher": "The Verge",
+      "sourceType": "independent_reporting",
+      "title": "Binding of Isaac developer removes AI music from Repentance Plus",
+      "url": "https://www.theverge.com/games/1039770/binding-of-isaac-ai-music",
+      "publishedAt": "2026-11-22T17:25:20.000Z",
+      "updatedAt": "2026-11-22T17:25:20.000Z",
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_d0ba1e3b24d01b012cb6d837",
+      "sourceId": "verge_ai",
+      "publisher": "The Verge",
+      "sourceType": "independent_reporting",
+      "title": "The vibe-coding revolution is coming to all the gadgets",
+      "url": "https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera",
+      "publishedAt": "2026-11-22T13:00:00.000Z",
+      "updatedAt": "2026-11-20T21:30:59.000Z",
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_dbb4da50863b5cf75a18cf8e",
+      "sourceId": "openai_news",
+      "publisher": "OpenAI",
+      "sourceType": "company_announcement",
+      "title": "Perplexity and Intelligence",
+      "url": "https://openai.com/index/perplexity-and-intelligence",
+      "publishedAt": "2026-11-22T00:00:00.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "attributed_primary_source",
+      "editorialNote": null
+    },
+    {
+      "id": "news_866642e20cfb89efde825fe3",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "Signal restricts mobile screenshots as it confronts ‘existential threat’ of AI surveillance",
+      "url": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
+      "publishedAt": "2026-11-21T21:37:10.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_4563643a69d208d8b39eb208",
+      "sourceId": "techcrunch_ai",
+      "publisher": "TechCrunch",
+      "sourceType": "independent_reporting",
+      "title": "A tale of two Nvidias",
+      "url": "https://techcrunch.com/2026/11/21/a-tale-of-two-nvidias/",
+      "publishedAt": "2026-11-21T21:07:42.000Z",
+      "updatedAt": null,
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
+    {
+      "id": "news_edb998f420edda296683387d",
+      "sourceId": "verge_ai",
+      "publisher": "The Verge",
+      "sourceType": "independent_reporting",
+      "title": "The UN fails to agree on rules regulating ‘killer robots’",
+      "url": "https://www.theverge.com/tech/1039554/un-regulations-killer-robots",
+      "publishedAt": "2026-11-21T20:03:37.000Z",
+      "updatedAt": "2026-11-21T20:03:37.000Z",
+      "firstSeenAt": "2026-11-22T18:34:31.635Z",
+      "lens": null,
+      "evidenceStatus": "unreviewed",
+      "editorialNote": null
+    },
     {
       "id": "news_e1f00bc2b5736ce09ab5b2dd",
       "sourceId": "techcrunch_ai",
@@ -144,20 +242,6 @@
       "editorialNote": null
     },
     {
-      "id": "news_f226a5cd408b6f1a5f22eb04",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "AI claimed a solution to the 167-year-old Riemann hypothesis — and a human did, too",
-      "url": "https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/",
-      "publishedAt": "2026-11-20T19:32:08.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-21T18:03:42.784Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
       "id": "news_43a589f53773a217fecf4f9c",
       "sourceId": "verge_ai",
       "publisher": "The Verge",
@@ -167,20 +251,6 @@
       "publishedAt": "2026-11-20T18:50:19.000Z",
       "updatedAt": "2026-11-20T18:50:19.000Z",
       "firstSeenAt": "2026-11-21T18:03:42.784Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_f69c14fbb93da7c942431586",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "Chips can survive the space environment — can their financing?",
-      "url": "https://techcrunch.com/2026/11/20/chips-can-survive-the-space-environment-can-their-financing/",
-      "publishedAt": "2026-11-20T17:40:01.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
       "lens": null,
       "evidenceStatus": "unreviewed",
       "editorialNote": null
@@ -208,48 +278,6 @@
       "url": "https://news.mit.edu/2026/following-mathocalypse-mathematicians-consider-future-1120",
       "publishedAt": "2026-11-20T15:20:00.000Z",
       "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_7ec2f40fa4f4cf8d0a250445",
-      "sourceId": "techcrunch_ai",
-      "publisher": "TechCrunch",
-      "sourceType": "independent_reporting",
-      "title": "The fallout from Nvidia’s Jensen Huang scandal continues",
-      "url": "https://techcrunch.com/podcast/the-fallout-from-nvidias-jensen-huang-scandal-continues/",
-      "publishedAt": "2026-11-20T14:55:44.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_8702c915ec39d39284c61f21",
-      "sourceId": "verge_ai",
-      "publisher": "The Verge",
-      "sourceType": "independent_reporting",
-      "title": "The week everything fell apart",
-      "url": "https://www.theverge.com/podcast/1038419/outage-outlook-ground-stop-tech-failure-vergecast",
-      "publishedAt": "2026-11-20T14:06:59.000Z",
-      "updatedAt": "2026-11-20T14:06:59.000Z",
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
-      "id": "news_420cc4223cf9b195b3464ff1",
-      "sourceId": "verge_ai",
-      "publisher": "The Verge",
-      "sourceType": "independent_reporting",
-      "title": "Signal is blocking Gemini and Siri AI from reading your screen",
-      "url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
-      "publishedAt": "2026-11-20T12:30:47.000Z",
-      "updatedAt": "2026-11-20T14:36:42.000Z",
       "firstSeenAt": "2026-11-20T19:09:21.752Z",
       "lens": null,
       "evidenceStatus": "unreviewed",
@@ -396,20 +424,6 @@
       "editorialNote": null
     },
     {
-      "id": "news_7012b7e2764337eae22859af",
-      "sourceId": "verge_ai",
-      "publisher": "The Verge",
-      "sourceType": "independent_reporting",
-      "title": "Apple is hiring engineers to build its own AI agent",
-      "url": "https://www.theverge.com/tech/1038227/apple-ai-agent-engineer-job-listing",
-      "publishedAt": "2026-11-19T22:31:41.000Z",
-      "updatedAt": "2026-11-20T15:13:37.000Z",
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "unreviewed",
-      "editorialNote": null
-    },
-    {
       "id": "news_5c52a2a5f5198d20be578dad",
       "sourceId": "mit_news_ai",
       "publisher": "MIT News",
@@ -472,20 +486,6 @@
       "sourceType": "company_announcement",
       "title": "See PR scans in action",
       "url": "https://openai.com/business/learn/pr-scans-demo",
-      "publishedAt": "2026-11-19T00:00:00.000Z",
-      "updatedAt": null,
-      "firstSeenAt": "2026-11-20T19:09:21.752Z",
-      "lens": null,
-      "evidenceStatus": "attributed_primary_source",
-      "editorialNote": null
-    },
-    {
-      "id": "news_9fd13bf62797739d0e70ed8e",
-      "sourceId": "openai_news",
-      "publisher": "OpenAI",
-      "sourceType": "company_announcement",
-      "title": "Deploying Daybreak Red",
-      "url": "https://openai.com/business/learn/deploying-daybreak-red",
       "publishedAt": "2026-11-19T00:00:00.000Z",
       "updatedAt": null,
       "firstSeenAt": "2026-11-20T19:09:21.752Z",
