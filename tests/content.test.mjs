@@ -1243,3 +1243,22 @@ test("AIIP-HISTORY-BLUE-01 History palette matches its blue Discover identity wi
   assert.match(page, /stroke="#8cc9ff"/);
   assert.match(page, /data-hi-era/);
 });
+
+
+test("AIIP-EDU-NEWS-SWITCH-01 Education and News use equally prominent mobile navigation", () => {
+  const edu = read("src/pages/explore/education-news.astro");
+  const news = read("src/pages/explore/news.astro");
+  const eduCss = read("src/styles/education-learning.css");
+  const newsCss = read("src/styles/education-news.css");
+  assert.match(edu, /<nav class="ed-switch" aria-label="Education and News sections">/);
+  assert.match(edu, /class="ed-switch__item ed-switch__item--current" href="\\/explore\\/education-news" aria-current="page"/);
+  assert.match(edu, /class="ed-switch__item" href="\\/explore\\/news">News<\\/a>/);
+  assert.match(news, /class="en-section-switch" aria-label="Education and News sections"/);
+  assert.match(news, /href="\\/explore\\/news" aria-current="page">News<\\/a>/);
+  const mobile = eduCss.split("/* AIIP-EDU-NEWS-SWITCH-01")[1] || "";
+  assert.match(mobile, /@media\\(max-width:480px\\)/);
+  assert.match(mobile, /\\.ed-switch\\{[^}]*width:100%/);
+  assert.match(mobile, /\\.ed-switch__item\\{[^}]*flex:1 1 0;[^}]*min-height:44px/);
+  assert.match(newsCss, /@media\\(max-width:480px\\)\\{[^}]*\\.en-section-switch\\{width:100%/);
+  assert.match(eduCss, /\\.ed-switch__item--current\\{background:#b2f2ee/);
+});

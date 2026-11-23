@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 80
+- **Record revision:** 81
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -671,3 +671,12 @@
 **Scope and state:** Separate preview-only branch `feature/aiip-history-blue-palette-01` from production main `8cb33072160c0740e2513fc3b6753376790cb521`. Allowed: History CSS palette, minor inline History map stroke, focused regression contract, and this Project Control Record entry. Forbidden: Global Competition edits, Discover scene edits, History text/route/layout/logic, News snapshots/automation, dependencies, production merge, production publish. Existing production checkpoint is AIIP-GC-01 merge `8cb33072160c0740e2513fc3b6753376790cb521`.
 
 **Evidence needed:** GitHub content tests plus Astro build, branch preview READY, operator visual check on desktop and mobile for contrast/clock/timeline/selected controls, compare with Discover History scene. No production authorization. A subsequent separate explicit release approval is required.
+
+
+## AIIP-EDU-NEWS-SWITCH-01 | Education mobile News-switch parity (2026-11-23)
+
+**Observation/owner request:** Owner supplied two screenshots showing Education's small right-aligned segmented Education/News control versus News's full-width mobile control. Requested that Education's switch be just as prominent so visitors recognize News is available. Ground-source finding: Education `src/styles/education-learning.css` only sets `.ed-switch{width:100%}` at 355px or below; News `src/styles/education-news.css` expands its switch at 480px or below. This accounts for the discrepancy at typical phone widths. No change to News data, News page presentation, or automated feeds is required.
+
+**Bounded preview authorization:** UI-only parity adjustment in Education stylesheet at the existing News 480px mobile breakpoint. Keep both labels equally sized with 44px minimum tap target. Preserve Education tab current state, News route, page content/layout beyond navigation wrap, larger-screen behavior, and all existing News snapshot/workflows. Branch `feature/aiip-edu-news-switch-mobile-parity` from source `574a2b6566b890a99f82bc1386655d23682d462d`. Allowed: `src/styles/education-learning.css`, `tests/content.test.mjs`, this record. Forbidden: `main` merge/deploy without separate owner authorization; broader Education/News redesign; changes to published AI & Global Competition and History.
+
+**Verification required:** Source contract, content+offline News tests, Astro build, protected Vercel preview and owner mobile visual acceptance. No production publication yet.
