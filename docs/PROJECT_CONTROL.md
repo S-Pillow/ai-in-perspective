@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 79
+- **Record revision:** 80
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -662,3 +662,12 @@
 **Pre-merge release candidate:** PR #12, branch `feature/aiip-global-competition-preview-v1`, source head `6b2473c229b5f88a3351463f72295c4fd15dd43d`, main baseline `473f5f558cb2392ac30be6754bd2200f47c83bbd`. GitHub compared ahead 3 / behind 0, mergeable true. GitHub Actions run `45130140586`: 46 content contracts PASS, offline News fixtures PASS, 17-page Astro build PASS including `/explore/global-competition/index.html`. Vercel preview `dpl_5BpHFz6ku4QrDNzvkFkeKSSUo2Sr` at the same SHA READY. Owner reviewed preview and confirmed "Very nice!! all of it". Source spot-check: Stanford AI Index 2026 corroborates U.S. 2025 private AI investment $285.9B, Europe $20.9B, China $12.4B and adoption 55% (2023) to 88% (2025). Reuters Sept 18, 2026 article supports spending projection attribution. No changed files in `src/data/news-snapshot.json` or News automation paths.
 
 **Release transition:** User now authorizes merge/publish from PR #12 to GitHub main (auto-triggering Vercel production deployment). Pre-release source and test evidence does not constitute production evidence. Release confirmation requires Vercel production READY at merged commit, live route HTTP 200 with unique content and no fallback, Discover six worlds, and unchanged News route/snapshot. If any gate fails, do not call production accepted; investigate or revert to premerge release anchor. Post-release project state and exact deploy identity must be recorded.
+
+
+## AIIP-HISTORY-BLUE-01 | History blue-palette preview (2026-11-23)
+
+**Owner direction:** Prioritize History palette alignment before any newly mentioned other change. Requested visual direction: move dominant purple/lavender treatment toward deep navy, blue and cyan in harmony with the existing blue History Discover scene, while retaining gold accents, original clock visual, explanatory content, interactions, and playful multicolor Explain Like I'm Five heading.
+
+**Scope and state:** Separate preview-only branch `feature/aiip-history-blue-palette-01` from production main `8cb33072160c0740e2513fc3b6753376790cb521`. Allowed: History CSS palette, minor inline History map stroke, focused regression contract, and this Project Control Record entry. Forbidden: Global Competition edits, Discover scene edits, History text/route/layout/logic, News snapshots/automation, dependencies, production merge, production publish. Existing production checkpoint is AIIP-GC-01 merge `8cb33072160c0740e2513fc3b6753376790cb521`.
+
+**Evidence needed:** GitHub content tests plus Astro build, branch preview READY, operator visual check on desktop and mobile for contrast/clock/timeline/selected controls, compare with Discover History scene. No production authorization. A subsequent separate explicit release approval is required.
