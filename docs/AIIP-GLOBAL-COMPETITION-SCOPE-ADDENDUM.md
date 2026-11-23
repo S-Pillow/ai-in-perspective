@@ -19,7 +19,7 @@ The owner approved the v0.6 standalone prototype after direct visual corrections
 - Cross-links: brief contextually placed pointers in Risks & Safety and Benefits; reciprocal routes in Global Competition.
 - Privacy and platform: no live data ingestion, paid source APIs, AI jobs, or tracking. News snapshot and scheduled publication workflows are not to be changed.
 - Claims: illustrative futures are possibilities, not invented observed outcomes; measured data retain sources and dates. Source spot-check and editorial review required before production approval.
-- Publication: Git branch and draft PR are preview-only. An owner review of actual rendered site and separate explicit authorization are required before merge to `main`.
+- Publication: The preview and draft PR were reviewed and accepted by the owner. Explicit merge and publication authorization was given on 2026-11-23. Publish only after the pre-merge checks pass; verify the production deployment separately and record the actual release identity.
 
 ## Preview acceptance
 
