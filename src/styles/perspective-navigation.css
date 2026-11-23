@@ -54,6 +54,7 @@
 .perspective-return--risks { --pr-accent: #f1c981; --pr-secondary: #84dce9; --pr-glow: 241, 201, 129; }
 .perspective-return--benefits { --pr-accent: #95efc9; --pr-secondary: #8fd7ff; --pr-glow: 149, 239, 201; }
 .perspective-return--environment { --pr-accent: #81ecf6; --pr-secondary: #91b9fa; --pr-glow: 129, 236, 246; }
+.perspective-return--global-competition { --pr-accent: #9aeed3; --pr-secondary: #ebb189; --pr-glow: 154, 238, 211; }
 .perspective-return--education-news { --pr-accent: #c5b1ff; --pr-secondary: #83efde; --pr-glow: 197, 177, 255; }
 .perspective-return--news { --pr-accent: #89ece1; --pr-secondary: #a39dff; --pr-glow: 137, 236, 225; }
 .perspective-return__content { position: relative; max-width: 720px; margin: 0 auto; }
@@ -166,3 +167,13 @@
   .perspective-return__arrow, .perspective-return__top,
   .header-links .header-perspectives-link { transition: none; }
 }
+
+/* Related perspective bridges belong near the relevant teaching content, not in a separate navigation menu. */
+.related-bridge{width:min(1180px,calc(100% - 44px));margin:28px auto 75px;padding:clamp(27px,4vw,54px);border:1px solid rgba(157,232,218,.3);border-left:4px solid #8ce4cb;border-radius:12px;background:linear-gradient(145deg,#112638,#0b1c2b);color:#e9f4f2}
+.related-bridge__kicker{color:#9adfce;font:800 11px/1.5 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:0 0 15px}
+.related-bridge h2{font:400 clamp(29px,3.6vw,47px)/1.12 Georgia,serif;letter-spacing:-.035em;color:#f6f7f2;margin:0 0 18px;max-width:22ch}
+.related-bridge p:not(.related-bridge__kicker){color:#d6e6e8;max-width:70ch;font-size:16px;line-height:1.7}
+.related-bridge a{display:inline-flex;gap:15px;align-items:center;margin-top:8px;padding:14px 20px;border-radius:5px;border:1px solid #8ce4cb;color:#eafff5;text-decoration:none;font-weight:750;font-size:14px}
+.related-bridge a:hover,.related-bridge a:focus-visible{background:#245149;color:white}
+.related-bridge--benefits{border-left-color:#ffba90;background:linear-gradient(125deg,#221e32,#102b30)}
+@media(max-width:620px){.related-bridge{width:calc(100% - 28px);margin:30px auto 54px;padding:24px 20px}.related-bridge a{width:100%;justify-content:center;text-align:center}}
