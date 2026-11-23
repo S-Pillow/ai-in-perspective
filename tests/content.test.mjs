@@ -1269,3 +1269,63 @@ test("AIIP-EDU-NEWS-SWITCH-01 Education and News use equally prominent mobile na
   assert.ok(newsCss.includes(".en-section-switch a{display:flex;flex:1 1 0;min-width:0;min-height:48px;"));
 });
 
+
+
+test("Environment community impact is evidence-backed, substantive, progressively enhanced and scoped", () => {
+  const page = read("src/pages/explore/environment.astro");
+  const chapter = read("src/components/EnvironmentCommunity.astro");
+  const css = read("src/styles/environment-community.css");
+  const script = read("src/scripts/environment-community.js");
+  assert.match(page, /<EnvironmentCommunity \/>/);
+  assert.match(page, /environment-community\.css/);
+  assert.match(page, /environment-community\.js/);
+  const order = [page.indexOf('class="env-context"'), page.indexOf("<EnvironmentCommunity />"), page.indexOf('class="env-actions"')];
+  assert.ok(order[0] < order[1] && order[1] < order[2]);
+  for (const topic of ["bills", "electricity", "transparency", "scale", "benefits", "alternatives"]) {
+    assert.match(chapter, new RegExp('id: "' + topic + '"'));
+  }
+  assert.match(chapter, /What makes a data center <em>hyperscale<\/em>/);
+  assert.match(chapter, /one building-size rule/i);
+  assert.match(chapter, /4\.7%/);
+  assert.match(chapter, /9\.5–15\.3%/);
+  assert.match(chapter, /not AI-only measurements/i);
+  assert.match(chapter, /The numbers here are made up/);
+  assert.match(chapter, /A lower PUE means less electricity is spent on cooling/);
+  assert.match(chapter, /<details class="community-impact__details">/);
+  assert.match(chapter, /<summary>/);
+  assert.match(chapter, /data-community-scope="cluster"/);
+  assert.match(chapter, /data-community-topic=\{t\.id\}/);
+  assert.match(chapter, /data-community-panel=\{t\.id\}/);
+  assert.match(chapter, /role="img" aria-labelledby="community-scene-title community-scene-desc"/);
+  assert.match(script, /panels\.forEach\(panel => \{ panel\.hidden =/);
+  assert.match(script, /aria-pressed/);
+  assert.match(script, /readyState === "loading"/);
+  assert.match(css, /community-impact__panel\[hidden\]\{display:none!important\}/);
+  assert.match(css, /community-impact--enhanced \.community-impact__topics\{display:grid\}/);
+  assert.match(css, /community-impact__scene svg\{min-width:760px\}/);
+  assert.match(css, /community-impact--enhanced \.community-impact__topics\{display:flex;overflow-x:auto/);
+  assert.match(chapter, /<noscript><p>All six explanations/);
+  assert.match(chapter, />Several nearby<\/button>/);
+  assert.match(chapter, /What changes when several data centers are built nearby\?/);
+  assert.match(chapter, /A data center is a place where computers run the websites/);
+  assert.match(chapter, /Some are built for one organization/);
+  assert.match(chapter, /Others provide space and services for many different customers/);
+  assert.match(chapter, /Some of the biggest projects being proposed today are called/);
+  assert.match(chapter, /SHARED BY MANY CUSTOMERS/);
+  assert.match(chapter, /sources\.ieaTypes\.url/);
+  assert.doesNotMatch(chapter, /This is a simple illustration|not a map of a real town|On a phone, swipe across|conceptual diagram without numerical claims/);
+  assert.doesNotMatch(css, /community-impact__figure figcaption p:last-child/);
+
+  assert.doesNotMatch(chapter, /THE POINT OF THE EXERCISE|Don.t start with|The drawings are examples|community-impact__closing/);
+  assert.doesNotMatch(css, /community-impact__closing/);
+  assert.match(css, /community-impact__efficiency\{[^\n]*margin-bottom:0\}/);
+  assert.match(script, /Looking at one project at a time can miss the bigger picture/);
+  assert.doesNotMatch(chapter + script, /A regional cluster|regional infrastructure|combined timing, demand|separate assessment/);
+  assert.match(chapter, /Those are projections, not measurements of the future/);
+  assert.match(chapter, /Neither result tells us exactly what a different town would gain/);
+  assert.match(chapter, /role="img" aria-label="10 units/);
+  assert.match(css, /@media\(max-width:480px\)/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+  for (const source of ["eta.lbl.gov", "www.iea.org", "jlarc.virginia.gov", "www.energy.gov", "www.everycrsreport.com", "news.gatech.edu", "handbook.ashrae.org"]) assert.ok(chapter.includes(source));
+  assert.doesNotMatch(chapter, /5 million gallons|1000 mw|2\.5gw|under 100k sqft/i);
+});

@@ -1,0 +1,106 @@
+/* Community impact: a research-led chapter within the existing Environment exhibit. */
+.environment-rebuild .community-impact{max-width:1540px;margin:0 auto;padding:90px clamp(18px,5vw,80px) 24px;color:#eaf5f3;border-top:1px solid #2b4752;--comm-muted:#b8cdd1;--comm-teal:#9be6d7;--comm-amber:#f2c38e;--comm-border:#38535d;}
+.environment-rebuild .community-impact *{box-sizing:border-box}
+.environment-rebuild .community-impact__eyebrow,.environment-rebuild .community-impact__overline{font:700 11px/1.5 ui-monospace,SFMono-Regular,monospace;letter-spacing:.14em;color:#91cecf;margin:0 0 13px;}
+.environment-rebuild .community-impact__eyebrow span{color:var(--comm-amber);padding:0 7px}
+.environment-rebuild .community-impact__intro{max-width:1050px;margin-bottom:54px}
+.environment-rebuild .community-impact__intro h2{font:700 clamp(39px,5.3vw,80px)/1.05 'Syne',Inter,sans-serif;letter-spacing:-.052em;margin:0 0 21px;text-wrap:balance}
+.environment-rebuild .community-impact__intro h2 em{font-style:normal;color:var(--comm-teal)}
+.environment-rebuild .community-impact__intro>p:not(.community-impact__eyebrow){font-size:clamp(16px,1.7vw,20px);line-height:1.7;max-width:780px;color:#c5d7d9;margin:0 0 13px}
+.environment-rebuild .community-impact__intro>p:last-child{margin-bottom:0}
+.environment-rebuild .community-impact__definition{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:42px;background:linear-gradient(135deg,#193440,#0e202b 70%);border:1px solid var(--comm-border);border-radius:20px;padding:clamp(25px,3.8vw,50px);margin-bottom:28px}
+.environment-rebuild .community-impact__definition h3{font:680 clamp(28px,3vw,43px)/1.14 'Syne',Inter,sans-serif;letter-spacing:-.036em;margin:0 0 21px}
+.environment-rebuild .community-impact__definition h3 em{font-style:normal;color:var(--comm-amber)}
+.environment-rebuild .community-impact__definition p:not(.community-impact__overline){font-size:15px;line-height:1.8;color:#c8dadd;margin:0 0 14px}
+.environment-rebuild .community-impact__definition a,.environment-rebuild .community-impact__sources a,.environment-rebuild .community-impact__evidence-context a,.environment-rebuild .community-impact__efficiency-note a{color:#b8eee3;text-decoration:underline;text-decoration-color:#5b9e9d;text-underline-offset:4px;font-size:13px;line-height:1.65}
+.environment-rebuild .community-impact__definition-aside{border-left:1px solid #41606a;padding-left:30px;display:grid;align-content:center;gap:20px}
+.environment-rebuild .community-impact__definition-aside>div:not(:last-child){padding-bottom:17px;border-bottom:1px solid #3b545c}
+.environment-rebuild .community-impact__definition-aside span{font:700 11px/1.4 ui-monospace,monospace;letter-spacing:.1em;color:var(--comm-amber)}
+.environment-rebuild .community-impact__definition-aside p{margin:8px 0 0!important;color:#d1e2e2!important;font-size:14px!important}
+.environment-rebuild .community-impact__figure{margin:0 0 25px;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#102631,#081822);border:1px solid var(--comm-border)}
+.environment-rebuild .community-impact--enhanced .community-impact__view-buttons{display:flex}
+.environment-rebuild .community-impact--enhanced .community-impact__topics{display:grid}
+.environment-rebuild .community-impact__figure figcaption{padding:30px 34px 20px;display:flex;align-items:end;justify-content:space-between;gap:28px}
+.environment-rebuild .community-impact__figure figcaption>div:first-child{max-width:725px}
+.environment-rebuild .community-impact__figure h3{font:680 clamp(24px,2.8vw,37px)/1.2 'Syne',Inter,sans-serif;letter-spacing:-.035em;margin:0}
+.environment-rebuild .community-impact__view-buttons{display:none;gap:5px;background:#122d37;border:1px solid #41626c;padding:5px;border-radius:11px;flex-shrink:0}
+.environment-rebuild .community-impact__view-buttons button{cursor:pointer;background:transparent;border:1px solid transparent;border-radius:7px;color:#bfd7dc;font:700 13px/1.3 Inter,sans-serif;min-height:44px;padding:9px 16px}
+.environment-rebuild .community-impact__view-buttons button[aria-pressed=true]{color:#0e2931;background:#a5e6d7;border-color:#a5e6d7}
+.environment-rebuild .community-impact__scene{overflow:hidden;border-block:1px solid #314a55;background:radial-gradient(ellipse at 50% 50%,#1c3c4b 0%,transparent 65%)}
+.environment-rebuild .community-impact__scene svg{display:block;width:100%;height:auto;max-height:420px}
+.environment-rebuild .community-impact__cluster-only{opacity:0;transition:opacity .32s ease}
+.environment-rebuild .community-impact__scene[data-scope=cluster] .community-impact__cluster-only{opacity:1}
+.environment-rebuild .community-impact__figure-caption{margin:0;padding:20px 34px 9px;color:#e4eeeb;font-size:15px;line-height:1.65;min-height:66px}
+.environment-rebuild .community-impact__figure-legend{display:flex;flex-wrap:wrap;gap:16px 26px;padding:4px 34px 25px;color:#a9c4c9;font-size:11px}
+.environment-rebuild .community-impact__figure-legend span{display:inline-flex;align-items:center;gap:8px}
+.environment-rebuild .community-impact__figure-legend i{height:3px;width:24px;display:inline-block;background:#eac48f}
+.environment-rebuild .community-impact__figure-legend .community-impact__legend-water{background:#6ad1d6}
+.environment-rebuild .community-impact__figure-legend .community-impact__legend-sites{background:#95e1de}
+.environment-rebuild .community-impact__evidence{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:1px;background:#32525d;border:1px solid #32525d;border-radius:16px;overflow:hidden;margin-bottom:84px}
+.environment-rebuild .community-impact__evidence>div{padding:28px clamp(22px,2.5vw,33px);background:#132a35}
+.environment-rebuild .community-impact__evidence-number span{color:#b8d3d6;font:700 10px/1.45 ui-monospace,monospace;letter-spacing:.08em;display:block}
+.environment-rebuild .community-impact__evidence-number strong{font:720 clamp(38px,4.1vw,60px)/1.25 'Syne',Inter,sans-serif;letter-spacing:-.055em;color:var(--comm-teal);display:block;margin:10px 0 7px;white-space:nowrap}
+.environment-rebuild .community-impact__evidence-number p,.environment-rebuild .community-impact__evidence-context p{color:#b8cdd1;font-size:13px;line-height:1.7;margin:0}
+.environment-rebuild .community-impact__evidence-context strong{font-size:16px;line-height:1.45;display:block;margin-bottom:9px}
+.environment-rebuild .community-impact__evidence-context a{display:inline-block;margin-top:12px}
+.environment-rebuild .community-impact__explorer{display:grid;grid-template-columns:minmax(260px,.72fr) minmax(0,1.6fr);gap:clamp(24px,4vw,64px);margin-bottom:78px;align-items:start}
+.environment-rebuild .community-impact__navigation{position:sticky;top:24px}
+.environment-rebuild .community-impact__navigation h3{font:700 clamp(30px,3.5vw,50px)/1.14 'Syne',Inter,sans-serif;letter-spacing:-.042em;margin:0 0 14px}
+.environment-rebuild .community-impact__navigation>p:not(.community-impact__overline){font-size:14px;line-height:1.7;color:#b9cdd1;margin:0 0 23px}
+.environment-rebuild .community-impact__topics{display:none;gap:8px}
+.environment-rebuild .community-impact__topic{min-height:65px;width:100%;display:flex;gap:15px;align-items:center;text-align:left;padding:15px 18px;border:1px solid #35515c;border-radius:11px;background:#142935;color:#d3e4e5;cursor:pointer}
+.environment-rebuild .community-impact__topic span:first-child{font:700 11px ui-monospace,monospace;color:#85b8bc}
+.environment-rebuild .community-impact__topic strong{flex:1;font:680 16px/1.3 Inter,sans-serif}
+.environment-rebuild .community-impact__topic span:last-child{color:#9dcdd0}
+.environment-rebuild .community-impact__topic[aria-pressed=true]{background:#1b434e;border-color:#94e2d9;box-shadow:inset 4px 0 0 #95e2d9;color:#fff}
+.environment-rebuild .community-impact__topic:hover:not([aria-pressed=true]){background:#1b3743;border-color:#668c94}
+.environment-rebuild .community-impact__panels{min-width:0}
+.environment-rebuild .community-impact__panel{border:1px solid #42616c;border-radius:18px;background:linear-gradient(150deg,#172e3a,#0b1c27 72%);padding:clamp(26px,3vw,44px);margin-bottom:15px}
+.environment-rebuild .community-impact__panel[hidden]{display:none!important}
+.environment-rebuild .community-impact__panel-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:28px}
+.environment-rebuild .community-impact__panel-top span:first-child{color:var(--comm-amber);font:700 10px/1.5 ui-monospace,monospace;letter-spacing:.09em}
+.environment-rebuild .community-impact__panel-top span:last-child{color:#90bfc3;font:700 10px ui-monospace,monospace;letter-spacing:.09em}
+.environment-rebuild .community-impact__panel h3{font:700 clamp(29px,3.4vw,47px)/1.13 'Syne',Inter,sans-serif;letter-spacing:-.045em;margin:0 0 21px;max-width:800px}
+.environment-rebuild .community-impact__panel-lead{font-size:clamp(17px,1.7vw,21px);line-height:1.63;color:#e3f2ee;font-weight:500;margin:0 0 27px}
+.environment-rebuild .community-impact__panel-body p{font-size:15px;line-height:1.87;color:#c4d7d9;margin:0 0 17px}
+.environment-rebuild .community-impact__ask{margin:28px 0;border-left:3px solid var(--comm-amber);padding:18px 21px;background:#203541;border-radius:0 9px 9px 0}
+.environment-rebuild .community-impact__ask span{color:var(--comm-amber);font:700 11px/1.5 ui-monospace,monospace;letter-spacing:.09em}
+.environment-rebuild .community-impact__ask p{color:#f2f5ec;font:600 clamp(15px,1.45vw,18px)/1.6 Inter,sans-serif;margin:10px 0 0}
+.environment-rebuild .community-impact__details{border:1px solid #52737c;border-radius:11px;background:#112b36;overflow:hidden}
+.environment-rebuild .community-impact__details summary{cursor:pointer;display:flex;align-items:center;gap:10px;padding:20px 22px;list-style:none;color:#ecf8f4;min-height:65px}
+.environment-rebuild .community-impact__details summary::-webkit-details-marker{display:none}
+.environment-rebuild .community-impact__details summary>span:first-child{font:700 19px/1.3 'Syne',Inter,sans-serif}
+.environment-rebuild .community-impact__details summary small{color:#a7c6ca;flex:1;font-size:12px;line-height:1.5}
+.environment-rebuild .community-impact__plus{width:30px;height:30px;border-radius:50%;background:#2b4f59;display:grid;place-items:center;font-size:22px;font-weight:400;flex-shrink:0}
+.environment-rebuild .community-impact__details[open] .community-impact__plus{transform:rotate(45deg)}
+.environment-rebuild .community-impact__details-body{padding:3px 24px 8px;border-top:1px solid #365461}
+.environment-rebuild .community-impact__details-body>div{padding:22px 0;border-bottom:1px solid #31505b}
+.environment-rebuild .community-impact__details-body>div:last-child{border-bottom:0}
+.environment-rebuild .community-impact__details-body h4{font:700 17px/1.35 Inter,sans-serif;color:#fff;margin:0 0 10px}
+.environment-rebuild .community-impact__details-body p{font-size:14px;line-height:1.85;color:#c5d9dc;margin:0}
+.environment-rebuild .community-impact__sources{margin-top:30px}
+.environment-rebuild .community-impact__sources>span{font:700 10px ui-monospace,monospace;color:#8dbebf;letter-spacing:.11em}
+.environment-rebuild .community-impact__sources ul{margin:11px 0 0;padding:0;list-style:none}
+.environment-rebuild .community-impact__sources li{margin:8px 0}
+.environment-rebuild .community-impact__efficiency{border:1px solid #517276;border-radius:19px;background:radial-gradient(ellipse at 100% 0%,#23504e 0%,transparent 45%),linear-gradient(153deg,#193440,#0b1c27 77%);padding:clamp(24px,4vw,50px);margin-bottom:0}
+.environment-rebuild .community-impact__efficiency-heading{max-width:900px}
+.environment-rebuild .community-impact__efficiency h3{font:700 clamp(30px,4vw,55px)/1.13 'Syne',Inter,sans-serif;letter-spacing:-.044em;margin:0 0 21px}
+.environment-rebuild .community-impact__efficiency h3 em{font-style:normal;color:var(--comm-amber)}
+.environment-rebuild .community-impact__efficiency-heading>p:last-child{font-size:16px;line-height:1.75;color:#cadddc;margin:0 0 30px}
+.environment-rebuild .community-impact__efficiency-heading strong{color:#fff}
+.environment-rebuild .community-impact__energy-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.environment-rebuild .community-impact__energy-card{min-width:0;border:1px solid #466771;border-radius:13px;padding:25px;background:#0f2530}
+.environment-rebuild .community-impact__energy-card>span{font:700 11px/1.4 ui-monospace,monospace;color:#a7c8ca;letter-spacing:.09em}
+.environment-rebuild .community-impact__energy-card h4{font:700 clamp(27px,3.3vw,41px)/1.24 'Syne',Inter,sans-serif;margin:13px 0 22px}
+.environment-rebuild .community-impact__energy-meter{height:26px;width:100%;background:#183843;display:flex;align-items:stretch;border-radius:5px;overflow:hidden}
+.environment-rebuild .community-impact__energy-meter span{display:block;background:#8be1ce}
+.environment-rebuild .community-impact__energy-meter i{display:block;background:#edba80}
+.environment-rebuild .community-impact__energy-card p{font-size:14px;line-height:1.7;color:#d3e2e2;margin:17px 0}
+.environment-rebuild .community-impact__energy-card small{font-size:12px;color:#a8c3c7;line-height:1.65;display:block}
+.environment-rebuild .community-impact__efficiency-note{border-top:1px solid #41636a;margin-top:24px;padding-top:19px;max-width:1030px}
+.environment-rebuild .community-impact__efficiency-note p{font-size:13px;line-height:1.8;color:#bed2d6;margin:0 0 9px}
+.environment-rebuild .community-impact button:focus-visible,.environment-rebuild .community-impact a:focus-visible,.environment-rebuild .community-impact summary:focus-visible{outline:3px solid #f5d397;outline-offset:3px}
+@media(max-width:1020px){.environment-rebuild .community-impact__definition{gap:25px}.environment-rebuild .community-impact__explorer{grid-template-columns:225px minmax(0,1fr);gap:24px}.environment-rebuild .community-impact__evidence{grid-template-columns:1fr 1fr}.environment-rebuild .community-impact__evidence-context{grid-column:1/-1}}
+@media(max-width:760px){.environment-rebuild .community-impact__scene{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}.environment-rebuild .community-impact__scene svg{min-width:760px}.environment-rebuild .community-impact--enhanced .community-impact__topics{display:flex}.environment-rebuild .community-impact{padding:66px 20px 18px}.environment-rebuild .community-impact__intro{margin-bottom:34px}.environment-rebuild .community-impact__definition{grid-template-columns:1fr;gap:12px;padding:27px 24px}.environment-rebuild .community-impact__definition-aside{border-left:0;border-top:1px solid #41606a;padding:23px 0 0;grid-template-columns:1fr;gap:13px}.environment-rebuild .community-impact__figure figcaption{flex-direction:column;align-items:stretch;padding:25px 21px 16px}.environment-rebuild .community-impact__figure-caption{padding:15px 22px 9px}.environment-rebuild .community-impact__figure-legend{padding:4px 22px 22px}.environment-rebuild .community-impact__evidence{margin-bottom:55px}.environment-rebuild .community-impact__explorer{grid-template-columns:1fr;gap:25px;margin-bottom:56px}.environment-rebuild .community-impact__navigation{position:static}.environment-rebuild .community-impact--enhanced .community-impact__topics{display:flex;overflow-x:auto;scrollbar-width:thin;padding:0 0 10px;gap:8px;scroll-snap-type:x proximity}.environment-rebuild .community-impact__topic{flex:0 0 195px;scroll-snap-align:start;min-height:63px}.environment-rebuild .community-impact__panel{padding:26px 22px}.environment-rebuild .community-impact__energy-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.environment-rebuild .community-impact{padding:57px 15px 16px}.environment-rebuild .community-impact__view-buttons{width:100%}.environment-rebuild .community-impact__view-buttons button{flex:1;padding:10px 7px;font-size:12px}.environment-rebuild .community-impact__evidence{grid-template-columns:1fr}.environment-rebuild .community-impact__evidence-context{grid-column:auto}.environment-rebuild .community-impact__evidence>div{padding:23px}.environment-rebuild .community-impact__figure figcaption{padding:22px 16px 13px}.environment-rebuild .community-impact__figure-caption{padding:16px}.environment-rebuild .community-impact__figure-legend{padding:5px 16px 20px}.environment-rebuild .community-impact__panel{padding:23px 17px}.environment-rebuild .community-impact__details summary{flex-wrap:wrap}.environment-rebuild .community-impact__details summary small{flex-basis:55%}.environment-rebuild .community-impact__details-body{padding:1px 17px}.environment-rebuild .community-impact__energy-card{padding:19px}}
+@media(prefers-reduced-motion:reduce){.environment-rebuild .community-impact__cluster-only{transition:none!important}.environment-rebuild .community-impact__topic,.environment-rebuild .community-impact__details summary{scroll-behavior:auto}}
