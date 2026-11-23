@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 82
+- **Record revision:** 83
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -689,3 +689,14 @@
 **Refinement:** On both Education and News routes, enlarge the desktop switch at 481px and up to 360px wide with two equal segments, 48px minimum height, centered 14px labels. Preserve current upper-right nav location, active-state color, links, and the previously accepted mobile layout unchanged. Changed files: Education stylesheet, News presentation stylesheet (styling only), content tests, and Project Control Record. News snapshot, data, content, source workflows, other perspectives, and shared global styles remain unchanged.
 
 **Release gate:** GitHub CI and preview deployment on new branch tip, operator visual acceptance on desktop and confirmation mobile remains consistent. Merge/deploy to production requires a separate explicit owner authorization.
+
+
+## AIIP-EDU-NEWS-SWITCH-01 | Owner publication authorization and pre-merge release gate (2026-11-23)
+
+**Decision and authority:** After mobile acceptance ("Perfect on mobile") and review of the desktop enlarged-switch preview, owner explicitly approved "merge and publish" in this conversation on 2026-11-23. This authorizes PR #14 only, including the Education and News tab presentation corrections as reviewed. No broader News editorial/content, source collection, automation, History, Global Competition, Discover, dependency, or runtime changes are approved.
+
+**Accepted change:** Full-width equal two-tab Education switch at mobile widths up to 480px; at 481px and above both Education and News switches are enlarged to 360px maximum, equally divided, with 48px minimum tab height. Existing navigation, link destinations and selected-state colors are preserved.
+
+**Pre-release source and evidence:** PR #14 branch `feature/aiip-edu-news-switch-mobile-parity`, last feature tip `e18ce666a1d29e0b199bbdfdf666399725c10ee1`, production baseline `574a2b6566b890a99f82bc1386655d23682d462d`; GitHub Actions `45143837621` SUCCESS (content contracts, offline News checks, Astro build); protected Vercel preview `dpl_6NVy3aX63iMTXDe9goauiRrrJ7hW` READY at the same feature tip. Owner's acceptance constitutes operator attestation, not independent tool-observed browser testing. Premerge drift/CI recheck required after this documentation-only correction.
+
+**Release consequences and stop:** GitHub merge to main automatically initiates Vercel production deployment. Gate: confirm final PR tip, success CI, main/head alignment, changed-file allowlist (Education CSS, News CSS, tests, PCR), and News snapshot absence; stop on failure or drift. Postmerge: verify GitHub main/PR state, Vercel production READY with canonical alias and exact merged SHA, unchanged News snapshot and other perspectives, and record remaining live-browser observation limitations. Previous production `574a2b6566b890a99f82bc1386655d23682d462d` is rollback anchor. No History or other deferred work in this unit.
