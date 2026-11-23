@@ -1301,6 +1301,10 @@ test("Environment community impact is evidence-backed, substantive, progressivel
   assert.match(script, /aria-pressed/);
   assert.match(script, /readyState === "loading"/);
   assert.match(css, /community-impact__panel\[hidden\]\{display:none!important\}/);
+  assert.match(css, /community-impact--enhanced \.community-impact__topics\{display:grid\}/);
+  assert.match(css, /community-impact__scene svg\{min-width:760px\}/);
+  assert.match(chapter, /<noscript><p>All six explanations/);
+  assert.match(chapter, /role="img" aria-label="10 units/);
   assert.match(css, /@media\(max-width:480px\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);
   for (const source of ["eta.lbl.gov", "www.iea.org", "jlarc.virginia.gov", "www.energy.gov", "www.everycrsreport.com", "news.gatech.edu", "handbook.ashrae.org"]) assert.ok(chapter.includes(source));

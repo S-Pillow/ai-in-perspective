@@ -135,14 +135,14 @@ const topics = [
       <div>
         <p class="community-impact__overline">01 / SEE THE SYSTEM</p>
         <h3 id="community-impact-figure-title">When more projects share one region, the questions add up.</h3>
-        <p>This conceptual diagram shows relationships, not real facilities, distances, measured resource use or forecast demand.</p>
+        <p>This conceptual diagram shows relationships, not real facilities, distances, measured resource use or forecast demand. On small screens, swipe across the illustration.</p>
       </div>
       <div class="community-impact__view-buttons" role="group" aria-label="Choose illustration scope">
         <button type="button" data-community-scope="one" aria-pressed="true">One site</button>
         <button type="button" data-community-scope="cluster" aria-pressed="false">A regional cluster</button>
       </div>
     </figcaption>
-    <div class="community-impact__scene" data-community-scene data-scope="one">
+    <div class="community-impact__scene" data-community-scene data-scope="one" tabindex="0" role="region" aria-label="Scrollable illustration of community infrastructure">
       <svg viewBox="0 0 1000 365" role="img" aria-labelledby="community-scene-title community-scene-desc" preserveAspectRatio="xMidYMid meet">
         <title id="community-scene-title">Illustration of data centers sharing a grid and a watershed with nearby homes</title>
         <desc id="community-scene-desc">One-site view shows a data center, a power network, a water source and a neighborhood. Regional-cluster view adds two more data centers sharing the infrastructure. This is a conceptual diagram without numerical claims.</desc>
@@ -212,6 +212,7 @@ const topics = [
       <p class="community-impact__overline">02 / EXPLORE THE CONSEQUENCES</p>
       <h3>Six questions worth asking</h3>
       <p>Choose an issue, then open Dig deeper for the mechanisms, limitations and evidence behind it.</p>
+      <noscript><p>All six explanations are available below. Enable JavaScript to switch between them.</p></noscript>
       <div class="community-impact__topics" role="group" aria-label="Choose a community impact question">
         {topics.map((t, i) => (
           <button type="button" class="community-impact__topic" data-community-topic={t.id} aria-pressed={i===0?"true":"false"}>
@@ -252,13 +253,13 @@ const topics = [
     <div class="community-impact__energy-grid">
       <div class="community-impact__energy-card">
         <span>SMALLER / IMAGINARY EXAMPLE</span><h4>15 total units</h4>
-        <div class="community-impact__energy-meter" aria-label="10 units for computing equipment plus 5 units for supporting systems equals 15 total units"><span style="width:8.33%"></span><i style="width:4.17%"></i></div>
+        <div class="community-impact__energy-meter" role="img" aria-label="10 units for computing equipment plus 5 units for supporting systems equals 15 total units"><span style="width:8.33%"></span><i style="width:4.17%"></i></div>
         <p><b>10</b> units for computing equipment + <b>5</b> units for cooling and overhead.</p>
         <small>Facility energy ÷ computing equipment energy = 1.5</small>
       </div>
       <div class="community-impact__energy-card community-impact__energy-card--large">
         <span>LARGER / IMAGINARY EXAMPLE</span><h4>120 total units</h4>
-        <div class="community-impact__energy-meter" aria-label="100 units for computing equipment plus 20 units for supporting systems equals 120 total units"><span style="width:83.33%"></span><i style="width:16.67%"></i></div>
+        <div class="community-impact__energy-meter" role="img" aria-label="100 units for computing equipment plus 20 units for supporting systems equals 120 total units"><span style="width:83.33%"></span><i style="width:16.67%"></i></div>
         <p><b>100</b> units for computing equipment + <b>20</b> units for cooling and overhead.</p>
         <small>Facility energy ÷ computing equipment energy = 1.2</small>
       </div>

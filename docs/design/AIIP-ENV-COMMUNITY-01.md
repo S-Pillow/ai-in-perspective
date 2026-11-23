@@ -28,3 +28,6 @@ One-site/cluster SVG is explicitly conceptual and makes no quantitative claims. 
 - Test with \`npm run check\`, preview at 320, 390, 430, 768, 1440 widths, and operator-observed visual/interaction review. Verify all six panels, both diagram modes, details, link targets, keyboard, focus, reduced motion, desktop/mobile text and scroll. Owner approval needed before merging. Source checks are not browser acceptance.
 - Risk: added section is intentionally deep and can increase page length. Enhanced navigation should reduce that burden; no-JS fallback shows all six topics. Source and research review remains inspectable.
 - Stop at a draft PR and source/test evidence. Do not deploy or modify unrelated projects.
+
+### Pre-review accessibility correction
+Selector and mode controls remain hidden without JavaScript while the full content renders. The diagram uses a labeled, focusable horizontal-scroll region on phones to prevent shrinking its labels to unreadable microtext. Both hypothetical energy bars have accessible labels.
