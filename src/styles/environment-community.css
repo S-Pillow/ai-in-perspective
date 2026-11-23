@@ -6,7 +6,8 @@
 .environment-rebuild .community-impact__intro{max-width:1050px;margin-bottom:54px}
 .environment-rebuild .community-impact__intro h2{font:700 clamp(39px,5.3vw,80px)/1.05 'Syne',Inter,sans-serif;letter-spacing:-.052em;margin:0 0 21px;text-wrap:balance}
 .environment-rebuild .community-impact__intro h2 em{font-style:normal;color:var(--comm-teal)}
-.environment-rebuild .community-impact__intro>p:last-child{font-size:clamp(16px,1.7vw,20px);line-height:1.7;max-width:780px;color:#c5d7d9;margin:0}
+.environment-rebuild .community-impact__intro>p:not(.community-impact__eyebrow){font-size:clamp(16px,1.7vw,20px);line-height:1.7;max-width:780px;color:#c5d7d9;margin:0 0 13px}
+.environment-rebuild .community-impact__intro>p:last-child{margin-bottom:0}
 .environment-rebuild .community-impact__definition{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:42px;background:linear-gradient(135deg,#193440,#0e202b 70%);border:1px solid var(--comm-border);border-radius:20px;padding:clamp(25px,3.8vw,50px);margin-bottom:28px}
 .environment-rebuild .community-impact__definition h3{font:680 clamp(28px,3vw,43px)/1.14 'Syne',Inter,sans-serif;letter-spacing:-.036em;margin:0 0 21px}
 .environment-rebuild .community-impact__definition h3 em{font-style:normal;color:var(--comm-amber)}
@@ -21,8 +22,7 @@
 .environment-rebuild .community-impact--enhanced .community-impact__topics{display:grid}
 .environment-rebuild .community-impact__figure figcaption{padding:30px 34px 20px;display:flex;align-items:end;justify-content:space-between;gap:28px}
 .environment-rebuild .community-impact__figure figcaption>div:first-child{max-width:725px}
-.environment-rebuild .community-impact__figure h3{font:680 clamp(24px,2.8vw,37px)/1.2 'Syne',Inter,sans-serif;letter-spacing:-.035em;margin:0 0 11px}
-.environment-rebuild .community-impact__figure figcaption p:last-child{font-size:13px;line-height:1.7;color:#b5c9ce;margin:0}
+.environment-rebuild .community-impact__figure h3{font:680 clamp(24px,2.8vw,37px)/1.2 'Syne',Inter,sans-serif;letter-spacing:-.035em;margin:0}
 .environment-rebuild .community-impact__view-buttons{display:none;gap:5px;background:#122d37;border:1px solid #41626c;padding:5px;border-radius:11px;flex-shrink:0}
 .environment-rebuild .community-impact__view-buttons button{cursor:pointer;background:transparent;border:1px solid transparent;border-radius:7px;color:#bfd7dc;font:700 13px/1.3 Inter,sans-serif;min-height:44px;padding:9px 16px}
 .environment-rebuild .community-impact__view-buttons button[aria-pressed=true]{color:#0e2931;background:#a5e6d7;border-color:#a5e6d7}

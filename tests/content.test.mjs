@@ -1284,8 +1284,8 @@ test("Environment community impact is evidence-backed, substantive, progressivel
   for (const topic of ["bills", "electricity", "transparency", "scale", "benefits", "alternatives"]) {
     assert.match(chapter, new RegExp('id: "' + topic + '"'));
   }
-  assert.match(chapter, /What is a <em>hyperscale<\/em> data center/);
-  assert.match(chapter, /one official building size/i);
+  assert.match(chapter, /What makes a data center <em>hyperscale<\/em>/);
+  assert.match(chapter, /one building-size rule/i);
   assert.match(chapter, /4\.7%/);
   assert.match(chapter, /9\.5–15\.3%/);
   assert.match(chapter, /not AI-only measurements/i);
@@ -1307,6 +1307,15 @@ test("Environment community impact is evidence-backed, substantive, progressivel
   assert.match(chapter, /<noscript><p>All six explanations/);
   assert.match(chapter, />Several nearby<\/button>/);
   assert.match(chapter, /What changes when several data centers are built nearby\?/);
+  assert.match(chapter, /A data center is a place where computers run the websites/);
+  assert.match(chapter, /Some are built for one organization/);
+  assert.match(chapter, /Others provide space and services for many different customers/);
+  assert.match(chapter, /Some of the biggest projects being proposed today are called/);
+  assert.match(chapter, /SHARED BY MANY CUSTOMERS/);
+  assert.match(chapter, /sources\.ieaTypes\.url/);
+  assert.doesNotMatch(chapter, /This is a simple illustration|not a map of a real town|On a phone, swipe across|conceptual diagram without numerical claims/);
+  assert.doesNotMatch(css, /community-impact__figure figcaption p:last-child/);
+
   assert.doesNotMatch(chapter, /THE POINT OF THE EXERCISE|Don.t start with|The drawings are examples|community-impact__closing/);
   assert.doesNotMatch(css, /community-impact__closing/);
   assert.match(css, /community-impact__efficiency\{[^\n]*margin-bottom:0\}/);

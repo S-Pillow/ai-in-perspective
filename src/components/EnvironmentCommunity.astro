@@ -2,6 +2,7 @@
 const sources = {
   lbl: { label: "Berkeley Lab · 2025 U.S. data-center energy update (published 2026)", url: "https://eta.lbl.gov/publications/united-states-data-center-energy-2025" },
   iea: { label: "IEA · Energy and AI (2025)", url: "https://www.iea.org/reports/energy-and-ai/executive-summary" },
+  ieaTypes: { label: "IEA · Energy and AI Observatory", url: "https://www.iea.org/data-and-statistics/data-tools/energy-and-ai-observatory" },
   crs: { label: "Congressional Research Service · Data centers and the electricity grid (2026)", url: "https://www.everycrsreport.com/reports/R49326.html" },
   doe: { label: "U.S. Department of Energy · Electricity rates for large loads (2025)", url: "https://www.energy.gov/policy/articles/electricity-rate-designs-large-loads-evolving-practices-and-opportunities" },
   jlarc: { label: "Virginia JLARC · Data Centers in Virginia (2024)", url: "https://jlarc.virginia.gov/landing-2024-data-centers-in-virginia.asp" },
@@ -112,21 +113,22 @@ const topics = [
   <header class="community-impact__intro">
     <p class="community-impact__eyebrow">THE IMPACT OUTSIDE THE BUILDING <span aria-hidden="true">/</span> A COMMUNITY DEEP DIVE</p>
     <h2 id="community-impact-title">What happens when a <em>data center comes to town?</em></h2>
-    <p>When a company wants to build a huge data center, nearby residents may have questions. Will it bring jobs and tax revenue? How much electricity and water will it need? Could it affect local bills? Let's look at what we know, what depends on the location, and what people can ask before decisions are made.</p>
+    <p>A data center is a place where computers run the websites, apps and online services we use every day. Some are built for one organization. Others provide space and services for many different customers.</p>
+    <p>Some of the biggest projects being proposed today are called <strong>hyperscale data centers</strong>. When one is planned near a community, people have questions: How much electricity and water will it need? Will it bring jobs and tax revenue? Could it affect local bills?</p>
   </header>
 
   <div class="community-impact__definition">
     <div>
       <p class="community-impact__overline">FIRST, THE PLAIN-LANGUAGE VERSION</p>
-      <h3>What is a <em>hyperscale</em> data center?</h3>
-      <p>Think of a huge building, or several buildings together, packed with computers that run websites, store information or help power AI. These facilities are designed to handle massive amounts of work and often have room to grow. That's the idea behind <strong>hyperscale</strong>.</p>
-      <p>There isn't one official building size that makes a data center hyperscale. And hyperscale doesn't mean every computer there is running AI. What matters to people nearby is how much electricity, water and space the facility could need, especially if it grows over time.</p>
-      <a href={sources.iea4e.url} target="_blank" rel="noopener noreferrer">Source: IEA 4E on definitions and size <span aria-hidden="true">↗</span></a>
+      <h3>What makes a data center <em>hyperscale</em>?</h3>
+      <p>A hyperscale data center is built to handle enormous amounts of computing and to grow as demand increases. It might be one very large building or several buildings working together. These centers can run cloud services, AI systems or a mix of both.</p>
+      <p>There isn't one building-size rule that everyone uses. And size alone doesn't tell you how much electricity or water a facility needs. For people living nearby, it's more useful to ask about the computers inside, the cooling system, and how much the site could grow.</p>
+      <a href={sources.ieaTypes.url} target="_blank" rel="noopener noreferrer">IEA · How data centers differ <span aria-hidden="true">↗</span></a>
     </div>
-    <aside class="community-impact__definition-aside" aria-label="Two important distinctions">
-      <div><span>NOT A FIXED SIZE</span><p>There's no single building size that every hyperscale data center must reach.</p></div>
-      <div><span>NOT AI-ONLY</span><p>Hyperscale facilities can support cloud services, AI and many other kinds of computing.</p></div>
-      <div><span>NOT ONE WATER NUMBER</span><p>Water use depends on equipment, cooling, climate and what is being measured.</p></div>
+    <aside class="community-impact__definition-aside" aria-label="How different data centers are used">
+      <div><span>FOR ONE ORGANIZATION</span><p>Some businesses or institutions have data centers mainly for their own computers and services.</p></div>
+      <div><span>SHARED BY MANY CUSTOMERS</span><p>Other operators provide space, power or computing services to several customers.</p></div>
+      <div><span>HYPERSCALE</span><p>Built to handle very large computing needs, often for major cloud and technology companies.</p></div>
     </aside>
   </div>
 
@@ -135,7 +137,6 @@ const topics = [
       <div>
         <p class="community-impact__overline">01 / SEE THE SYSTEM</p>
         <h3 id="community-impact-figure-title">What changes when several data centers are built nearby?</h3>
-        <p>This is a simple illustration, not a map of a real town. It doesn't show exact building sizes, distances, or how much power and water any project would use. On a phone, swipe across to see the whole picture.</p>
       </div>
       <div class="community-impact__view-buttons" role="group" aria-label="Compare one site with several nearby sites">
         <button type="button" data-community-scope="one" aria-pressed="true">One data center</button>
@@ -145,7 +146,7 @@ const topics = [
     <div class="community-impact__scene" data-community-scene data-scope="one" tabindex="0" role="region" aria-label="Scrollable illustration of community infrastructure">
       <svg viewBox="0 0 1000 365" role="img" aria-labelledby="community-scene-title community-scene-desc" preserveAspectRatio="xMidYMid meet">
         <title id="community-scene-title">Illustration of data centers, nearby homes, power lines, and a shared water source</title>
-        <desc id="community-scene-desc">One-site view shows a data center, a power network, a water source and a neighborhood. The second view adds two more data centers connected to the same local power and water systems. This is a conceptual diagram without numerical claims.</desc>
+        <desc id="community-scene-desc">One-site view shows a data center, a power network, a water source and a neighborhood. The second view adds two more data centers connected to the same local power and water systems.</desc>
         <defs>
           <linearGradient id="comm-land" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1a3440"/><stop offset="1" stop-color="#0c1f2b"/></linearGradient>
           <linearGradient id="comm-center" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#306275"/><stop offset="1" stop-color="#153644"/></linearGradient>
