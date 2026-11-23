@@ -1261,4 +1261,11 @@ test("AIIP-EDU-NEWS-SWITCH-01 Education and News use equally prominent mobile na
   assert.ok(mobile.includes(".ed-switch__item{flex:1 1 0;min-width:0;min-height:44px;"));
   assert.ok(newsCss.includes(".en-section-switch{width:100%;}"));
   assert.ok(eduCss.includes(".ed-switch__item--current{background:#b2f2ee"));
+  assert.ok(eduCss.includes("@media(min-width:481px){"));
+  assert.ok(eduCss.includes(".ed-switch{display:flex;width:min(100%,360px);box-sizing:border-box;}"));
+  assert.ok(eduCss.includes(".ed-switch__item{flex:1 1 0;min-width:0;min-height:48px;justify-content:center;"));
+  assert.ok(newsCss.includes("@media(min-width:481px){"));
+  assert.ok(newsCss.includes(".en-section-switch{display:flex;width:min(100%,360px);box-sizing:border-box;}"));
+  assert.ok(newsCss.includes(".en-section-switch a{display:flex;flex:1 1 0;min-width:0;min-height:48px;"));
 });
+

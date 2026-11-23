@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 81
+- **Record revision:** 82
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -680,3 +680,12 @@
 **Bounded preview authorization:** UI-only parity adjustment in Education stylesheet at the existing News 480px mobile breakpoint. Keep both labels equally sized with 44px minimum tap target. Preserve Education tab current state, News route, page content/layout beyond navigation wrap, larger-screen behavior, and all existing News snapshot/workflows. Branch `feature/aiip-edu-news-switch-mobile-parity` from source `574a2b6566b890a99f82bc1386655d23682d462d`. Allowed: `src/styles/education-learning.css`, `tests/content.test.mjs`, this record. Forbidden: `main` merge/deploy without separate owner authorization; broader Education/News redesign; changes to published AI & Global Competition and History.
 
 **Verification required:** Source contract, content+offline News tests, Astro build, protected Vercel preview and owner mobile visual acceptance. No production publication yet.
+
+
+## AIIP-EDU-NEWS-SWITCH-01 | Desktop parity refinement on owner feedback (2026-11-23)
+
+**Owner evidence:** Owner reviewed the mobile preview and stated "Perfect on mobile" while supplying desktop Education and News screenshots demonstrating the switch is still much too small at desktop widths. Requested similar discoverability on desktop. The existing PR #14 and branch remain the same authorized correction unit; no production approval has been given.
+
+**Refinement:** On both Education and News routes, enlarge the desktop switch at 481px and up to 360px wide with two equal segments, 48px minimum height, centered 14px labels. Preserve current upper-right nav location, active-state color, links, and the previously accepted mobile layout unchanged. Changed files: Education stylesheet, News presentation stylesheet (styling only), content tests, and Project Control Record. News snapshot, data, content, source workflows, other perspectives, and shared global styles remain unchanged.
+
+**Release gate:** GitHub CI and preview deployment on new branch tip, operator visual acceptance on desktop and confirmation mobile remains consistent. Merge/deploy to production requires a separate explicit owner authorization.
