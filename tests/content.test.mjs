@@ -1303,6 +1303,7 @@ test("Environment community impact is evidence-backed, substantive, progressivel
   assert.match(css, /community-impact__panel\[hidden\]\{display:none!important\}/);
   assert.match(css, /community-impact--enhanced \.community-impact__topics\{display:grid\}/);
   assert.match(css, /community-impact__scene svg\{min-width:760px\}/);
+  assert.match(css, /community-impact--enhanced \.community-impact__topics\{display:flex;overflow-x:auto/);
   assert.match(chapter, /<noscript><p>All six explanations/);
   assert.match(chapter, /role="img" aria-label="10 units/);
   assert.match(css, /@media\(max-width:480px\)/);
