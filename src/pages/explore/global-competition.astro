@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import experienceMarkup from "../../data/global-competition/experience.html?raw";
+import "../../styles/global-competition.css";
+---
+<BaseLayout
+  title="What If America Bans AI? | AI & Global Competition"
+  description="Explore what could happen to American jobs, businesses, cybersecurity, scientific discovery, and national capabilities if the U.S. bans AI while other countries continue advancing."
+  bodyClass="global-competition-page"
+>
+  <Fragment set:html={experienceMarkup} />
+  <script>import "../../scripts/global-competition.js";</script>
+</BaseLayout>
