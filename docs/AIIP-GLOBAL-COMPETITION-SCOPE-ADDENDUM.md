@@ -1,6 +1,6 @@
 # AIIP-GC-01 | AI & Global Competition scope addendum
 
-**State:** Preview implementation proposed; owner-accepted visual/content reference v0.6, no production release authorization.
+**State:** Owner authorized merge and publication on 2026-11-23, following preview visual acceptance; final production deployment and smoke evidence pending.
 
 ## Authority and rationale
 
