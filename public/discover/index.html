@@ -28,14 +28,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Explore AI | AI in Perspective</title>
-<meta name="description" content="Explore five perspectives on artificial intelligence: history, risks and safety, benefits, the environment, and education and news.">
+<meta name="description" content="Explore six perspectives on artificial intelligence: history, risks and safety, benefits, the environment, global competition, and education and news.">
 <meta name="theme-color" content="#050505">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://ai-in-perspective.vercel.app/discover/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI in Perspective">
 <meta property="og:title" content="Explore AI | AI in Perspective">
-<meta property="og:description" content="Explore five perspectives on artificial intelligence: history, risks and safety, benefits, the environment, and education and news.">
+<meta property="og:description" content="Explore six perspectives on artificial intelligence: history, risks and safety, benefits, the environment, global competition, and education and news.">
 <meta property="og:url" content="https://ai-in-perspective.vercel.app/discover/">
 <meta property="og:image" content="https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg">
 <meta property="og:image:secure_url" content="https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg">
@@ -141,6 +141,7 @@ a{color:inherit;text-decoration:none}
 .title[data-typography="risks"]{--heading-ink:#fff3dc;--descriptor-ink:#fff3dc;--title-scrim:13,11,16;--scrim-strength:.72;--scrim-middle:.44}
 .title[data-typography="benefits"]{--heading-ink:#32182f;--descriptor-ink:#32182f;--title-shadow:0 0 2px rgba(255,239,177,.85),0 0 9px rgba(255,209,132,.38);--title-scrim:255,222,145;--scrim-strength:.30;--scrim-middle:.18}
 .title[data-typography="environment"]{--heading-ink:#effff7;--descriptor-ink:#e9fff2;--title-scrim:3,20,20;--scrim-strength:.63;--scrim-middle:.32}
+.title[data-typography="competition"]{--heading-ink:#effff7;--descriptor-ink:#ebfff7;--title-scrim:3,18,24;--scrim-strength:.65;--scrim-middle:.34}
 .title[data-typography="education"]{--heading-ink:#edfaff;--descriptor-ink:#edfaff;--title-scrim:3,15,30;--scrim-strength:.60;--scrim-middle:.30}
 .title::before{content:'';position:absolute;left:50%;top:50%;width:min(1100px,130vw);height:170%;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(ellipse closest-side,rgba(var(--title-scrim),var(--scrim-strength)) 0%,rgba(var(--title-scrim),var(--scrim-middle)) 55%,transparent 100%);filter:blur(12px)}
@@ -379,10 +380,10 @@ form{display:grid;gap:12px;margin-top:26px}
     <div class="k">AI in Perspective</div>
     <h3>Explore the promise. <em>Examine the evidence.</em></h3>
     <p>Artificial intelligence raises questions about how we arrived here, what it changes, where it helps, and what deserves caution. AI in Perspective invites you to examine those questions without requiring optimism or fear.</p>
-    <p>Turn the ring to choose from five perspectives, all available to explore. Education also connects to a separate News section. Each page is a starting point for asking better questions, not a claim that every answer is settled.</p>
+    <p>Turn the ring to choose from six perspectives, all available to explore. Education also connects to a separate News section. Each page is a starting point for asking better questions, not a claim that every answer is settled.</p>
     <div class="stats">
-      <div><b>5</b><span>Perspectives</span></div>
-      <div><b>5</b><span>Open now</span></div>
+      <div><b>6</b><span>Perspectives</span></div>
+      <div><b>6</b><span>Open now</span></div>
       <div><b>1</b><span>News section</span></div>
     </div>
     <div class="worlds" id="worldList"></div>
@@ -1060,16 +1061,72 @@ const ICON={
   blossom:petal+'<circle cx="12" cy="12" r="1.1"/>',
   circuit:'<rect x="7" y="7" width="10" height="10" rx="1.6"/><rect x="10" y="10" width="4" height="4" rx=".6"/><path d="M10 3.5V7M14 3.5V7M10 17v3.5M14 17v3.5M3.5 10H7M3.5 14H7M17 10h3.5M17 14h3.5"/>',
   hollow:'<path d="M12 2.5 15.5 7v9.5L12 21.5l-3.5-5V7z"/><path d="M8.5 7 12 8.8 15.5 7M12 8.8v12.7"/><path d="M5 19V13l1.6-2.6L8.2 13" opacity=".7"/><path d="M15.8 13.2l1.6-2.4 1.6 2.4V19" opacity=".7"/>',
+  confluence:'<circle cx="12" cy="12" r="8"/><path d="M4 9c2-2 5-2 8 0s6 2 8 0M4 15c2-2 5-2 8 0s6 2 8 0M12 4v16"/>',
   frontier:'<path d="M12 2.5c2.8 2.3 3.9 5.6 3.9 9.3L14.5 16h-5l-1.4-4.2c0-3.7 1.1-7 3.9-9.3z"/><circle cx="12" cy="9" r="1.6"/><path d="M8.3 12.5 5.5 16.5l4 .3M15.7 12.5l2.8 4-4 .3"/><path d="M10.7 18.5c.2 1.4 1.3 2.8 1.3 2.8s1.1-1.4 1.3-2.8"/>'
 };
+
+/* VI / Confluence: competition spans connected industries and borders. */
+function pCompetition(c,W,H,D){
+  const mid=W*.5,hz=H*.75,R=H*.245;
+  c.fillStyle=lin(c,0,0,0,H,[[0,'#020b15'],[.36,'#09283a'],[.67,'#103a42'],[.78,'#0e1d2a'],[1,'#030913']]);c.fillRect(0,0,W,H);
+  stars(c,W,H,340,820,.8,.53,'175,235,235');
+  glow(c,mid,H*.36,H*.6,'rgba(59,226,184,.19)');
+  glow(c,mid-W*.32,H*.58,H*.46,'rgba(251,148,105,.18)');
+  glow(c,mid+W*.31,H*.56,H*.46,'rgba(85,196,240,.16)');
+  c.save();c.translate(mid,H*.40);
+  c.strokeStyle='rgba(151,230,223,.34)';c.lineWidth=1.5;
+  for(const k of [.56,.81,1.05]){c.beginPath();c.arc(0,0,R*k,0,TAU);c.stroke()}
+  c.strokeStyle='rgba(121,226,215,.22)';
+  for(let i=-2;i<=2;i++){c.beginPath();c.ellipse(0,0,R*.55*Math.max(.2,Math.cos(i*.34)),R*.99,0,0,TAU);c.stroke()}
+  for(const h of [-.68,-.37,0,.37,.68]){c.beginPath();c.ellipse(0,R*h,R*Math.sqrt(1-h*h),R*.18,0,0,TAU);c.stroke()}
+  c.fillStyle='rgba(114,245,205,.22)';c.beginPath();c.moveTo(-R*.58,-R*.38);c.lineTo(-R*.21,-R*.68);c.lineTo(R*.14,-R*.45);c.lineTo(-R*.05,-R*.05);c.lineTo(-R*.5,R*.09);c.closePath();c.fill();
+  c.beginPath();c.moveTo(R*.23,-R*.1);c.lineTo(R*.69,-R*.25);c.lineTo(R*.83,R*.07);c.lineTo(R*.46,R*.38);c.lineTo(R*.25,R*.66);c.lineTo(R*.12,R*.23);c.closePath();c.fill();
+  c.restore();
+  const r=rng(824);D.routes=[];
+  for(let i=0;i<18;i++){
+    const left=i%2===0,sx=left?W*(.04+r()*.26):W*(.73+r()*.21),sy=H*(.20+r()*.51);
+    const ex=left?W*(.76+r()*.17):W*(.05+r()*.23),ey=H*(.21+r()*.48),cy=H*(.06+r()*.17);
+    const color=left?'255,176,118':'132,240,217',alpha=.10+r()*.16;
+    c.beginPath();c.moveTo(sx,sy);c.bezierCurveTo(mid,cy,mid,cy,ex,ey);
+    c.strokeStyle='rgba('+color+','+alpha+')';c.lineWidth=1+r()*1.5;c.stroke();
+    D.routes.push({sx,sy,ex,ey,cy,color,seed:r()});
+  }
+  const buildings=(start,end,color,light,seed)=>{const a=rng(seed);
+    for(let x=start;x<end;){const w=18+a()*52,h=H*(.08+a()*.22),y=hz-h;
+      c.fillStyle=color;c.fillRect(x,y,w,H-y);c.fillStyle=light;c.globalAlpha=.26;
+      for(let px=x+5;px<x+w-4;px+=9)for(let py=y+7;py<hz-5;py+=12)if(a()>.66)c.fillRect(px,py,3,4);
+      c.globalAlpha=1;x+=w+4+a()*12}
+  };
+  buildings(-10,W*.28,'#071522','#ffae8a',825);
+  buildings(W*.76,W+40,'#061b27','#8df2dd',826);
+  c.fillStyle=lin(c,0,hz,0,H,[[0,'rgba(11,31,39,.3)'],[1,'#030815']]);c.fillRect(0,hz,W,H-hz);
+  band(c,W,hz,H*.035,'rgba(84,227,195,.17)');
+  D.center=[mid,H*.40,R];
+}
+function aCompetition(c,t,D){
+  const [cx,cy,R]=D.center;
+  c.save();c.globalCompositeOperation='lighter';
+  c.strokeStyle='rgba(124,250,214,.23)';c.lineWidth=1.5;c.beginPath();
+  c.arc(cx,cy,R*1.1+t%9*3,0,TAU);c.stroke();
+  for(let i=0;i<D.routes.length;i++){
+    const q=D.routes[i],u=wrap(t*(.035+q.seed*.035)+q.seed,1),v=1-u,px=v*v*v*q.sx+3*v*v*u*cx+3*v*u*u*cx+u*u*u*q.ex,
+      py=v*v*v*q.sy+3*v*v*u*q.cy+3*v*u*u*q.cy+u*u*u*q.ey;
+    sg(c,q.color,px,py,16+9*Math.sin(Math.PI*u),.52+Math.sin(u*Math.PI)*.36);
+  }
+  const ang=t*.23;c.beginPath();c.ellipse(cx,cy,R*1.2,R*.22,ang,0,TAU);
+  c.strokeStyle='rgba(255,191,138,.26)';c.lineWidth=2;c.stroke();
+  c.restore();
+}
+
 const WORLDS=[
   {name:'History',sub:'How artificial intelligence began and how it developed',tag:'History · Ideas · Discovery',accent:'#c9d6ff',pos:'62% 44%',scale:1.35,paint:pOrbit,icon:ICON.orbit,bloom:0.4,anim:aOrbit,url:'/explore/history',typography:'history'},
   {name:'Risks & Safety',sub:'What can go wrong, what helps, and what we are still missing',tag:'Risk · Safeguards · Responsibility',accent:'#ffc23d',pos:'50% 42%',scale:1.4,paint:pCircuit,icon:ICON.circuit,bloom:0.45,anim:aCircuit,url:'/explore/risks',typography:'risks'},
   {name:'Benefits',sub:'Where AI is helping people — and where evidence matters',tag:'Benefits · Human Impact',accent:'#ff9c78',pos:'50% 50%',scale:1.3,paint:pGrid,icon:ICON.horizon,bloom:0.4,anim:aGrid,url:'/explore/benefits',typography:'benefits'},
   {name:'Environment',sub:'The energy, water, and infrastructure behind AI',tag:'Environment · Resources · Evidence',accent:'#5dff9d',pos:'50% 36%',scale:1.3,paint:pAurora,icon:ICON.aurora,bloom:0.38,anim:aAurora,url:'/explore/environment',typography:'environment'},
+  {name:'AI & Global Competition',sub:'What could America risk if it bans AI while other countries keep advancing?',tag:'Global Competition · Jobs · Security',accent:'#92efcf',pos:'50% 42%',scale:1.32,paint:pCompetition,icon:ICON.confluence,bloom:0.42,anim:aCompetition,url:'/explore/global-competition',typography:'competition'},
   {name:'Education & News',sub:'Keep learning. Follow developments with perspective.',tag:'Learning · Headlines · Context',accent:'#2ee6ff',pos:'50% 40%',scale:1.35,paint:pCity,icon:ICON.city,bloom:0.42,anim:aCity,url:'/explore/education-news',typography:'education'}
 ];
-const N=WORLDS.length,STEP=TAU/N,ROMAN=['I','II','III','IV','V'];
+const N=WORLDS.length,STEP=TAU/N,ROMAN=['I','II','III','IV','V','VI'];
 
 /* ════════════════════ DOM ════════════════════ */
 const $=s=>document.querySelector(s);

@@ -46,14 +46,14 @@ test("approved AI HAS ARRIVED introduction is the public entrypoint", () => {
   assert.doesNotMatch(rootPage, /hall--living-atrium/);
 });
 
-test("ring selector uses five real AI perspectives and no fake destination links", () => {
+test("ring selector uses six real AI perspectives and no fake destination links", () => {
   const page = read("public/discover/index.html");
   const worlds = page.split("const WORLDS=[")[1]?.split("];")[0] || "";
-  assert.equal((worlds.match(/\{name:'/g)||[]).length,5);
-  for (const name of ["History","Risks & Safety","Benefits","Environment","Education & News"]) {
+  assert.equal((worlds.match(/\{name:'/g)||[]).length,6);
+  for (const name of ["History","Risks & Safety","Benefits","Environment","AI & Global Competition","Education & News"]) {
     assert.ok(worlds.includes("name:'"+name+"'"));
   }
-  for (const path of ["/explore/history","/explore/risks","/explore/benefits","/explore/environment","/explore/education-news"]) {
+  for (const path of ["/explore/history","/explore/risks","/explore/benefits","/explore/environment","/explore/global-competition","/explore/education-news"]) {
     assert.ok(worlds.includes("url:'"+path+"'"));
   }
   assert.equal((worlds.match(/url:null/g)||[]).length,0);
@@ -595,7 +595,7 @@ test("AIIP-COPY-01 keeps four topic pages conversational without intrusive art l
 
 
 
-test("AIIP-EDU-02 Education is the fifth entrance, with a real beginning-to-advanced learning path", () => {
+test("AIIP-EDU-02 Education is the sixth entrance, with a real beginning-to-advanced learning path", () => {
   const page = read("src/pages/explore/education-news.astro");
   const data = read("src/data/education.ts");
   const css = read("src/styles/education-learning.css");
@@ -1059,7 +1059,7 @@ test("AIIP-NAV-01 prominent return to perspectives uses a real shared destinatio
   assert.match(exit, /See another perspective/);
   assert.match(exit, /href="\/discover\/"/);
   assert.match(exit, /href="#page-top"/);
-  for (const tone of ["history", "risks", "benefits", "environment", "education-news", "news"]) {
+  for (const tone of ["history", "risks", "benefits", "environment", "global-competition", "education-news", "news"]) {
     assert.ok(css.includes(".perspective-return--" + tone), "missing topic accent for " + tone);
     assert.match(read("src/pages/explore/" + tone + ".astro"), /<BaseLayout/);
   }
@@ -1081,23 +1081,23 @@ test("AIIP-NEWS-05 Education links to published News without stale Coming Soon l
 });
 
 
-test("AIIP-COPY-STATUS-01 Discover About counters match five published perspectives and separate News", () => {
+test("AIIP-COPY-STATUS-01 Discover About counters match six published perspectives and separate News", () => {
   const page = read("public/discover/index.html");
   const worlds = page.split("const WORLDS=[")[1]?.split("];")[0] || "";
   const paths = [...worlds.matchAll(/url:'(\/explore\/[^']+)'/g)].map(match => match[1]);
   assert.deepEqual(paths, [
     "/explore/history", "/explore/risks", "/explore/benefits",
-    "/explore/environment", "/explore/education-news"
+    "/explore/environment", "/explore/global-competition", "/explore/education-news"
   ]);
   for (const path of paths) {
     assert.ok(read("src/pages" + path + ".astro").includes("<BaseLayout"), "live page for " + path);
   }
   assert.ok(read("src/pages/explore/news.astro").includes("<BaseLayout"));
-  assert.match(page, /Turn the ring to choose from five perspectives, all available to explore/);
+  assert.match(page, /Turn the ring to choose from six perspectives, all available to explore/);
   assert.match(page, /Education also connects to a separate News section/);
   const modal = page.split('<div class="stats">')[1]?.split('<div class="worlds"')[0] || "";
-  assert.match(modal, /<b>5<\/b><span>Perspectives<\/span>/);
-  assert.match(modal, /<b>5<\/b><span>Open now<\/span>/);
+  assert.match(modal, /<b>6<\/b><span>Perspectives<\/span>/);
+  assert.match(modal, /<b>6<\/b><span>Open now<\/span>/);
   assert.match(modal, /<b>1<\/b><span>News section<\/span>/);
   assert.doesNotMatch(modal, /Current links|In development|Coming Soon/);
 });
@@ -1159,6 +1159,7 @@ test("AIIP-DISCOVER-01B scene-adaptive typography preserves the cinematic subtit
     ["Risks & Safety","risks","What can go wrong, what helps, and what we are still missing","/explore/risks"],
     ["Benefits","benefits","Where AI is helping people — and where evidence matters","/explore/benefits"],
     ["Environment","environment","The energy, water, and infrastructure behind AI","/explore/environment"],
+    ["AI & Global Competition","competition","What could America risk if it bans AI while other countries keep advancing?","/explore/global-competition"],
     ["Education & News","education","Keep learning. Follow developments with perspective.","/explore/education-news"]
   ];
   const records=[...worlds.matchAll(/\{name:'([^']+)',sub:'([^']+)'[^\n]+?url:'([^']+)',typography:'([^']+)'\}/g)];
@@ -1191,4 +1192,35 @@ test("AIIP-DISCOVER-01B scene-adaptive typography preserves the cinematic subtit
   assert.match(page,/topicCta\.href=w\.url/);
   assert.match(page,/prefers-reduced-motion:reduce/);
   // These source contracts do not prove rendered contrast on animated artwork.
+});
+
+
+test("AIIP-GC-01 preview implements the accepted global-competition experience and six-scene Discover", () => {
+  const page = read("src/pages/explore/global-competition.astro");
+  const markup = read("src/data/global-competition/experience.html");
+  const style = read("src/styles/global-competition.css");
+  const script = read("src/scripts/global-competition.js");
+  const discover = read("public/discover/index.html");
+  const risks = read("src/pages/explore/risks.astro");
+  const benefits = read("src/pages/explore/benefits.astro");
+  const edu = read("src/pages/explore/education-news.astro");
+  assert.match(page, /<BaseLayout/);
+  assert.match(page, /experienceMarkup/);
+  for (const heading of ["What if America", "AI &amp; Global Competition", "The world"]) assert.ok(markup.includes(heading), heading);
+  assert.match(markup, /id="eli5-title"/);
+  assert.match(markup, /class="eli5-word d">Five:/);
+  for (const section of ["impact","ecosystem","world","evidence","everyday","sources"]) assert.ok(markup.includes('id="'+section+'"'), section);
+  assert.match(markup, /href="\/explore\/risks"/);
+  assert.match(markup, /href="\/explore\/benefits"/);
+  assert.match(risks, /href="\/explore\/global-competition"/);
+  assert.match(benefits, /href="\/explore\/global-competition"/);
+  assert.match(script, /renderCase\(0\)/);
+  assert.match(script, /renderRegion\('us'\)/);
+  assert.match(style, /prefers-reduced-motion:reduce/);
+  assert.match(discover, /function pCompetition\(/);
+  assert.match(discover, /function aCompetition\(/);
+  assert.match(discover, /ROMAN=\['I','II','III','IV','V','VI'\]/);
+  assert.match(edu, /PERSPECTIVE 06 \/ THE LEARNING PATH/);
+  assert.ok(!markup.includes("Standalone review prototype"));
+  assert.ok(!markup.includes("\u2014"), "new experience copy has no em dashes");
 });

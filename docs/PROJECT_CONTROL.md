@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 78
+- **Record revision:** 79
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -644,3 +644,21 @@
 - **Boundary / preflight:** Existing draft PR #11 branch, prior head d32e9a0e3c5c494f48f37b8eb45d77f6f5aa3170, inspected main 3dc48c02d47b32d41017d2373e26835962146137. Managed UI visual regression correction. Authorized: Discover title/descriptor and narrowly scoped CTA contrast, focused regression test, project record and PR evidence, established preview only. Preserve names, artwork/draw routines, timings, global UI, routes, ring interaction and all News state. Non-force guarded branch update; no production action. Known-good production stays unchanged.
 - **Implementation:** Five scene-local typography palettes applied in the existing render callback; fully opaque italic heading, dark plum Benefits foreground with warm localized feathered glow, light foreground in other scenes and soft dark atmospheric gradients. Benefits CTA retains control shape and behavior with a warm contrast treatment. Remove all descriptor box styling; retain medium weight, responsive wrapping and reduced tracking. No dependencies or new artwork. Regression source contracts replace the rejected backing and preserve five names/descriptors/routes and timing.
 - **Evidence / stop:** Source contracts and exact-head CI/build plus protected preview identity required. Actual contrast, composition, desktop/mobile, transitions, focus, reduced motion and navigation are rendered acceptance criteria; source assertions and READY status cannot prove them. Owner is the fallback visual observer; keep individual evidence pending until observed. New checklist AIIP-DISCOVER-01B-VISUAL-01; separate explicit release authorization required. Exact commit and CI/preview results to be recorded in PR #11 after platform finalization. Latest News snapshot on main must be preserved at any later release.
+
+
+## AIIP-GC-01 | AI & Global Competition preview authorization (2026-11-23)
+
+**Owner direction:** Accepted standalone design reference `AIIP_Global_Competition_Interactive_Prototype_v0_6.html`. The user authorized preview-only integration on 2026-11-23 after accepting the recap section and the completed v0.6 experience. See `docs/AIIP-GLOBAL-COMPETITION-SCOPE-ADDENDUM.md` for the controlled scope change relative to the accepted historical PRD v2.1.
+
+**Source state:** Isolated implementation branch `feature/aiip-global-competition-preview-v1` began from `473f5f558cb2392ac30be6754bd2200f47c83bbd`. No production merge or publish authorized. The previously published five-world Discover remains the production baseline until a separately approved release. The automatic News snapshot is not in scope and must be preserved on future reconciliation.
+
+**Next gate:** Inspect preview build, original six-scene art and live responsive experience; run CI, interaction, accessibility and editorial source spot checks. Document operator review; no release without explicit approval.
+
+
+## AIIP-GC-01 | Release authorization and pre-merge evidence (2026-11-23)
+
+**Authorization:** Owner explicitly instructed "AI & Global Competition approved for merge and publish" on 2026-11-23 after visually accepting both preview perspectives. Scope is PR #12 only; no History palette work, no unrelated site, runtime, or News updates.
+
+**Pre-merge release candidate:** PR #12, branch `feature/aiip-global-competition-preview-v1`, source head `6b2473c229b5f88a3351463f72295c4fd15dd43d`, main baseline `473f5f558cb2392ac30be6754bd2200f47c83bbd`. GitHub compared ahead 3 / behind 0, mergeable true. GitHub Actions run `45130140586`: 46 content contracts PASS, offline News fixtures PASS, 17-page Astro build PASS including `/explore/global-competition/index.html`. Vercel preview `dpl_5BpHFz6ku4QrDNzvkFkeKSSUo2Sr` at the same SHA READY. Owner reviewed preview and confirmed "Very nice!! all of it". Source spot-check: Stanford AI Index 2026 corroborates U.S. 2025 private AI investment $285.9B, Europe $20.9B, China $12.4B and adoption 55% (2023) to 88% (2025). Reuters Sept 18, 2026 article supports spending projection attribution. No changed files in `src/data/news-snapshot.json` or News automation paths.
+
+**Release transition:** User now authorizes merge/publish from PR #12 to GitHub main (auto-triggering Vercel production deployment). Pre-release source and test evidence does not constitute production evidence. Release confirmation requires Vercel production READY at merged commit, live route HTTP 200 with unique content and no fallback, Discover six worlds, and unchanged News route/snapshot. If any gate fails, do not call production accepted; investigate or revert to premerge release anchor. Post-release project state and exact deploy identity must be recorded.

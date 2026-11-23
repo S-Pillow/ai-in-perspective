@@ -3,7 +3,7 @@ interface Props {
   tone?: string;
 }
 const { tone = "default" } = Astro.props;
-const tones = ["history", "risks", "benefits", "environment", "education-news", "news"];
+const tones = ["history", "risks", "benefits", "environment", "global-competition", "education-news", "news"];
 const theme = tones.includes(tone) ? tone : "default";
 ---
 <section class:list={["perspective-return", `perspective-return--${theme}`]} aria-labelledby="perspective-return-title">
