@@ -1206,7 +1206,9 @@ test("AIIP-GC-01 preview implements the accepted global-competition experience a
   const edu = read("src/pages/explore/education-news.astro");
   assert.match(page, /<BaseLayout/);
   assert.match(page, /experienceMarkup/);
-  for (const heading of ["What if America", "AI &amp; Global Competition", "Explain Like I'm Five:", "The world"]) assert.ok(markup.includes(heading), heading);
+  for (const heading of ["What if America", "AI &amp; Global Competition", "The world"]) assert.ok(markup.includes(heading), heading);
+  assert.match(markup, /id="eli5-title"/);
+  assert.match(markup, /class="eli5-word d">Five:/);
   for (const section of ["impact","ecosystem","world","evidence","everyday","sources"]) assert.ok(markup.includes('id="'+section+'"'), section);
   assert.match(markup, /href="\/explore\/risks"/);
   assert.match(markup, /href="\/explore\/benefits"/);
