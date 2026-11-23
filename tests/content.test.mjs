@@ -1307,6 +1307,9 @@ test("Environment community impact is evidence-backed, substantive, progressivel
   assert.match(chapter, /<noscript><p>All six explanations/);
   assert.match(chapter, />Several nearby<\/button>/);
   assert.match(chapter, /What changes when several data centers are built nearby\?/);
+  assert.doesNotMatch(chapter, /THE POINT OF THE EXERCISE|Don.t start with|The drawings are examples|community-impact__closing/);
+  assert.doesNotMatch(css, /community-impact__closing/);
+  assert.match(css, /community-impact__efficiency\{[^\n]*margin-bottom:0\}/);
   assert.match(script, /Looking at one project at a time can miss the bigger picture/);
   assert.doesNotMatch(chapter + script, /A regional cluster|regional infrastructure|combined timing, demand|separate assessment/);
   assert.match(chapter, /Those are projections, not measurements of the future/);
