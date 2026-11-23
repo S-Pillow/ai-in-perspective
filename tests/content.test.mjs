@@ -1285,12 +1285,12 @@ test("Environment community impact is evidence-backed, substantive, progressivel
     assert.match(chapter, new RegExp('id: "' + topic + '"'));
   }
   assert.match(chapter, /What is a <em>hyperscale<\/em> data center/);
-  assert.match(chapter, /no universal building-size rule/i);
+  assert.match(chapter, /one official building size/i);
   assert.match(chapter, /4\.7%/);
   assert.match(chapter, /9\.5–15\.3%/);
   assert.match(chapter, /not AI-only measurements/i);
-  assert.match(chapter, /These invented figures illustrate/);
-  assert.match(chapter, /lower PUE means less facility overhead/i);
+  assert.match(chapter, /The numbers here are made up/);
+  assert.match(chapter, /A lower PUE means less electricity is spent on cooling/);
   assert.match(chapter, /<details class="community-impact__details">/);
   assert.match(chapter, /<summary>/);
   assert.match(chapter, /data-community-scope="cluster"/);
@@ -1305,6 +1305,12 @@ test("Environment community impact is evidence-backed, substantive, progressivel
   assert.match(css, /community-impact__scene svg\{min-width:760px\}/);
   assert.match(css, /community-impact--enhanced \.community-impact__topics\{display:flex;overflow-x:auto/);
   assert.match(chapter, /<noscript><p>All six explanations/);
+  assert.match(chapter, />Several nearby<\/button>/);
+  assert.match(chapter, /What changes when several data centers are built nearby\?/);
+  assert.match(script, /Looking at one project at a time can miss the bigger picture/);
+  assert.doesNotMatch(chapter + script, /A regional cluster|regional infrastructure|combined timing, demand|separate assessment/);
+  assert.match(chapter, /Those are projections, not measurements of the future/);
+  assert.match(chapter, /Neither result tells us exactly what a different town would gain/);
   assert.match(chapter, /role="img" aria-label="10 units/);
   assert.match(css, /@media\(max-width:480px\)/);
   assert.match(css, /prefers-reduced-motion:reduce/);

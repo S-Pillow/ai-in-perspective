@@ -14,8 +14,8 @@ function initializeCommunityImpact() {
     const scopeButtons = Array.from(section.querySelectorAll("[data-community-scope]"));
     const explanation = section.querySelector("[data-community-scope-explanation]");
     const descriptions = {
-      one: "One project can affect a shared electricity network and local water resources. Its effects depend on the actual design and location.",
-      cluster: "Multiple proposed facilities may draw on the same regional infrastructure. Their combined timing, demand and effects need separate assessment, not simply the sum of announcements."
+      one: "A data center may draw electricity and water from systems that nearby homes and businesses also rely on. The actual effect depends on where and how it's built.",
+      cluster: "When several data centers are planned in the same area, they may all need electricity from the same power grid and water from nearby sources. Looking at one project at a time can miss the bigger picture, especially if several are built around the same time. Plans can also change, so it matters which projects are actually likely to happen."
     };
     if (scene && explanation && scopeButtons.length === 2) {
       scopeButtons.forEach(button => button.addEventListener("click", () => {

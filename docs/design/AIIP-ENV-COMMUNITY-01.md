@@ -31,3 +31,6 @@ One-site/cluster SVG is explicitly conceptual and makes no quantitative claims. 
 
 ### Pre-review accessibility correction
 Selector and mode controls remain hidden without JavaScript while the full content renders. The diagram uses a labeled, focusable horizontal-scroll region on phones to prevent shrinking its labels to unreadable microtext. Both hypothetical energy bars have accessible labels.
+
+### Owner voice correction (Nov 23, 2026)
+Owner accepted the overall presentation but asked for a more natural, human voice for a general audience, highlighting the label "A regional cluster" and the sentence "Their combined timing, demand and effects need separate assessment, not simply the sum of announcements." This revision keeps all six topics, substantial Dig deeper answers, source references, numbers/dates/uncertainty qualifications, diagrams, interactive behavior, and layout. It changes "A regional cluster" to "Several nearby" and replaces institutional phrasing throughout the chapter with natural questions and explanations. Factual units and source distinctions are preserved (estimated 2024 national share; projected 2030 all-data-center scenarios; local outcomes not universal; PUE example hypothetical). This copy change requires updated source/CI/build and rendered preview review; no production publish authority.
