@@ -1224,3 +1224,19 @@ test("AIIP-GC-01 preview implements the accepted global-competition experience a
   assert.ok(!markup.includes("Standalone review prototype"));
   assert.ok(!markup.includes("\u2014"), "new experience copy has no em dashes");
 });
+
+
+test("AIIP-HISTORY-BLUE-01 History palette matches its blue Discover identity without changing structure", () => {
+  const css = read("src/styles/history.css");
+  const page = read("src/pages/explore/history.astro");
+  assert.match(css, /AIIP-HISTORY-BLUE-01/);
+  assert.match(css, /--hi-blue:#a9d6ff/);
+  assert.match(css, /background:#090f24/);
+  assert.doesNotMatch(css, /--hi-violet|#bdb6ff|#48447c60|#c1acfa/);
+  assert.match(css, /\.hi-eli5__word--pink\{color:#f5b6d9/);
+  assert.match(css, /\.hi-eli5__word--gold\{color:#f0ce9b/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(page, /class="hi-clock__center"/);
+  assert.match(page, /stroke="#8cc9ff"/);
+  assert.match(page, /data-hi-era/);
+});
