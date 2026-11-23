@@ -1,0 +1,277 @@
+---
+const sources = {
+  lbl: { label: "Berkeley Lab · 2025 U.S. data-center energy update (published 2026)", url: "https://eta.lbl.gov/publications/united-states-data-center-energy-2025" },
+  iea: { label: "IEA · Energy and AI (2025)", url: "https://www.iea.org/reports/energy-and-ai/executive-summary" },
+  crs: { label: "Congressional Research Service · Data centers and the electricity grid (2026)", url: "https://www.everycrsreport.com/reports/R49326.html" },
+  doe: { label: "U.S. Department of Energy · Electricity rates for large loads (2025)", url: "https://www.energy.gov/policy/articles/electricity-rate-designs-large-loads-evolving-practices-and-opportunities" },
+  jlarc: { label: "Virginia JLARC · Data Centers in Virginia (2024)", url: "https://jlarc.virginia.gov/landing-2024-data-centers-in-virginia.asp" },
+  gatech: { label: "Georgia Tech · Local economic effects of data centers (2026)", url: "https://news.gatech.edu/news/2026/07/10/why-better-cities-and-towns-see-more-benefits-data-centers-rural-regions" },
+  ashr: { label: "ASHRAE · Data-center energy efficiency and PUE", url: "https://handbook.ashrae.org/handbooks/A19/SI/A19_Ch20/A19_Ch20_si.aspx" },
+  iea4e: { label: "IEA 4E · Data-center efficiency policies and definitions", url: "https://www.iea-4e.org/wp-content/uploads/publications/2023/02/DC-Workstream-activity-1-publication-version.pdf" }
+};
+const topics = [
+  {
+    id: "bills", num: "01", tab: "Power bills", eyebrow: "THE COST OF THE GRID",
+    title: "Will households pay more for electricity?",
+    lead: "A large computing facility is a major electricity customer. Its demand can require new lines, substations, or power plants. The question is not just what the data center pays for its power, but who pays for the wider system built to serve it.",
+    paragraphs: [
+      "Electric bills help cover two broad things: producing electricity and delivering it. When utilities build new equipment, regulators decide how those costs are shared. In some places, a large customer may help spread existing fixed costs over more electricity sales. In others, new construction or tighter electricity supply may push costs up.",
+      "These effects vary by utility and time period. Research has found higher average residential rates after data-center entry in some settings, but that is not a prediction for every town. The contract, local electricity supply, utility regulation, and whether promised demand actually arrives all matter."
+    ],
+    question: "What equipment must be built, how much will the data center pay for it, and who is responsible if it uses less electricity than expected?",
+    deeper: [
+      { title: "What is a grid upgrade?", text: "It can mean reinforcing the wires, substations, transformers, or power supplies that serve a region. Sometimes the facility pays a connection charge. Other additions may be recovered through utility rates shared by many customers. A local rate case or special tariff helps explain who pays which part." },
+      { title: "Could a large customer actually help lower rates?", text: "Possibly. If existing infrastructure has spare capacity, additional sales can help spread fixed costs. But the result changes if new generation and transmission are expensive or if demand exceeds supply. A lower rate in one study does not prove the same outcome at a proposed site." },
+      { title: "What if the project never reaches full size?", text: "Utilities may have invested for a forecast that never arrives. Long-term contracts, minimum payments, and financial guarantees are ways regulators can limit the risk of other customers paying for underused infrastructure." }
+    ],
+    refs: ["doe", "crs", "jlarc"]
+  },
+  {
+    id: "electricity", num: "02", tab: "Energy & emissions", eyebrow: "POWER AND CLIMATE",
+    title: "A lot of electricity does not mean one fixed climate impact.",
+    lead: "Data centers run servers all day, and servers give off heat. More computing generally means more electricity. But the pollution associated with that demand depends on what supplies the power, when it is needed, and what additional generation the grid builds.",
+    paragraphs: [
+      "A facility connected to a cleaner electricity system may have a different emissions footprint from one drawing more power from fossil-fuel generation. Companies can buy clean electricity or support new power projects, but annual renewable-energy purchasing claims do not automatically tell us what powered a facility at every hour.",
+      "Berkeley Lab estimated that all U.S. data centers used about 4.7% of U.S. electricity in 2024. Its scenarios project 9.5% to 15.3% by 2030. That future range is a model, not a measured result, and it covers data centers used for many digital services, not AI alone."
+    ],
+    question: "How much electricity would the project actually use each year, where would that power come from, and what changes when demand peaks?",
+    deeper: [
+      { title: "Why is a power forecast not a measured bill?", text: "Projects are often announced before construction, with estimates of maximum future capacity. The facility might expand slowly, operate below its rating, change equipment, or never open. A projected megawatt requirement is not the same as metered annual electricity use." },
+      { title: "What about renewable electricity?", text: "New wind, solar, geothermal, and other sources can help. The key questions are whether the electricity is additional, available when needed, and delivered on a grid that can handle it. Fossil-fuel plants and backup generators can still matter, depending on local conditions." },
+      { title: "Is AI the only reason data centers use power?", text: "No. Cloud storage, websites, streaming, business services, and AI can share data-center infrastructure. National data-center totals should not be presented as measured AI-only demand unless the source separates those workloads." }
+    ],
+    refs: ["lbl", "iea", "crs"]
+  },
+  {
+    id: "transparency", num: "03", tab: "Transparency", eyebrow: "PROMISES AND PROOF",
+    title: "What should a community be able to find out?",
+    lead: "People cannot weigh a project fairly if they have only a glossy rendering and a promise of investment. Resource estimates, cost-sharing agreements, environmental permits, and local benefits need to be understandable and open to scrutiny.",
+    paragraphs: [
+      "Useful disclosures include planned versus expected electricity demand, water withdrawal and consumption, noise studies, backup-generator permits, the number of permanent jobs, tax incentives, and plans for future expansion. Some information may be commercially sensitive, and disclosure rules differ among jurisdictions.",
+      "A company promise is not the same as an enforceable condition or a measured outcome. Local authorities and regulators can help by publishing the terms they can lawfully disclose, explaining how compliance will be checked, and making clear who receives complaints after a site opens."
+    ],
+    question: "Which promises are binding, what will be measured after opening, and where can residents inspect the results?",
+    deeper: [
+      { title: "Why do public hearings and permits matter?", text: "They are places where siting, water, noise, land use, and utility questions can be examined before a final decision. But a hearing is only useful if the underlying information is available and the relevant agency actually has authority over the issue." },
+      { title: "Is a sustainability report enough?", text: "Company-wide totals can hide local differences. A claim about global water replenishment does not tell a nearby town how much water a specific facility expects to withdraw during a dry month. It helps to ask for the location, time period, definition, and independent verification behind a figure." },
+      { title: "What happens after approval?", text: "Permits, operating reports, utility filings, and complaint processes can document whether conditions were met. The public should be able to distinguish a planned improvement from one that was completed and independently checked." }
+    ],
+    refs: ["jlarc", "crs", "doe"]
+  },
+  {
+    id: "scale", num: "04", tab: "Scale & growth", eyebrow: "MORE THAN ONE BUILDING",
+    title: "One project is different from a whole regional cluster.",
+    lead: "Hyperscale describes computing built to operate at very large scale and expand. It is not a universal square-footage cutoff, and not every hyperscale center is devoted entirely to AI. The important planning question is the combined demand of the facilities proposed for an area.",
+    paragraphs: [
+      "A single data center may need a major grid connection. Several facilities planned along the same roads and utility corridors can add demands for power, transmission, cooling water, land, construction crews, and local services. Reviewing each in isolation can miss what happens when their timelines overlap.",
+      "The IEA reported in 2025 that many planned U.S. data centers were concentrated in existing clusters. A region with spare electricity capacity, an available water source, and suitable industrial land faces different choices from one where the grid or watershed is already stretched."
+    ],
+    question: "How many projects, phases, and expansions are proposed across the entire region, and have their combined demands been assessed?",
+    deeper: [
+      { title: "Does hyperscale mean a fixed number of servers or square feet?", text: "No single threshold is used everywhere. Industry reports, facility owners, and analysts categorize hyperscale differently. For a local project, the useful figures are the planned power connection, actual or expected energy use, cooling design, land area, and phases of construction." },
+      { title: "Are AI centers fundamentally different from older centers?", text: "AI-heavy centers can use dense racks of GPUs or other accelerators, while other data centers may use many general-purpose processors. Both can contain a mix. Size, equipment, and cooling vary independently, so two buildings with the same floor area can have very different electricity demands." },
+      { title: "What counts as a cumulative impact?", text: "Think of several projects drawing from one grid or watershed. Each might appear manageable on its own, but their combined demand can require larger infrastructure or leave less room for existing uses. The timing and likelihood of each project matter, not just the total announced on paper." }
+    ],
+    refs: ["iea", "jlarc", "iea4e"]
+  },
+  {
+    id: "benefits", num: "05", tab: "Costs & benefits", eyebrow: "WHO GAINS, WHO PAYS",
+    title: "A useful technology does not guarantee a fair local deal.",
+    lead: "Data centers can support digital services and AI tools used far beyond the towns hosting them. Construction spending, local tax receipts, contracts, and some permanent jobs can benefit a community. The amount and distribution of those benefits are not automatic.",
+    paragraphs: [
+      "In Virginia, a state legislative review identified substantial local tax revenue and mostly construction-period economic benefits. A 2026 Georgia Tech study found stronger job and wage effects in metropolitan counties than in less populated counties. Neither finding settles what any particular proposal will deliver.",
+      "A meaningful comparison includes public incentives and long-term operating costs alongside tax revenue, jobs, infrastructure, land use, electricity rates, noise, and local water conditions. A region may gain revenue while some neighbors experience inconvenience or higher costs. Those outcomes should be examined separately."
+    ],
+    question: "How many lasting local jobs are expected, how much net tax revenue remains after incentives and public expenses, and who bears the nearby burdens?",
+    deeper: [
+      { title: "Why is construction employment different?", text: "Building a large facility can employ many people for a limited period. Running the finished building can require a much smaller permanent workforce. Job claims should say which phase, where workers live, and how long the positions last." },
+      { title: "What about tax revenue?", text: "Property and equipment taxes can be important for local budgets, but some locations offer exemptions or abatements. Compare expected collections with the incentives and any public costs of serving the project. Do not assume revenue is evenly shared with nearby households." },
+      { title: "Can communities reach different conclusions?", text: "Yes. Two towns can weigh reliable tax revenue, jobs, land use, water stress, noise, and household affordability differently. The role of the exhibit is to make the tradeoffs visible, not cast a vote on their behalf." }
+    ],
+    refs: ["jlarc", "gatech", "doe"]
+  },
+  {
+    id: "alternatives", num: "06", tab: "Other approaches", eyebrow: "CHOICES BEYOND YES OR NO",
+    title: "The options are bigger than 'build it' or 'ban it.'",
+    lead: "Large facilities are one way to provide computing, not the only choice about how or where demand is met. Communities and operators can consider better locations, different designs, timing, and rules about who pays.",
+    paragraphs: [
+      "Potential responses include siting new projects where electricity and water are less constrained; requiring stronger cost protections; using reclaimed water where appropriate; designing efficient cooling; adding clean energy and storage; and scheduling flexible computing work for times when the grid has spare supply.",
+      "Smaller or distributed computing can serve some workloads, especially work that benefits from being closer to users. But it does not automatically replace the performance, networking, security, or operating capabilities of a large facility. Every alternative has its own cost and environmental footprint."
+    ],
+    question: "Which location, design, rate agreement, and operating commitments would reduce the particular risks identified here?",
+    deeper: [
+      { title: "Could a data center do work at a different time?", text: "Some computing tasks can be delayed or moved to another location when electricity is scarce. Other tasks, such as real-time services, need fast responses. Flexible demand can reduce pressure at peak times, but it cannot eliminate the energy required for all workloads." },
+      { title: "Would small data centers solve the problem?", text: "Not necessarily. Smaller sites may fit certain tasks, but many sites also need power, cooling, networking, maintenance, and security. A fair comparison looks at the same work being done, with the full system and real operating conditions counted." },
+      { title: "What can local policy change?", text: "Depending on state and local authority, public decisions may shape zoning, sound limits, water estimates, electricity tariffs, disclosure requirements, and incentive terms. The practical choice can be how development happens, not simply whether computing happens at all." }
+    ],
+    refs: ["iea", "doe", "jlarc", "crs"]
+  }
+];
+---
+<section class="community-impact" id="community-impact" data-community-section aria-labelledby="community-impact-title">
+  <header class="community-impact__intro">
+    <p class="community-impact__eyebrow">THE IMPACT OUTSIDE THE BUILDING <span aria-hidden="true">/</span> A COMMUNITY DEEP DIVE</p>
+    <h2 id="community-impact-title">What happens when a <em>data center comes to town?</em></h2>
+    <p>Big computing facilities can support useful technology and bring local investment. They can also change how a region uses power, water, land and public resources. The real question is what changes, who benefits, and who is asked to carry the costs.</p>
+  </header>
+
+  <div class="community-impact__definition">
+    <div>
+      <p class="community-impact__overline">FIRST, THE PLAIN-LANGUAGE VERSION</p>
+      <h3>What is a <em>hyperscale</em> data center?</h3>
+      <p>Imagine a building or campus filled with computers that run internet services, store information or power AI. Now imagine an operation built to serve enormous demand and keep expanding. That is the idea behind <strong>hyperscale</strong>.</p>
+      <p>There is no universal building-size rule. Hyperscale does not mean all the computers run AI, and smaller centers can also use powerful equipment. What matters locally is the planned electricity, cooling, space and growth, not the label alone.</p>
+      <a href={sources.iea4e.url} target="_blank" rel="noopener noreferrer">Source: IEA 4E on definitions and size <span aria-hidden="true">↗</span></a>
+    </div>
+    <aside class="community-impact__definition-aside" aria-label="Two important distinctions">
+      <div><span>NOT A FIXED SIZE</span><p>One million square feet is not a required threshold.</p></div>
+      <div><span>NOT AI-ONLY</span><p>Hyperscale facilities can support cloud services, AI and many other kinds of computing.</p></div>
+      <div><span>NOT ONE WATER NUMBER</span><p>Water use depends on equipment, cooling, climate and what is being measured.</p></div>
+    </aside>
+  </div>
+
+  <figure class="community-impact__figure" aria-labelledby="community-impact-figure-title">
+    <figcaption>
+      <div>
+        <p class="community-impact__overline">01 / SEE THE SYSTEM</p>
+        <h3 id="community-impact-figure-title">When more projects share one region, the questions add up.</h3>
+        <p>This conceptual diagram shows relationships, not real facilities, distances, measured resource use or forecast demand.</p>
+      </div>
+      <div class="community-impact__view-buttons" role="group" aria-label="Choose illustration scope">
+        <button type="button" data-community-scope="one" aria-pressed="true">One site</button>
+        <button type="button" data-community-scope="cluster" aria-pressed="false">A regional cluster</button>
+      </div>
+    </figcaption>
+    <div class="community-impact__scene" data-community-scene data-scope="one">
+      <svg viewBox="0 0 1000 365" role="img" aria-labelledby="community-scene-title community-scene-desc" preserveAspectRatio="xMidYMid meet">
+        <title id="community-scene-title">Illustration of data centers sharing a grid and a watershed with nearby homes</title>
+        <desc id="community-scene-desc">One-site view shows a data center, a power network, a water source and a neighborhood. Regional-cluster view adds two more data centers sharing the infrastructure. This is a conceptual diagram without numerical claims.</desc>
+        <defs>
+          <linearGradient id="comm-land" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1a3440"/><stop offset="1" stop-color="#0c1f2b"/></linearGradient>
+          <linearGradient id="comm-center" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#306275"/><stop offset="1" stop-color="#153644"/></linearGradient>
+        </defs>
+        <path d="M0 265 L170 208 388 247 575 187 770 216 1000 159 V365 H0Z" fill="url(#comm-land)"/>
+        <path d="M0 321 C230 264 305 363 535 309 S815 280 1000 320" fill="none" stroke="#4a9eae" stroke-width="19" stroke-opacity=".21"/>
+        <path d="M0 321 C230 264 305 363 535 309 S815 280 1000 320" fill="none" stroke="#6ad1d6" stroke-width="3" stroke-opacity=".8" stroke-dasharray="11 14"/>
+        <g stroke="#87c8d1" stroke-width="2.5" fill="none" opacity=".85">
+          <path d="M167 129 H421 V176 H550"/>
+          <path d="M421 129 V75 H704" class="community-impact__cluster-only"/>
+          <path d="M421 129 V246 H744" class="community-impact__cluster-only"/>
+        </g>
+        <g transform="translate(77 79)">
+          <path d="M18 90 L40 10 62 90 M25 64 H56 M29 45 H53 M12 90 H68" fill="none" stroke="#ffd098" stroke-width="5" stroke-linecap="round"/>
+          <path d="M40 10 V1 M6 46 H74" stroke="#ffd098" stroke-width="3" stroke-linecap="round"/>
+          <text x="0" y="123" fill="#e9cf9e" font-size="17" font-weight="650">POWER GRID</text>
+        </g>
+        <g transform="translate(304 129)">
+          <path d="M0 53 L99 5 188 49 90 96Z" fill="#427c8c" stroke="#95e1de" stroke-width="2.5"/>
+          <path d="M0 53 V142 L91 188 V96Z" fill="#1b394a" stroke="#5d9cab" stroke-width="2"/>
+          <path d="M91 96 V188 L188 140 V49Z" fill="url(#comm-center)" stroke="#5d9cab" stroke-width="2"/>
+          {Array.from({length:4},(_,i)=> <g><path d={"M"+(18+i*16)+" "+(74+i*8)+" l0 53"} stroke="#81cbcb" stroke-width="5" stroke-opacity=".7"/><path d={"M"+(112+i*15)+" "+(107-i*7)+" v31"} stroke="#9dd7e1" stroke-width="6" stroke-opacity=".48"/></g>)}
+          <text x="36" y="222" fill="#effafa" font-size="19" font-weight="650">DATA CENTER</text>
+        </g>
+        <g class="community-impact__cluster-only" transform="translate(690 42)">
+          <path d="M0 36 L57 8 123 40 65 70Z" fill="#4b8290" stroke="#91d8d9" stroke-width="2"/>
+          <path d="M0 36 V97 L65 129 V70Z" fill="#214451" stroke="#5e9aaa" stroke-width="2"/>
+          <path d="M65 70 V129 L123 98 V40Z" fill="#34677a" stroke="#5e9aaa" stroke-width="2"/>
+          <text x="-8" y="152" fill="#ccebe7" font-size="16">ANOTHER SITE</text>
+        </g>
+        <g class="community-impact__cluster-only" transform="translate(728 225)">
+          <path d="M0 18 L49 -6 110 21 62 46Z" fill="#4b8290" stroke="#91d8d9" stroke-width="2"/>
+          <path d="M0 18 V65 L62 93 V46Z" fill="#214451" stroke="#5e9aaa" stroke-width="2"/>
+          <path d="M62 46 V93 L110 67 V21Z" fill="#34677a" stroke="#5e9aaa" stroke-width="2"/>
+        </g>
+        <g transform="translate(59 263)" fill="#cde6e4"><path d="M0 24 L28 4 55 24 V59 H0Z" fill="#496b72" stroke="#a3dbd7" stroke-width="2"/><rect x="22" y="36" width="12" height="23" fill="#eac08b"/><path d="M66 30 L89 11 114 30 V60 H66Z" fill="#496b72" stroke="#a3dbd7" stroke-width="2"/><text x="8" y="87" font-size="16" font-weight="650">NEARBY HOMES</text></g>
+        <g transform="translate(658 304)"><text x="0" y="36" font-size="16" font-weight="650" fill="#98d7df">SHARED WATER SOURCES</text></g>
+      </svg>
+    </div>
+    <p class="community-impact__figure-caption" data-community-scope-explanation aria-live="polite">One project can affect a shared electricity network and local water resources. Its effects depend on the actual design and location.</p>
+    <div class="community-impact__figure-legend"><span><i class="community-impact__legend-power"></i>Grid and electricity links</span><span><i class="community-impact__legend-water"></i>Illustrative shared water system</span><span><i class="community-impact__legend-sites"></i>Data center facilities</span></div>
+  </figure>
+
+  <div class="community-impact__evidence" aria-label="National electricity context">
+    <div class="community-impact__evidence-number">
+      <span>U.S. DATA CENTERS / 2024 ESTIMATE</span>
+      <strong>4.7%</strong>
+      <p>of annual U.S. electricity consumption</p>
+    </div>
+    <div class="community-impact__evidence-number">
+      <span>U.S. DATA CENTERS / 2030 SCENARIOS</span>
+      <strong>9.5–15.3%</strong>
+      <p>of annual U.S. electricity consumption, projected</p>
+    </div>
+    <div class="community-impact__evidence-context">
+      <strong>What these numbers do and do not tell us.</strong>
+      <p>These are national estimates and future scenarios for <em>all data centers</em>, not AI-only measurements. They do not tell us how much electricity a particular site uses or who pays for local upgrades.</p>
+      <a href={sources.lbl.url} target="_blank" rel="noopener noreferrer">Berkeley Lab · June 2026 update <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+
+  <div class="community-impact__explorer" aria-label="Six questions about local data-center development">
+    <div class="community-impact__navigation">
+      <p class="community-impact__overline">02 / EXPLORE THE CONSEQUENCES</p>
+      <h3>Six questions worth asking</h3>
+      <p>Choose an issue, then open Dig deeper for the mechanisms, limitations and evidence behind it.</p>
+      <div class="community-impact__topics" role="group" aria-label="Choose a community impact question">
+        {topics.map((t, i) => (
+          <button type="button" class="community-impact__topic" data-community-topic={t.id} aria-pressed={i===0?"true":"false"}>
+            <span>{t.num}</span><strong>{t.tab}</strong><span aria-hidden="true">↗</span>
+          </button>
+        ))}
+      </div>
+    </div>
+    <div class="community-impact__panels">
+      {topics.map(t=> (
+        <article class="community-impact__panel" data-community-panel={t.id} aria-labelledby={"community-topic-"+t.id}>
+          <div class="community-impact__panel-top"><span>{t.num} / {t.eyebrow}</span><span>COMMUNITY QUESTION</span></div>
+          <h3 id={"community-topic-"+t.id}>{t.title}</h3>
+          <p class="community-impact__panel-lead">{t.lead}</p>
+          <div class="community-impact__panel-body">{t.paragraphs.map(p=><p>{p}</p>)}</div>
+          <div class="community-impact__ask"><span>ONE QUESTION TO ASK LOCALLY</span><p>{t.question}</p></div>
+          <details class="community-impact__details">
+            <summary><span>Dig deeper</span><small>Explore the details and tradeoffs</small><span class="community-impact__plus" aria-hidden="true">+</span></summary>
+            <div class="community-impact__details-body">
+              {t.deeper.map(d=><div><h4>{d.title}</h4><p>{d.text}</p></div>)}
+            </div>
+          </details>
+          <div class="community-impact__sources">
+            <span>SOURCES / READ FURTHER</span>
+            <ul>{t.refs.map(key=><li><a href={sources[key].url} target="_blank" rel="noopener noreferrer">{sources[key].label} <span aria-hidden="true">↗</span></a></li>)}</ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <div class="community-impact__efficiency" aria-labelledby="community-efficiency-title">
+    <div class="community-impact__efficiency-heading">
+      <p class="community-impact__overline">03 / A MISLEADING COMPARISON, EXPLAINED</p>
+      <h3 id="community-efficiency-title">Can a more efficient data center still use <em>more electricity?</em></h3>
+      <p><strong>Yes.</strong> A facility may spend a smaller share of its electricity on cooling and supporting systems while using vastly more electricity overall because it operates on a much larger scale. Efficiency alone does not tell us total resource use.</p>
+    </div>
+    <div class="community-impact__energy-grid">
+      <div class="community-impact__energy-card">
+        <span>SMALLER / IMAGINARY EXAMPLE</span><h4>15 total units</h4>
+        <div class="community-impact__energy-meter" aria-label="10 units for computing equipment plus 5 units for supporting systems equals 15 total units"><span style="width:8.33%"></span><i style="width:4.17%"></i></div>
+        <p><b>10</b> units for computing equipment + <b>5</b> units for cooling and overhead.</p>
+        <small>Facility energy ÷ computing equipment energy = 1.5</small>
+      </div>
+      <div class="community-impact__energy-card community-impact__energy-card--large">
+        <span>LARGER / IMAGINARY EXAMPLE</span><h4>120 total units</h4>
+        <div class="community-impact__energy-meter" aria-label="100 units for computing equipment plus 20 units for supporting systems equals 120 total units"><span style="width:83.33%"></span><i style="width:16.67%"></i></div>
+        <p><b>100</b> units for computing equipment + <b>20</b> units for cooling and overhead.</p>
+        <small>Facility energy ÷ computing equipment energy = 1.2</small>
+      </div>
+    </div>
+    <div class="community-impact__efficiency-note">
+      <p><strong>Read this carefully:</strong> These invented figures illustrate the calculation used in power usage effectiveness (PUE), not typical data-center sizes, actual electricity consumption or energy used per AI task. Both bars share the same scale. A lower PUE means less facility overhead relative to IT energy; it does not measure computing performance or total climate impact.</p>
+      <a href={sources.ashr.url} target="_blank" rel="noopener noreferrer">ASHRAE · What PUE measures and its limitations <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <footer class="community-impact__closing">
+    <p class="community-impact__overline">THE POINT OF THE EXERCISE</p>
+    <h3>Don't start with “good” or “bad.” Start with what is known.</h3>
+    <p>The most useful questions are local: How much power and water will actually be needed? Who funds the infrastructure? What economic benefits will last? What can residents verify? What alternatives were considered? The answers can differ from place to place.</p>
+    <span>Explanatory diagrams and hypothetical calculations are labeled. Figures are not site-specific forecasts. Research and source links are provided for readers who want to inspect the evidence.</span>
+  </footer>
+</section>

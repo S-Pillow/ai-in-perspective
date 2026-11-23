@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import "../../styles/environment-rebuild.css";
 import "../../styles/environment-water.css";
+import "../../styles/environment-community.css";
+import EnvironmentCommunity from "../../components/EnvironmentCommunity.astro";
 ---
 <BaseLayout title="AI & the Environment" description="Explore how electricity, grid infrastructure, servers, cooling and environmental resources connect to AI computing." bodyClass="exhibit-body">
   <SiteHeader subtle />
@@ -167,6 +169,8 @@ import "../../styles/environment-water.css";
       </div>
     </section>
 
+    <EnvironmentCommunity />
+
     <!-- AIIP-EXPERIENCE-12: Practical responses and a plain-language closing recap. -->
     <section class="env-actions" aria-labelledby="environment-actions-title">
       <div class="env-actions__intro">
@@ -240,4 +244,5 @@ import "../../styles/environment-water.css";
   </main>
   <script>import "../../scripts/environment-system.js";</script>
   <script>import "../../scripts/environment-water.js";</script>
+  <script>import "../../scripts/environment-community.js";</script>
 </BaseLayout>
