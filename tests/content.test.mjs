@@ -1243,3 +1243,29 @@ test("AIIP-HISTORY-BLUE-01 History palette matches its blue Discover identity wi
   assert.match(page, /stroke="#8cc9ff"/);
   assert.match(page, /data-hi-era/);
 });
+
+
+test("AIIP-EDU-NEWS-SWITCH-01 Education and News use equally prominent mobile navigation", () => {
+  const edu = read("src/pages/explore/education-news.astro");
+  const news = read("src/pages/explore/news.astro");
+  const eduCss = read("src/styles/education-learning.css");
+  const newsCss = read("src/styles/education-news.css");
+  assert.ok(edu.includes('<nav class="ed-switch" aria-label="Education and News sections">'));
+  assert.ok(edu.includes('class="ed-switch__item ed-switch__item--current" href="/explore/education-news" aria-current="page"'));
+  assert.ok(edu.includes('class="ed-switch__item" href="/explore/news">News</a>'));
+  assert.ok(news.includes('class="en-section-switch" aria-label="Education and News sections"'));
+  assert.ok(news.includes('href="/explore/news" aria-current="page">News</a>'));
+  const mobile = eduCss.split("/* AIIP-EDU-NEWS-SWITCH-01")[1] || "";
+  assert.ok(mobile.includes("@media(max-width:480px)"));
+  assert.ok(mobile.includes(".ed-switch{display:flex;flex:0 0 100%;width:100%;"));
+  assert.ok(mobile.includes(".ed-switch__item{flex:1 1 0;min-width:0;min-height:44px;"));
+  assert.ok(newsCss.includes(".en-section-switch{width:100%;}"));
+  assert.ok(eduCss.includes(".ed-switch__item--current{background:#b2f2ee"));
+  assert.ok(eduCss.includes("@media(min-width:481px){"));
+  assert.ok(eduCss.includes(".ed-switch{display:flex;width:min(100%,360px);box-sizing:border-box;}"));
+  assert.ok(eduCss.includes(".ed-switch__item{flex:1 1 0;min-width:0;min-height:48px;justify-content:center;"));
+  assert.ok(newsCss.includes("@media(min-width:481px){"));
+  assert.ok(newsCss.includes(".en-section-switch{display:flex;width:min(100%,360px);box-sizing:border-box;}"));
+  assert.ok(newsCss.includes(".en-section-switch a{display:flex;flex:1 1 0;min-width:0;min-height:48px;"));
+});
+

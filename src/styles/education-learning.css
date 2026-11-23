@@ -217,3 +217,16 @@
 .ed-build-tools__disclosure{font-size:11px;line-height:1.7;color:#b8c7d8;border-top:1px solid #66819770;margin:25px 0 0;padding-top:15px;}
 @media(max-width:820px){.ed-build-tools__group ul{grid-template-columns:1fr;}.ed-concept[open] .ed-concept__body{font-size:14px;}}
 @media(max-width:580px){.ed-build-tools{margin:22px 19px 5px;padding:19px 16px;}.ed-concept[open] .ed-concept__body{padding:0 18px 22px;}.ed-concept__additional ul{display:block;}.ed-concept__additional li{margin:7px 0;}}
+
+/* AIIP-EDU-NEWS-SWITCH-01: match News mobile tab discoverability; preserve desktop sizing and active-state semantics. */
+@media(max-width:480px){
+  .ed-hero__nav{align-items:flex-start;}
+  .ed-switch{display:flex;flex:0 0 100%;width:100%;box-sizing:border-box;}
+  .ed-switch__item{flex:1 1 0;min-width:0;min-height:44px;justify-content:center;text-align:center;padding:10px 12px;font-size:12px;}
+}
+
+/* AIIP-EDU-NEWS-SWITCH-01: larger, equal-width desktop tabs; the accepted mobile switch stays unchanged. */
+@media(min-width:481px){
+  .ed-switch{display:flex;width:min(100%,360px);box-sizing:border-box;}
+  .ed-switch__item{flex:1 1 0;min-width:0;min-height:48px;justify-content:center;text-align:center;padding:12px 16px;font-size:14px;}
+}

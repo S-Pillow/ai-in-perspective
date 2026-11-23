@@ -1,6 +1,6 @@
 # AI in Perspective | Project control record
 
-- **Record revision:** 80
+- **Record revision:** 83
 - **Last reconciled:** 2026-11-17
 - **Governance:** AIPF v8.10.1
 - **Product authority:** `AI_in_Perspective_PRD_v2_1_Museum_Review_Revision.docx`, owner-accepted 2026-11-12. Its embedded 'review draft' notices are superseded by the owner's explicit acceptance; the document content is otherwise unchanged.
@@ -671,3 +671,32 @@
 **Scope and state:** Separate preview-only branch `feature/aiip-history-blue-palette-01` from production main `8cb33072160c0740e2513fc3b6753376790cb521`. Allowed: History CSS palette, minor inline History map stroke, focused regression contract, and this Project Control Record entry. Forbidden: Global Competition edits, Discover scene edits, History text/route/layout/logic, News snapshots/automation, dependencies, production merge, production publish. Existing production checkpoint is AIIP-GC-01 merge `8cb33072160c0740e2513fc3b6753376790cb521`.
 
 **Evidence needed:** GitHub content tests plus Astro build, branch preview READY, operator visual check on desktop and mobile for contrast/clock/timeline/selected controls, compare with Discover History scene. No production authorization. A subsequent separate explicit release approval is required.
+
+
+## AIIP-EDU-NEWS-SWITCH-01 | Education mobile News-switch parity (2026-11-23)
+
+**Observation/owner request:** Owner supplied two screenshots showing Education's small right-aligned segmented Education/News control versus News's full-width mobile control. Requested that Education's switch be just as prominent so visitors recognize News is available. Ground-source finding: Education `src/styles/education-learning.css` only sets `.ed-switch{width:100%}` at 355px or below; News `src/styles/education-news.css` expands its switch at 480px or below. This accounts for the discrepancy at typical phone widths. No change to News data, News page presentation, or automated feeds is required.
+
+**Bounded preview authorization:** UI-only parity adjustment in Education stylesheet at the existing News 480px mobile breakpoint. Keep both labels equally sized with 44px minimum tap target. Preserve Education tab current state, News route, page content/layout beyond navigation wrap, larger-screen behavior, and all existing News snapshot/workflows. Branch `feature/aiip-edu-news-switch-mobile-parity` from source `574a2b6566b890a99f82bc1386655d23682d462d`. Allowed: `src/styles/education-learning.css`, `tests/content.test.mjs`, this record. Forbidden: `main` merge/deploy without separate owner authorization; broader Education/News redesign; changes to published AI & Global Competition and History.
+
+**Verification required:** Source contract, content+offline News tests, Astro build, protected Vercel preview and owner mobile visual acceptance. No production publication yet.
+
+
+## AIIP-EDU-NEWS-SWITCH-01 | Desktop parity refinement on owner feedback (2026-11-23)
+
+**Owner evidence:** Owner reviewed the mobile preview and stated "Perfect on mobile" while supplying desktop Education and News screenshots demonstrating the switch is still much too small at desktop widths. Requested similar discoverability on desktop. The existing PR #14 and branch remain the same authorized correction unit; no production approval has been given.
+
+**Refinement:** On both Education and News routes, enlarge the desktop switch at 481px and up to 360px wide with two equal segments, 48px minimum height, centered 14px labels. Preserve current upper-right nav location, active-state color, links, and the previously accepted mobile layout unchanged. Changed files: Education stylesheet, News presentation stylesheet (styling only), content tests, and Project Control Record. News snapshot, data, content, source workflows, other perspectives, and shared global styles remain unchanged.
+
+**Release gate:** GitHub CI and preview deployment on new branch tip, operator visual acceptance on desktop and confirmation mobile remains consistent. Merge/deploy to production requires a separate explicit owner authorization.
+
+
+## AIIP-EDU-NEWS-SWITCH-01 | Owner publication authorization and pre-merge release gate (2026-11-23)
+
+**Decision and authority:** After mobile acceptance ("Perfect on mobile") and review of the desktop enlarged-switch preview, owner explicitly approved "merge and publish" in this conversation on 2026-11-23. This authorizes PR #14 only, including the Education and News tab presentation corrections as reviewed. No broader News editorial/content, source collection, automation, History, Global Competition, Discover, dependency, or runtime changes are approved.
+
+**Accepted change:** Full-width equal two-tab Education switch at mobile widths up to 480px; at 481px and above both Education and News switches are enlarged to 360px maximum, equally divided, with 48px minimum tab height. Existing navigation, link destinations and selected-state colors are preserved.
+
+**Pre-release source and evidence:** PR #14 branch `feature/aiip-edu-news-switch-mobile-parity`, last feature tip `e18ce666a1d29e0b199bbdfdf666399725c10ee1`, production baseline `574a2b6566b890a99f82bc1386655d23682d462d`; GitHub Actions `45143837621` SUCCESS (content contracts, offline News checks, Astro build); protected Vercel preview `dpl_6NVy3aX63iMTXDe9goauiRrrJ7hW` READY at the same feature tip. Owner's acceptance constitutes operator attestation, not independent tool-observed browser testing. Premerge drift/CI recheck required after this documentation-only correction.
+
+**Release consequences and stop:** GitHub merge to main automatically initiates Vercel production deployment. Gate: confirm final PR tip, success CI, main/head alignment, changed-file allowlist (Education CSS, News CSS, tests, PCR), and News snapshot absence; stop on failure or drift. Postmerge: verify GitHub main/PR state, Vercel production READY with canonical alias and exact merged SHA, unchanged News snapshot and other perspectives, and record remaining live-browser observation limitations. Previous production `574a2b6566b890a99f82bc1386655d23682d462d` is rollback anchor. No History or other deferred work in this unit.
