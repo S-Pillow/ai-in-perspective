@@ -1,13 +1,13 @@
 <h1 align="center">AI in Perspective</h1>
 <p align="center"><strong>Explore the promise. Examine the evidence.</strong></p>
-<p align="center">An interactive, evidence-first guide to artificial intelligence: its history, potential benefits, risks, physical footprint, and the ideas that make it work.</p>
+<p align="center">An interactive, evidence-first guide to AI's history, benefits, risks, environmental footprint, global competition, and the concepts behind the technology.</p>
 <p align="center"><a href="https://ai-in-perspective.vercel.app/intro">Enter the experience</a> · <a href="https://ai-in-perspective.vercel.app/discover/">Choose a perspective</a> · <a href="https://ai-in-perspective.vercel.app/methodology">Our approach</a></p>
 
-<p align="center"><a href="https://ai-in-perspective.vercel.app/"><img src="public/social/ai-in-perspective-og.jpg" alt="AI in Perspective: explore the promise and examine the evidence through five interactive AI perspectives." width="900"></a></p>
+<p align="center"><a href="https://ai-in-perspective.vercel.app/"><img src="public/social/ai-in-perspective-og.jpg" alt="AI in Perspective promotional illustration. Explore all six perspectives below." width="900"></a></p>
 
 ---
 
-## Explore five perspectives
+## Explore six perspectives
 
 Follow the interactive Discover ring, or go directly to a topic.
 
@@ -17,7 +17,8 @@ Follow the interactive Discover ring, or go directly to a topic.
 | **Risks & Safety** | [Understand the risks](https://ai-in-perspective.vercel.app/explore/risks) | Documented harms, possible future risks, and safeguards. |
 | **Benefits** | [Look at the benefits](https://ai-in-perspective.vercel.app/explore/benefits) | Where AI is helping people, and how to examine the evidence. |
 | **Environment** | [Follow the footprint](https://ai-in-perspective.vercel.app/explore/environment) | The electricity, water, cooling, and infrastructure behind AI. |
-| **Education** | [Learn how AI works](https://ai-in-perspective.vercel.app/explore/education-news) | Six learning levels and 32 topics, from fundamentals to advanced concepts. |
+| **AI & Global Competition** | [Explore the possible futures](https://ai-in-perspective.vercel.app/explore/global-competition) | What a broad U.S. AI ban could mean for jobs, security, research, and competition with other countries. |
+| **Education & News** | [Learn how AI works](https://ai-in-perspective.vercel.app/explore/education-news) | Six learning levels and 32 topics, plus a way into the separate News experience. |
 
 ### News & Perspective
 
@@ -42,11 +43,11 @@ Read the site's [editorial approach](https://ai-in-perspective.vercel.app/method
 
 ## Project status
 
-**Public soft launch:** November 14, 2026. All **five perspective destinations** and the separate **News** section are published as of November 17, 2026.
+**Public soft launch:** November 14, 2026. All **six perspective destinations**, including AI & Global Competition (published November 23, 2026), and the separate **News** section are now available.
 
 | Area | Status |
 | :-- | :-- |
-| Intro, Discover, five perspectives, Education, News | **Published** |
+| Intro, Discover, six perspectives, separate News | **Published** |
 | Perspective-return navigation | **Published** ([PR #6](https://github.com/S-Pillow/ai-in-perspective/pull/6)) |
 | Discover availability labels and methodology copy | **Updated in source** ([PR #7](https://github.com/S-Pillow/ai-in-perspective/pull/7)); check the production deployment for rollout |
 | Daily News collection | **Configured**; [review queue](https://github.com/S-Pillow/ai-in-perspective/issues/8) |
