@@ -3,6 +3,8 @@
 <p align="center">An interactive, evidence-first guide to artificial intelligence: its history, potential benefits, risks, physical footprint, and the ideas that make it work.</p>
 <p align="center"><a href="https://ai-in-perspective.vercel.app/intro">Enter the experience</a> · <a href="https://ai-in-perspective.vercel.app/discover/">Choose a perspective</a> · <a href="https://ai-in-perspective.vercel.app/methodology">Our approach</a></p>
 
+<p align="center"><a href="https://ai-in-perspective.vercel.app/"><img src="public/social/ai-in-perspective-og.jpg" alt="AI in Perspective: explore the promise and examine the evidence through five interactive AI perspectives." width="900"></a></p>
+
 ---
 
 ## Explore five perspectives
