@@ -4,7 +4,8 @@
   --env-ink: #e9f2f1; --env-muted: #9bafb9; --env-ember: #ffae62;
   background: radial-gradient(ellipse 65% 38% at 70% 10%,#172c38 0%,transparent 85%),
     linear-gradient(180deg,#08131c,#080f16 50%,#060c12);
-  min-height: 100vh; color:var(--env-ink); overflow:hidden;
+  /* Keep the wide scene clipped without creating a scroll container that traps the Community Impact sticky topic menu. */
+  min-height: 100vh; color:var(--env-ink); overflow:clip;
   font-family:Inter,Arial,sans-serif;
 }
 .environment-rebuild *, .environment-rebuild *::before,.environment-rebuild *::after {box-sizing:border-box;}

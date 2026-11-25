@@ -1271,6 +1271,21 @@ test("AIIP-EDU-NEWS-SWITCH-01 Education and News use equally prominent mobile na
 
 
 
+test("Environment topic menu can stick to the viewport on desktop", () => {
+  const page = read("src/pages/explore/environment.astro");
+  const rebuildCss = read("src/styles/environment-rebuild.css");
+  const communityCss = read("src/styles/environment-community.css");
+  const rootRule = rebuildCss.match(/\\.environment-rebuild\\s*\\{[^}]*\\}/s)?.[0];
+  assert.ok(rootRule, "Environment page root styles must exist");
+  assert.match(rootRule, /overflow:\\s*clip;/, "Root must clip visuals without creating a sticky-breaking scroll container");
+  assert.doesNotMatch(rootRule, /overflow:\\s*(hidden|auto|scroll|overlay);/);
+  assert.match(communityCss, /\\.environment-rebuild \\.community-impact__navigation\\{position:sticky;top:24px\\}/);
+  const mobileRule = communityCss.split("\\n").find(line => line.startsWith("@media(max-width:760px)"));
+  assert.ok(mobileRule);
+  assert.match(mobileRule, /\\.environment-rebuild \\.community-impact__navigation\\{position:static\\}/, "Mobile remains a horizontal topic selector");
+  assert.match(page, /<EnvironmentCommunity \\/>/);
+});
+
 test("Environment community impact is evidence-backed, substantive, progressively enhanced and scoped", () => {
   const page = read("src/pages/explore/environment.astro");
   const chapter = read("src/components/EnvironmentCommunity.astro");
