@@ -1107,6 +1107,30 @@ test("AIIP-COPY-STATUS-01 Discover About counters match six published perspectiv
   assert.doesNotMatch(modal, /Current links|In development|Coming Soon/);
 });
 
+test("AIIP-README-06 keeps all six live Discover perspectives documented", () => {
+  const readme = read("README.md");
+  const discover = read("public/discover/index.html");
+  assert.match(readme, /## Explore six perspectives/);
+  const table = readme.split("## Explore six perspectives")[1]?.split("### News & Perspective")[0] || "";
+  const destinations = [
+    ["History", "history"],
+    ["Risks & Safety", "risks"],
+    ["Benefits", "benefits"],
+    ["Environment", "environment"],
+    ["AI & Global Competition", "global-competition"],
+    ["Education & News", "education-news"]
+  ];
+  assert.equal((table.match(/^\| \*\*[^|]+\*\* \|/gm) || []).length, 6);
+  for (const [label, slug] of destinations) {
+    assert.ok(table.includes("| **" + label + "** |"), label);
+    assert.ok(table.includes("https://ai-in-perspective.vercel.app/explore/" + slug), slug);
+    assert.ok(discover.includes("url:'/explore/" + slug + "'"), "Discover: " + slug);
+  }
+  assert.match(readme, /All \*\*six perspective destinations\*\*/);
+  assert.doesNotMatch(readme, /Explore five perspectives|five perspective destinations|five interactive AI perspectives|Discover, five perspectives/);
+  assert.match(readme, /src="public\/social\/ai-in-perspective-og-six\.jpg"/);
+});
+
 test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a complete independent audit", () => {
   const page = read("src/pages/methodology.astro");
   assert.match(page, /Editorial scope:/);
