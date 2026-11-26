@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { createHash } from "node:crypto";
 
 const root = process.cwd();
 const read = (file) => readFileSync(join(root, file), "utf8");
@@ -815,7 +816,7 @@ test("AIIP-RELEASE-01 preserves MIT license and creator credit for the arcade an
 
 
 test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Graph metadata", () => {
-  const image = readFileSync(join(root,"public/social/ai-in-perspective-og.jpg"));
+  const image = readFileSync(join(root,"public/social/ai-in-perspective-og-six.jpg"));
   assert.ok(image.length > 30000 && image.length < 500000, "social JPEG is optimized and nonempty");
   assert.equal(image[0],0xff);
   assert.equal(image[1],0xd8);
@@ -836,11 +837,12 @@ test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Grap
     i+=length;
   }
   assert.deepEqual([width,height],[1200,630]);
+  assert.equal(createHash("sha256").update(image).digest("hex"), "bd1c43cf311171f5f958e6e3d7d04c705c0d7e06909113d4a581ed3324984be1", "approved six-perspective image bytes must be used");
 
   const layout=read("src/layouts/BaseLayout.astro");
   const discover=read("public/discover/index.html");
   const home=read("src/pages/index.astro");
-  const imageUrl="https://ai-in-perspective.vercel.app/social/ai-in-perspective-og.jpg";
+  const imageUrl="https://ai-in-perspective.vercel.app/social/ai-in-perspective-og-six.jpg";
   assert.ok(layout.includes('const socialImageUrl = "'+imageUrl+'"'));
   assert.match(layout,/property="og:image" content=\{socialImageUrl\}/);
   assert.match(layout,/property="og:image:secure_url" content=\{socialImageUrl\}/);
@@ -848,6 +850,9 @@ test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Grap
   assert.match(layout,/property="og:image:width" content="1200"/);
   assert.match(layout,/property="og:image:height" content="630"/);
   assert.match(layout,/property="og:image:alt"/);
+  assert.ok(layout.includes('AI in Perspective shows six interactive perspectives above a person looking out at Earth.'));
+  assert.ok(discover.includes('AI in Perspective shows six interactive perspectives above a person looking out at Earth.'));
+  assert.match(discover, /AI & Global Competition|global competition/i);
   assert.match(layout,/property="og:url" content=\{canonicalUrl\}/);
   assert.match(layout,/rel="canonical" href=\{canonicalUrl\}/);
   assert.match(layout,/name="twitter:card" content="summary_large_image"/);
@@ -857,7 +862,7 @@ test("AIIP-SHARE-01 social card is a real 1200x630 JPEG with canonical Open Grap
   assert.ok(discover.includes('name="twitter:image" content="'+imageUrl+'"'));
   assert.match(discover,/property="og:url" content="https:\/\/ai-in-perspective\.vercel\.app\/discover\/"/);
   assert.match(discover,/name="twitter:card" content="summary_large_image"/);
-  assert.match(home,/A guided look at AI through history, benefits, risks, and the environment\./);
+  assert.match(home,/Explore AI through six perspectives: history, risks and safety, benefits, the environment, global competition, and education\./);
   assert.match(layout,/name="robots" content="noindex, nofollow"/);
   assert.match(discover,/name="robots" content="noindex, nofollow"/);
 });
@@ -1123,7 +1128,7 @@ test("AIIP-README-06 keeps all six live Discover perspectives documented", () =>
   }
   assert.match(readme, /All \*\*six perspective destinations\*\*/);
   assert.doesNotMatch(readme, /Explore five perspectives|five perspective destinations|five interactive AI perspectives|Discover, five perspectives/);
-  assert.match(readme, /src="public\/social\/ai-in-perspective-og\.jpg"/);
+  assert.match(readme, /src="public\/social\/ai-in-perspective-og-six\.jpg"/);
 });
 
 test("AIIP-COPY-STATUS-01 methodology states editorial scope without claiming a complete independent audit", () => {

@@ -3,7 +3,7 @@
 <p align="center">An interactive, evidence-first guide to AI's history, benefits, risks, environmental footprint, global competition, and the concepts behind the technology.</p>
 <p align="center"><a href="https://ai-in-perspective.vercel.app/intro">Enter the experience</a> · <a href="https://ai-in-perspective.vercel.app/discover/">Choose a perspective</a> · <a href="https://ai-in-perspective.vercel.app/methodology">Our approach</a></p>
 
-<p align="center"><a href="https://ai-in-perspective.vercel.app/"><img src="public/social/ai-in-perspective-og.jpg" alt="AI in Perspective promotional illustration. Explore all six perspectives below." width="900"></a></p>
+<p align="center"><a href="https://ai-in-perspective.vercel.app/"><img src="public/social/ai-in-perspective-og-six.jpg" alt="AI in Perspective artwork showing six perspectives—History, Risks and Safety, Benefits, Environment, Global Competition, and Education—above a person looking out at Earth." width="900"></a></p>
 
 ---
 
